@@ -35,38 +35,6 @@ app.use(express.json({
 }));
 
 // Configuration de la session (en local)
-// const sessionStore = new MySQLStore({
-//     host: process.env.DATABASE_HOST,
-//     user: process.env.DATABASE_USER,
-//     password: process.env.DATABASE_PASSWORD,
-//     database: process.env.DATABASE,
-//     connectionLimit: 10,
-//     waitForConnections: true,
-//     queueLimit: 0,
-//     acquireTimeout: 1000000
-// }, (err) => {
-//     if (err) {
-//         console.error('Erreur de connexion à la base de données pour la session :', err);
-//     } else {
-//         console.log('Tu es connecté à la base de données mon potte !!');
-//     }
-// });
-
-
-// // conf de la session (en local)
-// app.use(session({
-//     key: process.env.SESSION_COOKIE_NAME,
-//     secret: process.env.SESSION_SECRET,
-//     store: sessionStore,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         secure: false,
-//     }
-// }));
-
-
-// conf de la session (https)
 const sessionStore = new MySQLStore({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
@@ -84,9 +52,8 @@ const sessionStore = new MySQLStore({
     }
 });
 
-app.set('trust proxy', 1);
 
-// conf de la session (https)
+// conf de la session (en local)
 app.use(session({
     key: process.env.SESSION_COOKIE_NAME,
     secret: process.env.SESSION_SECRET,
@@ -94,12 +61,45 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: true,   
-        httpOnly: true,   
-        sameSite: 'lax', 
-        maxAge: 1000 * 60 * 60 * 24 * 30 
-    } 
+        secure: false,
+    }
 }));
+
+
+// conf de la session (https)
+// const sessionStore = new MySQLStore({
+//     host: process.env.DATABASE_HOST,
+//     user: process.env.DATABASE_USER,
+//     password: process.env.DATABASE_PASSWORD,
+//     database: process.env.DATABASE,
+//     connectionLimit: 10,
+//     waitForConnections: true,
+//     queueLimit: 0,
+//     acquireTimeout: 1000000
+// }, (err) => {
+//     if (err) {
+//         console.error('Erreur de connexion à la base de données pour la session :', err);
+//     } else {
+//         console.log('Tu es connecté à la base de données mon potte !!');
+//     }
+// });
+
+// app.set('trust proxy', 1);
+
+// // conf de la session (https)
+// app.use(session({
+//     key: process.env.SESSION_COOKIE_NAME,
+//     secret: process.env.SESSION_SECRET,
+//     store: sessionStore,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         secure: true,   
+//         httpOnly: true,   
+//         sameSite: 'lax', 
+//         maxAge: 1000 * 60 * 60 * 24 * 30 
+//     } 
+// }));
 
 // Configuration test de Multer pour accepter des fichiers plus volumineux
 const storage = multer.diskStorage({
@@ -243,7 +243,7 @@ cron.schedule('0 1 * * *', () => {
     });
 
 // Écouter sur un port
-const port = process.env.PORT || 5042;
+const port = process.env.PORT || 5044;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
