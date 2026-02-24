@@ -1,125 +1,35 @@
 /* ========================================
-   HERO SECTION - OPTIMISÉE
-======================================== */
-
-/* .hero-section {
-    position: relative;
-    height: 900px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('/img/index/img_index.webp');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-} */
-
-/* Overlay gris clair par-dessus l'image */
-/* .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(156, 156, 156, 0.3);
-    z-index: 1;
-} */
-
-/* Contenu au-dessus de l'overlay */
-/* .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 3rem 1rem;
-    max-width: 800px;
-} */
-
-/* Texte blanc avec ombre pour la lisibilité */
-/* .hero-content h1 {
-    color: white !important;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-    margin-bottom: 1.5rem;
-    font-family: 'Playfair Display', serif;
-} */
-
-/* .hero-content p {
-    color: white !important;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    font-size: 1.3rem;
-} */
-
-/* Responsive */
-/* @media (max-width: 1200px) {
-    .hero-section {
-        height: 500px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-section {
-        height: 0;
-        padding-bottom: 75%;      
-        background-size: cover;
-        background-position: top center;
-    }
-    
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-content p {
-        font-size: 1.1rem;
-    }
-
-
-}
-
-@media (max-width: 576px) {
-    .hero-section {
-        height: 350px;
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1rem;
-    }
-} */
-
-
-/* ========================================
-   HERO SECTION - OPTIMISÉE
+   HERO SECTION - SPIRIT OF FREEDOM
 ======================================== */
 
 .hero-section {
     position: relative;
-    height: 900px;
+    height: 100vh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/img/index/img_index.webp');
+    background-image: url('/img/index/img_page_accueil.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     overflow: hidden;
 }
 
-/* Image mobile cachée par défaut */
 .hero-img-mobile {
     display: none;
 }
 
-/* Overlay */
 .hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(156, 156, 156, 0.3);
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.6) 60%,
+        rgba(0, 0, 0, 0.85) 100%
+    );
     z-index: 1;
 }
 
@@ -127,284 +37,602 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 3rem 1rem;
-    max-width: 800px;
+    padding: 2rem 1rem;
 }
 
-.hero-content h1 {
-    color: white !important;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+.hero-badge {
+    display: inline-block;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.4rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
     margin-bottom: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    border-radius: 2px;
 }
 
-.hero-content p {
-    color: white !important;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    font-size: 1.3rem;
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+}
+
+.hero-title-gold {
+    color: #c9a84c;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 0 auto 2.5rem;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #c9a84c, #e8c96d);
+    color: #000;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.5);
+    color: #000;
+}
+
+.btn-hero-secondary {
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+    border-color: #c9a84c;
+    color: #c9a84c;
+    transform: translateY(-3px);
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
-    .hero-section {
-        height: 500px;
-    }
-}
-
 @media (max-width: 768px) {
     .hero-section {
+        background-attachment: scroll;
         height: auto;
+        min-height: 100vh;
         background-image: none;
     }
 
     .hero-img-mobile {
         display: block;
+        position: absolute;
+        inset: 0;
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
     }
 
-    .hero-overlay {
-        display: none;
+    .hero-title {
+        font-size: 2.8rem;
     }
 
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-content p {
-        font-size: 1.1rem;
+    .hero-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
 }
 
-@media (max-width: 576px) {
-    .hero-content h1 {
-        font-size: 2rem;
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem;
     }
 
-    .hero-content p {
-        font-size: 1rem;
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        width: 100%;
+        text-align: center;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ========================================
-   SECTION PRÉSENTATION PREMIUM
+   SECTION À PROPOS - SPIRIT OF FREEDOM
 ======================================== */
 
 .about-premium {
-    background: #ffffff;
+    background: #0d0d0d;
 }
 
-/* Intro Hero */
 .intro-hero {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, #eeeeee 0%, #cecece 100%);
+    position: relative;
+    padding: 5rem 0;
+    overflow: hidden;
+    background: #111111;
 }
 
-.label-tag {
-    display: inline-block;
-    padding: 0.5rem 1.25rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
+/* Image de fond */
+.intro-bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
+.intro-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+}
+
+.intro-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0d0d0d 0%, rgba(13,13,13,0.85) 100%);
+}
+
+/* Titre */
 .intro-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: #ffffff;
     line-height: 1.3;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-.intro-lead {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 2rem;
+.text-gold {
+    color: var(--gold);
 }
 
-.location-tag {
+/* Divider doré */
+.gold-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-bottom: 3rem;
+}
+
+/* Label tag */
+.label-tag {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+/* Blocs */
+.intro-block {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.intro-block:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-5px);
+}
+
+.intro-block-gold {
+    background: rgba(201,168,76,0.07);
+    border-color: rgba(201,168,76,0.3);
+}
+
+.intro-block-gold:hover {
+    background: rgba(201,168,76,0.12);
+    border-color: var(--gold);
+}
+
+/* Icône bloc */
+.intro-block-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(201,168,76,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.intro-block-icon i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.intro-block h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.intro-block p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.intro-block p strong {
+    color: var(--gold);
+}
+
+/* Tag localisation */
+.intro-location-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    background: white;
+    padding: 0.5rem 1rem;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
     border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.location-tag i {
-    color: var(--primary-color);
-    font-size: 1.25rem;
-}
-
-.location-tag span {
+    color: var(--gold);
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--secondary-color);
 }
 
-.intro-image {
+/* Responsive */
+@media (max-width: 991px) {
+    .intro-hero { padding: 4rem 0; }
+    .intro-title { font-size: 2rem; }
+}
+
+@media (max-width: 767px) {
+    .intro-hero { padding: 3rem 0; }
+    .intro-title { font-size: 1.7rem; }
+    .intro-block { padding: 1.5rem; }
+}
+
+@media (max-width: 575px) {
+    .intro-hero { padding: 2.5rem 0; }
+    .intro-title { font-size: 1.5rem; }
+    .intro-block { padding: 1.25rem; }
+    .intro-block h4 { font-size: 1rem; }
+    .intro-block p { font-size: 0.85rem; }
+}
+
+
+
+
+
+
+
+.specialty-text {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.specialty-box-inline {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
     position: relative;
 }
 
-.intro-image img {
-    transition: transform 0.6s ease;
+.specialty-top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 100%;
 }
 
-.intro-image:hover img {
-    transform: scale(1.05);
+.specialty-grid {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 2.5rem;
 }
 
-.image-badge {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    text-align: center;
+.specialty-main {
+    flex: 1;
 }
 
-.image-badge span {
-    display: block;
-    font-size: 2rem;
+.specialty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.specialty-main p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.75rem;
+}
+
+.specialty-main p:last-child {
+    margin-bottom: 0;
+}
+
+/* Stats */
+.specialty-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-shrink: 0;
+    border-left: 1px solid rgba(201, 168, 76, 0.15);
+    padding-left: 3rem;
+}
+
+.specialty-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.specialty-stat i {
+    width: 38px;
+    height: 38px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
     line-height: 1;
 }
 
-.image-badge small {
-    font-size: 0.9rem;
-    color: #666;
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
 }
 
+/* Responsive */
+@media (max-width: 991px) {
+    .specialty-grid {
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .specialty-stats {
+        padding-left: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .specialty-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .specialty-stats {
+        flex-direction: row;
+        border-left: none;
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+        padding-left: 0;
+        padding-top: 1.5rem;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .specialty-stat {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .specialty-grid {
+        padding: 1.25rem;
+    }
+
+    .specialty-title {
+        font-size: 1.2rem;
+    }
+
+    .specialty-main p {
+        font-size: 0.83rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========================================
-   SECTION RACES MODERNE - VERSION COMPACTE
+   SECTION RACES - LAYOUT ALTERNÉ
 ======================================== */
 
 .races-section {
     padding: 5rem 0;
-    background: white;
+    background: #0d0d0d;
 }
 
-/* Card race moderne - RÉDUITE */
-.race-card-modern {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
+.races-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+/* Ligne race */
+.race-row {
+    min-height: 250px;
     display: flex;
-    flex-direction: column;
-}
-
-.race-card-modern:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(101, 193, 120, 0.2);
-}
-
-/* Wrapper image - RÉDUIT */
-.race-image-wrapper {
-    position: relative;
-}
-
-.race-main-image {
-    position: relative;
-    height: 360px; 
+    align-items: stretch;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 16px;
     overflow: hidden;
+    background: #111111;
+    transition: all 0.4s ease;
 }
 
-.race-main-image img {
+.race-row:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    box-shadow: 0 15px 50px rgba(201, 168, 76, 0.08);
+}
+
+/* Inversé */
+.race-row-reverse {
+    flex-direction: row-reverse;
+}
+
+/* ========================================
+   BLOC IMAGE
+======================================== */
+
+.race-row-image {
+    position: relative;
+    width: 45%;
+    flex-shrink: 0;
+    overflow: hidden;
+    max-height: 400px;
+}
+
+.race-row-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s ease;
+    transition: transform 0.7s ease;
+    display: block;
 }
 
-.race-card-modern:hover .race-main-image img {
-    transform: scale(1.12) rotate(2deg);
+.race-row:hover .race-row-image img {
+    transform: scale(1.06);
 }
 
-/* Overlay moderne - RÉDUIT */
-.race-overlay-modern {
+.race-row-image-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-    padding: 1.5rem 1.5rem 1.25rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 1.25rem;
 }
 
-.race-overlay-modern h3 {
-    color: white;
-    font-size: 1.6rem; 
-    font-weight: 700;
-    margin: 0 0 0.4rem 0;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-}
-
-.race-count {
-    display: inline-block;
-    background: var(--primary-color);
-    color: white;
-    padding: 0.3rem 0.9rem; 
+.race-count-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.35rem 1rem;
     border-radius: 50px;
-    font-size: 0.85rem; 
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
-/* Badge LOF - RÉDUIT */
-.race-badge {
+/* Mini galerie */
+.race-row-mini-gallery {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: white;
-    padding: 0.6rem 1rem; 
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 700;
-    font-size: 0.9rem; 
-    color: var(--primary-color);
-}
-
-.race-badge i {
-    font-size: 1rem;
-}
-
-/* Mini galerie - RÉDUITE */
-.race-mini-gallery {
-    display: flex;
-    gap: 8px;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.03);
+    flex-direction: column;
+    gap: 6px;
 }
 
 .mini-thumb {
-    width: 55px;
-    height: 55px;
-    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
     overflow: hidden;
-    border: 2px solid white;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .mini-thumb:hover {
+    border-color: var(--gold);
     transform: scale(1.1);
-    border-color: var(--primary-color);
 }
 
 .mini-thumb img {
@@ -417,37 +645,63 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary-color);
-    color: white;
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--gold);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.85rem;
 }
 
-/* Contenu carte - RÉDUIT */
-.race-content-modern {
-    padding: 1.5rem;
+/* ========================================
+   BLOC CONTENU
+======================================== */
+
+.race-row-content {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem;
 }
 
-/* Description - RÉDUITE */
-.race-description {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 1.25rem;
+.race-row-inner {
+    width: 100%;
 }
 
-/* Liste reproducteurs - RÉDUITE */
-.reproducteurs-list {
-    margin-bottom: 1.25rem;
+.race-row-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(201, 168, 76, 0.08);
+    line-height: 1;
+    display: block;
+    margin-bottom: -1rem;
+    font-family: 'Playfair Display', serif;
 }
 
-.reproducteurs-list h5 {
-    font-size: 1rem; 
+.race-row-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.race-row-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1.5rem;
+}
+
+/* Reproducteurs */
+.race-row-repro {
+    margin-bottom: 1.5rem;
+}
+
+.race-row-repro-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 0.75rem;
 }
 
@@ -461,612 +715,221 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.4rem 0.85rem; 
-    background: white;
-    border: 2px solid #e0e0e0;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--secondary-color);
+    color: rgba(255,255,255,0.8);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .repro-tag:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
+    background: rgba(201, 168, 76, 0.15);
+    border-color: var(--gold);
+    color: var(--gold);
 }
 
 .repro-tag i {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--gold);
 }
 
-/* Boutons actions - RÉDUITS */
-.race-actions {
+/* Boutons */
+.race-row-actions {
     display: flex;
     gap: 0.75rem;
-    margin-top: auto;
+    flex-wrap: wrap;
 }
 
 .btn-race-primary,
 .btn-race-secondary {
-    flex: 1;
-    padding: 0.85rem;
-    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.9rem;
-    text-align: center;
+    font-size: 0.85rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
 }
 
 .btn-race-primary {
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
 }
 
 .btn-race-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.35);
-    color: white;
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+    color: #000;
 }
 
 .btn-race-secondary {
-    background: white;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(201, 168, 76, 0.4);
 }
 
 .btn-race-secondary:hover {
-    background: var(--primary-color);
-    color: white;
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
     transform: translateY(-2px);
 }
 
-/* Specialty box inline - RÉDUIT */
-.specialty-text {
-    text-align: center;
-    margin-top: 3rem;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-.specialty-box-inline {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
-    padding: 2.5rem; 
-    border-radius: 18px;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
 
-.specialty-icon {
-    font-size: 2.5rem; 
-    color: var(--primary-color);
-    flex-shrink: 0;
-}
+/* ========================================
+   RESPONSIVE
+======================================== */
 
-.specialty-box-inline p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #333;
-    margin: 0;
-    text-align: left;
-}
-
-/* Responsive */
 @media (max-width: 991px) {
-    .race-main-image {
-        height: 380px;
-    }
-    
-    .race-actions {
+    .race-row,
+    .race-row-reverse {
         flex-direction: column;
     }
-    
+
+    .race-row-image {
+        width: 100%;
+        height: 380px;
+    }
+
+    .race-row-mini-gallery {
+        flex-direction: row;
+        top: auto;
+        bottom: 60px;
+        right: 15px;
+    }
+
+    .race-row-content {
+        padding: 2rem;
+    }
+
+    .race-row-number {
+        font-size: 3rem;
+    }
+
+    .race-row-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .races-section { padding: 3rem 0; }
+    .races-title { font-size: 1.8rem; }
+
+    .race-row-image { height: 240px; }
+    .race-row-content { padding: 1.5rem; }
+    .race-row-title { font-size: 1.3rem; }
+    .race-row-number { font-size: 2.5rem; }
+
+    .race-row-actions { flex-direction: column; }
+    .btn-race-primary, .btn-race-secondary { justify-content: center; }
+
     .specialty-box-inline {
         flex-direction: column;
         text-align: center;
-        padding: 2rem;
-    }
-    
-    .specialty-box-inline p {
-        text-align: center;
+        padding: 1.5rem;
     }
 }
 
-@media (max-width: 576px) {
-    .race-main-image {
-        height: 200px;
-    }
-    
-    .race-overlay-modern h3 {
-        font-size: 1.4rem;
-    }
-    
-    .mini-thumb {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .race-content-modern {
-        padding: 1.25rem;
-    }
-    
-    .race-description {
-        font-size: 0.95rem;
-    }
-    
-    .btn-race-primary,
-    .btn-race-secondary {
-        font-size: 0.85rem;
-        padding: 0.75rem;
-    }
+@media (max-width: 575px) {
+    .races-title { font-size: 1.5rem; }
+    .race-row-image { height: 280px; }
+    .race-row-content { padding: 1.25rem; }
+    .race-row-title { font-size: 1.2rem; }
+    .race-row-desc { font-size: 0.85rem; }
 }
 
-/* Citation Parallax */
-.quote-parallax {
-    padding: 8rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    position: relative;
-}
 
-.quote-box {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-}
 
-.quote-icon-left,
-.quote-icon-right {
-    position: absolute;
-    font-size: 4rem;
-    color: var(--primary-color);
-    opacity: 0.2;
-}
 
-.quote-icon-left {
-    top: -20px;
-    left: 0;
-}
 
-.quote-icon-right {
-    bottom: -20px;
-    right: 0;
-}
 
-.quote-big {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    color: var(--secondary-color);
-    font-style: italic;
-    font-weight: 500;
-    margin: 0;
-    padding: 0 4rem;
-}
 
-/* Section Mission */
-.mission-section {
-    padding: 6rem 0;
-}
-
-.mission-image {
-    position: relative;
-}
-
-.float-card {
-    position: absolute;
-    bottom: -20px;
-    left: -20px;
-    background: white;
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.float-card i {
-    font-size: 2rem;
-    color: var(--primary-color);
-}
-
-.float-card span {
-    font-weight: 600;
-    color: var(--secondary-color);
-}
-
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-}
-
-.mission-content p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.highlight-box-inline {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-    padding: 1.5rem;
-    border-left: 4px solid var(--primary-color);
-    border-radius: 10px;
-    margin: 2rem 0;
-}
-
-.highlight-box-inline strong {
-    font-size: 1.1rem;
-    color: #2d5016;
-}
-
-/* Section Famille */
-.family-life-section {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-}
-
-.family-content p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.motto-banner {
-    background: var(--primary-color);
-    color: white;
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 2rem 0;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
-}
-
-/* Valeurs */
-.values-section {
-    padding: 6rem 0;
-}
-
-.value-card {
-    background: white;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
-    height: 100%;
-}
-
-.value-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
-}
-
-.value-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.value-icon i {
-    font-size: 2rem;
-    color: white;
-}
-
-.value-card h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
-
-.value-card p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #666;
-    margin: 0;
-}
-
-/* Engagements Modernes */
-.commitments-modern {
-    padding: 6rem 0;
-    background: #f8f9fa;
-}
-
-.section-title-big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-top: 1rem;
-}
-
-.commit-card {
-    background: white;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-}
-
-.commit-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), #7ed492);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
-
-.commit-card:hover::before {
-    transform: scaleX(1);
-}
-
-.commit-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
-}
-
-.commit-card.active {
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-}
-
-.commit-card.active * {
-    color: white !important;
-}
-
-.commit-number {
-    font-size: 4rem;
-    font-weight: 900;
-    color: rgba(101, 193, 120, 0.1);
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    line-height: 1;
-}
-
-.commit-card.active .commit-number {
-    color: rgba(255, 255, 255, 0.2);
-}
-
-.commit-icon-bg {
-    width: 60px;
-    height: 60px;
-    background: rgba(101, 193, 120, 0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.commit-card.active .commit-icon-bg {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.commit-icon-bg i {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-}
-
-.commit-card.active .commit-icon-bg i {
-    color: white;
-}
-
-.commit-card h4 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
-
-.commit-card p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #666;
-    margin: 0;
-}
-
-/* Responsive */
-@media (max-width: 991px) {
-    .intro-title {
-        font-size: 2.2rem;
-    }
-    
-    .quote-big {
-        font-size: 1.5rem;
-        padding: 0 2rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .section-title-big {
-        font-size: 2.2rem;
-    }
-}
 
 /* ========================================
-   SECTION NOS REPRODUCTEURS
+   SECTION REPRODUCTEURS
 ======================================== */
 
 .our-dogs-section {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    position: relative;
-    overflow: hidden;
+    padding: 5rem 0;
+    background: #111111;
 }
 
-/* Effet décoratif subtil */
-.our-dogs-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(101, 193, 120, 0.05) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-/* ========================================
-   EN-TÊTE DE SECTION
-======================================== */
-
-.label-tag {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--primary-color), #52a865);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.2);
-}
-
-.section-title-big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2E2E2E;
-    margin-bottom: 15px;
-}
-
-.section-subtitle {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* ========================================
-   CARTES CHIENS - DESIGN MODERNE
-======================================== */
-
+/* Carte chien */
 .dog-card {
-    background: white;
-    border-radius: 20px;
+    background: #0d0d0d;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .dog-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(201, 168, 76, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
-/* ========================================
-   IMAGE DU CHIEN
-======================================== */
-
+/* Image */
 .dog-card-image {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 3/4;
-    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    height: 350px;
 }
 
 .dog-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    object-position: center;
+    transition: transform 0.6s ease;
+    display: block;
 }
 
 .dog-card:hover .dog-card-image img {
-    transform: scale(1.1);
+    transform: scale(1.06);
 }
 
-/* ========================================
-   BADGE GENRE (Mâle/Femelle)
-======================================== */
-
+/* Badge genre */
 .dog-gender-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
     z-index: 2;
 }
 
 .dog-gender-badge.male {
-    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
 }
 
 .dog-gender-badge.female {
-    background: linear-gradient(135deg, #E91E63, #C2185B);
+    background: linear-gradient(135deg, #EC4899, #DB2777);
 }
 
-.dog-card:hover .dog-gender-badge {
-    transform: rotate(360deg) scale(1.1);
-}
-
-/* ========================================
-   OVERLAY AU SURVOL
-======================================== */
-
+/* Overlay hover */
 .dog-card-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
+    inset: 0;
+    background: rgba(0,0,0,0.75);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    padding: 30px;
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -1075,24 +938,18 @@
     opacity: 1;
 }
 
-/* ========================================
-   BOUTON VOIR LA FICHE
-======================================== */
-
 .btn-view-dog {
-    background: linear-gradient(135deg, var(--primary-color), #52a865);
-    color: white;
-    padding: 12px 30px;
-    border-radius: 30px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.4);
-    transition: all 0.3s ease;
     transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
 .dog-card:hover .btn-view-dog {
@@ -1100,616 +957,752 @@
 }
 
 .btn-view-dog:hover {
-    background: linear-gradient(135deg, #52a865, var(--primary-color));
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.5);
-    color: white;
-    transform: translateY(-2px);
+    color: #000;
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
 }
 
-/* ========================================
-   CORPS DE LA CARTE - INFORMATIONS
-======================================== */
-
+/* Corps carte */
 .dog-card-body {
-    padding: 25px;
-    flex-grow: 1;
+    padding: 1.25rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    background: #0d0d0d;
+}
+
+.dog-card-top-bar {
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 1rem;
+    border-radius: 2px;
 }
 
 .dog-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: #2E2E2E;
-    margin-bottom: 15px;
-    text-align: center;
+    color: #ffffff;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-/* ========================================
-   INFORMATIONS DU CHIEN
-======================================== */
-
+/* Infos */
 .dog-info {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.4rem;
 }
 
 .dog-info-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.dog-info-item:hover {
-    background: rgba(101, 193, 120, 0.1);
-    transform: translateX(5px);
+.dog-info-item:last-child {
+    border-bottom: none;
 }
 
 .dog-info-item i {
-    color: var(--primary-color);
-    font-size: 1rem;
-    min-width: 20px;
+    color: var(--gold);
+    font-size: 0.8rem;
+    width: 14px;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .dog-info-item span {
-    color: #555;
-    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.82rem;
     font-weight: 500;
 }
 
-/* ========================================
-   BOUTON VOIR TOUS LES REPRODUCTEURS
-======================================== */
-
+/* Bouton voir tous */
 .btn-see-all-dogs {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
+    padding: 0.85rem 2.5rem;
     background: transparent;
-    color: var(--primary-color);
-    padding: 15px 40px;
-    border: 2px solid var(--primary-color);
-    border-radius: 30px;
-    text-decoration: none;
+    color: var(--gold);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .btn-see-all-dogs:hover {
-    background: var(--primary-color);
-    color: white;
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.3);
 }
 
-.btn-see-all-dogs i {
-    transition: transform 0.3s ease;
+/* Responsive */
+@media (max-width: 991px) {
+    .our-dogs-section { padding: 3.5rem 0; }
+    .dog-card-image { aspect-ratio: 4/5; }
 }
 
-.btn-see-all-dogs:hover i {
-    transform: translateX(5px);
+@media (max-width: 767px) {
+    .our-dogs-section { padding: 3rem 0; }
+    .dog-card-image { aspect-ratio: 1/1; }
+    .dog-card-overlay { opacity: 1; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%); }
+    .btn-view-dog { transform: translateY(0); }
 }
+
+@media (max-width: 575px) {
+    .dog-name { font-size: 1.1rem; }
+    .dog-info-item span { font-size: 0.78rem; }
+}
+
+
+
 
 /* ========================================
-   RESPONSIVE
+   SECTION PHILOSOPHIE
 ======================================== */
 
-/* Tablettes */
+.philosophy-section {
+    padding: 5rem 0;
+    background: #0d0d0d;
+}
+
+.philosophy-image {
+    position: relative;
+    height: 100%;
+    min-height: 450px;
+    border-radius: 12px 0 0 12px;
+    overflow: hidden;
+}
+
+.philosophy-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.7s ease;
+}
+
+.philosophy-section:hover .philosophy-image img {
+    transform: scale(1.04);
+}
+
+.philosophy-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+}
+
+.philosophy-image-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+/* Contenu */
+.philosophy-content {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 0 12px 12px 0;
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.philosophy-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0.75rem 0;
+    line-height: 1.3;
+}
+
+/* Blocs */
+.philosophy-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.philosophy-block {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.philosophy-block:hover {
+    background: rgba(201, 168, 76, 0.05);
+    border-color: rgba(201, 168, 76, 0.2);
+}
+
+.philosophy-block-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.philosophy-block-icon i {
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+.philosophy-block h5 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.philosophy-block p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
-    .our-dogs-section {
-        padding: 60px 0;
+    .philosophy-section { padding: 3.5rem 0; }
+
+    .philosophy-image {
+        min-height: 300px;
+        border-radius: 12px 12px 0 0;
     }
-    
-    .section-title-big {
-        font-size: 2rem;
-    }
-    
-    .dog-card-image {
-        aspect-ratio: 4/5;
+
+    .philosophy-content {
+        border-radius: 0 0 12px 12px;
+        padding: 2rem;
     }
 }
 
-/* Mobiles */
 @media (max-width: 767px) {
-    .our-dogs-section {
-        padding: 50px 0;
-    }
-    
-    .section-title-big {
-        font-size: 1.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 1rem;
-    }
-    
-    .dog-name {
-        font-size: 1.3rem;
-    }
-    
-    /* Les cartes prennent toute la largeur sur mobile */
-    .dog-card {
-        margin-bottom: 30px;
-    }
-    
-    .dog-card-image {
-        aspect-ratio: 1/1;
-    }
-    
-    /* Overlay toujours visible sur mobile */
-    .dog-card-overlay {
-        opacity: 1;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 0.8) 100%
-        );
-    }
-    
-    .btn-view-dog {
-        transform: translateY(0);
-        font-size: 0.9rem;
-        padding: 10px 25px;
-    }
+    .philosophy-section { padding: 3rem 0; }
+    .philosophy-title { font-size: 1.5rem; }
+    .philosophy-image { min-height: 250px; }
+    .philosophy-content { padding: 1.5rem; }
+    .philosophy-block { padding: 1rem; gap: 1rem; }
 }
 
-/* Petits mobiles */
 @media (max-width: 575px) {
-    .dog-gender-badge {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .dog-card-body {
-        padding: 20px;
-    }
-    
-    .btn-see-all-dogs {
-        width: 100%;
-        justify-content: center;
-    }
+    .philosophy-title { font-size: 1.3rem; }
+    .philosophy-block h5 { font-size: 0.9rem; }
+    .philosophy-block p { font-size: 0.82rem; }
+    .philosophy-image-badge { font-size: 0.78rem; padding: 0.5rem 1rem; }
 }
+
+
+
 
 /* ========================================
-   SECTION PORTÉES - VERSION PREMIUM
+   SECTION MARIAGES
 ======================================== */
 
 .our-marriages-section-premium {
-    padding: 100px 0;
-    background: #FAFBFC;
-    position: relative;
+    padding: 5rem 0;
+    background: #111111;
 }
 
-/* En-tête premium */
-.label-tag-premium {
-    display: inline-block;
-    background: white;
-    color: var(--primary-color);
-    padding: 10px 24px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    border: 2px solid var(--primary-color);
-}
-
-.section-title-premium {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.section-subtitle-premium {
-    font-size: 1.1rem;
-    color: #6B7280;
-    font-weight: 400;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* ========================================
-   CARTE MARIAGE - DESIGN PREMIUM
-======================================== */
-
+/* Carte mariage */
 .marriage-card-premium {
-    background: white;
-    border-radius: 24px;
+    background: #0d0d0d;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.4s ease;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .marriage-card-premium:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(201, 168, 76, 0.45);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
-/* ========================================
-   IMAGE - DESIGN MODERNE
-======================================== */
-
+/* Image */
 .marriage-image-container {
     position: relative;
-    width: 45%;
-    min-height: 400px;
+    height: 360px;
     overflow: hidden;
-    background: linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 100%);
 }
 
 .marriage-image-premium {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
+    transition: transform 0.7s ease;
 }
 
 .marriage-card-premium:hover .marriage-image-premium {
-    transform: scale(1.08);
+    transform: scale(1.06);
 }
 
-/* ========================================
-   BADGE STATUT - DESIGN MINIMAL
-======================================== */
+.marriage-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+}
 
+/* Badge statut - toujours en haut à droite */
 .status-badge-premium {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 10px 18px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 2;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-/* Statuts avec vos enum */
-.status-badge-premium.programmé {
-    background: rgba(147, 51, 234, 0.95); 
-    color: white;
-}
-
-.status-badge-premium.programmé .status-dot {
-    background: white;
-}
-
-.status-badge-premium.en-cours {
-    background: rgba(249, 115, 22, 0.95); 
-    color: white;
-}
-
-.status-badge-premium.en-cours .status-dot {
-    background: white;
-}
-
-.status-badge-premium.confirmé {
-    background: rgba(34, 197, 94, 0.95);
-    color: white;
-}
-
-.status-badge-premium.confirmé .status-dot {
-    background: white;
-}
-
-.status-badge-premium.archivé {
-    background: rgba(107, 114, 128, 0.95);
-    color: white;
-}
-
-.status-badge-premium.archivé .status-dot {
-    background: white;
-}
-
-/* ========================================
-   CONTENU DE LA CARTE
-======================================== */
-
-.marriage-content-premium {
-    width: 55%;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* ========================================
-   EN-TÊTE RACE
-======================================== */
-
-.marriage-breed-header {
+    top: 12px;
+    right: 12px;
+    left: auto;
+    width: fit-content;
     display: inline-flex;
     align-items: center;
-    gap: 8px; 
-    background: rgba(101, 193, 120, 0.08);
-    color: var(--primary-color);
-    padding: 6px 14px; 
-    border-radius: 10px; 
-    font-weight: 600;
-    font-size: 0.8rem;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    z-index: 2;
 }
 
-.marriage-breed-header i {
-    font-size: 1rem;
-}
+.status-badge-premium.programmé { background: rgba(59,130,246,0.85); color: #fff; }
+.status-badge-premium.en-cours { background: rgba(234,179,8,0.85); color: #000; }
+.status-badge-premium.confirmé { background: rgba(34,197,94,0.85); color: #fff; }
+.status-badge-premium.archivé { background: rgba(107,114,128,0.85); color: #fff; }
 
-/* ========================================
-   SECTION PARENTS - DESIGN ÉLÉGANT
-======================================== */
-
-.parents-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px; 
-    margin-bottom: 24px;
-}
-
-.parent-item {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    background: #F9FAFB;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-}
-
-.parent-item:hover {
-    background: #F3F4F6;
-    transform: translateX(4px);
-}
-
-.parent-icon {
-    width: 38px; 
-    height: 38px; 
+.status-dot {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: white;
+    background: currentColor;
+    display: inline-block;
     flex-shrink: 0;
 }
 
-.parent-item.male .parent-icon {
-    background: linear-gradient(135deg, #3B82F6, #2563EB);
+/* Badge race - en bas à gauche */
+.marriage-breed-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: fit-content;
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    padding: 0.3rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    z-index: 2;
 }
 
-.parent-item.female .parent-icon {
-    background: linear-gradient(135deg, #EC4899, #DB2777);
-}
-
-.parent-info {
+/* Contenu carte */
+.marriage-content-premium {
+    padding: 1.25rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 1rem;
 }
 
-.parent-label {
-    font-size: 0.6rem;
-    color: #9CA3AF;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 600;
-}
-
-.parent-name {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #1F2937;
-}
-
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.1); }
-}
-
-/* ========================================
-   STATISTIQUES - DESIGN MODERNE
-======================================== */
-
-.marriage-stats {
+/* Parents */
+.marriage-parents {
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 24px;
-    background: #F9FAFB;
-    border-radius: 16px;
-    margin-bottom: 24px;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
 }
 
-.stat-item {
+.marriage-parent {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     flex: 1;
-    text-align: center;
+    min-width: 0;
 }
 
-.stat-number {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #1F2937;
+.marriage-parent-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+}
+
+.marriage-parent.male .marriage-parent-icon {
+    background: rgba(59,130,246,0.15);
+    color: #3B82F6;
+}
+
+.marriage-parent.female .marriage-parent-icon {
+    background: rgba(236,72,153,0.15);
+    color: #EC4899;
+}
+
+.marriage-parent-label {
+    display: block;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     line-height: 1;
-    margin-bottom: 8px;
 }
 
-.stat-item.highlight .stat-number {
-    color: var(--primary-color);
+.marriage-parent-name {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
 }
 
-.stat-label {
+.marriage-parent-divider {
+    color: rgba(201, 168, 76, 0.4);
     font-size: 0.7rem;
-    color: #6B7280;
-    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* Footer stats + bouton */
+.marriage-footer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px; 
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-.stat-label i {
-    font-size: 0.9rem;
+.marriage-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-.stat-divider {
+.marriage-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 45px;
+}
+
+.marriage-stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.marriage-stat-item.highlight .marriage-stat-value {
+    color: var(--gold);
+}
+
+.marriage-stat-label {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.marriage-stat-sep {
     width: 1px;
-    height: 60px;
-    background: #E5E7EB;
+    height: 30px;
+    background: rgba(255,255,255,0.08);
+    flex-shrink: 0;
 }
 
-/* ========================================
-   DATE DE NAISSANCE - DESIGN ÉPURÉ
-======================================== */
-
-.birth-date-premium {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; 
-    padding: 10px 16px; 
-    background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
-    border-radius: 10px; 
-    color: #1E40AF;
-    font-weight: 600;
-    font-size: 0.8rem;
-}
-
-.birth-date-premium i {
-    font-size: 1rem;
-}
-
-/* ========================================
-   BOUTON CTA - DESIGN PREMIUM
-======================================== */
-
+/* Bouton CTA */
 .btn-cta-premium {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px; 
-    background: linear-gradient(135deg, var(--primary-color), #52a865);
-    color: white;
-    padding: 12px 28px; 
-    border-radius: 10px; 
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .btn-cta-premium:hover {
-    background: linear-gradient(135deg, #52a865, var(--primary-color));
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(101, 193, 120, 0.35);
-    color: white;
-}
-
-.btn-cta-premium i {
-    transition: transform 0.3s ease;
-}
-
-.btn-cta-premium:hover i {
-    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+    color: #000;
 }
 
 /* ========================================
-   BOUTON VOIR TOUTES - PREMIUM
+   RESPONSIVE
 ======================================== */
 
-.btn-all-marriages-premium {
-    display: inline-flex;
+@media (max-width: 991px) {
+    .our-marriages-section-premium { padding: 3.5rem 0; }
+    .marriage-image-container { height: 240px; }
+}
+
+@media (max-width: 767px) {
+    .our-marriages-section-premium { padding: 3rem 0; }
+    .marriage-image-container { height: 210px; }
+
+    /* Footer reste horizontal sur mobile */
+    .marriage-footer {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .btn-cta-premium {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .marriage-image-container { height: 190px; }
+
+    /* Cache label père/mère sur très petit écran */
+    .marriage-parent-label { display: none; }
+
+    .marriage-stat-value { font-size: 1rem; }
+    .marriage-stat-label { font-size: 0.65rem; }
+}
+
+
+
+/* ========================================
+   SECTION RÉSEAUX SOCIAUX
+======================================== */
+
+.social-section {
+    padding: 2rem 0;
+    background: #0d0d0d;
+}
+
+.social-block {
+    display: flex;
     align-items: center;
-    gap: 12px;
-    background: white;
-    color: var(--primary-color);
-    padding: 18px 40px;
-    border-radius: 50px;
+    gap: 4rem;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-top: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 3rem;
+}
+
+.social-block-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.social-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0.75rem 0;
+    line-height: 1.3;
+}
+
+.social-desc {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Côté droit - icônes */
+.social-block-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+/* Carte réseau social */
+.social-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid var(--primary-color);
     transition: all 0.3s ease;
+    min-width: 180px;
 }
 
-.btn-all-marriages-premium:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.25);
+.social-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201, 168, 76, 0.3);
+    background: rgba(255,255,255,0.06);
 }
 
-.btn-all-marriages-premium i {
-    transition: transform 0.3s ease;
+.social-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    color: #fff;
 }
 
-.btn-all-marriages-premium:hover i {
-    transform: translateX(5px);
+/* Couleurs par réseau */
+.social-facebook { background: #1877F2; }
+.social-instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.social-tiktok { background: #000000; border: 1px solid rgba(255,255,255,0.1); }
+.social-youtube { background: #FF0000; }
+
+.social-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.social-card-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.social-card-action {
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap; /* empêche le retour à la ligne */
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .social-block {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .social-block-right {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .social-card {
+        min-width: 150px;
+        flex: 1;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .social-section { padding: 3rem 0; }
+
+    .social-block {
+        padding: 1.5rem;
+    }
+
+    .social-title { font-size: 1.5rem; }
+
+    .social-block-right {
+        width: 100%;
+    }
+
+    .social-card {
+        width: 100%; /* pleine largeur au lieu de 50% */
+        min-width: unset;
+        padding: 0.85rem 1.25rem;
+        flex: unset;
+    }
+
+    .social-card-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .social-card-name { font-size: 0.85rem; }
+    
+    .social-card-action { 
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
 }
 
 
 /* ========================================
-   SECTION CHIOTS DISPONIBLES
+   SECTION CHIOTS
 ======================================== */
 
 .our-puppies-section {
-    padding: 6rem 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 1rem 0;
+    background: #0d0d0d;
 }
 
-/* Card chiot */
+/* Carte chiot */
 .puppy-card {
-    background: white;
-    border-radius: 20px;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .puppy-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(101, 193, 120, 0.2);
+    border-color: rgba(201, 168, 76, 0.45);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
-/* Image du chiot */
+/* Image */
 .puppy-card-image {
     position: relative;
-    height: 280px;
+    height: 260px;
     overflow: hidden;
 }
 
@@ -1717,80 +1710,68 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
     transition: transform 0.6s ease;
 }
 
 .puppy-card:hover .puppy-card-image img {
-    transform: scale(1.15);
+    transform: scale(1.07);
 }
 
-/* Badge statut (disponible/à vendre) */
+/* Badge statut */
 .puppy-status-badge {
     position: absolute;
     top: 12px;
     left: 12px;
-    padding: 0.4rem 0.85rem; 
+    width: fit-content;
+    padding: 0.3rem 0.75rem;
     border-radius: 50px;
-    font-size: 0.8rem; 
+    font-size: 0.75rem;
     font-weight: 700;
-    color: white;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); 
     z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
 }
 
 .puppy-status-badge.available {
-    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    background: rgba(34,197,94,0.85);
+    color: #fff;
 }
 
 .puppy-status-badge.for-sale {
-    background: linear-gradient(135deg, #2196f3, #42a5f5);
-}
-
-.puppy-status-badge i {
-    font-size: 0.75rem;
+    background: rgba(201, 168, 76, 0.9);
+    color: #000;
 }
 
 /* Badge genre */
 .puppy-gender-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 2;
 }
 
-.puppy-gender-badge.male {
-    background: linear-gradient(135deg, #2196f3, #42a5f5);
-}
-
-.puppy-gender-badge.female {
-    background: linear-gradient(135deg, #ec407a, #f06292);
-}
+.puppy-gender-badge.male { background: rgba(59,130,246,0.9); }
+.puppy-gender-badge.female { background: rgba(236,72,153,0.9); }
 
 /* Overlay hover */
 .puppy-card-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
+    inset: 0;
+    background: rgba(0,0,0,0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
+    z-index: 3;
 }
 
 .puppy-card:hover .puppy-card-overlay {
@@ -1798,11 +1779,12 @@
 }
 
 .btn-view-puppy {
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -1814,115 +1796,254 @@
     transform: translateY(0);
 }
 
-.btn-view-puppy:hover {
-    background: linear-gradient(135deg, #7ed492, var(--primary-color));
-    color: white;
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
-}
-
-/* Corps de la carte */
+/* Corps carte */
 .puppy-card-body {
-    padding: 1.5rem;
+    padding: 1.25rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.85rem;
+}
+
+/* Header nom + prix */
+.puppy-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .puppy-name {
-    font-size: 1.4rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Informations du chiot */
+.puppy-price-tag {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.puppy-price-tag.consult {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Infos */
 .puppy-info {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 0.4rem;
+    flex: 1;
 }
 
 .puppy-info-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #555;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.puppy-info-item:last-child {
+    border-bottom: none;
 }
 
 .puppy-info-item i {
-    color: var(--primary-color);
-    font-size: 1rem;
-    width: 20px;
+    color: var(--gold);
+    font-size: 0.78rem;
+    width: 14px;
     text-align: center;
+    flex-shrink: 0;
 }
 
-/* Prix */
-.puppy-price {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
-    text-align: center;
+.puppy-info-item span {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-.price-amount {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    display: block;
-}
-
-/* Prix "Nous Consulter" */
-.price-contact {
-    font-size: 1.1rem;
+/* Bouton fiche */
+.btn-puppy-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem;
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    color: var(--gold);
+    font-size: 0.82rem;
     font-weight: 600;
-    color: var(--secondary-color);
-    display: block;
-    font-style: italic;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto;
 }
 
+.btn-puppy-cta:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
+}
 
 /* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .our-puppies-section { padding: 3.5rem 0; }
+
+    .puppy-card-image { height: 330px; }
+
+    .puppy-card-overlay {
+    display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .our-puppies-section { padding: 3rem 0; }
+    .puppy-card-image { height: 310px; }
+
+    .puppy-card-overlay {
+    display: none;
+    }
+
+    /* Overlay visible sur mobile */
+    .puppy-card-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+        align-items: flex-end;
+        padding-bottom: 1rem;
+    }
+
+    .btn-view-puppy { transform: translateY(0); }
+}
+
+@media (max-width: 575px) {
+    .puppy-card-image { height: 300px; }
+    .puppy-name { font-size: 1rem; }
+    .puppy-info-item span { font-size: 0.78rem; }
+
+    .puppy-card-overlay {
+    display: none;
+    }
+}
+
+/* ========================================
+   SECTION VALEURS
+======================================== */
+
+.values-section {
+    padding: 5rem 0;
+    background: #111111;
+}
+
+.value-card {
+    background: #0d0d0d;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-top: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 2rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    border-color: rgba(201, 168, 76, 0.45);
+    border-top-color: var(--gold);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
+}
+
+.value-card-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.value-card-icon i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.value-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.85rem;
+}
+
+.value-card-text {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.88rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .values-section { padding: 3rem 0; }
+    .value-card { padding: 1.5rem; }
+    .value-card-title { font-size: 1.05rem; }
+}
+
+@media (max-width: 575px) {
+    .values-section { padding: 2.5rem 0; }
+    .value-card { padding: 1.25rem; }
+    .value-card-text { font-size: 0.83rem; }
+}/* ========================================
    SECTION BLOG
 ======================================== */
 
 .blog-section {
-    padding: 6rem 0;
-    background: #ffffff;
+    padding: 5rem 0;
+    background: #0d0d0d;
 }
 
-/* Card article */
+/* Carte blog - layout horizontal */
 .blog-card {
-    background: white;
-    border-radius: 20px;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
+    transition: all 0.4s ease;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* image gauche, contenu droite */
+    height: 210px;
 }
 
 .blog-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    border-color: rgba(201, 168, 76, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
-/* Image de l'article */
+/* Image */
 .blog-card-image {
     position: relative;
-    height: 280px;
+    width: 280px;
+    flex-shrink: 0;
     overflow: hidden;
 }
 
 .blog-card-image a {
     display: block;
-    width: 100%;
     height: 100%;
 }
 
@@ -1930,145 +2051,334 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.6s ease;
 }
 
 .blog-card:hover .blog-card-image img {
-    transform: scale(1.1);
+    transform: scale(1.06);
+}
+
+.blog-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, rgba(0,0,0,0.3));
+    pointer-events: none;
 }
 
 /* Badge catégorie */
 .blog-category-badge {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 0.4rem 0.9rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
+    top: 12px;
+    left: 12px;
+    width: fit-content;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.3rem 0.85rem;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
 }
 
-/* Corps de la carte */
+/* Badge date */
+.blog-date-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: fit-content;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    padding: 0.3rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+}
+
+/* Corps carte */
 .blog-card-body {
     padding: 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-/* Meta (date + likes) */
-.blog-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.blog-date,
-.blog-likes {
-    font-size: 0.85rem;
-    color: #888;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.blog-likes {
-    color: var(--primary-color);
-    font-weight: 600;
+    gap: 0.75rem;
+    justify-content: center;
+    min-width: 0;
 }
 
 /* Titre */
 .blog-title {
-    font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 1rem;
     line-height: 1.4;
+    margin: 0;
 }
 
 .blog-title a {
-    color: var(--secondary-color);
+    color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .blog-title a:hover {
-    color: var(--primary-color);
+    color: var(--gold);
 }
 
-/* Aperçu */
+/* Preview */
 .blog-preview {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 1.5rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.83rem;
+    line-height: 1.7;
+    margin: 0;
     flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
 }
 
-/* Bouton lire la suite */
+/* Footer carte */
+.blog-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.blog-likes {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+}
+
+.blog-likes i { color: #EC4899; }
+
+/* Bouton lire */
 .btn-read-more {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.95rem;
+    gap: 0.4rem;
+    color: var(--gold);
+    font-size: 0.82rem;
+    font-weight: 700;
     text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: auto;
+    transition: gap 0.3s ease;
 }
 
 .btn-read-more:hover {
-    color: #7ed492;
-    gap: 0.75rem;
+    gap: 0.7rem;
+    color: var(--gold-light);
 }
 
-.btn-read-more i {
-    transition: transform 0.3s ease;
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .blog-section { padding: 3.5rem 0; }
+    .blog-card { height: 180px; }
+    .blog-card-image { width: 300px; }
 }
 
-.btn-read-more:hover i {
-    transform: translateX(3px);
+@media (max-width: 767px) {
+    .blog-section { padding: 3rem 0; }
+
+    /* Retour en colonne sur mobile */
+    .blog-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .blog-card-image {
+        width: 100%;
+        height: 290px;
+    }
+
+    .blog-image-overlay {
+        background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    }
+
+    .blog-card-body { padding: 1.25rem; }
+    .blog-title { font-size: 1rem; }
 }
 
-/* Bouton voir tous les articles */
-.btn-see-all-blog {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1.25rem 3rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
-    transition: all 0.4s ease;
+@media (max-width: 575px) {
+    .blog-section { padding: 2.5rem 0; }
+    .blog-card-image { height: 275px; }
+    .blog-card-body { padding: 1rem; }
+    .blog-title { font-size: 0.95rem; }
+    .blog-preview { font-size: 0.8rem; }
 }
 
-.btn-see-all-blog:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.4);
-    color: white;
-}
 
-.btn-see-all-blog i {
-    transition: transform 0.3s ease;
-}
 
-.btn-see-all-blog:hover i {
-    transform: translateX(5px);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ========================================
    SECTION INFORMATIONS
@@ -4175,175 +4485,6 @@
     .btn-all-marriages-premium {
         font-size: 0.8rem;
         padding: 11px 24px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION VALEURS
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .values-section {
-        padding: 60px 0;
-    }
-    
-    /* Cartes valeurs */
-    .value-card {
-        padding: 35px 28px;
-    }
-    
-    .value-card h4 {
-        font-size: 1.4rem;
-        margin-bottom: 14px;
-    }
-    
-    .value-card p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    /* Icône */
-    .value-icon {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 20px;
-    }
-    
-    .value-icon i {
-        font-size: 1.8rem;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .values-section {
-        padding: 50px 0;
-    }
-    
-    /* Grille */
-    .values-section .row {
-        gap: 20px !important;
-    }
-    
-    /* Cartes valeurs */
-    .value-card {
-        padding: 30px 24px;
-        margin-bottom: 20px;
-    }
-    
-    .value-card h4 {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-        line-height: 1.3;
-    }
-    
-    .value-card p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    /* Icône */
-    .value-icon {
-        width: 65px;
-        height: 65px;
-        margin-bottom: 18px;
-    }
-    
-    .value-icon i {
-        font-size: 1.6rem;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .values-section {
-        padding: 40px 0;
-    }
-    
-    /* Grille */
-    .values-section .row {
-        gap: 15px !important;
-    }
-    
-    .values-section .mb-5 {
-        margin-bottom: 2rem !important;
-    }
-    
-    /* Cartes valeurs */
-    .value-card {
-        padding: 25px 20px;
-        margin-bottom: 15px;
-        border-radius: 16px;
-    }
-    
-    .value-card h4 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .value-card p {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 0;
-    }
-    
-    /* Icône */
-    .value-icon {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 16px;
-    }
-    
-    .value-icon i {
-        font-size: 1.5rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .values-section {
-        padding: 35px 0;
-    }
-    
-    /* Cartes valeurs */
-    .value-card {
-        padding: 22px 18px;
-        margin-bottom: 12px;
-    }
-    
-    .value-card h4 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .value-card p {
-        font-size: 0.8rem;
-        line-height: 1.7;
-    }
-    
-    /* Icône */
-    .value-icon {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 14px;
-    }
-    
-    .value-icon i {
-        font-size: 1.4rem;
     }
 }
 

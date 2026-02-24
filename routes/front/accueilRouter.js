@@ -29,7 +29,7 @@ router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Route pour la page d'accueil
 router.get('/', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     
     // Requête 1 : TOUS les reproducteurs pour la section RACES
     const queryAnimalsForRaces = `
@@ -101,7 +101,7 @@ router.get('/', (req, res) => {
         breed_name.name,
         breed_name.slug
     ORDER BY animals.id DESC
-    LIMIT 4
+    LIMIT 3
 `;
 
     const queryMarriages = `
@@ -209,6 +209,17 @@ router.get('/', (req, res) => {
     LIMIT 4
 `;
 
+const querySocialLinks = `
+    SELECT 
+        usl.social_media_link,
+        sn.name AS network_name
+    FROM user_social_links usl
+    LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+    WHERE usl.user_id = ?
+    AND usl.social_media_link IS NOT NULL
+    AND usl.social_media_link != ''
+`;
+
     // Exécuter les requêtes
     db.query(queryAnimalsForRaces, [userId], (err, allAnimals) => {
         if (err) {
@@ -251,14 +262,22 @@ router.get('/', (req, res) => {
                             return res.redirect('/error');
                         }
 
+                        db.query(querySocialLinks, [userId], (err, socialLinks) => {
+                            if (err) {
+                                console.error('Erreur social links:', err);
+                                return res.redirect('/error');
+                            }
+
                         res.render('index', {
                             animals: animals,          
                             allAnimals: allAnimals,
                             marriages: formattedMarriages,
                             puppies: puppies,
-                            blogs: blogs
+                            blogs: blogs,
+                            socialLinks: socialLinks
                         });
                     });
+                  });
                 });
             });
         });

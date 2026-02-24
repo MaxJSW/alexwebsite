@@ -34,7 +34,7 @@ router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // router pour afficher la page de chiots à vendre par race et par genre
 router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
@@ -224,7 +224,7 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
 
 //  route pour la page de tri des chiots produits
 router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
@@ -385,7 +385,7 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
 
 // router pour afficher la page de chiots à vendre par genre
 router.get('/a-vendre/:gender(males|femelles)', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
@@ -551,7 +551,7 @@ router.get('/a-vendre/:gender(males|femelles)', (req, res) => {
 
 // router pour afficher la page de détail d'un chiot à vendre
 router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const {
         breedSlug,
         slug
@@ -979,7 +979,7 @@ router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
 
 // router pour afficher la page de détail d'un chiot vendu
 router.get('/produits/:breedSlug/:slug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const {
         breedSlug,
         slug
@@ -1394,7 +1394,7 @@ router.get('/produits/:breedSlug/:slug', (req, res) => {
 
 // router pour afficher la page de chiots produits par genre
 router.get('/produits/:gender(males|femelles)', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
@@ -1547,7 +1547,7 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
 
 // router pour afficher la page de chiots à vendre
 router.get('/a-vendre', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6; 
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.query.breed;
@@ -1743,7 +1743,7 @@ router.get('/a-vendre', (req, res) => {
 
 // router pour afficher la page de chiots produits
 router.get('/produits', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.query.breed;
@@ -1918,7 +1918,7 @@ router.get('/produits', (req, res) => {
 
 // router pour afficher la page de chiots à vendre par race
 router.get('/a-vendre/:breedSlug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
@@ -2128,7 +2128,7 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
 
 // router pour afficher la page de chiots produits filtrés par races
 router.get('/produits/:breedSlug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
@@ -2319,7 +2319,7 @@ router.get('/produits/:breedSlug', (req, res) => {
 
 // router principal de la page chiots
 router.get('/', (req, res) => {
-    const userId = 8;
+    const userId = 10;
 
     // Requête pour les chiots à vendre/disponibles
     const queryAvailablePuppies = `
