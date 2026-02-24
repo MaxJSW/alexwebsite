@@ -1,0 +1,125 @@
+<!-- Modal litter success-->
+<div class="modal fade" id="successLitterModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center justify-content-center" style="height: 200px;">
+                <p class="fs-4 text-center">Création du Mariage réussi</p>
+                <i class="bi bi-check-circle text-primary icon-centered" style="font-size: 5rem; margin-bottom: 80px; margin-right:60px"></i>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modale edit breeding -->
+<div class="modal fade modal-fullscreen" id="editMarriageModal" tabindex="-1" aria-labelledby="editMarriageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMarriageModalLabel">Modifier le Mariage</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class=" modal-body">
+                <form id="editMarriageForm">
+                    <input type="hidden" id="edit_marriage_id">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12 p-5">
+                            <div class="mb-3 border border-primary rounded p-2">
+                                <div class="d-flex align-items-center">
+                                    <label class="form-label mb-0 me-2">Avez-vous une bannière disponible pour ce mariage ?</label>
+                                    <div class="form-check form-switch d-inline-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" id="edit_get_banner">
+                                        <label class="form-check-label ms-2" for="edit_get_banner" id="edit_get_banner_label" style="display: none;" >Oui</label>
+                                    </div>
+                                </div>
+                                <span style="font-size: 12px; margin-top: 5px;">Dimension recommandée (1080 x 1350)</span>
+                            </div>
+                            <div id="bannerUploadSection" style="display: none;">
+                                <div class="d-grid gap-2 mb-4">
+                                    <button class="btn btn-primary" type="button" id="uploadBtnBanner">Téléchargement de la Bannière</button>
+                                </div>
+                                <div id="uploadBannerForm" style="display: none; margin-bottom: 20px;">
+                                    <input type="file" name="bannerPhoto" id="bannerPhotoInput" accept="image/*">
+                                </div>
+                                <div class="album py-5 bg-body-tertiary min-height-400 mb-3">
+                                    <div class="container d-flex justify-content-center">
+                                        <div class="img-fluid h-100" id="bannerPhotoContainer"></div>
+                                        <!-- l'image de la bannière doit s'afficher ici -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12 p-5">
+                            <div class="mb-3">
+                                <label for="edit_male_name" class="form-label">Mâle</label>
+                                <input type="text" class="form-control" id="edit_male_name" readonly>
+                                <input type="hidden" id="edit_male_id" name="edit_male_id">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_female_name" class="form-label">Femelle</label>
+                                <input type="text" class="form-control" id="edit_female_name" readonly>
+                                <input type="hidden" id="edit_female_id" name="edit_female_id">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_expected_puppies" class="form-label">Nombre de chiots attendus</label>
+                                <input type="number" class="form-control" id="edit_expected_puppies">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_expected_birth_date" class="form-label">Date de naissance prévue</label>
+                                <input type="date" class="form-control" id="edit_expected_birth_date">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_actual_birth_date" class="form-label">Date de naissance :</label>
+                                <input type="date" class="form-control" id="edit_actual_birth_date">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_actual_male_puppies" class="form-label">Nombre de chiots mâles:</label>
+                                <input type="number" class="form-control" id="edit_actual_male_puppies">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_actual_female_puppies" class="form-label">Nombre de chiots femelles:</label>
+                                <input type="number" class="form-control" id="edit_actual_female_puppies">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_marriages_status" class="form-label">Statut</label>
+                                <select class="form-select" id="edit_marriages_status">
+                                    <option value="Programmé">Programmé</option>
+                                    <option value="En cours">En cours</option>
+                                    <option value="Confirmé">Confirmé</option>
+                                    <option value="Archivé">Archivé</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4 p-5">
+                            <div class="mb-3">
+                                <label for="edit_is_online" class="form-label">En ligne</label>
+                                <select class="form-select" id="edit_is_online">
+                                    <option value="1">Oui</option>
+                                    <option value="0">Non</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_marriages_description" class="form-label">Description du mariage</label>
+                                <textarea class="form-control" id="edit_marriages_description" rows="20" id="edit_marriages_description" placeholder="Nombre de caractères recommandé minimum 350"></textarea>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <input type="hidden" class="form-control" id="edit_marriages_slug" name="edit_marriages_slug">
+                            </div>
+                            <input type="hidden" name="user_id" value="<%= user.id %>">
+
+                            <div class="alert alert-success" role="alert" id="successEditMarriageMessage" style="display:none;">
+                                Modification du mariage réussi
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

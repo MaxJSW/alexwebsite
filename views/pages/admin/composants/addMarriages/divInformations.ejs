@@ -1,0 +1,33 @@
+<div class="container-fluid mb-3">
+    <div class="alert alert-success" role="alert">
+        <div class="d-flex justify-content-between align-items-center small" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#infoCollapse" aria-expanded="false" aria-controls="infoCollapse">
+            <h4 class="alert-heading mb-0 ms-2">
+                <i class="bi bi-info-circle me-2 "></i> Informations
+            </h4>
+            <i class="bi bi-chevron-down" id="chevronIcon"></i>
+        </div>
+        
+        <div class="collapse" id="infoCollapse">
+            <hr class="my-2">
+            <p class="mb-0 small">
+                Pour créer une nouvelle portée, veuillez d'abord sélectionner un mâle et une femelle parmi les chiens disponibles. 
+                Ensuite, remplissez les informations requises concernant la portée, telles que le nombre attendu de chiots mâles et femelles, 
+                la date de naissance prévue, et la date de naissance réelle si elle est déjà connue. Une fois toutes ces informations fournies, 
+                vous pourrez valider la portée. Cette procédure permet de suivre et de gérer efficacement les détails de chaque portée, 
+                facilitant ainsi la présentation et la vente éventuelle des chiots.
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    // Script pour changer l'icône chevron
+    document.getElementById('infoCollapse').addEventListener('show.bs.collapse', function () {
+        document.getElementById('chevronIcon').classList.remove('bi-chevron-down');
+        document.getElementById('chevronIcon').classList.add('bi-chevron-up');
+    });
+    
+    document.getElementById('infoCollapse').addEventListener('hide.bs.collapse', function () {
+        document.getElementById('chevronIcon').classList.remove('bi-chevron-up');
+        document.getElementById('chevronIcon').classList.add('bi-chevron-down');
+    });
+</script>

@@ -1,0 +1,35 @@
+<% if (kennelInformations.length > 0) { %>
+    <% kennelInformations.forEach(section => { %>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 mb-4">
+            <div class="h-100 p-4 bg-body-tertiary border rounded-3 position-relative shadow-sm">
+                <span id="badge-<%= section.id %>" class="badge <%= section.is_online ? 'bg-success' : 'bg-secondary' %> position-absolute top-0 end-0 m-2">
+                    <%= section.is_online ? 'En Ligne' : 'Brouillon' %>
+                </span>
+                <h5 class="text-primary-kennel"><i class="bi bi-file-earmark-text me-2"></i>Titre de la section:</h5>
+                <h5 class="mb-3"><%= section.titre %></h5>
+                <h6 class="text-secondary"><i class="bi bi-card-text me-2"></i>Description</h6>
+                <p class="mb-3"><%= section.description.substring(0, 150) %>...</p>
+                <div class="d-flex flex-column">
+                    <div class="mb-3">
+                        <small class="text-primary-kennel"><i class="bi bi-pencil-square me-2"></i>Dernière modification : <%= section.formatted_date_modification %></small><br>
+                        <small class="text-muted"><i class="bi bi-calendar-event me-2"></i>Date de création : <%= section.formatted_date_creation %></small>
+                        <div class="form-check form-switch mt-1">
+                            <input class="form-check-input" type="checkbox" id="switchOnline<%= section.id %>" <%= section.is_online === 1 ? 'checked disabled' : '' %>>
+                            <label class="form-check-label" for="switchOnline<%= section.id %>">Mettre en ligne</label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-2 flex-md-row">
+                        <button class="btn btn-primary edit-button w-100" data-id="<%= section.id %>" data-is-online="<%= section.is_online %>">Modifier</button>
+                        <button class="btn btn-primary add-photo-button w-100" data-id="<%= section.id %>">Ajouter une photo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+<% } else { %>
+    <div class=" justify-content-center  align-items-center">
+        <div class="alert alert-primary text-center" role="alert">
+            Aucune section trouvée.
+        </div>
+    </div>
+<% } %>

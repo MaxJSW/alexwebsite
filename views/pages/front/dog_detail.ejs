@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Élevage de Bel Air - American Bully & Springer Anglais</title>
+        <meta name="description" content="Élevage de Bel Air : élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse, accompagnement personnalisé. Découvrez nos reproducteurs et chiots." />
+        <meta name="keywords" content="élevage american bully, élevage springer anglais, chiots american bully, chiots springer anglais, élevage canin, chien de chasse, elevage de bel air, chiots LOF, american bully france, springer anglais france"/>
+        <meta name="author" content="Élevage de Bel Air" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <link rel="canonical" href="https://elevagedebelair.com/chiens" />
+        <meta name="language" content="fr" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.placename" content="France" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Élevage de Bel Air" />
+        <meta property="og:title" content="Élevage de Bel Air - American Bully & Springer Anglais" />
+        <meta property="og:description" content="Élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse, accompagnement personnalisé." />
+        <meta property="og:url" content="https://elevagedebelair.com/chiens" />
+        <meta property="og:image" content="https://elevagedebelair.com<%= animal.optimized_image_path ? '/uploads/optimized/' + animal.optimized_image_path : animal.image_path ? '/uploads/' + animal.image_path : '/img/og/og-image.webp' %>">
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Élevage de Bel Air - American Bully et Springer Anglais" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Élevage de Bel Air - American Bully & Springer Anglais" />
+        <meta name="twitter:description" content="Élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse." />
+        <meta name="twitter:image" content="https://elevagedebelair.com<%= animal.optimized_image_path ? '/uploads/optimized/' + animal.optimized_image_path : animal.image_path ? '/uploads/' + animal.image_path : '/img/og/og-image.webp' %>">
+        <meta name="twitter:image:alt" content="Élevage de Bel Air" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#65C178" />
+        <meta name="msapplication-TileColor" content="#65C178" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="/front/css/navbar.css" />
+        <link rel="stylesheet" href="/front/css/dog_details.css" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    </head>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
+        <main style="padding-top: 50px;">
+            <section class="dog-profile-hero">
+                <div class="container">
+                    <div class="dog-profile-card" data-aos="fade-up">
+                        <div class="dog-profile-image-wrapper">
+                            <div class="dog-profile-image">
+                                <% let profileImageSrc; if (animal.profile_optimized_image_path) { profileImageSrc = '/uploads/optimized/' + animal.profile_optimized_image_path; } else if (animal.profile_image_path) { profileImageSrc =
+                                '/uploads/' + animal.profile_image_path; } else if (animal.optimized_image_path) { profileImageSrc = '/uploads/optimized/' + animal.optimized_image_path; } else if (animal.image_path) { profileImageSrc =
+                                '/uploads/' + animal.image_path; } else { profileImageSrc = '/img/placeholder-dog.jpg'; } %>
+                                <img src="<%= profileImageSrc %>" alt="<%= animal.balise_alt || animal.name %>" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                <div class="profile-gender-badge <%= animal.gender === 'Male' ? 'male' : 'female' %>">
+                                    <i class="fas <%= animal.gender === 'Male' ? 'fa-mars' : 'fa-venus' %>"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dog-profile-info">
+                            <div class="profile-header">
+                                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                    <h1 class="profile-name" style="margin: 0;"><%= animal.name %></h1>
+                                    <% if (animal.retreat === 1) { %>
+                                    <span class="badge-retired">
+                                        <i class="fas fa-home"></i>
+                                        Retraité
+                                    </span>
+                                    <% } %>
+                                </div>
+                                <% if (animal.other_names) { %>
+                                <p class="profile-other-name"><%= animal.other_names %></p>
+                                <% } %>
+                            </div>
+                            <div class="profile-breed">
+                                <i class="fas fa-paw"></i>
+                                <a href="/chiens/<%= animal.breed_slug %>"><%= animal.breed_name %></a>
+                                <% if (animal.breed_type) { %>
+                                <span class="divider">•</span>
+                                <span><%= animal.breed_type %></span>
+                                <% } %>
+                            </div>
+                            <div class="profile-details-grid">
+                                <% if (animal.birth_date) { const birthDate = new Date(animal.birth_date); const today = new Date(); let age = today.getFullYear() - birthDate.getFullYear(); const monthDiff = today.getMonth() -
+                                birthDate.getMonth(); if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; } %>
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Âge</span>
+                                        <span class="detail-value"><%= age %> an<%= age > 1 ? 's' : '' %></span>
+                                    </div>
+                                </div>
+                                <% } %> <% if (animal.color) { %>
+                                <div class="detail-item">
+                                    <i class="fas fa-palette"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Couleur</span>
+                                        <span class="detail-value"><%= animal.color %></span>
+                                    </div>
+                                </div>
+                                <% } %> <% if (animal.eye_color) { %>
+                                <div class="detail-item">
+                                    <i class="fas fa-eye"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Yeux</span>
+                                        <span class="detail-value"><%= animal.eye_color %></span>
+                                    </div>
+                                </div>
+                                <% } %> <% if (animal.register_name) { %>
+                                <div class="detail-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Registre</span>
+                                        <span class="detail-value"><%= animal.register_name %></span>
+                                    </div>
+                                </div>
+                                <% } %> <% if (animal.country_name) { %>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Origine</span>
+                                        <span class="detail-value"><%= animal.country_name %></span>
+                                    </div>
+                                </div>
+                                <% } %> <% if (animal.coat_type) { %>
+                                <div class="detail-item">
+                                    <i class="fas fa-dog"></i>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Poil</span>
+                                        <span class="detail-value"><%= animal.coat_type %></span>
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
+                            <% if (animal.open_for_stud === 1 && animal.gender === 'Male' && animal.retreat !== 1) { %>
+                            <div class="profile-action">
+                                <a href="/contact?animal=<%= animal.slug %>" class="btn-profile-stud">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Disponible en saillie</span>
+                                </a>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="dog-info-gallery-section">
+                <div class="container">
+                    <div class="info-gallery-card" data-aos="fade-up">
+                        <div class="info-gallery-left">
+                            <% if (animal.description_animals) { %>
+                            <div class="info-block">
+                                <h2 class="info-block-title">
+                                    À propos de <%= animal.name %>
+                                </h2>
+                                <div class="info-block-content description-text">
+                                    <%- animal.description_animals %>
+                                </div>
+                            </div>
+                            <% } %> <% if (animal.father_name || animal.mother_name) { %>
+                            <div class="info-block">
+                                <h3 class="info-block-subtitle">
+                                    <i class="fas fa-paw"></i>
+                                    Pedigree
+                                </h3>
+                                <div class="info-block-content">
+                                    <% if (animal.father_name) { %>
+                                    <div class="pedigree-item">
+                                        <i class="fas fa-mars pedigree-icon male"></i>
+                                        <div>
+                                            <span class="pedigree-label">Père</span>
+                                            <span class="pedigree-value"><%= animal.father_name %></span>
+                                        </div>
+                                    </div>
+                                    <% } %> <% if (animal.mother_name) { %>
+                                    <div class="pedigree-item">
+                                        <i class="fas fa-venus pedigree-icon female"></i>
+                                        <div>
+                                            <span class="pedigree-label">Mère</span>
+                                            <span class="pedigree-value"><%= animal.mother_name %></span>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <% } %> <% if (animal.health_tests) { %>
+                            <div class="info-block">
+                                <h3 class="info-block-subtitle">
+                                    <i class="fas fa-heartbeat"></i>
+                                    Tests de Santé
+                                </h3>
+                                <div class="info-block-content">
+                                    <p class="health-text"><%= animal.health_tests %></p>
+                                </div>
+                            </div>
+                            <% } %> 
+                            <% if (animal.open_for_stud === 1 && animal.gender === 'Male' && animal.retreat !== 1) { %>
+                            <div class="info-block stud-info-block">
+                                <div class="info-block-content">
+                                    <div class="stud-info-item">
+                                        <div class="stud-icon-wrapper">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
+                                        <div class="stud-details">
+                                            <span class="stud-label">Statut</span>
+                                            <span class="stud-status">Disponible en saillie</span>
+                                        </div>
+                                    </div>
+                                    <a href="/contact?animal=<%= animal.slug %>" class="btn-contact-stud-improved">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Demander une saillie</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="info-gallery-right">
+                            <% if (animalImages && animalImages.length > 0) { %>
+                            <div class="carousel-wrapper">
+                                <div class="swiper mainGallerySwiper">
+                                    <div class="swiper-wrapper">
+                                        <% animalImages.forEach((image, index) => { let imageSrc; if (image.optimized_image_path) { imageSrc = '/uploads/optimized/' + image.optimized_image_path; } else if (image.image_path) { imageSrc =
+                                        '/uploads/' + image.image_path; } else { imageSrc = '/img/placeholder-dog.jpg'; } %>
+                                        <div class="swiper-slide">
+                                            <a href="<%= imageSrc %>" data-fancybox="dog-gallery" data-caption="<%= image.balise_alt || animal.name %>">
+                                                <div class="carousel-image">
+                                                    <img src="<%= imageSrc %>" alt="<%= image.balise_alt || animal.name %>" title="<%= image.balise_title || animal.name %>" loading="lazy" />
+                                                    <div class="carousel-overlay">
+                                                        <i class="fas fa-search-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <% }); %>
+                                    </div>
+                                    <div class="swiper-button-next carousel-btn-next"></div>
+                                    <div class="swiper-button-prev carousel-btn-prev"></div>
+                                    <div class="carousel-counter">
+                                        <i class="fas fa-camera"></i>
+                                        <span class="counter-current">1</span> / <span class="counter-total"><%= animalImages.length %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="thumbnails-grid">
+                                <% animalImages.forEach((image, index) => { 
+                                    let imageSrc;
+                                    if (image.optimized_image_path) {
+                                        imageSrc = '/uploads/optimized/' + image.optimized_image_path;
+                                    } else if (image.image_path) {
+                                        imageSrc = '/uploads/' + image.image_path;
+                                    } else {
+                                        imageSrc = '/img/placeholder-dog.jpg';
+                                    }
+                                %>
+                                <div class="thumbnail-item" data-index="<%= index %>">
+                                    <div class="thumbnail-image">
+                                        <img src="<%= imageSrc %>" 
+                                            alt="<%= image.balise_alt || animal.name %>"
+                                            loading="lazy" />
+                                    </div>
+                                </div>
+                                <% }); %>
+                            </div>
+
+                            <% } else { %>
+                            <div class="no-images">
+                                <i class="fas fa-image"></i>
+                                <p>Aucune photo disponible</p>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section Pedigree / Généalogie -->
+            <% if (father || mother) { %>
+            <section class="dog-pedigree-section">
+                <div class="container">
+                    <div class="pedigree-header" data-aos="fade-up">
+                        <h2 class="pedigree-title">
+                            <i class="fas fa-sitemap"></i>
+                            Arbre Généalogique
+                        </h2>
+                        <p class="pedigree-subtitle">Découvrez les origines de <%= animal.name %></p>
+                    </div>
+                        <div class="pedigree-level level-1 mb-2">
+                            <div class="pedigree-card <%= father ? '' : 'empty' %>">
+                                <% if (father) { %>
+                                <div class="pedigree-card-content">
+                                    <% if (father.optimized_image_path || father.image_path) { %>
+                                    <div class="pedigree-image">
+                                        <img src="<%= father.optimized_image_path ? '/uploads/optimized/' + father.optimized_image_path : '/uploads/' + father.image_path %>" 
+                                            alt="<%= father.father_name %>" />
+                                    </div>
+                                    <% } else { %>
+                                    <div class="pedigree-badge male">
+                                        <i class="fas fa-mars"></i>
+                                    </div>
+                                    <% } %>
+                                    <div class="pedigree-info">
+                                        <span class="pedigree-label">Père</span>
+                                        <span class="pedigree-name"><%= father.father_name %></span>
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-card-content">
+                                    <span class="pedigree-unknown">Inconnu</span>
+                                </div>
+                                <% } %>
+                            </div>
+                            <div class="pedigree-card <%= mother ? '' : 'empty' %>">
+                                <% if (mother) { %>
+                                <div class="pedigree-card-content">
+                                    <% if (mother.optimized_image_path || mother.image_path) { %>
+                                    <div class="pedigree-image">
+                                        <img src="<%= mother.optimized_image_path ? '/uploads/optimized/' + mother.optimized_image_path : '/uploads/' + mother.image_path %>" 
+                                            alt="<%= mother.mother_name %>" />
+                                    </div>
+                                    <% } else { %>
+                                    <div class="pedigree-badge female">
+                                        <i class="fas fa-venus"></i>
+                                    </div>
+                                    <% } %>
+                                    <div class="pedigree-info">
+                                        <span class="pedigree-label">Mère</span>
+                                        <span class="pedigree-name"><%= mother.mother_name %></span>
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-card-content">
+                                    <span class="pedigree-unknown">Inconnue</span>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="pedigree-level level-2">
+                        <div class="pedigree-card <%= grandfather ? '' : 'empty' %>">
+                            <% if (grandfather) { %>
+                            <div class="pedigree-card-content">
+                                <% if (grandfather.optimized_image_path || grandfather.image_path) { %>
+                                <div class="pedigree-image small">
+                                    <img src="<%= grandfather.optimized_image_path ? '/uploads/optimized/' + grandfather.optimized_image_path : '/uploads/' + grandfather.image_path %>" 
+                                        alt="<%= grandfather.grandfather_name %>" />
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-badge male small">
+                                    <i class="fas fa-mars"></i>
+                                </div>
+                                <% } %>
+                                <div class="pedigree-info">
+                                    <span class="pedigree-label">Grand-père paternel</span>
+                                    <span class="pedigree-name small"><%= grandfather.grandfather_name %></span>
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="pedigree-card-content">
+                                <span class="pedigree-unknown">Inconnu</span>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="pedigree-card <%= grandmother ? '' : 'empty' %>">
+                            <% if (grandmother) { %>
+                            <div class="pedigree-card-content">
+                                <% if (grandmother.optimized_image_path || grandmother.image_path) { %>
+                                <div class="pedigree-image small">
+                                    <img src="<%= grandmother.optimized_image_path ? '/uploads/optimized/' + grandmother.optimized_image_path : '/uploads/' + grandmother.image_path %>" 
+                                        alt="<%= grandmother.grandmother_name %>" />
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-badge female small">
+                                    <i class="fas fa-venus"></i>
+                                </div>
+                                <% } %>
+                                <div class="pedigree-info">
+                                    <span class="pedigree-label">Grand-mère paternelle</span>
+                                    <span class="pedigree-name small"><%= grandmother.grandmother_name %></span>
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="pedigree-card-content">
+                                <span class="pedigree-unknown">Inconnue</span>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="pedigree-card <%= maternalGrandfather ? '' : 'empty' %>">
+                            <% if (maternalGrandfather) { %>
+                            <div class="pedigree-card-content">
+                                <% if (maternalGrandfather.optimized_image_path || maternalGrandfather.image_path) { %>
+                                <div class="pedigree-image small">
+                                    <img src="<%= maternalGrandfather.optimized_image_path ? '/uploads/optimized/' + maternalGrandfather.optimized_image_path : '/uploads/' + maternalGrandfather.image_path %>" 
+                                        alt="<%= maternalGrandfather.grandfather_name %>" />
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-badge male small">
+                                    <i class="fas fa-mars"></i>
+                                </div>
+                                <% } %>
+                                <div class="pedigree-info">
+                                    <span class="pedigree-label">Grand-père maternel</span>
+                                    <span class="pedigree-name small"><%= maternalGrandfather.grandfather_name %></span>
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="pedigree-card-content">
+                                <span class="pedigree-unknown">Inconnu</span>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="pedigree-card <%= maternalGrandmother ? '' : 'empty' %>">
+                            <% if (maternalGrandmother) { %>
+                            <div class="pedigree-card-content">
+                                <% if (maternalGrandmother.optimized_image_path || maternalGrandmother.image_path) { %>
+                                <div class="pedigree-image small">
+                                    <img src="<%= maternalGrandmother.optimized_image_path ? '/uploads/optimized/' + maternalGrandmother.optimized_image_path : '/uploads/' + maternalGrandmother.image_path %>" 
+                                        alt="<%= maternalGrandmother.grandmother_name %>" />
+                                </div>
+                                <% } else { %>
+                                <div class="pedigree-badge female small">
+                                    <i class="fas fa-venus"></i>
+                                </div>
+                                <% } %>
+                                <div class="pedigree-info">
+                                    <span class="pedigree-label">Grand-mère maternelle</span>
+                                    <span class="pedigree-name small"><%= maternalGrandmother.grandmother_name %></span>
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="pedigree-card-content">
+                                <span class="pedigree-unknown">Inconnue</span>
+                            </div>
+                            <% } %>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <% } %>
+        </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const mainGallerySwiper = new Swiper('.mainGallerySwiper', {
+                    spaceBetween: 0,
+                    loop: false,
+                    navigation: {
+                        nextEl: '.carousel-btn-next',
+                        prevEl: '.carousel-btn-prev',
+                    },
+                    on: {
+                        slideChange: function () {
+                            const currentSlide = document.querySelector('.counter-current');
+                            if (currentSlide) {
+                                currentSlide.textContent = this.activeIndex + 1;
+                            }
+                            
+                            document.querySelectorAll('.thumbnail-item').forEach(t => t.classList.remove('active'));
+                            const activeThumb = document.querySelectorAll('.thumbnail-item')[this.activeIndex];
+                            if (activeThumb) {
+                                activeThumb.classList.add('active');
+                            }
+                        }
+                    },
+                    observer: true,
+                    observeParents: true,
+                });
+                document.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
+                    thumb.addEventListener('click', function() {
+                        mainGallerySwiper.slideTo(index);
+                    });
+                });
+                if (document.querySelector('.thumbnail-item')) {
+                    document.querySelector('.thumbnail-item').classList.add('active');
+                }
+
+                Fancybox.bind('[data-fancybox="dog-gallery"]', {
+                    Toolbar: {
+                        display: {
+                            left: [],
+                            middle: [],
+                            right: ["close"],
+                        },
+                    },
+                    Images: {
+                        zoom: true,
+                    },
+                    Carousel: {
+                        infinite: true,
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>

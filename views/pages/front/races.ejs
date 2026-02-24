@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nos Races - American Bully & Springer Anglais | Élevage de Bel Air</title>
+    <meta name="description" content="Découvrez nos deux races : l'American Bully, chien compact et athlétique, et le Springer Anglais, chien de chasse dynamique. Élevage familial LOF près de Montpellier.">
+    <meta name="keywords" content="american bully caractère, springer anglais chasse, races élevage bel air, chien american bully, springer anglais éducation, american bully standard, springer anglais LOF, races canines">
+    <meta name="author" content="Élevage de Bel Air">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://elevagedebelair.com/races">
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="FR">
+    <meta name="geo.placename" content="France">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Élevage de Bel Air">
+    <meta property="og:title" content="Nos Races - American Bully & Springer Anglais | Élevage de Bel Air">
+    <meta property="og:description" content="Découvrez l'American Bully et le Springer Anglais, nos deux races d'exception. Élevage familial LOF avec sélection rigoureuse.">
+    <meta property="og:url" content="https://elevagedebelair.com/races">
+    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="American Bully et Springer Anglais - Élevage de Bel Air">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nos Races - American Bully & Springer Anglais">
+    <meta name="twitter:description" content="Découvrez l'American Bully et le Springer Anglais, nos deux races d'exception.">
+    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta name="twitter:image:alt" content="Élevage de Bel Air">
+    <%- include('../front/partials/head-meta-base.ejs') %>
+    <%- include('../front/partials/head-fonts-libs.ejs') %>
+    <link rel="stylesheet" href="/front/css/navbar.css">
+    <link rel="stylesheet" href="/front/css/races.css">
+</head>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
+        <main style="padding-top: 70px;">
+            <section class="page-hero-simple">
+                <div class="page-hero-overlay"></div>
+                <div class="container">
+                    <div class="page-hero-content">
+                        <h1 class="page-hero-title">Les Races de l'Élevage</h1>
+                        <p class="page-hero-subtitle">
+                            Découvrez nos races d'exception, sélectionnées avec passion pour leurs qualités exceptionnelles
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="races-grid-section">
+                <div class="container">
+                    <% if (breeds && breeds.length > 0) { %>
+                    <div class="row g-4">
+                        <% breeds.forEach((breed, index) => { %>
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <article class="race-card-detail">
+                                <div class="race-card-detail-image">
+                                    <a href="/races/<%= breed.slug %>">
+                                        <img src="<%= breed.image.path %>" alt="<%= breed.image.alt || breed.breed_name %>" class="img-fluid" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                    </a>
+                                    <div class="race-position-badge">
+                                        Race n°<%= breed.position %>
+                                    </div>
+                                    <div class="race-card-detail-overlay">
+                                        <a href="/races/<%= breed.slug %>" class="btn-discover-race"> <i class="fas fa-paw me-2"></i>Découvrir la race </a>
+                                    </div>
+                                </div>
+                                <div class="race-card-detail-body">
+                                    <h3 class="race-card-detail-title">
+                                        <a href="/races/<%= breed.slug %>">
+                                            <%= breed.breed_name %>
+                                        </a>
+                                    </h3>
+                                    <% if (breed.breed_description) { %>
+                                    <p class="race-card-detail-description">
+                                        <%= breed.breed_description.length > 80 ? breed.breed_description.substring(0, 100) + '...' : breed.breed_description %>
+                                    </p>
+                                    <% } %>
+                                    <div class="race-card-divider"></div>
+                                    <div class="race-card-detail-actions">
+                                        <a href="/races/<%= breed.slug %>" class="btn-race-detail-primary">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            En savoir plus
+                                        </a>
+                                        <a href="/chiens/<%= breed.slug %>" class="btn-race-detail-secondary">
+                                            <i class="fas fa-dog me-2"></i>
+                                            Voir nos chiens
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } else { %>
+                    <div class="text-center py-5">
+                        <div class="no-races-message" data-aos="fade-up">
+                            <i class="fas fa-paw fa-3x text-muted mb-3"></i>
+                            <h3>Aucune race disponible pour le moment</h3>
+                            <p class="text-muted">Revenez bientôt pour découvrir nos races d'exception</p>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </section>
+            <!-- Section CTA Contact -->
+            <section class="races-cta-section">
+                <div class="container">
+                    <div class="races-cta-box" data-aos="zoom-in">
+                        <div class="races-cta-content">
+                            <h2 class="races-cta-title">Vous souhaitez adopter un chiot ?</h2>
+                            <p class="races-cta-text">
+                                Contactez-nous pour plus d'informations sur nos races, nos reproducteurs et nos chiots disponibles
+                            </p>
+                            <a href="/contact" class="btn-races-cta">
+                                <i class="fas fa-envelope me-2"></i>
+                                Nous Contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+    </body>
+</html>

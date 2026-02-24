@@ -1,0 +1,291 @@
+/* ========================================
+   VARIABLES CSS POUR LE DASHBOARD
+   ======================================== */
+:root {
+    --card-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --card-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --card-gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --card-gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --card-gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ========================================
+   CARTES MODERNES
+   ======================================== */
+.card {
+    border: none !important;
+    border-radius: 20px !important;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    height: 100%;
+}
+
+/* Animation au chargement des cartes */
+.col-xl-4, .col-lg-6, .col-sm-6, .col-12 {
+    animation: slideUp 0.6s ease-out backwards;
+}
+
+.col-xl-4:nth-child(1) { animation-delay: 0.1s; }
+.col-xl-4:nth-child(2) { animation-delay: 0.2s; }
+.col-xl-4:nth-child(3) { animation-delay: 0.3s; }
+.col-xl-4:nth-child(4) { animation-delay: 0.4s; }
+.col-xl-4:nth-child(5) { animation-delay: 0.5s; }
+.col-xl-4:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Gradient différent pour chaque carte */
+.col-xl-4:nth-child(1) .card { background: var(--card-gradient-1); }
+.col-xl-4:nth-child(2) .card { background: var(--card-gradient-2); }
+.col-xl-4:nth-child(3) .card { background: var(--card-gradient-3); }
+.col-xl-4:nth-child(4) .card { background: var(--card-gradient-4); }
+.col-xl-4:nth-child(5) .card { background: var(--card-gradient-5); }
+.col-xl-4:nth-child(6) .card { background: var(--card-gradient-6); }
+
+/* Effet au survol */
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Effet de brillance au survol */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    pointer-events: none;  /* ⭐ AJOUTE CETTE LIGNE */
+    z-index: 0;  /* ⭐ AJOUTE AUSSI CETTE LIGNE */
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Pour les boutons et éléments interactifs dans la carte */
+.card button,
+.card a,
+.card .btn {
+    position: relative;
+    z-index: 2;  
+}
+
+/* ========================================
+   CONTENU DES CARTES
+   ======================================== */
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.card-body {
+    padding: 2rem 1.5rem !important;
+}
+
+/* Texte des cartes */
+.media-body h3 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.media-body span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   ICÔNES ANIMÉES
+   ======================================== */
+.card-icon {
+    font-size: 3rem !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.card:hover .card-icon {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+/* Animation de pulsation pour les icônes */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.card-icon {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.card:hover .card-icon {
+    animation: none;
+}
+
+/* ========================================
+   MÉDIA QUERY - RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .media-body h3 {
+        font-size: 2rem;
+    }
+    
+    .card-icon {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .media-body h3 {
+        font-size: 1.75rem;
+    }
+    
+    .media-body span {
+        font-size: 0.875rem;
+    }
+    
+    .card-icon {
+        font-size: 2rem !important;
+    }
+}
+
+/* ========================================
+   EFFET DE PARTICULES FLOTTANTES
+   ======================================== */
+.card::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-20px, 20px);
+    }
+}
+
+/* ========================================
+   AMÉLIORATION DU MEDIA D-FLEX
+   ======================================== */
+.media.d-flex {
+    align-items: center;
+    gap: 1rem;
+}
+
+.media-body {
+    flex: 1;
+}
+
+/* ========================================
+   EFFET DE BORDURE LUMINEUSE
+   ======================================== */
+.card {
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 
+        var(--card-shadow),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        var(--card-shadow-hover),
+        inset 0 0 30px rgba(255, 255, 255, 0.2),
+        0 0 40px rgba(99, 102, 241, 0.3);
+}
+
+/* ========================================
+   TITRE DE PAGE (si nécessaire)
+   ======================================== */
+h1, h2, h3, h4, h5, h6 {
+    color: #1e293b;
+    font-weight: 700;
+}
+
+/* ========================================
+   STYLE POUR LE MODE SOMBRE (OPTIONNEL)
+   ======================================== */
+
+[data-bs-theme="dark"] .card {
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+[data-bs-theme="dark"] .card:hover {
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.7),
+        inset 0 0 30px rgba(255, 255, 255, 0.1),
+        0 0 40px rgba(99, 102, 241, 0.4);
+}
+
+[data-bs-theme="dark"] h1, h2, h3, h4, h5, h6 {
+    color: #a4a4a5;
+    font-weight: 700;
+}

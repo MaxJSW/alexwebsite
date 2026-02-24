@@ -1,0 +1,14 @@
+/* importer la police de caracttère poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+    @media (max-width: 768px) {
+        .title-under-box span{
+            font-size:0.7rem !important;
+        }
+
+        .title-under-box a{
+            font-size:0.7rem !important;
+        }
+    }
+    

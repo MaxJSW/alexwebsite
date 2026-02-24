@@ -1,0 +1,26 @@
+<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+<div class="row gy-3 gy-xxl-4 mb-3">
+    <div class="col-12">
+        
+        <div class="row gy-2 p-3 border rounded mb-4">
+            <label class="form-label m-0 mb-3">Image du Profil</label>
+        <div id="image-profile-2" class="col-6 " >
+              <% if (animal.image_path_profile) { %>
+                <img src="/uploads/<%= animal.image_path_profile %>" class="rounded float-start" alt="profile-image" width="150px" height="150px">
+            <% } else { %>
+                <img src="https://img.freepik.com/vecteurs-premium/icone-compte-icone-utilisateur-graphiques-vectoriels_292645-552.jpg?w=740" class="rounded float-start" alt="default-profile-image" width="150px" height="150px">
+            <% } %>
+        
+        <div class="col-4 d-flex align-items-center p-3">
+            <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 mt-2 rounded me-2  text-center" data-bs-toggle="modal" data-bs-target="#uploadProfileModal">
+                <i class="bi bi-upload"></i>
+            </a>
+            <a href="#!" 
+                class="d-inline-block bg-danger link-light lh-1 p-2 mt-2 rounded text-center" 
+                data-bs-toggle="modal" 
+                data-bs-target="#deleteProfileImageModal"
+                data-animal-id="<%= animal.id %>">
+                    <i class="bi bi-trash"></i>
+                </a>
+          </div>
+      </div>

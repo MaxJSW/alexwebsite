@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Blogs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/1365cc5822.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/admin/css/dashboard.css">
+    <link rel="stylesheet" href="/admin/css/sidebar.css">
+    <link rel="stylesheet" href="/admin/css/blog.css">
+    <script src="/admin/js/themes/darkThemeFunction.js"></script>
+</head>
+  <body>
+    <%- include('../admin/composants/header') %>
+    <%- include('../admin/composants/topBar') %>
+    <div class="container-fluid d-flex justify-content-end mt-3">
+      <button id="createArticleModale" class="btn btn-secondary">Créer un article</button>
+  </div>
+    <div class="container  mt-5">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Recherche</span>
+            <input type="text" class="form-control" id="searchInput" placeholder="Entrez le titre de l'article" aria-label="titre-blog" aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div class="container-fluid mt-5" style="min-height: 800px;">
+        <div class="row">
+            <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="blog-list">
+                <%- include('./partials/blogList') %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center" id="paginationContainer">
+                <% if (totalPages > 1 && totalBlogs >= 6) { %>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if (currentPage > 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?search=<%= searchQuery %>&page=<%= currentPage - 1 %>">Précédent</a>
+                                </li>
+                            <% } %>
+                            <% for (let i = 1; i <= totalPages; i++) { %>
+                                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                    <a class="page-link" href="?search=<%= searchQuery %>&page=<%= i %>"><%= i %></a>
+                                </li>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?search=<%= searchQuery %>&page=<%= currentPage + 1 %>">Suivant</a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                <% } %>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="/admin/js/utilities/titleFunction.js"></script>
+<script src="/admin/js/blogs/blogsFunction.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+function addNewCategory() {
+    const newCategory = $('#new_category').val().trim();
+
+    if (newCategory) {
+        $.ajax({
+            url: '/admin/adminBlogs/add-New-Category',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ content: newCategory }),
+            success: function(data) {
+                if (data.success) {
+                    const select = $('#cat');
+                    const option = $('<option></option>')
+                        .val(data.category.id)
+                        .text(data.category.content);
+                    select.append(option);
+                    select.val(data.category.id);
+
+                    $('#new_category').val('');
+                    console.log('New Category Added:', data.category);
+                } else {
+                    alert('Erreur lors de l\'ajout de la catégorie.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur:', error);
+            }
+        });
+    } else {
+        console.log('No Category Entered');
+        alert('Veuillez entrer une catégorie.');
+    }
+}
+</script>
+
+<!-- modale création d'article -->
+<div id="createArticleModal" class="modal fade" tabindex="-1" aria-labelledby="createArticleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="createArticleModalLabel">Créer un article</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="createArticleForm">
+                <div class="form-group bg-body-tertiary p-3" style="border-radius: 15px;">
+                    <label for="categorie">Catégorie</label>
+                    <select class="form-control" id="cat" name="categorie_id" required>
+                        <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>"><%= category.content %></option>
+                        <% }) %>
+                    </select>
+                    <div class="d-flex mt-2">
+                        <input type="text" class="form-control mr-2" id="new_category" placeholder="Ajouter une nouvelle catégorie" style="margin-right: 3px;">
+                        <button type="button" class="btn btn-secondary" onclick="addNewCategory()">Ajouter</button>
+                    </div>
+                </div>
+            
+                <hr>
+                  <div class="mb-3 mt-2">
+                      <label for="titre" class="form-label">Titre</label>
+                      <input type="text" class="form-control" id="titre" name="titre" maxlength="70" placeholder="Le titre doit faire 55 caractères maximum" required>
+                      <div id="titreFeedback" class="form-text"></div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="preview" class="form-label">Description</label>
+                      <textarea class="form-control" id="preview" name="preview" rows="15" placeholder="Décrivez votre article brièvement, vous pourrez ensuite le modifier à votre convenance."></textarea>
+                  </div>
+                  
+                
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date de création</label>
+                        <input type="text" class="form-control" id="date" name="date" readonly>
+                    </div>
+                    <div id="successMessage" class="alert alert-success" role="alert" style="display: none;">Votre article a bien été créé</div>
+               
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="button" class="btn btn-primary" id="saveArticleButton" disabled>Enregistrer</button>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- modale modification de l'article -->
+<div class="modal fade modal-fullscreen" id="editArticleModal" tabindex="-1" aria-labelledby="editArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editArticleModalLabel">Modifier l'article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container modal-body">
+                <form id="editArticleForm">
+                    <div class="mb-3">
+                        <label for="editTitre" class="form-label">Titre Principal</label>
+                        <input type="text" class="form-control" id="editTitre" name="titre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPreview" class="form-label">Description de l'article</label>
+                        <textarea class="form-control" id="editPreview" name="preview" rows="8"></textarea>
+                    </div>
+                    <hr>
+                    <div id="paragraphContainer"></div>
+                    <button type="button" class="btn btn-secondary" id="addParagraphButton">Ajouter un paragraphe</button>
+                    <input type="hidden" id="editDateModification" name="date_modification">
+                    <input type="hidden" id="editArticleId" name="articleId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="saveEditButton">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% blogs.forEach(blog => { %>
+    <!-- Modale d'ajout de photo pour chaque blog -->
+    <div class="modal fade" id="addPhotoModal-<%= blog.id %>" tabindex="-1" aria-labelledby="addPhotoModalLabel-<%= blog.id %>" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPhotoModalLabel-<%= blog.id %>">Ajouter une photo au Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container modal-body" style="max-width: 700px; margin: 0 auto;">
+                    <form id="addPhotoForm-<%= blog.id %>" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <button class="btn btn-primary mb-2 w-100 upload-photo-button" type="button" data-photos-blog-id="<%= blog.id %>">Télécharger des photos</button>
+                            <div id="blogPhotoContainer-<%= blog.id %>" class="bg-body-tertiary p-3 mb-3" style="height:500px"></div>
+                            <label for="photo" class="form-label" style="display:none;">Sélectionner une photo</label>
+                            <input type="file" class="form-control main-photo-input" id="photo-<%= blog.id %>" name="photo" style="display:none;" required>
+                            <small class="mb-2">Taille de photo recommandée : 1024 x 768 Pixels - Format paysage</small>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="balise_title-<%= blog.id %>" name="balise_title" placeholder="Exemple : photo du blog 'la santé des animaux'">
+                        </div>
+                        <div class="mb-3">
+                            <label for="balise_alt-<%= blog.id %>" class="form-label">Balise Alt</label>
+                            <input type="text" class="form-control" id="balise_alt-<%= blog.id %>" name="balise_alt" placeholder="Décrire en quelques mots la photo ci-dessus">
+                        </div>
+                        <input type="hidden" id="blogId-<%= blog.id %>" name="blogId" value="<%= blog.id %>">
+                        <div id="successModalPhotoMessage-<%= blog.id %>" class="alert alert-success mt-2" role="alert" style="display: none;">Les modifications ont bien été enregistrées</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary save-photo-button" data-blog-id="<%= blog.id %>">Enregistrer les modifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
+
+<!-- Modale d'ajout des photos supplémentaires pour chaque blog -->
+<% blogs.forEach(blog => { %>
+    <div class="modal fade" id="addSuppPhotoModal-<%= blog.id %>" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter des photos supplémentaires</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="photoContainer-<%= blog.id %>" class="photo-container"></div>
+                    <hr>
+                    <button type="button" class="btn btn-primary mb-3 upload-photo-button w-100" data-blog-id="<%= blog.id %>">
+                        Sélectionner une photo
+                    </button>
+                 <input type="file" class="form-control d-none photo-input supp-photo-input" data-blog-id="<%= blog.id %>" accept="image/*" multiple>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
+
+<!-- modale pour confirmer la mise en ligne de l'article -->
+    <% blogs.forEach(blog => { %>
+        <div class="modal fade" id="ConfirmOnlineArticle-<%= blog.id %>" tabindex="-1" aria-labelledby="ConfirmOnlineArticleLabel-<%= blog.id %>" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ConfirmOnlineArticleLabel-<%= blog.id %>">Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center">
+                            <h5 class="mb-4 text-primary"><%= blog.titre %></h5>
+                        </div>
+                        <p>Etes-vous sûr de vouloir placer l'article en ligne ?</p>
+                        <p>Veuillez vérifier les points suivants avant de confirmer :</p>
+                        <ul class="list-unstyled">
+                            <li>
+                                <input type="checkbox" id="checkTitle-<%= blog.id %>" class="form-check-input-confirm">
+                                <label for="checkTitle-<%= blog.id %>" class="form-check-label">Le titre est complet et pertinent</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkContent-<%= blog.id %>" class="form-check-input-confirm">
+                                <label for="checkContent-<%= blog.id %>" class="form-check-label">Le contenu est complet et sans erreurs</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkKeywords-<%= blog.id %>" class="form-check-input-confirm">
+                                <label for="checkKeywords-<%= blog.id %>" class="form-check-label">Les mots clefs sont ajoutés</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkImage-<%= blog.id %>" class="form-check-input-confirm">
+                                <label for="checkImage-<%= blog.id %>" class="form-check-label">Une image est ajoutée</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkSEO-<%= blog.id %>" class="form-check-input-confirm">
+                                <label for="checkSEO-<%= blog.id %>" class="form-check-label">Les balises SEO (titre et alt) sont remplies</label>
+                            </li>
+                        </ul>
+                        <div id="successConfirmOnlineArticle<%= blog.id %>" class="alert alert-success mt-2 p-2" role="alert" style="display: none;">Votre article est désormais en ligne ! </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger confirm-online-button-final" data-id="<%= blog.id %>" disabled>Mettre en ligne</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+        
+<!-- Modale d'ajout de mots clefs pour chaque blog -->
+<% blogs.forEach(blog => { %>
+    <div class="modal fade" id="addKeywordsModal-<%= blog.id %>" tabindex="-1" aria-labelledby="addKeywordsModalLabel-<%= blog.id %>" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addKeywordsModalLabel-<%= blog.id %>">Ajouter des mots clefs</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addKeywordsForm-<%= blog.id %>">
+                        <div class="mb-3">
+                            <label for="keywordsInput-<%= blog.id %>" class="form-label">Mots Clefs (max 20 caractères)</label>
+                            <input type="text" class="form-control" id="keywordsInput-<%= blog.id %>" placeholder="Saisissez un mot clef et appuyez sur Entrée">
+                            <ul id="keywordsSuggestions-<%= blog.id %>" class="list-group mt-2" style="position: absolute; z-index: 1000; display: none;"></ul>
+                        </div>
+                        <div id="keywordsContainer-<%= blog.id %>" class="border rounded p-3" style="min-height: 100px;"></div>
+                        <input type="hidden" id="blogId-<%= blog.id %>" name="blogId" value="<%= blog.id %>">
+                    </form>
+                    <div id="addKeywordsModal-<%= blog.id %>" class="alert alert-success mt-2" role="alert" style="display: none;">Les mots clefs ont bien été ajoutés</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary save-keywords-button" data-blog-id="<%= blog.id %>">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+
+    <!-- Modale d'ajout du faq-->
+    <% blogs.forEach(blog => { %>
+        <div class="modal fade" id="faqModal-<%= blog.id %>" tabindex="-1" aria-labelledby="faqModalLabel-<%= blog.id %>" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="faqModalLabel-<%= blog.id %>">Gestion de la FAQ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="faqList-<%= blog.id %>" class="mb-4">
+                        </div>
+                        <form id="faqForm-<%= blog.id %>" class="border-top pt-3">
+                            <div class="mb-3">
+                                <label for="question-<%= blog.id %>" class="form-label">Question</label>
+                                <input type="text" class="form-control" id="question-<%= blog.id %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="reponse-<%= blog.id %>" class="form-label">Réponse</label>
+                                <textarea class="form-control" id="reponse-<%= blog.id %>" rows="3" required></textarea>
+                            </div>
+                            <input type="hidden" id="currentFaqId-<%= blog.id %>" value="">
+                            <button type="button" class="btn btn-primary add-faq-button" data-blog-id="<%= blog.id %>">
+                                <i class="bi bi-plus-circle me-2"></i>Ajouter une FAQ
+                            </button>
+                        </form>
+                        <div id="faqAlert-<%= blog.id %>" class="alert alert-success mt-3" role="alert" style="display: none;">
+                            Opération réalisée avec succès
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</body>
+</html>

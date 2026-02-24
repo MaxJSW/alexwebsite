@@ -1,0 +1,138 @@
+<!-- modal pour modifier les informations de la mère d'un animal -->
+<div class="modal fade" id="motherUpdateModal" tabindex="-1" aria-labelledby="motherUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="motherUpdateModalLabel">Modifier les informations de la mère de <%= animal.name %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for updating mother's information -->
+                <form id="addNewMother" action="/admin/animalProfile/<%= animal.slug %>/updateMother" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2 mb-4">
+                                    <button class="btn btn-primary" type="button" id="uploadBtnMother" data-animal-id="<%= animal.id %>" data-mother-id="<%= animal.mother_id %>">Télécharger une photo</button>
+                                </div>
+                                <div id="uploadMotherForm" style="display: none;">
+                                    <input type="file" name="photo" id="photoInputMother" accept="image/*">
+                                    <input type="hidden" name="animal_id" value="<%= animal.id %>">
+                                </div>
+                                <div class="album py-5 bg-body-tertiary min-height-400">
+                                    <div class="container">
+                                        <div class="img-fluid h-100" id="photoContainerMother">
+                                            <% imagesMother.forEach(photo => { %>
+                                            <div class="col" id="photo-<%= photo.id %>">
+                                                <div class="card shadow-sm position-relative">
+                                                    <img src="/uploads/<%= photo.image_path %>" class="bd-placeholder-img card-img-top img-fluid h-100" style="object-fit: cover;" alt="Photo">
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="motherName" class="form-label">Nom de la mère</label>
+                                    <input type="text" class="form-control" id="motherName" name="motherName" value="<%= animal.mother_name %>">
+                                </div>
+                                <div class="form-group pb-2">
+                                    <label for="motherBreed" class="form-label">Race</label>
+                                    <select class="form-control" id="motherBreed" name="motherBreed">
+                                        <!-- Option placeholder affichée en tête de liste -->
+                                        <option value="" disabled <%= !animal.mother_breed_id ? 'selected' : '' %>>Choisir une race</option>
+                                        <!-- Affichage des races disponibles -->
+                                        <% breeds.forEach(breed => { %>
+                                        <option value="<%= breed.id %>" <%= breed.id === animal.mother_breed_id ? 'selected' : '' %>><%= breed.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mb-2">
+                                    <label for="motherColor" class="form-label">Couleur</label>
+                                    <input type="text" class="form-control" id="motherColor" name="motherColor" value="<%= animal.mother_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherGender" class="form-label">Genre</label>
+                                    <select class="form-control" id="motherGender" name="motherGender">
+                                        <option value="Femelle" selected>Femelle</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Les autres champs du formulaire restent inchangés -->
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherRegister" class="form-label">Registre</label>
+                                    <select class="form-control" id="motherRegister" name="motherRegister">
+                                        <% registers.forEach(register => { %>
+                                        <option value="<%= register.id %>" <%= animal.mother_register_id == register.id ? 'selected' : '' %>><%= register.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherCountry" class="form-label">Pays de Naissance</label>
+                                    <select class="form-control" id="motherCountry" name="motherCountry">
+                                        <% countries.forEach(country => { %>
+                                        <option value="<%= country.id %>" <%= country.id === animal.mother_country_id ? 'selected' : '' %>><%= country.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherBreedType" class="form-label">Type de race</label>
+                                    <input type="text" class="form-control" id="motherBreedType" name="motherBreedType" value="<%= animal.mother_breed_type %>" placeholder="Nain, Miniature,...">
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherCoatType" class="form-label">Type de pelage</label>
+                                    <input type="text" class="form-control" id="motherCoatType" name="motherCoatType" value="<%= animal.mother_coat_type %>">
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherEyeColor" class="form-label">Couleur des yeux</label>
+                                    <input type="text" class="form-control" id="motherEyeColor" name="motherEyeColor" value="<%= animal.mother_eye_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="motherIsOnline" class="form-label">Fiche en ligne</label>
+                                    <select class="form-control" id="motherIsOnline" name="motherIsOnline">
+                                        <option value="0" <%= animal.mother_is_online === 0 ? 'selected' : '' %>>Non</option>
+                                        <option value="1" <%= animal.mother_is_online === 1 ? 'selected' : '' %>>Oui</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternal_father_id">Père de <%= animal.mother_name %></label>
+                                    <select class="form-control" id="maternal_father_id" name="maternal_father_id" required>
+                                        <% grandfathers.forEach(grandfather => { %>
+                                        <option value="<%= grandfather.id %>" <%= grandfather.id === animal.maternal_grandfather_id ? 'selected' : '' %>><%= grandfather.grandfather_name %></option>
+                                        <% }) %>
+                                    </select>
+                                    <div class="d-flex mt-2 mt-1">
+                                        <input type="text" class="form-control mr-2" id="new_Maternal_father" placeholder="Ajouter un nouveau père">
+                                        <button type="button" class="btn btn-secondary" onclick="addNewMaternalFather()">Ajouter</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group pb-2">
+                                    <label for="maternal_mother_id">Mère de <%= animal.mother_name %></label>
+                                    <select class="form-control" id="maternal_mother_id" name="maternal_mother_id" required>
+                                        <% grandmothers.forEach(grandmother => { %>
+                                        <option value="<%= grandmother.id %>" <%= grandmother.id === animal.maternal_grandmother_id ? 'selected' : '' %>><%= grandmother.grandmother_name %></option>
+                                        <% }) %>
+                                    </select>
+                                    <div class="d-flex mt-2">
+                                        <input type="text" class="form-control mr-2" id="new_Maternal_mother" placeholder="Ajouter une nouvelle mère">
+                                        <button type="button" class="btn btn-secondary" onclick="addNewMaternalMother()">Ajouter</button>
+                                    </div>
+                                    <div id="updateMotherSuccess" class="alert alert-success mt-3" role="alert" style="display: none;">
+                                        Mise à jour des informations de la mère de <%= animal.name %> réussie
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary" id="saveMotherChanges">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

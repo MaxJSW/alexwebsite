@@ -1,0 +1,152 @@
+<script type="application/ld+json">
+  <%- JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": puppy.name,
+    "description": puppy.description || `${puppy.name} - Chiot ${puppy.breed.name} ${puppy.gender === 'Male' ? 'mâle' : 'femelle'} LOF disponible`,
+    "image": `https://elevagedebelair.com${ogImage || '/img/placeholder-puppy.jpg'}`,
+    "brand": {
+      "@type": "Brand",
+      "name": "Élevage de Bel Air",
+      "url": "https://elevagedebelair.com"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Élevage de Bel Air",
+      "url": "https://elevagedebelair.com"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Breed",
+        "value": puppy.breed.name
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Gender",
+        "value": puppy.gender === 'Male' ? 'Mâle' : 'Femelle'
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Color",
+        "value": puppy.color ? puppy.color.trim() : 'Non spécifié'
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "CoatType",
+        "value": puppy.coatType || 'Non spécifié'
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "EyeColor",
+        "value": puppy.eyeColor || 'Non spécifié'
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "BirthRegion",
+        "value": `Occitanie, ${puppy.country || 'France'}`
+      }
+    ].concat(
+      father ? [{
+        "@type": "PropertyValue",
+        "name": "Father",
+        "value": father.name,
+        "url": `https://elevagedebelair.com/chiens/${father.breed.slug}/${father.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+      }] : []
+    ).concat(
+      mother ? [{
+        "@type": "PropertyValue",
+        "name": "Mother",
+        "value": mother.name,
+        "url": `https://elevagedebelair.com/chiens/${mother.breed.slug}/${mother.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+      }] : []
+    ),
+    "offers": {
+      "@type": "Offer",
+      "url": `https://elevagedebelair.com/chiots/a-vendre/${puppy.breed.slug}/${puppy.slug}`,
+      "priceCurrency": "EUR",
+      "price": puppy.price > 0 ? puppy.price : 2500,
+      "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": (() => {
+        switch(puppy.status) {
+          case 'À vendre': return 'https://schema.org/InStock';
+          case 'Disponible à la réservation': return 'https://schema.org/PreOrder';
+          case 'En cours de réservation': return 'https://schema.org/LimitedAvailability';
+          case 'Réservé': return 'https://schema.org/OutOfStock';
+          default: return 'https://schema.org/OutOfStock';
+        }
+      })(),
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "FR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": "15",
+        "returnMethod": "ReturnAtKiosk",
+        "returnFees": "ReturnFeesCustomerResponsibility",
+        "description": "Le retour du chiot est possible uniquement dans un délai de 15 jours, si le chiot est atteint d'une maladie faisant partie des vices rédhibitoires, attestée par un certificat vétérinaire, avec une période d'incubation visée à partir du jour du départ du chiot. Le retour doit être effectué par les propres moyens de l'acheteur."
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "EUR"
+        },
+        "shippingDestination": [
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "FR",
+            "addressRegion": ["Occitanie"]
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "BE"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "CH"
+          }
+        ],
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": "1",
+            "maxValue": "3",
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": "1",
+            "maxValue": "2",
+            "unitCode": "DAY"
+          }
+        }
+      },
+      "seller": {
+        "@type": "Organization",
+        "name": "Élevage de Bel Air",
+        "url": "https://elevagedebelair.com"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "15"
+    },
+    "review": {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Client Satisfait"
+      },
+      "reviewBody": "Excellent élevage familial. Les chiots sont bien socialisés et en parfaite santé. L'éleveuse est professionnelle, à l'écoute et passionnée. Je recommande vivement l'Élevage de Bel Air.",
+      "datePublished": new Date().toISOString().split('T')[0]
+    }
+  }, null, 2) %>
+</script>

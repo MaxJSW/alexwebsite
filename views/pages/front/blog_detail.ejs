@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title><%= blog.titre %></title>
+        <meta name="description" content="<%= blog.preview %>" />
+        <meta name="keywords" content="<%= keywords %>, élevage de bel air, american bully, springer anglais, blog élevage canin"/>
+        <meta name="author" content="<%= userInfo.kennel_name %>" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <link rel="canonical" href="https://elevagedebelair.com/blog/<%= blog.slug %>" />
+        <meta name="language" content="fr" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.placename" content="France" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Élevage de Bel Air" />
+        <meta property="og:title" content="<%= blog.titre %>" />
+        <meta property="og:description" content="<%= blog.preview %>" />
+        <meta property="og:url" content="https://elevagedebelair.com/blog/<%= blog.slug %>" />
+        <% 
+            let socialImagePath;
+            if (blogImage && blogImage.optimized_image_path) {
+                socialImagePath = '/uploads/optimized/' + blogImage.optimized_image_path;
+            } else if (blogImage && blogImage.image_path) {
+                socialImagePath = '/uploads/' + blogImage.image_path;
+            } else {
+                socialImagePath = '/images/og-image-blog.jpg';
+            }
+        %>
+        <meta property="og:image" content="https://elevagedebelair.com<%= socialImagePath %>" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="<%= blogImage.balise_alt || blog.titre %>" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="article:published_time" content="<%= new Date(blog.date_creation).toISOString() %>" />
+        <% if (blog.date_modification) { %>
+        <meta property="article:modified_time" content="<%= new Date(blog.date_modification).toISOString() %>" />
+        <% } %>
+        <meta property="article:author" content="<%= userInfo.kennel_name %>" />
+        <meta property="article:section" content="<%= blog.category_content %>" />
+        <% tags.forEach(tag => { if (tag.tag_content) { %>
+        <meta property="article:tag" content="<%= tag.tag_content %>" />
+        <% }}); %>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="<%= blog.titre %>" />
+        <meta name="twitter:description" content="<%= blog.preview %>" />
+        <meta name="twitter:image" content="https://elevagedebelair.com<%= socialImagePath %>" />
+        <meta name="twitter:image:alt" content="<%= blogImage.balise_alt || blog.titre %>" />
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css"/><link rel="stylesheet" href="/front/css/blog.css"/><link rel="stylesheet" href="/front/css/blog-details.css"/>
+    </head>
+      <body class="h-100">
+        <main style="padding-top: 70px;">
+           <%- include('../front/frontEndAssets/header') %>
+            <section class="blog-detail-hero">
+                <div class="container mt-2">
+                    <nav aria-label="Fil d'Ariane" class="breadcrumb-nav mt-5" data-aos="fade-down">
+                        <ol class="breadcrumb-list">
+                            <li class="breadcrumb-item">
+                                <a href="/"><i class="fas fa-home"></i> Accueil</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="ms-1" href="/blog">Blog</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                            <span class="ms-1"><%= blog.titre %></span> 
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <div class="row">
+                        <div class="col-lg-5" data-aos="fade-right">
+                            <div class="article-image-wrapper">
+                                <% 
+                                let articleImageSrc;
+                                if (blogImage && blogImage.optimized_image_path) {
+                                    articleImageSrc = '/uploads/optimized/' + blogImage.optimized_image_path;
+                                } else if (blogImage && blogImage.image_path) {
+                                    articleImageSrc = '/uploads/' + blogImage.image_path;
+                                } else {
+                                    articleImageSrc = '/img/placeholder-blog.jpg';
+                                }
+                                
+                                const articleFallbackSrc = blogImage && blogImage.image_path ? 
+                                    '/uploads/' + blogImage.image_path : 
+                                    '/img/placeholder-blog.jpg';
+                                %>
+                                <img src="<%= articleImageSrc %>" 
+                                    alt="<%= blogImage.balise_alt || blog.titre %>" 
+                                    class="article-main-image"
+                                    onerror="this.onerror=null; this.src='<%= articleFallbackSrc %>';">
+                            </div>
+                        </div>
+                        <div class="col-lg-7" data-aos="fade-left">
+                            <div class="article-header-info">
+                                <% if (blog.category_content && blog.category_slug) { %>
+                                <a href="/blog/categorie/<%= blog.category_slug %>" class="article-category-badge">
+                                    <i class="fas fa-folder"></i>
+                                    <%= blog.category_content %>
+                                </a>
+                                <% } %>
+                                <h1 class="article-title"><%= blog.titre %></h1>
+                                <div class="article-meta-info">
+                                    <span class="meta-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        }) %>
+                                    </span>
+                                    <% if (blog.date_modification) { %>
+                                    <span class="meta-updated">
+                                        <i class="fas fa-sync-alt"></i>
+                                        Mis à jour le <%= new Date(blog.date_modification).toLocaleDateString('fr-FR', { 
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric'
+                                        }) %>
+                                    </span>
+                                    <% } %>
+                                    <span class="meta-likes">
+                                        <i class="fas fa-heart"></i>
+                                        <span id="likesCount"><%= blog.likes || 0 %></span> J'aime
+                                    </span>
+                                </div>
+                                <% if (blog.preview) { %>
+                                <p class="article-preview"><%- blog.preview %></p>
+                                <% } %>
+                                <% if (tags && tags.length > 0) { %>
+                                <div class="article-tags-list">
+                                    <% tags.forEach(tag => { if (tag.tag_content && tag.tag_slug) { %>
+                                    <a href="/blog/tag/<%= tag.tag_slug %>" class="tag-link">
+                                        <i class="fas fa-hashtag"></i><%= tag.tag_content.replace(/^#/, '') %>
+                                    </a>
+                                    <% }}); %>
+                                </div>
+                                <% } %>
+                                <!-- <button class="btn-like-article" id="likeButton" data-slug="<%= blog.slug %>">
+                                    <i class="fas fa-heart"></i>
+                                    J'aime cet article
+                                </button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="article-content-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <article class="article-main-content" data-aos="fade-up">
+                                <% if (blogParagraphs && blogParagraphs.length > 0) { %>
+                                    <% blogParagraphs.forEach((paragraph, index) => { %>
+                                        <div class="article-paragraph" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                                            <% if (paragraph.title) { %>
+                                                <h2 class="paragraph-title"><%= paragraph.title %></h2>
+                                            <% } %>
+                                            <% if (paragraph.content) { %>
+                                                <div class="paragraph-content">
+                                                    <%- paragraph.content %>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    <% }); %>
+                                <% } %>
+                                <% if (suppPhotos && suppPhotos.length > 0) { %>
+                                    <div class="article-gallery" data-aos="fade-up">
+                                        <h3 class="gallery-title">
+                                            <i class="fas fa-images"></i>
+                                            Photos supplémentaires
+                                        </h3>
+                                        <div class="row g-3">
+                                            <% suppPhotos.forEach((photo, index) => { %>
+                                                <div class="col-md-6" data-aos="zoom-in" data-aos-delay="<%= index * 50 %>">
+                                                    <div class="gallery-item">
+                                                        <% 
+                                                        let photoSrc = photo.optimized_image_path ? 
+                                                            '/uploads/optimized/' + photo.optimized_image_path : 
+                                                            '/uploads/' + photo.image_path;
+                                                        let photoFallback = '/uploads/' + photo.image_path;
+                                                        %>
+                                                        <img src="<%= photoSrc %>" 
+                                                            alt="<%= photo.balise_alt || 'Photo supplémentaire' %>" 
+                                                            title="<%= photo.balise_title || '' %>"
+                                                            class="gallery-image"
+                                                            onerror="this.onerror=null; this.src='<%= photoFallback %>';">
+                                                    </div>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <% if (faqs && faqs.length > 0) { %>
+                                    <div class="article-faq" data-aos="fade-up">
+                                        <h3 class="faq-title">
+                                            <i class="fas fa-question-circle"></i>
+                                            Questions fréquentes
+                                        </h3>
+                                        <div class="accordion" id="faqAccordion">
+                                            <% faqs.forEach((faq, index) => { %>
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header" id="faqHeading<%= index %>">
+                                                        <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" 
+                                                                type="button" 
+                                                                data-bs-toggle="collapse" 
+                                                                data-bs-target="#faqCollapse<%= index %>" 
+                                                                aria-expanded="<%= index === 0 ? 'true' : 'false' %>" 
+                                                                aria-controls="faqCollapse<%= index %>">
+                                                            <%= faq.question %>
+                                                        </button>
+                                                    </h4>
+                                                    <div id="faqCollapse<%= index %>" 
+                                                        class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>" 
+                                                        aria-labelledby="faqHeading<%= index %>" 
+                                                        data-bs-parent="#faqAccordion">
+                                                        <div class="accordion-body">
+                                                            <%= faq.reponse %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </article>
+                        </div>
+                        <div class="col-lg-4">
+                            <aside class="article-sidebar">
+                                <div class="sidebar-widget" data-aos="fade-left">
+                                    <h3 class="widget-title">
+                                        <i class="fas fa-clock"></i>
+                                        Articles Récents
+                                    </h3>
+                                    <% if (recentPosts && recentPosts.length > 0) { %>
+                                        <div class="recent-posts-list">
+                                            <% recentPosts.slice(0, 5).forEach((post, index) => { %>
+                                                <article class="recent-post-item">
+                                                    <div class="recent-post-image">
+                                                        <% 
+                                                        let recentImageSrc = post.optimized_image_path ? 
+                                                            '/uploads/optimized/' + post.optimized_image_path : 
+                                                            (post.image_path ? '/uploads/' + post.image_path : '/img/placeholder-blog.jpg');
+                                                        let recentFallback = post.image_path ? '/uploads/' + post.image_path : '/img/placeholder-blog.jpg';
+                                                        %>
+                                                        <a href="/blog/<%= post.slug %>">
+                                                            <img src="<%= recentImageSrc %>" 
+                                                                alt="<%= post.balise_alt || post.titre %>"
+                                                                onerror="this.onerror=null; this.src='<%= recentFallback %>';">
+                                                        </a>
+                                                    </div>
+                                                    <div class="recent-post-content">
+                                                        <h4 class="recent-post-title">
+                                                            <a href="/blog/<%= post.slug %>"><%= post.titre %></a>
+                                                        </h4>
+                                                        <span class="recent-post-date">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                            <%= new Date(post.date_creation).toLocaleDateString('fr-FR', { 
+                                                                day: 'numeric',
+                                                                month: 'short',
+                                                                year: 'numeric'
+                                                            }) %>
+                                                        </span>
+                                                    </div>
+                                                </article>
+                                            <% }); %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="100">
+                                    <div class="widget-header">
+                                        <h3 class="widget-title">
+                                            <i class="fas fa-folder-open"></i>
+                                            Catégories
+                                        </h3>
+                                        <a href="/blog/categories" class="widget-view-all">
+                                            Voir toutes
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                    <% if (categories && categories.length > 0) { %>
+                                        <div class="categories-badges">
+                                            <% categories.forEach(category => { %>
+                                                <a href="/blog/categorie/<%= category.category_slug %>" class="category-badge">
+                                                    <i class="fas fa-tag"></i>
+                                                    <%= category.content %>
+                                                    <span class="badge-count"><%= category.count || 0 %></span>
+                                                </a>
+                                            <% }); %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="200">
+                                    <div class="widget-header">
+                                        <h3 class="widget-title">
+                                            <i class="fas fa-hashtag"></i>
+                                            Tags Populaires
+                                        </h3>
+                                        <a href="/blog/tags" class="widget-view-all">
+                                            Voir tous
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                    <% if (randomTags && randomTags.length > 0) { %>
+                                        <div class="tags-cloud">
+                                            <% randomTags.forEach(tag => { %>
+                                                <a href="/blog/tag/<%= tag.tag_slug %>" class="tag-cloud-item">
+                                                    #<%= tag.content.replace(/^#/, '') %>
+                                                    <span class="tag-count">(<%= tag.count %>)</span>
+                                                </a>
+                                            <% }); %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+    </body>
+</html>

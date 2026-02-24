@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex, nofollow">
+        <title>Ajouter un Animal</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="/admin/css/dashboard.css">
+         <link rel="stylesheet" href="/admin/css/dashboard-modern.css">
+        <link rel="stylesheet" href="/admin/css/sidebar.css">
+        <script src="/admin/js/themes/darkThemeFunction.js"></script>
+    </head>
+    <body>
+        <%- include('../admin/composants/header') %>
+        <%- include('../admin/composants/topBar') %>
+        <main>
+            <div class="album py-5 bg-body-tertiary">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class="card shadow-sm">
+                                <div class="justify-content-between p-3 border rounded-2 border radius-2">
+                                    <form id="addAnimalForm" action="/admin/addAnimal" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="user_id" value="<%= userId %>">
+                                        <input type="hidden" name="id" value="id">
+                                        <div class="form-group pb-2">
+                                            <label for="name">Nom</label>
+                                            <input type="text" class="form-control" id="name" name="name" maxlength="15"  placeholder="Uniquement le nom sans affixe">
+                                            <small id="nameFeedback" class="form-text"></small>
+                                            <span id="nameIcon" class="icon"></span>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="in_breeding">Fait-il partie de l'élevage ?</label>
+                                            <select class="form-control" id="in_breeding" name="in_breeding" required>
+                                                <option value="1">Oui</option>
+                                                <option value="0">Non</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="gender">Genre</label>
+                                            <select class="form-control" id="gender" name="gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Femelle">Femelle</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="other_names">Autres noms</label>
+                                            <input type="text" class="form-control" id="other_names" name="other_names" placeholder="Ex: Noms avec affixe" required >
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="category">Catégorie</label>
+                                            <select class="form-control" id="category" name="category">
+                                                <option value="chien">Chien</option>
+                                                <option value="chat">Chat</option>
+                                            </select>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pb-2">
+                                            <label for="breed_id">Race</label>
+                                            <select class="form-control" id="breed_id" name="breed_id" required>
+                                                <% breeds.forEach(breed => { %>
+                                                <option value="<%= breed.id %>"><%= breed.name %></option>
+                                                <% }) %>
+                                            </select>
+                                            <div class="d-flex mt-2">
+                                                <input type="text" class="form-control mr-2" id="new_breed" placeholder="Ajouter une nouvelle race">
+                                                <button type="button" class="btn btn-secondary" onclick="addNewBreed()">Ajouter</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pb-2">
+                                            <label for="breed_type">Type</label>
+                                            <input type="text" class="form-control" id="breed_type" name="breed_type" placeholder="Ex: Miniature, Nain, Standard" required>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="birth_date">Date de Naissance</label>
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pb-2">
+                                            <label for="country_id">Pays de naissance</label>
+                                            <select class="form-control" id="country_id" name="country_id" required>
+                                                <% countries.forEach(country => { %>
+                                                <option value="<%= country.id %>"><%= country.name %></option>
+                                                <% }) %>
+                                            </select>
+                                            <div class="d-flex mt-2">
+                                                <input type="text" class="form-control mr-2" id="new_country" placeholder="Ajouter un nouveau pays">
+                                                <input type="hidden" id="userId" value="<%- user.id %>">
+                                                <button type="button" class="btn btn-secondary" onclick="addNewCountry()">Ajouter</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group pb-2">
+                                            <label for="color">Couleur</label>
+                                            <input type="text" class="form-control" id="color" name="color" required>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="coat_type">Type de pelage</label>
+                                            <input type="text" class="form-control" id="coat_type" name="coat_type" required>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="eye_color">Couleur des yeux</label>
+                                            <input type="text" class="form-control" id="eye_color" name="eye_color" required>
+                                        </div>
+                                        <div class="form-group pb-2">
+                                            <label for="is_online">Fiche en ligne</label>
+                                            <select class="form-control" id="is_online" name="is_online">
+                                                <option value="0">Non</option>
+                                                <!-- <option value="1">Oui</option> -->
+                                            </select>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- deuxième colonne formulaire-->
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class="card shadow-sm">
+                                <div class="justify-content-between p-3 border rounded-2 border radius-2">
+                                    <div class="form-group">
+                                        <label for="register_id">Registre</label>
+                                        <select class="form-control" id="register_id" name="register_id" required>
+                                            <% registers.forEach(register => { %>
+                                            <option value="<%= register.id %>"><%= register.name %></option>
+                                            <% }) %>
+                                        </select>
+                                        <div class="d-flex mt-2">
+                                            <input type="text" class="form-control mr-2" id="new_register" placeholder="Ajouter un nouveau registre">
+                                            <button type="button" class="btn btn-secondary" onclick="addNewRegister()">Ajouter</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px; border-radius: 5px; font-size: 14px; margin-bottom: 5px;">
+                                        <span style="color: #d9534f; font-size: 12px; font-weight: bold;">Attention !</span>
+                                        <span style="color: #d9534f; font-size: 12px;"> L'enregistrement des parents doit être fait pour chaque chien enregistré.</span>
+                                    </div>
+                                    <div class="form-group pb-2">
+                                        <label for="father_id">Père</label>
+                                        <select class="form-control" id="father_id" name="father_id" required>
+                                            <% fathers.forEach(father => { %>
+                                            <option value="<%= father.id %>"><%= father.father_name %></option>
+                                            <% }) %>
+                                        </select>
+                                        <div class="d-flex mt-2">
+                                            <input type="text" class="form-control mr-2" id="new_father" placeholder="Ajouter un nouveau père">
+                                            <button type="button" class="btn btn-secondary" onclick="addNewFather()">Ajouter</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group pb-2">
+                                        <label for="mother_id">Mère</label>
+                                        <select class="form-control" id="mother_id" name="mother_id" required>
+                                            <% mothers.forEach(mother => { %>
+                                            <option value="<%= mother.id %>"><%= mother.mother_name %></option>
+                                            <% }) %>
+                                        </select>
+                                        <div class="d-flex mt-2">
+                                            <input type="text" class="form-control mr-2" id="new_mother" placeholder="Ajouter une nouvelle mère">
+                                            <button type="button" class="btn btn-secondary" onclick="addNewMother()">Ajouter</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <label for="health_tests_id" class=" mt-3">Test(s) de Santé</label>
+                                    <div class="form-floating mb-3 mt-1">
+                                        <textarea class="form-control" placeholder="Test de Santé" id="toggleTextarea" name="health_tests" style="height: 200px"></textarea>
+                                        <label for="toggleTextarea" class="text-holder">Ajoutez le(s) test(s) effectué(s) sur votre animal</label>
+                                    </div>
+                                    <label for="description_id" class=" mt-2">Description</label>
+                                    <div class="form-floating mb-3 mt-1">
+                                        <textarea class="form-control" placeholder="Description" id="toggleTextarea" name="description_animals" minlength="50" style="height: 300px" required></textarea>
+                                        <label for="toggleTextarea" class="text-holder" >Description de votre animal en utilisant des mots clés.</label>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </main>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="/admin/js/forms/formFunction.js"></script>
+        <script src="/admin/js/utilities/titleFunction.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <!-- créer un script link vers le dossier color-node.js -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                      var title = document.querySelector('title').textContent;
+                      document.getElementById('page-title').textContent = title;
+                  });
+        </script>
+    </body>
+</html>

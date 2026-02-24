@@ -1,0 +1,161 @@
+<!-- modale création de section -->
+<div id="createSectionModal" class="modal fade" tabindex="-1" aria-labelledby="createSectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createSectionModalLabel">Créer une section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createSectionForm">
+                    <div class="mb-3">
+                        <label for="titre" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="titre" name="titre" maxlength="70" placeholder="Exemple : Santé, Concours, Pedigree" required>
+                        <div id="titreFeedback" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="preview" class="form-label">Description</label>
+                        <textarea class="form-control" id="preview" name="preview" rows="15" placeholder="Décrivez votre section brièvement, vous pourrez ensuite la modifier à votre convenance."></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Date de création</label>
+                      <input type="text" class="form-control" id="date" name="date" readonly>
+                  </div>
+                  <div id="successCreateSectionMessage" class="alert alert-success" role="alert" style="display: none;">Votre nouvelle section a bien été créée</div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="saveSectionButton" disabled>Enregistrer</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!-- modale de modification de section -->
+  <div class="modal fade modal-fullscreen" id="editInformationsModal" tabindex="-1" aria-labelledby="editInformationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editInformationsModalLabel">Modification de la Section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container modal-body">
+                <form id="editArticleForm">
+                    <div class="mb-3">
+                        <label for="editTitre" class="form-label">Titre Principal</label>
+                        <input type="text" class="form-control" id="editTitre" name="titre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPreview" class="form-label">Description de la section</label>
+                        <textarea class="form-control" id="editPreview" name="preview" rows="8"></textarea>
+                    </div>
+                    <hr>
+                    <div id="paragraphContainer"></div>
+                    <button type="button" class="btn btn-secondary" id="addParagraphButton">Ajouter un paragraphe</button>
+                    <input type="hidden" id="editDateModification" name="date_modification">
+                    <input type="hidden" id="editSectionId" name="sectionId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="saveEditButton">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <% kennelInformations.forEach(section => { %>
+    <!-- Modale d'ajout de photo pour chaque section -->
+    <div class="modal fade" id="addPhotoSectionModal-<%= section.id %>" tabindex="-1" aria-labelledby="addPhotoSectionModalLabel-<%= section.id %>" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPhotoSectionModalLabel-<%= section.id %>">Ajouter une photo à la section</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container modal-body" style="max-width: 700px; margin: 0 auto;">
+                    <form id="addPhotoForm-<%= section.id %>" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <button class="btn btn-primary mb-2 w-100 upload-photo-button" type="button" data-photos-section-id="<%= section.id %>">Télécharger des photos</button>
+                            <div id="sectionPhotoContainer-<%= section.id %>" class="bg-body-tertiary p-3 mb-3" style="height:500px"></div>
+                            <label for="photo" class="form-label" style="display:none;">Sélectionner une photo</label>
+                            <input type="file" class="form-control" id="photo-<%= section.id %>" name="photo" style="display:none;" required>
+                            <small class="mb-2">Taille de photo recommandée : 1920 par 1280 Pixels - Format paysage</small>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <!-- <label for="balise_title-<%= section.id %>" class="form-label">Balise Title</label> -->
+                            <input type="hidden" class="form-control" id="balise_title-<%= section.id %>" name="balise_title" placeholder="Exemple : photo de la section 'Santé ou Alimentation'">
+                        </div>
+                        <div class="mb-3">
+                            <label for="balise_alt-<%= section.id %>" class="form-label">Balise Alt</label>
+                            <input type="text" class="form-control" id="balise_alt-<%= section.id %>" name="balise_alt" placeholder="Décrire en quelques mots la photo ci-dessus">
+                        </div>
+                        <input type="hidden" id="sectionId-<%= section.id %>" name="sectionId" value="<%= section.id %>">
+                        <div id="successModalPhotoMessage-<%= section.id %>" class="alert alert-success mt-2" role="alert" style="display: none;">Les modifications ont bien été enregistrées</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary save-photo-button" data-section-id="<%= section.id %>">Enregistrer les modifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% }); %>
+  
+  
+  
+  
+  
+  <!-- modale pour confirmer la mise en ligne de l'article -->
+  <% kennelInformations.forEach(section => { %>
+    <div class="modal fade" id="confirmOnlineSection-<%= section.id %>" tabindex="-1" aria-labelledby="confirmOnlineSectionLabel-<%= section.id %>" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmOnlineSectionLabel-<%= section.id %>">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <h5 class="mb-4 text-primary"><%= section.titre %></h5>
+                    </div>
+                    <p>Êtes-vous sûr de vouloir placer la section en ligne ?</p>
+                    <p>Veuillez vérifier les points suivants avant de confirmer :</p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <input type="checkbox" id="checkTitle-<%= section.id %>" class="form-check-input-confirm">
+                            <label for="checkTitle-<%= section.id %>" class="form-check-label">Le titre est complet et pertinent</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="checkContent-<%= section.id %>" class="form-check-input-confirm">
+                            <label for="checkContent-<%= section.id %>" class="form-check-label">Le contenu est complet et sans erreurs</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="checkImage-<%= section.id %>" class="form-check-input-confirm">
+                            <label for="checkImage-<%= section.id %>" class="form-check-label">Une image est ajoutée</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="checkSEO-<%= section.id %>" class="form-check-input-confirm">
+                            <label for="checkSEO-<%= section.id %>" class="form-check-label">Les balises SEO (titre et alt) sont remplies</label>
+                        </li>
+                    </ul>
+                    <div id="successConfirmOnlineSection<%= section.id %>" class="alert alert-success mt-2 p-2" role="alert" style="display: none;">Votre section est désormais en ligne ! </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger confirm-online-button-final" data-id="<%= section.id %>" disabled>Mettre en ligne</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% }); %>

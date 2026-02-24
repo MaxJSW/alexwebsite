@@ -1,0 +1,100 @@
+<label class="form-label m-0 mb-3">Informations du Profil</label>
+<form id="updateForm" action="/admin/animalProfile/<%= animal.id %>" method="POST" class="row gy-3 gy-xxl-4">
+    <div class="col-12 col-md-6">
+        <label for="name" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="name" name="name" maxlength="15" value="<%= animal.name %>">
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="in_breeding" class="form-label">Fait-il partie de l'élevage ?</label>
+        <input type="text" class="form-control" id="in_breeding" name="in_breeding" value="<%= animal.in_breeding == 1 ? 'Oui' : 'Non' %>" readonly>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="gender" class="form-label">Genre</label>
+        <select class="form-control" id="gender" name="gender">
+            <option value="Male" <%= animal.gender === 'Male' ? 'selected' : '' %>>Male</option>
+            <option value="Femelle" <%= animal.gender === 'Femelle' ? 'selected' : '' %>>Femelle</option>
+        </select>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="other_names" class="form-label">Autres noms</label>
+        <input type="text" class="form-control" id="other_names" name="other_names" placeholder="Ex: Noms avec affixe" value="<%= animal.other_names %>">
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="category" class="form-label">Catégorie</label>
+        <select class="form-control" id="category" name="category">
+            <option value="chien" <%= animal.category === 'chien' ? 'selected' : '' %>>Chien</option>
+            <option value="chat" <%= animal.category === 'chat' ? 'selected' : '' %>>Chat</option>
+        </select>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="breed_id" class="form-label">Race</label>
+        <select class="form-control" id="breed_id" name="breed_id" required>
+            <% breeds.forEach(breed => { %>
+            <option value="<%= breed.id %>" <%= animal.breed_id === breed.id ? 'selected' : '' %>><%= breed.name %></option>
+            <% }) %>
+        </select>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="breed_type" class="form-label">Type</label>
+        <input type="text" class="form-control" id="breed_type" name="breed_type" value="<%= animal.breed_type %>" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="birth_date" class="form-label">Date de Naissance</label>
+        <input type="date" class="form-control" id="birth_date" name="birth_date" value="<%= animal.birth_date ? animal.birth_date.toISOString().substring(0, 10) : '' %>" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="country_id" class="form-label">Pays de naissance</label>
+        <select class="form-control" id="country_id" name="country_id" required>
+            <% countries.forEach(country => { %>
+            <option value="<%= country.id %>" <%= country.id === animal.country_id ? 'selected' : '' %>><%= country.name %></option>
+            <% }) %>
+        </select>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="coat_type" class="form-label">Type de Pelage</label>
+        <input type="text" class="form-control" id="coat_type" name="coat_type" value="<%= animal.coat_type %>" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="color" class="form-label">Couleur</label>
+        <input type="text" class="form-control" id="color" name="color" value="<%= animal.color %>" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="eye_color" class="form-label">Couleur des yeux</label>
+        <input type="text" class="form-control" id="eye_color" name="eye_color" value="<%= animal.eye_color %>" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="register_id" class="form-label">Registre</label>
+        <select class="form-control" id="register_id" name="register_id" required>
+            <% registers.forEach(register => { %>
+            <option value="<%= register.id %>" <%= register.id === animal.register_id ? 'selected' : '' %>><%= register.name %></option>
+            <% }) %>
+        </select>
+    </div>
+    <% if (animal.gender === 'Male') { %>
+    <div class="col-12 col-md-6">
+        <label for="open_for_stud" class="form-label">Ouvert en saillie</label>
+        <select class="form-control" id="open_for_stud" name="open_for_stud" required>
+            <option value="0" <%= animal.open_for_stud === 0 ? 'selected' : '' %>>Non</option>
+            <option value="1" <%= animal.open_for_stud === 1 ? 'selected' : '' %>>Oui</option>
+        </select>
+    </div>
+    <% } %>
+    <div class="col-12 col-md-6 d-flex align-items-center check-retreat">
+        <label class="form-label me-3 mb-0">En retraite :</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="retreat" id="retreatYes" value="1" <%= animal.retreat === 1 ? 'checked' : '' %>>
+            <label class="form-check-label" for="retreatYes">
+            Oui
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="retreat" id="retreatNo" value="0" <%= !animal.retreat || animal.retreat === 0 ? 'checked' : '' %>>
+            <label class="form-check-label" for="retreatNo">
+            Non
+            </label>
+        </div>
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+</form>

@@ -1,0 +1,102 @@
+<h5 class="mb-3">Profile</h5>
+<div class="row g-0">
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Nom</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.name %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Autre Nom</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.other_names %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Catégorie</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.category %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Genre</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.gender %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Race</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.breed_name %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Type</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.breed_type %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Couleurs</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.color %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Type de Pelage</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.coat_type %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Couleurs des Yeux</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.eye_color %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Pays de Naissance</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.country_name %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Date de naissance</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.formatted_birth_date %> (<%= animal.age %>)</div>
+</div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Statut</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1 <%= animal.is_online ? 'status-online' : 'status-offline' %>">
+    <div class="p-2"><%= animal.is_online ? 'En Ligne' : 'Hors-Ligne' %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Fait partie de l'élevage</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.in_breeding ? 'Oui' : 'Non' %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Père</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.father_name %></div>
+  </div>
+  <div class="col-5 col-md-3 bg-body-tertiary border-bottom border-white border-1">
+    <div class="p-2">Mère</div>
+  </div>
+  <div class="col-7 col-md-9 bg-body-tertiary border-start border-bottom border-white border-1">
+    <div class="p-2"><%= animal.mother_name %></div>
+  </div>
+<hr>
+<div class="container">
+  <span class="mt-3" style="text-decoration:underline;">Test(s) de santé du chien</span>
+  <p class="small mt-3"><%= animal.health_tests %></p>
+</div>
+<hr>
+<div class="container">
+  <span class="pb-3" style="text-decoration:underline;">Description du chien</span>
+<p class="small mb-3"><%= animal.description_animals %></p>
+</div>

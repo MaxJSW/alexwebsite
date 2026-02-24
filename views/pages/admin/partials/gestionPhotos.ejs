@@ -1,0 +1,30 @@
+<div class="container text-center">
+    <div class="d-grid gap-2 mb-4">
+        <button class="btn btn-primary" type="button" id="uploadBtn">Télécharger des photos</button>
+    </div>
+    <form id="uploadForm" action="/addPhotos/uploadPhotos" method="POST" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="photos" id="photoInput" multiple>
+        <input type="hidden" name="animal_id" value="<%= animal_id %>">
+    </form>
+</div>
+</section>
+<section class="mt-5">
+<div class="album py-5 bg-body-tertiary min-height-500">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="photoContainer">
+            <% photos.forEach(photo => { %>
+                <div class="col" id="photo-<%= photo.id %>">
+                    <div class="card shadow-sm position-relative">
+                        <img src="/uploads/<%= photo.image_path %>" class="bd-placeholder-img card-img-top" width="100%" height="300" alt="Photo">
+                        <button class="btn btn-danger position-absolute top-0 end-0 m-2" data-photo-id="<%= photo.id %>" data-photo-path="<%= photo.image_path %>" onclick="confirmDelete(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div> 
+</div>
+
+
+

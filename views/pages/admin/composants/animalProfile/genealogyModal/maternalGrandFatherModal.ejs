@@ -1,0 +1,111 @@
+<!-- Modal pour modifier les informations du grand-père maternel -->
+<div class="modal fade" id="maternalGrandfatherUpdateModal" tabindex="-1" aria-labelledby="maternalGrandfatherUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="maternalGrandfatherUpdateModalLabel">Modifier les informations du grand-père maternel de <%= animal.name %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulaire pour mettre à jour les informations du grand-père maternel -->
+                <form id="updateMaternalGrandfather" action="/admin/animalProfile/<%= animal.slug %>/updateMaternalGrandfather" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2 mb-4">
+                                    <button class="btn btn-primary" type="button" id="uploadBtnMaternalGrandfather" data-grandfather-id="<%= animal.maternal_grandfather_id %>">Télécharger une photo</button>
+                                </div>
+                                <div id="uploadMaternalGrandfatherForm" style="display: none;">
+                                    <input type="file" name="photo" id="photoInputMaternalGrandfather" accept="image/*">
+                                    <input type="hidden" name="grandfather_id" value="<%= animal.maternal_grandfather_id %>">
+                                </div>
+                                <div class="album py-5 bg-body-tertiary min-height-400">
+                                    <div class="container">
+                                        <div class="img-fluid h-100" id="photoContainerMaternalGrandfather">
+                                            <% imagesMaternalGrandfather.forEach(photo => { %>
+                                                <div class="col" id="photo-<%= photo.id %>">
+                                                    <div class="card shadow-sm position-relative">
+                                                        <img src="/uploads/<%= photo.image_path %>" class="bd-placeholder-img card-img-top img-fluid h-100" style="object-fit: cover;" alt="Photo">
+                                                    </div>
+                                                </div>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandfatherName" class="form-label">Nom du grand-père maternel</label>
+                                    <input type="text" class="form-control" id="maternalGrandfatherName" name="maternalGrandfatherName" value="<%= animal.maternal_grandfather_name %>">
+                                </div>
+                                <div class="form-group pb-2">
+                                    <label for="maternalGrandfatherBreed" class="form-label">Race</label>
+                                    <select class="form-control" id="maternalGrandfatherBreed" name="maternalGrandfatherBreed">
+                                        <!-- Option placeholder affichée en tête de liste -->
+                                        <option value="" disabled <%= !animal.maternal_grandfather_breed_id ? 'selected' : '' %>>Choisir une race</option>
+                                        <!-- Affichage des races disponibles -->
+                                        <% breeds.forEach(breed => { %>
+                                        <option value="<%= breed.id %>" <%= breed.id === animal.maternal_grandfather_breed_id ? 'selected' : '' %>><%= breed.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandfatherGender" class="form-label">Genre</label>
+                                    <select class="form-control" id="maternalGrandfatherGender" name="maternalGrandfatherGender">
+                                        <option value="Mâle" selected>Mâle</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandfatherRegister" class="form-label">Registre</label>
+                                    <select class="form-control" id="maternalGrandfatherRegister" name="maternalGrandfatherRegister">
+                                        <% registers.forEach(register => { %>
+                                        <option value="<%= register.id %>" <%= register.id === animal.maternal_grandfather_register_id ? 'selected' : '' %>><%= register.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandfatherCountry" class="form-label">Pays de Naissance</label>
+                                    <select class="form-control" id="maternalGrandfatherCountry" name="maternalGrandfatherCountry">
+                                        <% countries.forEach(country => { %>
+                                        <option value="<%= country.id %>" <%= country.id === animal.maternal_grandfather_country_id ? 'selected' : '' %>><%= country.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandfatherBreedType" class="form-label">Type de race</label>
+                                    <input type="text" class="form-control" id="maternalGrandfatherBreedType" name="maternalGrandfatherBreedType" value="<%= animal.maternal_grandfather_breed_type %>" placeholder="Nain, Miniature,...">
+                                </div>
+                                <div class="form-group pb-2 mb-2">
+                                    <label for="maternalGrandfatherColor" class="form-label">Couleur</label>
+                                    <input type="text" class="form-control" id="maternalGrandfatherColor" name="maternalGrandfatherColor" value="<%= animal.maternal_grandfather_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandfatherCoatType" class="form-label">Type de pelage</label>
+                                    <input type="text" class="form-control" id="maternalGrandfatherCoatType" name="maternalGrandfatherCoatType" value="<%= animal.maternal_grandfather_coat_type %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandfatherEyeColor" class="form-label">Couleur des yeux</label>
+                                    <input type="text" class="form-control" id="maternalGrandfatherEyeColor" name="maternalGrandfatherEyeColor" value="<%= animal.maternal_grandfather_eye_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandfatherIsOnline" class="form-label">Fiche en ligne</label>
+                                    <select class="form-control" id="maternalGrandfatherIsOnline" name="maternalGrandfatherIsOnline">
+                                        <option value="0" <%= animal.maternal_grandfather_is_online === 0 ? 'selected' : '' %>>Non</option>
+                                        <option value="1" <%= animal.maternal_grandfather_is_online === 1 ? 'selected' : '' %>>Oui</option>
+                                    </select>
+                                </div>
+                                <div id="updateMaternalGrandfatherSuccess" class="alert alert-success mt-3" role="alert" style="display: none;">
+                                    Mise à jour des informations du grand-père maternel de <%= animal.name %> réussie
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary" id="saveMaternalGrandfatherChanges">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

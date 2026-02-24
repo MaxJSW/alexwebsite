@@ -1,0 +1,32 @@
+<div class="container mt-4 bg-body-tertiary p-3 rounded">
+    <h3 >Résultats de Compétition</h3>
+
+    <% if (Object.keys(awardsByYear).length > 0) { %>
+        <% Object.keys(awardsByYear).forEach(function(year) { %>
+            <div class="year-section mt-5">
+                <h4 class="text-info border-bottom pb-2"><%= year %></h4>
+                <ul class="list-group list-group-flush">
+                    <% awardsByYear[year].forEach(function(award) { %>
+                        <li class="list-group-item bg-body rounded mb-4">
+                            <form class="award-form">
+                                <div class="mb-2">
+                                    <label for="awardName-<%= award.award_id %>" class="form-label">Nom de la récompense</label>
+                                    <input type="text" class="form-control" id="awardName-<%= award.award_id %>" value="<%= award.award_name %>" />
+                                </div>
+                                <div class="mb-2">
+                                    <label for="awardDescription-<%= award.award_id %>" class="form-label">Description de la récompense</label>
+                                    <textarea class="form-control" id="awardDescription-<%= award.award_id %>" rows="5"><%= award.award_description %></textarea>
+                                </div>
+                                <input type="hidden" id="awardId-<%= award.award_id %>" value="<%= award.award_id %>">
+                                <div id="alert-success-<%= award.award_id %>" class="alert alert-success" style="display:none;" role="alert"></div>
+                                <button type="button" class="btn btn-primary save-award" data-award-id="<%= award.award_id %>">Enregistrer</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p class="text-muted">Aucun résultat de compétition disponible pour cet animal.</p>
+    <% } %>
+</div>

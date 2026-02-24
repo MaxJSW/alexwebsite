@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Informations & Guides | Élevage de Bel Air</title>
+        <meta name="description" content="Découvrez toutes nos informations sur l'élevage d'American Bully et de Springer Anglais : guides pratiques, conseils d'experts et ressources pour futurs propriétaires." />
+        <meta name="keywords" content="informations élevage, guide american bully, guide springer anglais, conseils chiots, ressources élevage, élevage de bel air"/>
+        <meta name="author" content="Élevage de Bel Air" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        <link rel="canonical" href="https://elevagedebelair.com/informations" />
+        <meta name="language" content="fr" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.placename" content="France" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Élevage de Bel Air" />
+        <meta property="og:title" content="Informations & Guides | Élevage de Bel Air" />
+        <meta property="og:description" content="Découvrez toutes nos informations et guides pratiques sur l'élevage d'American Bully et de Springer Anglais." />
+        <meta property="og:url" content="https://elevagedebelair.com/informations" />
+        <meta property="og:image" content="https://elevagedebelair.com/images/og-image-informations.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Informations Élevage de Bel Air" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Informations & Guides | Élevage de Bel Air" />
+        <meta name="twitter:description" content="Découvrez toutes nos informations et guides pratiques sur l'élevage." />
+        <meta name="twitter:image" content="https://elevagedebelair.com/images/twitter-card-informations.jpg" />
+        <meta name="twitter:image:alt" content="Informations Élevage de Bel Air" />
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css" />
+        <link rel="stylesheet" href="/front/css/informations.css" />
+    </head>
+        <body class="h-100">
+            <%- include('../front/frontEndAssets/header') %>
+            <main style="padding-top: 70px;">
+                <section class="page-hero-simple">
+                    <div class="page-hero-overlay"></div>
+                    <div class="container">
+                        <div class="page-hero-content">
+                            <h1 class="page-hero-title">Informations & Guides</h1>
+                            <p class="page-hero-subtitle">
+                                Découvrez toutes nos ressources et guides pratiques pour futurs propriétaires. 
+                                Conseils d'experts, informations essentielles et tout ce que vous devez savoir 
+                                sur l'American Bully, le Springer Anglais et l'accueil de votre nouveau compagnon.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section class="informations-section">
+                    <div class="container">
+                        <% if (kennelInfo && kennelInfo.length > 0) { %>
+                            <div class="row g-4">
+                                <% kennelInfo.forEach((info, index) => { %>
+                                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                                        <article class="info-card">
+                                            <div class="info-card-image">
+                                                <a href="/informations/<%= info.slug %>">
+                                                    <img src="<%= info.image.path %>" 
+                                                        alt="<%= info.image.alt || info.titre %>" 
+                                                        class="img-fluid"
+                                                        onerror="this.onerror=null; this.src='/img/placeholder-info.jpg';">
+                                                </a>
+                                            </div>
+                                           <div class="info-card-body">
+                                                <div class="info-meta">
+                                                    <span class="info-date">
+                                                        <i class="fas fa-sync-alt"></i>
+                                                        Mis à jour le <%= info.dateModification %>
+                                                    </span>
+                                                </div>
+                                                <h2 class="info-title">
+                                                    <a href="/informations/<%= info.slug %>">
+                                                        <%= info.titre %>
+                                                    </a>
+                                                </h2>
+                                                <% if (info.description) { %>
+                                                    <p class="info-description">
+                                                        <%= info.description.substring(0, 100) %><%= info.description.length > 100 ? '...' : '' %>
+                                                    </p>
+                                                <% } %> 
+                                                <a href="/informations/<%= info.slug %>" class="btn-read-info">
+                                                    En savoir plus
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } else { %>
+                            <div class="no-info-found" data-aos="fade-up">
+                                <div class="no-info-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <h3>Aucune information disponible</h3>
+                                <p>Les guides et informations seront bientôt disponibles.</p>
+                            </div>
+                        <% } %>
+                    </div>
+                </section>
+                <section class="legal-info-section">
+                    <div class="container">
+                        <div class="legal-info-card" data-aos="fade-up">
+                            <div class="legal-info-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <h3 class="legal-info-title">Informations Légales</h3>
+                            <p class="legal-info-text">
+                                Pour en savoir plus sur vos droits et nos engagements, consultez nos documents légaux. 
+                                Vous y trouverez toutes les informations concernant l'utilisation de notre site, 
+                                la protection de vos données personnelles et nos conditions générales.
+                            </p>
+                            <div class="legal-info-links">
+                                <a href="/conditions-generales" class="legal-link">
+                                    <i class="fas fa-gavel"></i>
+                                    <span>Mentions Légales</span>
+                                </a>
+                                <a href="/conditions-generales" class="legal-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Conditions Générales d'Utilisation</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+    </body>
+</html>

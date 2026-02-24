@@ -1,0 +1,112 @@
+<!-- Modal pour modifier les informations de la grand-mère maternelle -->
+<div class="modal fade" id="maternalGrandmotherUpdateModal" tabindex="-1" aria-labelledby="maternalGrandmotherUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="maternalGrandmotherUpdateModalLabel">Modifier les informations de la grand-mère maternelle de <%= animal.name %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulaire pour mettre à jour les informations de la grand-mère maternelle -->
+                <form id="updateMaternalGrandmother" action="/admin/animalProfile/<%= animal.slug %>/updateMaternalGrandmother" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2 mb-4">
+                                    <button class="btn btn-primary" type="button" id="uploadBtnMaternalGrandmother" data-grandmother-id="<%= animal.maternal_grandmother_id %>">Télécharger une photo</button>
+                                </div>
+                                <div id="uploadMaternalGrandmotherForm" style="display: none;">
+                                    <input type="file" name="photo" id="photoInputMaternalGrandmother" accept="image/*">
+                                    <input type="hidden" name="grandmother_id" value="<%= animal.maternal_grandmother_id %>">
+                                </div>
+                                <div class="album py-5 bg-body-tertiary min-height-400">
+                                    <div class="container">
+                                        <div class="img-fluid h-100" id="photoContainerMaternalGrandmother">
+                                            <% imagesMaternalGrandmother.forEach(photo => { %>
+                                                <div class="col" id="photo-<%= photo.id %>">
+                                                    <div class="card shadow-sm position-relative">
+                                                        <img src="/uploads/<%= photo.image_path %>" class="bd-placeholder-img card-img-top img-fluid h-100" style="object-fit: cover;" alt="Photo">
+                                                    </div>
+                                                </div>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandmotherName" class="form-label">Nom de la grand-mère maternelle</label>
+                                    <input type="text" class="form-control" id="maternalGrandmotherName" name="maternalGrandmotherName" value="<%= animal.maternal_grandmother_name %>">
+                                </div>
+                                <div class="form-group pb-2">
+                                    <label for="maternalGrandmotherBreed" class="form-label">Race</label>
+                                    <select class="form-control" id="maternalGrandmotherBreed" name="maternalGrandmotherBreed">
+                                        <!-- Option placeholder affichée en tête de liste -->
+                                        <option value="" disabled <%= !animal.maternal_grandmother_breed_id ? 'selected' : '' %>>Choisir une race</option>
+                                        <!-- Affichage des races disponibles -->
+                                        <% breeds.forEach(breed => { %>
+                                            <option value="<%= breed.id %>" <%= breed.id === animal.maternal_grandmother_breed_id ? 'selected' : '' %>><%= breed.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandmotherGender" class="form-label">Genre</label>
+                                    <select class="form-control" id="maternalGrandmotherGender" name="maternalGrandmotherGender">
+                                        <option value="Femelle" selected>Femelle</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandmotherRegister" class="form-label">Registre</label>
+                                    <select class="form-control" id="maternalGrandmotherRegister" name="maternalGrandmotherRegister">
+                                        <% registers.forEach(register => { %>
+                                            <option value="<%= register.id %>" <%= register.id === animal.maternal_grandmother_register_id ? 'selected' : '' %>><%= register.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandmotherCountry" class="form-label">Pays de Naissance</label>
+                                    <select class="form-control" id="maternalGrandmotherCountry" name="maternalGrandmotherCountry">
+                                        <% countries.forEach(country => { %>
+                                            <option value="<%= country.id %>" <%= country.id === animal.maternal_grandmother_country_id ? 'selected' : '' %>><%= country.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group pb-2 mt-1">
+                                    <label for="maternalGrandmotherBreedType" class="form-label">Type de race</label>
+                                    <input type="text" class="form-control" id="maternalGrandmotherBreedType" name="maternalGrandmotherBreedType" value="<%= animal.maternal_grandmother_breed_type %>" placeholder="Nain, Miniature,...">
+                                </div>
+                                <div class="form-group pb-2 mb-2">
+                                    <label for="maternalGrandmotherColor" class="form-label">Couleur</label>
+                                    <input type="text" class="form-control" id="maternalGrandmotherColor" name="maternalGrandmotherColor" value="<%= animal.maternal_grandmother_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandmotherCoatType" class="form-label">Type de pelage</label>
+                                    <input type="text" class="form-control" id="maternalGrandmotherCoatType" name="maternalGrandmotherCoatType" value="<%= animal.maternal_grandmother_coat_type %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandmotherEyeColor" class="form-label">Couleur des yeux</label>
+                                    <input type="text" class="form-control" id="maternalGrandmotherEyeColor" name="maternalGrandmotherEyeColor" value="<%= animal.maternal_grandmother_eye_color %>">
+                                </div>
+                                <div class="form-group pb-2 mt-2">
+                                    <label for="maternalGrandmotherIsOnline" class="form-label">Fiche en ligne</label>
+                                    <select class="form-control" id="maternalGrandmotherIsOnline" name="maternalGrandmotherIsOnline">
+                                        <option value="0" <%= animal.maternal_grandmother_is_online === 0 ? 'selected' : '' %>>Non</option>
+                                        <option value="1" <%= animal.maternal_grandmother_is_online === 1 ? 'selected' : '' %>>Oui</option>
+                                    </select>
+                                </div>
+                                <div id="updateMaternalGrandmotherSuccess" class="alert alert-success mt-3" role="alert" style="display: none;">
+                                    Mise à jour des informations de la grand-mère maternelle de <%= animal.name %> réussie
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary" id="saveMaternalGrandmotherChanges">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

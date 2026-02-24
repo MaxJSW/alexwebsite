@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title>Livre d'Or - Témoignages Clients | Élevage de Bel Air</title>
+            <meta name="description" content="Découvrez les témoignages et avis de nos clients satisfaits. Partagez votre expérience avec l'Élevage de Bel Air et nos chiots American Bully et Springer Anglais." />
+            <meta name="keywords" content="livre d'or, témoignages élevage, avis clients, retours chiots, expérience élevage, avis american bully, avis springer anglais, élevage de bel air"/>
+            <meta name="author" content="Élevage de Bel Air" />
+            <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+            <meta name="googlebot" content="index, follow" />
+            <link rel="canonical" href="https://elevagedebelair.com/livre-d-or" />
+            <meta name="language" content="fr" />
+            <meta name="geo.region" content="FR" />
+            <meta name="geo.placename" content="France" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Élevage de Bel Air" />
+            <meta property="og:title" content="Livre d'Or - Témoignages Clients | Élevage de Bel Air" />
+            <meta property="og:description" content="Découvrez les témoignages authentiques de nos clients satisfaits et leurs expériences avec nos chiots American Bully et Springer Anglais." />
+            <meta property="og:url" content="https://elevagedebelair.com/livre-d-or" />
+            <meta property="og:image" content="https://elevagedebelair.com/images/og-image-informations.jpg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content="Témoignages clients Élevage de Bel Air" />
+            <meta property="og:locale" content="fr_FR" />
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="Livre d'Or - Témoignages | Élevage de Bel Air">
+            <meta name="twitter:description" content="Découvrez les avis authentiques de nos clients satisfaits sur l'Élevage de Bel Air.">
+            <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+            <meta name="twitter:image:alt" content="Témoignages clients Élevage de Bel Air">
+            <%- include('../front/partials/head-meta-base.ejs') %> 
+            <%- include('../front/partials/head-fonts-libs.ejs') %> 
+            <link rel="stylesheet" href="/front/css/navbar.css" /><link rel="stylesheet" href="/front/css/livredor.css" />
+        </head>
+            <body class="h-100">
+            <%- include('../front/frontEndAssets/header') %>
+            <main style="padding-top: 70px;">
+                <section class="page-hero-simple">
+                    <div class="page-hero-overlay"></div>
+                    <div class="container">
+                        <div class="page-hero-content">
+                            <h1 class="page-hero-title">Livre d'Or</h1>
+                            <p class="page-hero-subtitle">
+                                Découvrez les témoignages de nos familles heureuses et leurs compagnons. 
+                                Partagez votre expérience avec votre American Bully ou votre Springer Anglais 
+                                et rejoignez notre communauté de passionnés.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section class="testimonials-stats-section">
+                    <div class="container">
+                        <div class="row g-4 text-center">
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div class="stat-number"><%= comments.length %></div>
+                                    <div class="stat-label">Témoignages</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-number">
+                                        <% 
+                                        const avgRating = comments.length > 0 
+                                            ? (comments.reduce((sum, c) => sum + parseInt(c.reviews_star), 0) / comments.length).toFixed(1)
+                                            : 0;
+                                        %>
+                                        <%= avgRating %>/5
+                                    </div>
+                                    <div class="stat-label">Note Moyenne</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div class="stat-number">100%</div>
+                                    <div class="stat-label">Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-5" data-aos="fade-up">
+                            <button class="btn-add-testimonial" id="openFormBtn">
+                                <i class="fas fa-pen"></i>
+                                Partager mon témoignage
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section class="testimonial-form-section" id="testimonialFormSection" style="display: none;">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="form-wrapper" data-aos="fade-up">
+                                    <div class="form-header">
+                                        <h2 class="form-title">
+                                            <i class="fas fa-pen-fancy"></i>
+                                            Partagez votre expérience
+                                        </h2>
+                                        <p class="form-subtitle">
+                                            Votre témoignage sera vérifié avant publication
+                                        </p>
+                                        <button class="btn-close-form" id="closeFormBtn">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+
+                                    <form id="testimonialForm" enctype="multipart/form-data">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="user_name" class="form-label">
+                                                    <i class="fas fa-user"></i>
+                                                    Votre nom <span class="required">*</span>
+                                                </label>
+                                                <input type="text" 
+                                                    class="form-control" 
+                                                    id="user_name" 
+                                                    name="user_name" 
+                                                    required
+                                                    placeholder="Jean Dupont">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="user_email" class="form-label">
+                                                    <i class="fas fa-envelope"></i>
+                                                    Votre email <span class="required">*</span>
+                                                </label>
+                                                <input type="email" 
+                                                    class="form-control" 
+                                                    id="user_email" 
+                                                    name="user_email" 
+                                                    required
+                                                    placeholder="jean.dupont@example.com">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="name_of_dog" class="form-label">
+                                                    <i class="fas fa-paw"></i>
+                                                    Nom de votre chien <span class="required">*</span>
+                                                </label>
+                                                <input type="text" 
+                                                    class="form-control" 
+                                                    id="name_of_dog" 
+                                                    name="name_of_dog" 
+                                                    required
+                                                    placeholder="Rex">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">
+                                                    <i class="fas fa-star"></i>
+                                                    Votre note <span class="required">*</span>
+                                                </label>
+                                                <div class="star-rating" id="starRating">
+                                                    <input type="radio" name="reviews_star" value="5" id="star5" required>
+                                                    <label for="star5"><i class="fas fa-star"></i></label>
+                                                    <input type="radio" name="reviews_star" value="4" id="star4">
+                                                    <label for="star4"><i class="fas fa-star"></i></label>
+                                                    <input type="radio" name="reviews_star" value="3" id="star3">
+                                                    <label for="star3"><i class="fas fa-star"></i></label>
+                                                    <input type="radio" name="reviews_star" value="2" id="star2">
+                                                    <label for="star2"><i class="fas fa-star"></i></label>
+                                                    <input type="radio" name="reviews_star" value="1" id="star1">
+                                                    <label for="star1"><i class="fas fa-star"></i></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="comment_text" class="form-label">
+                                                    <i class="fas fa-comment-dots"></i>
+                                                    Votre témoignage <span class="required">*</span>
+                                                </label>
+                                                <textarea class="form-control" 
+                                                        id="comment_text" 
+                                                        name="comment_text" 
+                                                        rows="5" 
+                                                        required
+                                                        placeholder="Partagez votre expérience avec votre compagnon de l'Élevage de Bel Air..."></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="photo" class="form-label">
+                                                    <i class="fas fa-camera"></i>
+                                                    Photo de votre chien (optionnel)
+                                                </label>
+                                                <div class="file-upload-wrapper">
+                                                    <input type="file" 
+                                                        class="form-control" 
+                                                        id="photo" 
+                                                        name="photo" 
+                                                        accept="image/*">
+                                                    <div class="file-upload-preview" id="photoPreview"></div>
+                                                </div>
+                                                <small class="form-text">Formats acceptés : JPG, PNG, WEBP (max 5Mo)</small>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="formMessage" class="form-message" style="display: none;"></div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-actions">
+                                                    <button type="button" class="btn-cancel" id="cancelBtn">
+                                                        Annuler
+                                                    </button>
+                                                    <button type="submit" class="btn-submit">
+                                                        <i class="fas fa-paper-plane"></i>
+                                                        Envoyer mon témoignage
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="testimonials-display-section">
+                    <div class="container">
+                        <div class="section-header text-center" data-aos="fade-up">
+                            <h2 class="section-title">
+                                Témoignages de nos familles
+                            </h2>
+                            <p class="section-subtitle">
+                                Découvrez les expériences de nos clients avec leurs compagnons
+                            </p>
+                        </div>
+                        <% if (comments && comments.length > 0) { %>
+                            <div class="row g-4">
+                                <% comments.forEach((comment, index) => { %>
+                                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                                        <article class="testimonial-card">
+                                            <% if (comment.optimized_photo_path || comment.photo_path) { 
+                                                let photoSrc = comment.optimized_photo_path ? 
+                                                    '/uploads/optimized/' + comment.optimized_photo_path : 
+                                                    '/uploads/' + comment.photo_path;
+                                                let photoFallback = comment.photo_path ? 
+                                                    '/uploads/' + comment.photo_path : 
+                                                    '/img/placeholder-dog.jpg';
+                                            %>
+                                                <div class="testimonial-image">
+                                                    <img src="<%= photoSrc %>" 
+                                                        alt="<%= comment.name_of_dog %>" 
+                                                        onerror="this.onerror=null; this.src='<%= photoFallback %>';">
+                                                </div>
+                                            <% } %>
+
+                                            <div class="testimonial-body">
+                                                <div class="testimonial-rating">
+                                                    <% for (let i = 1; i <= 5; i++) { %>
+                                                        <i class="fas fa-star <%= i <= comment.reviews_star ? 'active' : '' %>"></i>
+                                                    <% } %>
+                                                </div>
+                                                <h3 class="testimonial-dog-name">
+                                                    <i class="fas fa-paw"></i>
+                                                    <%= comment.name_of_dog %>
+                                                </h3>
+                                                <p class="testimonial-text">
+                                                    "<%= comment.comment_text %>"
+                                                </p>
+                                                <div class="testimonial-footer">
+                                                    <div class="testimonial-author">
+                                                        <i class="fas fa-user"></i>
+                                                        <%= comment.user_name %>
+                                                    </div>
+                                                    <div class="testimonial-date">
+                                                        <i class="far fa-calendar-alt"></i>
+                                                        <%= new Date(comment.created_at).toLocaleDateString('fr-FR', { 
+                                                            month: 'short',
+                                                            year: 'numeric'
+                                                        }) %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } else { %>
+                            <div class="no-testimonials" data-aos="fade-up">
+                                <div class="no-testimonials-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h3>Aucun témoignage pour le moment</h3>
+                                <p>Soyez le premier à partager votre expérience !</p>
+                                <button class="btn-add-testimonial" onclick="document.getElementById('openFormBtn').click()">
+                                    <i class="fas fa-pen"></i>
+                                    Partager mon témoignage
+                                </button>
+                            </div>
+                        <% } %>
+                    </div>
+                </section>
+            </main>
+            <%- include('../front/frontEndAssets/footer') %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            <script src="/front/js/header.js"></script>
+            <script src="/front/js/blogs/livreDorFunction.js"></script>
+            <%- include('./partials/googleAnalytics') %>
+            <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+            <script>
+                AOS.init({
+                    duration: 1000,
+                    easing: "ease-in-out",
+                    once: true,
+                    offset: 120,
+                    delay: 0,
+                    anchorPlacement: "top-bottom",
+                    mirror: false,
+                    disable: "mobile",
+                });
+            </script>
+        </body>
+    </html>

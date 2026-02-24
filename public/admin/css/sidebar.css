@@ -1,0 +1,431 @@
+/* ========================================
+   VARIABLES CSS POUR LE SIDEBAR
+   ======================================== */
+:root {
+    --sidebar-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    --sidebar-hover: rgba(99, 102, 241, 0.1);
+    --sidebar-active: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --sidebar-text: #cbd5e1;
+    --sidebar-text-active: #ffffff;
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+    --sidebar-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   SIDEBAR PRINCIPAL
+   ======================================== */
+.sidebar {
+    background: var(--sidebar-bg) !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid var(--sidebar-border) !important;
+    position: relative;
+}
+
+/* Effet de bordure lumineuse sur le côté droit */
+.sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(99, 102, 241, 0.5) 50%,
+        transparent
+    );
+    opacity: 0.5;
+}
+
+.offcanvas-body {
+    background: transparent;
+}
+
+/* ========================================
+   NAVIGATION ITEMS
+   ======================================== */
+.nav-link {
+    color: var(--sidebar-text) !important;
+    padding: 0.875rem 1.25rem !important;
+    border-radius: 10px;
+    margin: 0.25rem 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.page-title {
+    font-size: 20px;
+}
+
+.breeder-title{
+    font-size: 23px;
+}
+
+/* Effet de fond au survol */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+    left: 100%;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+    background: var(--sidebar-hover);
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Item actif */
+.nav-link.active {
+    background: var(--sidebar-active) !important;
+    color: var(--sidebar-text-active) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transform: translateX(5px);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   ICÔNES SVG
+   ======================================== */
+.nav-link svg,
+.nav-link i {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.nav-link:hover svg,
+.nav-link:hover i {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.nav-link.active svg,
+.nav-link.active i {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+/* ========================================
+   HEADINGS (SECTIONS)
+   ======================================== */
+.sidebar-heading {
+    color: #94a3b8 !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 1rem 1.25rem 0.5rem;
+    margin-bottom: 0 !important;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.sidebar-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.25rem;
+    right: 1.25rem;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--sidebar-border) 50%,
+        transparent
+    );
+}
+
+.sidebar-heading span {
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-heading a {
+    color: #94a3b8 !important;
+    transition: all 0.3s ease;
+}
+
+.sidebar-heading a:hover {
+    color: #6366f1 !important;
+    transform: scale(1.2);
+}
+
+/* ========================================
+   BOUTON "VOIR MON SITE"
+   ======================================== */
+.btn-outline-secondary {
+    border: 2px solid rgba(99, 102, 241, 0.3) !important;
+    color: var(--sidebar-text) !important;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline-secondary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--sidebar-active) !important;
+    border-color: transparent !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.btn-outline-secondary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ========================================
+   SÉPARATEUR HR
+   ======================================== */
+hr {
+    border-color: var(--sidebar-border) !important;
+    opacity: 0.5;
+    margin: 1.5rem 1rem !important;
+}
+
+/* ========================================
+   SCROLLBAR PERSONNALISÉE
+   ======================================== */
+.offcanvas-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.offcanvas-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 10px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #8b5cf6, #6366f1);
+}
+
+/* ========================================
+   HEADER STICKY (NAV DU HAUT)
+   ======================================== */
+.navbar {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border-bottom: 1px solid var(--sidebar-border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 600 !important;
+    background: linear-gradient(135deg, #ffffff, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .nav-link {
+        margin: 0.25rem 0.5rem;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .sidebar-heading {
+        padding: 1rem 1rem 0.5rem;
+    }
+}
+
+/* ========================================
+   EFFET DE PROFONDEUR
+   ======================================== */
+.sidebar {
+    position: relative;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(
+        180deg,
+        rgba(99, 102, 241, 0.05),
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* ========================================
+   DÉFILEMENT INDÉPENDANT - VERSION CORRIGÉE
+   ======================================== */
+
+/* Le sidebar devient fixe et scrollable indépendamment */
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed !important;
+        top: 48px; /* Hauteur du header navbar */
+        bottom: 0;
+        left: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 100;
+    }
+    
+    /* Le contenu principal se décale pour ne pas être caché par le sidebar fixe */
+    .container-fluid > .row {
+        margin-left: 0;
+    }
+    
+    /* Scrollbar personnalisée pour le sidebar */
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #6366f1, #8b5cf6);
+        border-radius: 10px;
+    }
+}
+
+
+/* ========================================
+   MODE LIGHT - TEXTE VISIBLE
+   ======================================== */
+
+/* Quand le thème n'est pas dark, le sidebar a un fond clair */
+[data-bs-theme="light"] .sidebar,
+:root:not([data-bs-theme="dark"]) .sidebar {
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+}
+
+[data-bs-theme="light"] .sidebar::after,
+:root:not([data-bs-theme="dark"]) .sidebar::after {
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(99, 102, 241, 0.3) 50%,
+        transparent
+    );
+}
+
+/* Texte du menu en mode light */
+[data-bs-theme="light"] .nav-link,
+:root:not([data-bs-theme="dark"]) .nav-link {
+    color: #334155 !important;
+}
+
+[data-bs-theme="light"] .nav-link:hover,
+:root:not([data-bs-theme="dark"]) .nav-link:hover {
+    color: #1e293b !important;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* Item actif en mode light */
+[data-bs-theme="light"] .nav-link.active,
+:root:not([data-bs-theme="dark"]) .nav-link.active {
+    background: var(--sidebar-active) !important;
+    color: #ffffff !important;
+}
+
+/* Headings en mode light */
+[data-bs-theme="light"] .sidebar-heading,
+:root:not([data-bs-theme="dark"]) .sidebar-heading {
+    color: #64748b !important;
+}
+
+[data-bs-theme="light"] .sidebar-heading a,
+:root:not([data-bs-theme="dark"]) .sidebar-heading a {
+    color: #64748b !important;
+}
+
+[data-bs-theme="light"] .sidebar-heading a:hover,
+:root:not([data-bs-theme="dark"]) .sidebar-heading a:hover {
+    color: #6366f1 !important;
+}
+
+/* Bouton "Voir mon site" en mode light */
+[data-bs-theme="light"] .btn-outline-secondary,
+:root:not([data-bs-theme="dark"]) .btn-outline-secondary {
+    color: #334155 !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Icônes en mode light */
+[data-bs-theme="light"] .nav-link svg,
+[data-bs-theme="light"] .nav-link i,
+:root:not([data-bs-theme="dark"]) .nav-link svg,
+:root:not([data-bs-theme="dark"]) .nav-link i {
+    opacity: 0.7;
+}
+
+[data-bs-theme="light"] .nav-link:hover svg,
+[data-bs-theme="light"] .nav-link:hover i,
+:root:not([data-bs-theme="dark"]) .nav-link:hover svg,
+:root:not([data-bs-theme="dark"]) .nav-link:hover i {
+    opacity: 1;
+}
+
+/* Header en mode light */
+[data-bs-theme="light"] .navbar,
+:root:not([data-bs-theme="dark"]) .navbar {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+}
+
+[data-bs-theme="light"] .navbar-brand,
+:root:not([data-bs-theme="dark"]) .navbar-brand {
+    background: linear-gradient(135deg, #334155, #64748b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

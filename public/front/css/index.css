@@ -1,0 +1,5315 @@
+/* ========================================
+   HERO SECTION - OPTIMISÉE
+======================================== */
+
+/* .hero-section {
+    position: relative;
+    height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/img/index/img_index.webp');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+} */
+
+/* Overlay gris clair par-dessus l'image */
+/* .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(156, 156, 156, 0.3);
+    z-index: 1;
+} */
+
+/* Contenu au-dessus de l'overlay */
+/* .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 800px;
+} */
+
+/* Texte blanc avec ombre pour la lisibilité */
+/* .hero-content h1 {
+    color: white !important;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+} */
+
+/* .hero-content p {
+    color: white !important;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    font-size: 1.3rem;
+} */
+
+/* Responsive */
+/* @media (max-width: 1200px) {
+    .hero-section {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 0;
+        padding-bottom: 75%;      
+        background-size: cover;
+        background-position: top center;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        height: 350px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+} */
+
+
+/* ========================================
+   HERO SECTION - OPTIMISÉE
+======================================== */
+
+.hero-section {
+    position: relative;
+    height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/img/index/img_index.webp');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Image mobile cachée par défaut */
+.hero-img-mobile {
+    display: none;
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(156, 156, 156, 0.3);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    color: white !important;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-content p {
+    color: white !important;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    font-size: 1.3rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .hero-section {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        background-image: none;
+    }
+
+    .hero-img-mobile {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .hero-overlay {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
+
+
+/* ========================================
+   SECTION PRÉSENTATION PREMIUM
+======================================== */
+
+.about-premium {
+    background: #ffffff;
+}
+
+/* Intro Hero */
+.intro-hero {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #eeeeee 0%, #cecece 100%);
+}
+
+.label-tag {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+.intro-lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.location-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.location-tag i {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+
+.location-tag span {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.intro-image {
+    position: relative;
+}
+
+.intro-image img {
+    transition: transform 0.6s ease;
+}
+
+.intro-image:hover img {
+    transform: scale(1.05);
+}
+
+.image-badge {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.image-badge span {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.image-badge small {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ========================================
+   SECTION RACES MODERNE - VERSION COMPACTE
+======================================== */
+
+.races-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+/* Card race moderne - RÉDUITE */
+.race-card-modern {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.race-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(101, 193, 120, 0.2);
+}
+
+/* Wrapper image - RÉDUIT */
+.race-image-wrapper {
+    position: relative;
+}
+
+.race-main-image {
+    position: relative;
+    height: 360px; 
+    overflow: hidden;
+}
+
+.race-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.race-card-modern:hover .race-main-image img {
+    transform: scale(1.12) rotate(2deg);
+}
+
+/* Overlay moderne - RÉDUIT */
+.race-overlay-modern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+    padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.race-overlay-modern h3 {
+    color: white;
+    font-size: 1.6rem; 
+    font-weight: 700;
+    margin: 0 0 0.4rem 0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.race-count {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.9rem; 
+    border-radius: 50px;
+    font-size: 0.85rem; 
+    font-weight: 600;
+}
+
+/* Badge LOF - RÉDUIT */
+.race-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    padding: 0.6rem 1rem; 
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.9rem; 
+    color: var(--primary-color);
+}
+
+.race-badge i {
+    font-size: 1rem;
+}
+
+/* Mini galerie - RÉDUITE */
+.race-mini-gallery {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.mini-thumb {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid white;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.mini-thumb:hover {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.mini-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mini-thumb.more-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Contenu carte - RÉDUIT */
+.race-content-modern {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Description - RÉDUITE */
+.race-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.25rem;
+}
+
+/* Liste reproducteurs - RÉDUITE */
+.reproducteurs-list {
+    margin-bottom: 1.25rem;
+}
+
+.reproducteurs-list h5 {
+    font-size: 1rem; 
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.75rem;
+}
+
+.repro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.repro-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem; 
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.repro-tag:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.repro-tag i {
+    font-size: 0.8rem;
+}
+
+/* Boutons actions - RÉDUITS */
+.race-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.btn-race-primary,
+.btn-race-secondary {
+    flex: 1;
+    padding: 0.85rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-race-primary {
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border: none;
+}
+
+.btn-race-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.35);
+    color: white;
+}
+
+.btn-race-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-race-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Specialty box inline - RÉDUIT */
+.specialty-text {
+    text-align: center;
+    margin-top: 3rem;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.specialty-box-inline {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+    padding: 2.5rem; 
+    border-radius: 18px;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.specialty-icon {
+    font-size: 2.5rem; 
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.specialty-box-inline p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .race-main-image {
+        height: 380px;
+    }
+    
+    .race-actions {
+        flex-direction: column;
+    }
+    
+    .specialty-box-inline {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .specialty-box-inline p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .race-main-image {
+        height: 200px;
+    }
+    
+    .race-overlay-modern h3 {
+        font-size: 1.4rem;
+    }
+    
+    .mini-thumb {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .race-content-modern {
+        padding: 1.25rem;
+    }
+    
+    .race-description {
+        font-size: 0.95rem;
+    }
+    
+    .btn-race-primary,
+    .btn-race-secondary {
+        font-size: 0.85rem;
+        padding: 0.75rem;
+    }
+}
+
+/* Citation Parallax */
+.quote-parallax {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+}
+
+.quote-box {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.quote-icon-left,
+.quote-icon-right {
+    position: absolute;
+    font-size: 4rem;
+    color: var(--primary-color);
+    opacity: 0.2;
+}
+
+.quote-icon-left {
+    top: -20px;
+    left: 0;
+}
+
+.quote-icon-right {
+    bottom: -20px;
+    right: 0;
+}
+
+.quote-big {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--secondary-color);
+    font-style: italic;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 4rem;
+}
+
+/* Section Mission */
+.mission-section {
+    padding: 6rem 0;
+}
+
+.mission-image {
+    position: relative;
+}
+
+.float-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.float-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.float-card span {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.mission-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-box-inline {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.highlight-box-inline strong {
+    font-size: 1.1rem;
+    color: #2d5016;
+}
+
+/* Section Famille */
+.family-life-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.family-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.motto-banner {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
+}
+
+/* Valeurs */
+.values-section {
+    padding: 6rem 0;
+}
+
+.value-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+.value-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.value-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.value-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.value-card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+}
+
+/* Engagements Modernes */
+.commitments-modern {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.section-title-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-top: 1rem;
+}
+
+.commit-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.commit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #7ed492);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.commit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.commit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.commit-card.active {
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+}
+
+.commit-card.active * {
+    color: white !important;
+}
+
+.commit-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(101, 193, 120, 0.1);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    line-height: 1;
+}
+
+.commit-card.active .commit-number {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.commit-icon-bg {
+    width: 60px;
+    height: 60px;
+    background: rgba(101, 193, 120, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.commit-card.active .commit-icon-bg {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.commit-icon-bg i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.commit-card.active .commit-icon-bg i {
+    color: white;
+}
+
+.commit-card h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.commit-card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .intro-title {
+        font-size: 2.2rem;
+    }
+    
+    .quote-big {
+        font-size: 1.5rem;
+        padding: 0 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-title-big {
+        font-size: 2.2rem;
+    }
+}
+
+/* ========================================
+   SECTION NOS REPRODUCTEURS
+======================================== */
+
+.our-dogs-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet décoratif subtil */
+.our-dogs-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(101, 193, 120, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* ========================================
+   EN-TÊTE DE SECTION
+======================================== */
+
+.label-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), #52a865);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.2);
+}
+
+.section-title-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2E2E2E;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   CARTES CHIENS - DESIGN MODERNE
+======================================== */
+
+.dog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   IMAGE DU CHIEN
+======================================== */
+
+.dog-card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}
+
+.dog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dog-card:hover .dog-card-image img {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   BADGE GENRE (Mâle/Femelle)
+======================================== */
+
+.dog-gender-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.dog-gender-badge.male {
+    background: linear-gradient(135deg, #4A90E2, #357ABD);
+}
+
+.dog-gender-badge.female {
+    background: linear-gradient(135deg, #E91E63, #C2185B);
+}
+
+.dog-card:hover .dog-gender-badge {
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* ========================================
+   OVERLAY AU SURVOL
+======================================== */
+
+.dog-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.dog-card:hover .dog-card-overlay {
+    opacity: 1;
+}
+
+/* ========================================
+   BOUTON VOIR LA FICHE
+======================================== */
+
+.btn-view-dog {
+    background: linear-gradient(135deg, var(--primary-color), #52a865);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.4);
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+}
+
+.dog-card:hover .btn-view-dog {
+    transform: translateY(0);
+}
+
+.btn-view-dog:hover {
+    background: linear-gradient(135deg, #52a865, var(--primary-color));
+    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.5);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   CORPS DE LA CARTE - INFORMATIONS
+======================================== */
+
+.dog-card-body {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dog-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2E2E2E;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ========================================
+   INFORMATIONS DU CHIEN
+======================================== */
+
+.dog-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dog-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.dog-info-item:hover {
+    background: rgba(101, 193, 120, 0.1);
+    transform: translateX(5px);
+}
+
+.dog-info-item i {
+    color: var(--primary-color);
+    font-size: 1rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.dog-info-item span {
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ========================================
+   BOUTON VOIR TOUS LES REPRODUCTEURS
+======================================== */
+
+.btn-see-all-dogs {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--primary-color);
+    padding: 15px 40px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-see-all-dogs:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.3);
+}
+
+.btn-see-all-dogs i {
+    transition: transform 0.3s ease;
+}
+
+.btn-see-all-dogs:hover i {
+    transform: translateX(5px);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+/* Tablettes */
+@media (max-width: 991px) {
+    .our-dogs-section {
+        padding: 60px 0;
+    }
+    
+    .section-title-big {
+        font-size: 2rem;
+    }
+    
+    .dog-card-image {
+        aspect-ratio: 4/5;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 767px) {
+    .our-dogs-section {
+        padding: 50px 0;
+    }
+    
+    .section-title-big {
+        font-size: 1.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .dog-name {
+        font-size: 1.3rem;
+    }
+    
+    /* Les cartes prennent toute la largeur sur mobile */
+    .dog-card {
+        margin-bottom: 30px;
+    }
+    
+    .dog-card-image {
+        aspect-ratio: 1/1;
+    }
+    
+    /* Overlay toujours visible sur mobile */
+    .dog-card-overlay {
+        opacity: 1;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0.8) 100%
+        );
+    }
+    
+    .btn-view-dog {
+        transform: translateY(0);
+        font-size: 0.9rem;
+        padding: 10px 25px;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 575px) {
+    .dog-gender-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .dog-card-body {
+        padding: 20px;
+    }
+    
+    .btn-see-all-dogs {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ========================================
+   SECTION PORTÉES - VERSION PREMIUM
+======================================== */
+
+.our-marriages-section-premium {
+    padding: 100px 0;
+    background: #FAFBFC;
+    position: relative;
+}
+
+/* En-tête premium */
+.label-tag-premium {
+    display: inline-block;
+    background: white;
+    color: var(--primary-color);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border: 2px solid var(--primary-color);
+}
+
+.section-title-premium {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.section-subtitle-premium {
+    font-size: 1.1rem;
+    color: #6B7280;
+    font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   CARTE MARIAGE - DESIGN PREMIUM
+======================================== */
+
+.marriage-card-premium {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.marriage-card-premium:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ========================================
+   IMAGE - DESIGN MODERNE
+======================================== */
+
+.marriage-image-container {
+    position: relative;
+    width: 45%;
+    min-height: 400px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 100%);
+}
+
+.marriage-image-premium {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.marriage-card-premium:hover .marriage-image-premium {
+    transform: scale(1.08);
+}
+
+/* ========================================
+   BADGE STATUT - DESIGN MINIMAL
+======================================== */
+
+.status-badge-premium {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Statuts avec vos enum */
+.status-badge-premium.programmé {
+    background: rgba(147, 51, 234, 0.95); 
+    color: white;
+}
+
+.status-badge-premium.programmé .status-dot {
+    background: white;
+}
+
+.status-badge-premium.en-cours {
+    background: rgba(249, 115, 22, 0.95); 
+    color: white;
+}
+
+.status-badge-premium.en-cours .status-dot {
+    background: white;
+}
+
+.status-badge-premium.confirmé {
+    background: rgba(34, 197, 94, 0.95);
+    color: white;
+}
+
+.status-badge-premium.confirmé .status-dot {
+    background: white;
+}
+
+.status-badge-premium.archivé {
+    background: rgba(107, 114, 128, 0.95);
+    color: white;
+}
+
+.status-badge-premium.archivé .status-dot {
+    background: white;
+}
+
+/* ========================================
+   CONTENU DE LA CARTE
+======================================== */
+
+.marriage-content-premium {
+    width: 55%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ========================================
+   EN-TÊTE RACE
+======================================== */
+
+.marriage-breed-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+    background: rgba(101, 193, 120, 0.08);
+    color: var(--primary-color);
+    padding: 6px 14px; 
+    border-radius: 10px; 
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.marriage-breed-header i {
+    font-size: 1rem;
+}
+
+/* ========================================
+   SECTION PARENTS - DESIGN ÉLÉGANT
+======================================== */
+
+.parents-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    margin-bottom: 24px;
+}
+
+.parent-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #F9FAFB;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.parent-item:hover {
+    background: #F3F4F6;
+    transform: translateX(4px);
+}
+
+.parent-icon {
+    width: 38px; 
+    height: 38px; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.parent-item.male .parent-icon {
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+}
+
+.parent-item.female .parent-icon {
+    background: linear-gradient(135deg, #EC4899, #DB2777);
+}
+
+.parent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.parent-label {
+    font-size: 0.6rem;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.parent-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+}
+
+/* ========================================
+   STATISTIQUES - DESIGN MODERNE
+======================================== */
+
+.marriage-stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    background: #F9FAFB;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1F2937;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-item.highlight .stat-number {
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #6B7280;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; 
+}
+
+.stat-label i {
+    font-size: 0.9rem;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 60px;
+    background: #E5E7EB;
+}
+
+/* ========================================
+   DATE DE NAISSANCE - DESIGN ÉPURÉ
+======================================== */
+
+.birth-date-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    padding: 10px 16px; 
+    background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+    border-radius: 10px; 
+    color: #1E40AF;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.birth-date-premium i {
+    font-size: 1rem;
+}
+
+/* ========================================
+   BOUTON CTA - DESIGN PREMIUM
+======================================== */
+
+.btn-cta-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    background: linear-gradient(135deg, var(--primary-color), #52a865);
+    color: white;
+    padding: 12px 28px; 
+    border-radius: 10px; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-cta-premium:hover {
+    background: linear-gradient(135deg, #52a865, var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(101, 193, 120, 0.35);
+    color: white;
+}
+
+.btn-cta-premium i {
+    transition: transform 0.3s ease;
+}
+
+.btn-cta-premium:hover i {
+    transform: translateX(4px);
+}
+
+/* ========================================
+   BOUTON VOIR TOUTES - PREMIUM
+======================================== */
+
+.btn-all-marriages-premium {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    color: var(--primary-color);
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-all-marriages-premium:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.25);
+}
+
+.btn-all-marriages-premium i {
+    transition: transform 0.3s ease;
+}
+
+.btn-all-marriages-premium:hover i {
+    transform: translateX(5px);
+}
+
+
+/* ========================================
+   SECTION CHIOTS DISPONIBLES
+======================================== */
+
+.our-puppies-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* Card chiot */
+.puppy-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.puppy-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(101, 193, 120, 0.2);
+}
+
+/* Image du chiot */
+.puppy-card-image {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+}
+
+.puppy-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.puppy-card:hover .puppy-card-image img {
+    transform: scale(1.15);
+}
+
+/* Badge statut (disponible/à vendre) */
+.puppy-status-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.4rem 0.85rem; 
+    border-radius: 50px;
+    font-size: 0.8rem; 
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); 
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.puppy-status-badge.available {
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+}
+
+.puppy-status-badge.for-sale {
+    background: linear-gradient(135deg, #2196f3, #42a5f5);
+}
+
+.puppy-status-badge i {
+    font-size: 0.75rem;
+}
+
+/* Badge genre */
+.puppy-gender-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.puppy-gender-badge.male {
+    background: linear-gradient(135deg, #2196f3, #42a5f5);
+}
+
+.puppy-gender-badge.female {
+    background: linear-gradient(135deg, #ec407a, #f06292);
+}
+
+/* Overlay hover */
+.puppy-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.puppy-card:hover .puppy-card-overlay {
+    opacity: 1;
+}
+
+.btn-view-puppy {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.puppy-card:hover .btn-view-puppy {
+    transform: translateY(0);
+}
+
+.btn-view-puppy:hover {
+    background: linear-gradient(135deg, #7ed492, var(--primary-color));
+    color: white;
+    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
+}
+
+/* Corps de la carte */
+.puppy-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.puppy-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Informations du chiot */
+.puppy-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.puppy-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.puppy-info-item i {
+    color: var(--primary-color);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Prix */
+.puppy-price {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 2px solid #f0f0f0;
+    text-align: center;
+}
+
+.price-amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    display: block;
+}
+
+/* Prix "Nous Consulter" */
+.price-contact {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    display: block;
+    font-style: italic;
+}
+
+
+/* ========================================
+   SECTION BLOG
+======================================== */
+
+.blog-section {
+    padding: 6rem 0;
+    background: #ffffff;
+}
+
+/* Card article */
+.blog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Image de l'article */
+.blog-card-image {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+}
+
+.blog-card-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.1);
+}
+
+/* Badge catégorie */
+.blog-category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0.4rem 0.9rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Corps de la carte */
+.blog-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Meta (date + likes) */
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.blog-date,
+.blog-likes {
+    font-size: 0.85rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.blog-likes {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Titre */
+.blog-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.blog-title a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+    color: var(--primary-color);
+}
+
+/* Aperçu */
+.blog-preview {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+/* Bouton lire la suite */
+.btn-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-read-more:hover {
+    color: #7ed492;
+    gap: 0.75rem;
+}
+
+.btn-read-more i {
+    transition: transform 0.3s ease;
+}
+
+.btn-read-more:hover i {
+    transform: translateX(3px);
+}
+
+/* Bouton voir tous les articles */
+.btn-see-all-blog {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 3rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
+    transition: all 0.4s ease;
+}
+
+.btn-see-all-blog:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.4);
+    color: white;
+}
+
+.btn-see-all-blog i {
+    transition: transform 0.3s ease;
+}
+
+.btn-see-all-blog:hover i {
+    transform: translateX(5px);
+}
+
+/* ========================================
+   SECTION INFORMATIONS
+======================================== */
+
+.informations-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* Introduction */
+.info-intro {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    text-align: center;
+}
+
+.info-intro p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Bloc d'information */
+.info-block {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.4s ease;
+}
+
+.info-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+.info-block.international {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-left: 5px solid var(--primary-color);
+}
+
+/* Icône circulaire */
+.info-icon-circle {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
+}
+
+.info-icon-circle i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* Titre du bloc */
+.info-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Texte du bloc */
+.info-block-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.info-block-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Cards d'information (2 colonnes) */
+.info-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(101, 193, 120, 0.2);
+}
+
+.info-card-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(101, 193, 120, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.info-card-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.info-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.info-card-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+}
+
+/* CTA Informations */
+.info-cta {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border-left: 4px solid #ffc107;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: 0 5px 20px rgba(255, 193, 7, 0.2);
+}
+
+.info-cta p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #856404;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.info-cta i {
+    font-size: 1.3rem;
+}
+
+/* Section conseils pratiques */
+.info-tips {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-top: 3rem;
+}
+
+.info-tips-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Card conseil */
+.tip-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.tip-card:hover {
+    background: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.tip-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.tip-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.tip-card h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.75rem;
+}
+
+.tip-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+}
+
+/* Bouton contact */
+.btn-info-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.7rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
+    transition: all 0.4s ease;
+}
+
+.btn-info-contact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.4);
+    color: white;
+}
+
+.btn-info-contact i {
+    transition: transform 0.3s ease;
+}
+
+.btn-info-contact:hover i {
+    transform: translateX(3px);
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .section-title-premium {
+        font-size: 2.2rem;
+    }
+    
+    .marriage-card-premium {
+        flex-direction: column;
+    }
+    
+    .marriage-image-container {
+        width: 100%;
+        min-height: 280px;
+    }
+    
+    .marriage-content-premium {
+        width: 100%;
+        padding: 30px;
+    }
+    
+    .parents-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .parent-item {
+        width: 100%;
+    }
+    
+    .heart-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .our-marriages-section-premium {
+        padding: 60px 0;
+    }
+    
+    .section-title-premium {
+        font-size: 1.8rem;
+    }
+    
+    .marriage-content-premium {
+        padding: 24px;
+    }
+    
+    .marriage-stats {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-divider {
+        height: 50px;
+    }
+}
+
+@media (max-width: 575px) {
+    .section-title-premium {
+        font-size: 1.6rem;
+    }
+    
+    .marriage-breed-header {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .parent-name {
+        font-size: 0.9rem;
+    }
+    
+    .marriage-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .stat-divider {
+        width: 100%;
+        height: 1px;
+    }
+    
+    .btn-cta-premium {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Titre section */
+    .section-title-premium {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle-premium {
+        font-size: 0.9rem;
+    }
+    
+    /* Image + contenu en colonne */
+    .marriage-card-premium {
+        flex-direction: column;
+    }
+    
+    .marriage-image-container {
+        width: 100%;
+        min-height: 280px;
+    }
+    
+    .marriage-content-premium {
+        width: 100%;
+        padding: 25px;
+    }
+    
+    /* Race */
+    .marriage-breed-header {
+        font-size: 0.75rem;
+    }
+    
+    /* Parents */
+    .parent-label {
+        font-size: 0.6rem;
+    }
+    
+    .parent-name {
+        font-size: 0.8rem;
+    }
+    
+    .parent-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+    
+    /* Stats */
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    /* Date */
+    .birth-date-premium {
+        font-size: 0.75rem;
+        padding: 9px 14px;
+    }
+    
+    /* Bouton */
+    .btn-cta-premium {
+        font-size: 0.85rem;
+        padding: 11px 24px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Titre section */
+    .section-title-premium {
+        font-size: 1.5rem;
+    }
+    
+    .section-subtitle-premium {
+        font-size: 0.85rem;
+    }
+    
+    .label-tag-premium {
+        font-size: 0.65rem;
+        padding: 8px 18px;
+    }
+    
+    /* Contenu carte */
+    .marriage-content-premium {
+        padding: 20px;
+    }
+    
+    /* Race */
+    .marriage-breed-header {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+    }
+    
+    /* Parents */
+    .parent-item {
+        padding: 12px;
+    }
+    
+    .parent-label {
+        font-size: 0.55rem;
+    }
+    
+    .parent-name {
+        font-size: 0.75rem;
+    }
+    
+    .parent-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9rem;
+    }
+    
+    /* Stats */
+    .marriage-stats {
+        padding: 18px;
+        gap: 18px;
+    }
+    
+    .stat-number {
+        font-size: 1.2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.65rem;
+    }
+    
+    .stat-divider {
+        height: 50px;
+    }
+    
+    /* Date */
+    .birth-date-premium {
+        font-size: 0.7rem;
+        padding: 8px 12px;
+    }
+    
+    /* Bouton */
+    .btn-cta-premium {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+    }
+    
+    /* Badge statut */
+    .status-badge-premium {
+        font-size: 0.65rem;
+        padding: 8px 14px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Titre section */
+    .section-title-premium {
+        font-size: 1.3rem;
+    }
+    
+    .section-subtitle-premium {
+        font-size: 0.8rem;
+    }
+    
+    .label-tag-premium {
+        font-size: 0.6rem;
+        padding: 7px 16px;
+    }
+    
+    /* Contenu carte */
+    .marriage-content-premium {
+        padding: 18px;
+    }
+    
+    /* Race */
+    .marriage-breed-header {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+    
+    /* Parents */
+    .parent-item {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .parent-label {
+        font-size: 0.5rem;
+    }
+    
+    .parent-name {
+        font-size: 0.7rem;
+    }
+    
+    .parent-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+    
+    /* Stats */
+    .marriage-stats {
+        padding: 16px;
+        gap: 16px;
+        flex-direction: column;
+    }
+    
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+    }
+    
+    .stat-divider {
+        width: 100%;
+        height: 1px;
+    }
+    
+    /* Date */
+    .birth-date-premium {
+        font-size: 0.65rem;
+        padding: 7px 10px;
+        gap: 6px;
+    }
+    
+    /* Bouton */
+    .btn-cta-premium {
+        font-size: 0.75rem;
+        padding: 9px 18px;
+    }
+    
+    /* Badge statut */
+    .status-badge-premium {
+        font-size: 0.6rem;
+        padding: 7px 12px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    /* Bouton voir toutes */
+    .btn-all-marriages-premium {
+        font-size: 0.85rem;
+        padding: 14px 30px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION ABOUT (À PROPOS)
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section About */
+    .about-premium {
+        padding: 60px 0;
+    }
+    
+    /* Intro Hero */
+    .intro-hero {
+        padding: 40px 0;
+    }
+    
+    .intro-title {
+        font-size: 1.9rem;
+    }
+    
+    .intro-lead {
+        font-size: 0.95rem;
+    }
+    
+    .label-tag {
+        font-size: 0.7rem;
+        padding: 8px 18px;
+    }
+    
+    .location-tag {
+        font-size: 0.85rem;
+        padding: 10px 16px;
+    }
+    
+    .image-badge span {
+        font-size: 1.3rem;
+    }
+    
+    .image-badge small {
+        font-size: 0.7rem;
+    }
+    
+    /* Races Section */
+    .races-section {
+        padding: 50px 0;
+    }
+    
+    .race-overlay-modern h3 {
+        font-size: 1.5rem;
+    }
+    
+    .race-count {
+        font-size: 0.8rem;
+    }
+    
+    .race-description {
+        font-size: 0.9rem;
+    }
+    
+    .reproducteurs-list h5 {
+        font-size: 0.95rem;
+    }
+    
+    .repro-tag {
+        font-size: 0.8rem;
+        padding: 7px 14px;
+    }
+    
+    .btn-race-primary,
+    .btn-race-secondary {
+        font-size: 0.85rem;
+        padding: 11px 22px;
+    }
+    
+    .specialty-box-inline p {
+        font-size: 0.95rem;
+    }
+    
+    .specialty-icon {
+        font-size: 1.8rem;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section About */
+    .about-premium {
+        padding: 50px 0;
+    }
+    
+    /* Intro Hero */
+    .intro-hero {
+        padding: 30px 0;
+    }
+    
+    .intro-title {
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+    
+    .intro-lead {
+        font-size: 0.9rem;
+    }
+    
+    .label-tag {
+        font-size: 0.65rem;
+        padding: 7px 16px;
+        letter-spacing: 1.5px;
+    }
+    
+    .location-tag {
+        font-size: 0.8rem;
+        padding: 9px 14px;
+    }
+    
+    .location-tag i {
+        font-size: 0.9rem;
+    }
+    
+    .image-badge {
+        padding: 12px 18px;
+    }
+    
+    .image-badge span {
+        font-size: 1.2rem;
+    }
+    
+    .image-badge small {
+        font-size: 0.65rem;
+    }
+    
+    /* Races Section */
+    .races-section {
+        padding: 40px 0;
+    }
+    
+    .race-card-modern {
+        margin-bottom: 20px;
+    }
+    
+    .race-overlay-modern h3 {
+        font-size: 1.3rem;
+    }
+    
+    .race-count {
+        font-size: 0.75rem;
+        padding: 5px 12px;
+    }
+    
+    .race-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .reproducteurs-list h5 {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    
+    .repro-tags {
+        gap: 8px;
+    }
+    
+    .repro-tag {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .repro-tag i {
+        font-size: 0.8rem;
+    }
+    
+    .race-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-race-primary,
+    .btn-race-secondary {
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 10px 20px;
+        justify-content: center;
+    }
+    
+    .specialty-box-inline {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .specialty-box-inline p {
+        font-size: 0.9rem;
+    }
+    
+    .specialty-icon {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+    }
+    
+    /* Mini Gallery */
+    .race-mini-gallery {
+        gap: 6px;
+    }
+    
+    .mini-thumb {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .mini-thumb.more-count {
+        font-size: 0.8rem;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section About */
+    .about-premium {
+        padding: 0px 0;
+    }
+    
+    /* Intro Hero */
+    .intro-hero {
+        padding: 25px 0;
+    }
+    
+    .intro-content {
+        padding: 0 10px;
+    }
+    
+    .intro-title {
+        font-size: 1.4rem;
+        line-height: 1.3;
+        margin-bottom: 12px;
+    }
+    
+    .intro-lead {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+    
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+        letter-spacing: 1.2px;
+    }
+    
+    .location-tag {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+    }
+    
+    .location-tag i {
+        font-size: 0.85rem;
+    }
+    
+    .intro-image {
+        margin-top: 20px;
+    }
+    
+    .image-badge {
+        padding: 10px 16px;
+        right: 15px;
+    }
+    
+    .image-badge span {
+        font-size: 1.1rem;
+    }
+    
+    .image-badge small {
+        font-size: 0.6rem;
+    }
+    
+    /* Races Section */
+    .races-section {
+        padding: 35px 0;
+    }
+    
+    .race-card-modern {
+        margin-bottom: 20px;
+    }
+    
+    .race-content-modern {
+        padding: 20px;
+    }
+    
+    .race-overlay-modern {
+        padding: 20px;
+    }
+    
+    .race-overlay-modern h3 {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+    }
+    
+    .race-count {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+    
+    .race-description {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+    
+    .reproducteurs-list h5 {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    .repro-tags {
+        gap: 6px;
+    }
+    
+    .repro-tag {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+    
+    .repro-tag i {
+        font-size: 0.75rem;
+    }
+    
+    .race-actions {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 15px;
+    }
+    
+    .btn-race-primary,
+    .btn-race-secondary {
+        width: 100%;
+        font-size: 0.75rem;
+        padding: 9px 18px;
+        justify-content: center;
+    }
+    
+    .btn-race-primary i,
+    .btn-race-secondary i {
+        font-size: 0.8rem;
+    }
+    
+    /* Specialty Box */
+    .specialty-box-inline {
+        padding: 18px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .specialty-box-inline p {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+    
+    .specialty-icon {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+    
+    /* Mini Gallery */
+    .race-mini-gallery {
+        gap: 5px;
+    }
+    
+    .mini-thumb {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .mini-thumb.more-count {
+        font-size: 0.75rem;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    .intro-title {
+        font-size: 1.25rem;
+    }
+    
+    .intro-lead {
+        font-size: 0.8rem;
+    }
+    
+    .race-overlay-modern h3 {
+        font-size: 1.1rem;
+    }
+    
+    .race-description {
+        font-size: 0.75rem;
+    }
+    
+    .repro-tag {
+        font-size: 0.65rem;
+        padding: 4px 8px;
+    }
+    
+    .btn-race-primary,
+    .btn-race-secondary {
+        font-size: 0.7rem;
+        padding: 8px 16px;
+    }
+    
+    .specialty-box-inline p {
+        font-size: 0.8rem;
+    }
+    
+    .mini-thumb {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION NOS REPRODUCTEURS
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .our-dogs-section {
+        padding: 60px 0;
+    }
+    
+    /* Quote Parallax */
+    .quote-parallax {
+        padding: 50px 0;
+    }
+    
+    .quote-box {
+        padding: 35px 30px;
+    }
+    
+    .quote-big {
+        font-size: 1.3rem;
+        line-height: 1.6;
+    }
+    
+    .quote-icon-left,
+    .quote-icon-right {
+        font-size: 1.8rem;
+    }
+    
+    /* Cartes chiens */
+    .dog-card-image {
+        aspect-ratio: 4/5;
+    }
+    
+    .dog-name {
+        font-size: 1.3rem;
+    }
+    
+    .dog-info-item span {
+        font-size: 0.9rem;
+    }
+    
+    .dog-info-item i {
+        font-size: 0.95rem;
+    }
+    
+    .dog-gender-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+    
+    .btn-view-dog {
+        font-size: 0.9rem;
+        padding: 11px 26px;
+    }
+    
+    .btn-see-all-dogs {
+        font-size: 0.95rem;
+        padding: 14px 36px;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .our-dogs-section {
+        padding: 50px 0;
+    }
+    
+    /* Quote Parallax */
+    .quote-parallax {
+        padding: 40px 0;
+        margin-bottom: 30px !important;
+    }
+    
+    .quote-box {
+        padding: 30px 25px;
+    }
+    
+    .quote-big {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .quote-icon-left,
+    .quote-icon-right {
+        font-size: 1.5rem;
+        opacity: 0.3;
+    }
+    
+    .quote-icon-left {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .quote-icon-right {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    /* Sous-titre section */
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    /* Cartes chiens */
+    .dog-card {
+        margin-bottom: 30px;
+    }
+    
+    .dog-card-image {
+        aspect-ratio: 1/1;
+    }
+    
+    .dog-card-body {
+        padding: 20px;
+    }
+    
+    .dog-name {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .dog-info {
+        gap: 8px;
+    }
+    
+    .dog-info-item {
+        padding: 7px 10px;
+    }
+    
+    .dog-info-item span {
+        font-size: 0.85rem;
+    }
+    
+    .dog-info-item i {
+        font-size: 0.9rem;
+        min-width: 18px;
+    }
+    
+    .dog-gender-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Overlay toujours visible sur mobile */
+    .dog-card-overlay {
+        opacity: 1;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0.8) 100%
+        );
+    }
+    
+    .btn-view-dog {
+        transform: translateY(0);
+        font-size: 0.85rem;
+        padding: 10px 22px;
+    }
+    
+    .btn-see-all-dogs {
+        font-size: 0.9rem;
+        padding: 13px 32px;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .our-dogs-section {
+        padding: 40px 0;
+    }
+    
+    /* Quote Parallax */
+    .quote-parallax {
+        padding: 35px 0;
+        margin-bottom: 25px !important;
+    }
+    
+    .quote-box {
+        padding: 25px 20px;
+    }
+    
+    .quote-big {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .quote-icon-left,
+    .quote-icon-right {
+        font-size: 1.3rem;
+        opacity: 0.25;
+    }
+    
+    .quote-icon-left {
+        top: 12px;
+        left: 12px;
+    }
+    
+    .quote-icon-right {
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    /* Sous-titre section */
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+    
+    /* Label tag */
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+    }
+    
+    /* Cartes chiens */
+    .dog-card {
+        margin-bottom: 25px;
+    }
+    
+    .dog-card-body {
+        padding: 18px;
+    }
+    
+    .dog-name {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .dog-info {
+        gap: 7px;
+    }
+    
+    .dog-info-item {
+        padding: 6px 9px;
+        border-radius: 8px;
+    }
+    
+    .dog-info-item span {
+        font-size: 0.8rem;
+    }
+    
+    .dog-info-item i {
+        font-size: 0.85rem;
+        min-width: 16px;
+    }
+    
+    .dog-gender-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .btn-view-dog {
+        font-size: 0.8rem;
+        padding: 9px 20px;
+    }
+    
+    .btn-view-dog i {
+        font-size: 0.85rem;
+    }
+    
+    .btn-see-all-dogs {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 12px 28px;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Quote */
+    .quote-big {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .quote-box {
+        padding: 22px 18px;
+    }
+    
+    .quote-icon-left,
+    .quote-icon-right {
+        font-size: 1.2rem;
+    }
+    
+    /* Sous-titre */
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    /* Cartes */
+    .dog-card-body {
+        padding: 16px;
+    }
+    
+    .dog-name {
+        font-size: 1rem;
+    }
+    
+    .dog-info-item span {
+        font-size: 0.75rem;
+    }
+    
+    .dog-info-item i {
+        font-size: 0.8rem;
+    }
+    
+    .dog-gender-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-view-dog {
+        font-size: 0.75rem;
+        padding: 8px 18px;
+    }
+    
+    .btn-see-all-dogs {
+        font-size: 0.8rem;
+        padding: 11px 24px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION NOTRE PHILOSOPHIE
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .family-life-section {
+        padding: 60px 0;
+    }
+    
+    /* Contenu */
+    .family-content {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    .family-content p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    .section-title {
+        font-size: 1.9rem;
+    }
+    
+    /* Motto banner */
+    .motto-banner {
+        font-size: 1.1rem;
+        padding: 18px 24px;
+    }
+    
+    /* Image */
+    .family-image {
+        margin-top: 30px;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .family-life-section {
+        padding: 50px 0;
+    }
+    
+    /* Contenu */
+    .family-content {
+        padding: 0 10px;
+    }
+    
+    .family-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+        line-height: 1.3;
+    }
+    
+    .label-tag {
+        font-size: 0.65rem;
+        padding: 7px 16px;
+        margin-bottom: 12px;
+    }
+    
+    /* Motto banner */
+    .motto-banner {
+        font-size: 1rem;
+        padding: 16px 20px;
+        margin: 20px 0;
+        border-radius: 12px;
+    }
+    
+    /* Image */
+    .family-image {
+        margin-top: 25px;
+    }
+    
+    .family-image img {
+        border-radius: 16px !important;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .family-life-section {
+        padding: 40px 0;
+    }
+    
+    /* Contenu */
+    .family-content {
+        padding: 0 5px;
+    }
+    
+    .family-content p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+        line-height: 1.3;
+    }
+    
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+        margin-bottom: 10px;
+        letter-spacing: 1.2px;
+    }
+    
+    /* Motto banner */
+    .motto-banner {
+        font-size: 0.9rem;
+        padding: 14px 18px;
+        margin: 18px 0;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    /* Image */
+    .family-image {
+        margin-top: 20px;
+    }
+    
+    .family-image img {
+        border-radius: 14px !important;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .family-life-section {
+        padding: 35px 0;
+    }
+    
+    /* Contenu */
+    .family-content p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 14px;
+    }
+    
+    .label-tag {
+        font-size: 0.55rem;
+        padding: 5px 12px;
+    }
+    
+    /* Motto banner */
+    .motto-banner {
+        font-size: 0.85rem;
+        padding: 12px 16px;
+        margin: 16px 0;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION MISSION
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .mission-section {
+        padding: 60px 0;
+    }
+    
+    /* Image */
+    .mission-image {
+        margin-bottom: 30px;
+    }
+    
+    .float-card {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .float-card i {
+        font-size: 1.3rem;
+    }
+    
+    /* Contenu */
+    .mission-content {
+        padding-left: 0;
+    }
+    
+    .mission-content .section-title {
+        font-size: 1.9rem;
+    }
+    
+    .mission-content p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    /* Highlight box */
+    .highlight-box-inline {
+        padding: 18px 22px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .mission-section {
+        padding: 50px 0;
+    }
+    
+    /* Image */
+    .mission-image {
+        margin-bottom: 25px;
+    }
+    
+    .mission-image img {
+        border-radius: 16px !important;
+    }
+    
+    .float-card {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+        bottom: 15px;
+        left: 15px;
+    }
+    
+    .float-card i {
+        font-size: 1.2rem;
+        margin-right: 8px;
+    }
+    
+    /* Contenu */
+    .mission-content {
+        padding: 0 10px;
+    }
+    
+    .mission-content .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+        line-height: 1.3;
+    }
+    
+    .mission-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 18px;
+    }
+    
+    /* Highlight box */
+    .highlight-box-inline {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-radius: 12px;
+    }
+    
+    .highlight-box-inline strong {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .mission-section {
+        padding: 40px 0;
+    }
+    
+    /* Image */
+    .mission-image {
+        margin-bottom: 20px;
+    }
+    
+    .mission-image img {
+        border-radius: 14px !important;
+    }
+    
+    .float-card {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        bottom: 12px;
+        left: 12px;
+        border-radius: 10px;
+    }
+    
+    .float-card i {
+        font-size: 1.1rem;
+        margin-right: 7px;
+    }
+    
+    /* Contenu */
+    .mission-content {
+        padding: 0 5px;
+    }
+    
+    .mission-content .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+        line-height: 1.3;
+    }
+    
+    .mission-content p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-bottom: 16px;
+    }
+    
+    /* Highlight box */
+    .highlight-box-inline {
+        padding: 14px 18px;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .highlight-box-inline strong {
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .mission-section {
+        padding: 35px 0;
+    }
+    
+    /* Image */
+    .float-card {
+        padding: 9px 14px;
+        font-size: 0.8rem;
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .float-card i {
+        font-size: 1rem;
+        margin-right: 6px;
+    }
+    
+    /* Contenu */
+    .mission-content .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 14px;
+    }
+    
+    .mission-content p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+    
+    /* Highlight box */
+    .highlight-box-inline {
+        padding: 12px 16px;
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+    
+    .highlight-box-inline strong {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE - SECTION NOS CHIOTS DISPONIBLES
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .our-puppies-section {
+        padding: 60px 0;
+    }
+    
+    /* Cartes chiots */
+    .puppy-card-image {
+        aspect-ratio: 4/5;
+    }
+    
+    .puppy-name {
+        font-size: 1.3rem;
+    }
+    
+    .puppy-info-item span {
+        font-size: 0.9rem;
+    }
+    
+    .puppy-info-item i {
+        font-size: 0.95rem;
+    }
+    
+    /* Badges */
+    .puppy-status-badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .puppy-gender-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+    
+    /* Prix */
+    .puppy-price .price-amount {
+        font-size: 1.4rem;
+    }
+    
+    .puppy-price .price-contact {
+        font-size: 0.9rem;
+    }
+    
+    /* Bouton */
+    .btn-view-puppy {
+        font-size: 0.9rem;
+        padding: 11px 26px;
+    }
+    
+    .btn-all-marriages-premium {
+        font-size: 0.95rem;
+        padding: 14px 36px;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .our-puppies-section {
+        padding: 50px 0;
+    }
+    
+    /* Sous-titre */
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    /* Cartes chiots */
+    .puppy-card {
+        margin-bottom: 30px;
+    }
+    
+    .puppy-card-image {
+        aspect-ratio: 1/1;
+    }
+    
+    .puppy-card-body {
+        padding: 20px;
+    }
+    
+    .puppy-name {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    /* Infos */
+    .puppy-info {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .puppy-info-item {
+        padding: 7px 10px;
+        border-radius: 8px;
+    }
+    
+    .puppy-info-item span {
+        font-size: 0.85rem;
+    }
+    
+    .puppy-info-item i {
+        font-size: 0.9rem;
+        min-width: 18px;
+    }
+    
+    /* Badges */
+    .puppy-status-badge {
+        font-size: 0.7rem;
+        padding: 6px 11px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .puppy-status-badge i {
+        font-size: 0.75rem;
+    }
+    
+    .puppy-gender-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Prix */
+    .puppy-price {
+        padding: 12px;
+        margin-top: 15px;
+    }
+    
+    .puppy-price .price-amount {
+        font-size: 1.3rem;
+    }
+    
+    .puppy-price .price-contact {
+        font-size: 0.85rem;
+    }
+    
+    .puppy-price .price-contact i {
+        font-size: 0.8rem;
+    }
+    
+    /* Overlay toujours visible sur mobile */
+    .puppy-card-overlay {
+        opacity: 1;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0.8) 100%
+        );
+    }
+    
+    .btn-view-puppy {
+        transform: translateY(0);
+        font-size: 0.85rem;
+        padding: 10px 22px;
+    }
+    
+    .btn-all-marriages-premium {
+        font-size: 0.9rem;
+        padding: 13px 32px;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .our-puppies-section {
+        padding: 40px 0;
+    }
+    
+    /* Label et sous-titre */
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+    
+    /* Cartes chiots */
+    .puppy-card {
+        margin-bottom: 25px;
+    }
+    
+    .puppy-card-body {
+        padding: 18px;
+    }
+    
+    .puppy-name {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    /* Infos */
+    .puppy-info {
+        gap: 7px;
+        margin-bottom: 14px;
+    }
+    
+    .puppy-info-item {
+        padding: 6px 9px;
+    }
+    
+    .puppy-info-item span {
+        font-size: 0.8rem;
+    }
+    
+    .puppy-info-item i {
+        font-size: 0.85rem;
+        min-width: 16px;
+    }
+    
+    /* Badges */
+    .puppy-status-badge {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+        top: 8px;
+        left: 8px;
+    }
+    
+    .puppy-status-badge i {
+        font-size: 0.7rem;
+        margin-right: 3px;
+    }
+    
+    .puppy-gender-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+        top: 8px;
+        right: 8px;
+    }
+    
+    /* Prix */
+    .puppy-price {
+        padding: 11px;
+        margin-top: 14px;
+        border-radius: 10px;
+    }
+    
+    .puppy-price .price-amount {
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    
+    .puppy-price .price-contact {
+        font-size: 0.8rem;
+    }
+    
+    .puppy-price .price-contact i {
+        font-size: 0.75rem;
+    }
+    
+    /* Boutons */
+    .btn-view-puppy {
+        font-size: 0.8rem;
+        padding: 9px 20px;
+    }
+    
+    .btn-view-puppy i {
+        font-size: 0.85rem;
+    }
+    
+    .btn-all-marriages-premium {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 12px 28px;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .our-puppies-section {
+        padding: 35px 0;
+    }
+    
+    /* Sous-titre */
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    /* Cartes */
+    .puppy-card-body {
+        padding: 16px;
+    }
+    
+    .puppy-name {
+        font-size: 1rem;
+    }
+    
+    /* Infos */
+    .puppy-info-item span {
+        font-size: 0.75rem;
+    }
+    
+    .puppy-info-item i {
+        font-size: 0.8rem;
+    }
+    
+    /* Badges */
+    .puppy-status-badge {
+        font-size: 0.6rem;
+        padding: 4px 9px;
+    }
+    
+    .puppy-gender-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+    
+    /* Prix */
+    .puppy-price {
+        padding: 10px;
+    }
+    
+    .puppy-price .price-amount {
+        font-size: 1.1rem;
+    }
+    
+    .puppy-price .price-contact {
+        font-size: 0.75rem;
+    }
+    
+    /* Boutons */
+    .btn-view-puppy {
+        font-size: 0.75rem;
+        padding: 8px 18px;
+    }
+    
+    .btn-all-marriages-premium {
+        font-size: 0.8rem;
+        padding: 11px 24px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION VALEURS
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .values-section {
+        padding: 60px 0;
+    }
+    
+    /* Cartes valeurs */
+    .value-card {
+        padding: 35px 28px;
+    }
+    
+    .value-card h4 {
+        font-size: 1.4rem;
+        margin-bottom: 14px;
+    }
+    
+    .value-card p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    /* Icône */
+    .value-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    
+    .value-icon i {
+        font-size: 1.8rem;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .values-section {
+        padding: 50px 0;
+    }
+    
+    /* Grille */
+    .values-section .row {
+        gap: 20px !important;
+    }
+    
+    /* Cartes valeurs */
+    .value-card {
+        padding: 30px 24px;
+        margin-bottom: 20px;
+    }
+    
+    .value-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+    
+    .value-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    /* Icône */
+    .value-icon {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 18px;
+    }
+    
+    .value-icon i {
+        font-size: 1.6rem;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .values-section {
+        padding: 40px 0;
+    }
+    
+    /* Grille */
+    .values-section .row {
+        gap: 15px !important;
+    }
+    
+    .values-section .mb-5 {
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Cartes valeurs */
+    .value-card {
+        padding: 25px 20px;
+        margin-bottom: 15px;
+        border-radius: 16px;
+    }
+    
+    .value-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .value-card p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+    
+    /* Icône */
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 16px;
+    }
+    
+    .value-icon i {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .values-section {
+        padding: 35px 0;
+    }
+    
+    /* Cartes valeurs */
+    .value-card {
+        padding: 22px 18px;
+        margin-bottom: 12px;
+    }
+    
+    .value-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .value-card p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+    
+    /* Icône */
+    .value-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 14px;
+    }
+    
+    .value-icon i {
+        font-size: 1.4rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION BLOG
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .blog-section {
+        padding: 60px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.8rem;
+    }
+    
+    /* Cartes blog */
+    .blog-card-body {
+        padding: 25px;
+    }
+    
+    .blog-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+    }
+    
+    .blog-preview {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    /* Meta */
+    .blog-meta {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .blog-date,
+    .blog-likes {
+        font-size: 0.8rem;
+    }
+    
+    /* Badge catégorie */
+    .blog-category-badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    /* Boutons */
+    .btn-read-more {
+        font-size: 0.9rem;
+        padding: 10px 22px;
+    }
+    
+    .btn-see-all-blog {
+        font-size: 0.95rem;
+        padding: 14px 36px;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .blog-section {
+        padding: 50px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.5rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    /* Cartes blog */
+    .blog-card {
+        margin-bottom: 25px;
+    }
+    
+    .blog-card-image {
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .blog-card-body {
+        padding: 22px;
+    }
+    
+    .blog-title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+    
+    .blog-title a {
+        font-size: 1.2rem;
+    }
+    
+    .blog-preview {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    /* Meta */
+    .blog-meta {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+        gap: 12px;
+    }
+    
+    .blog-date,
+    .blog-likes {
+        font-size: 0.75rem;
+    }
+    
+    .blog-date i,
+    .blog-likes i {
+        font-size: 0.8rem;
+    }
+    
+    /* Badge catégorie */
+    .blog-category-badge {
+        font-size: 0.7rem;
+        padding: 6px 11px;
+        top: 12px;
+        left: 12px;
+    }
+    
+    .blog-category-badge i {
+        font-size: 0.75rem;
+    }
+    
+    /* Boutons */
+    .btn-read-more {
+        font-size: 0.85rem;
+        padding: 9px 20px;
+    }
+    
+    .btn-read-more i {
+        font-size: 0.8rem;
+    }
+    
+    .btn-see-all-blog {
+        font-size: 0.9rem;
+        padding: 13px 32px;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .blog-section {
+        padding: 40px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.4rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+    
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+    }
+    
+    /* Cartes blog */
+    .blog-card {
+        margin-bottom: 20px;
+    }
+    
+    .blog-card-image {
+        border-radius: 14px 14px 0 0;
+    }
+    
+    .blog-card-body {
+        padding: 20px;
+    }
+    
+    .blog-title {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+    
+    .blog-title a {
+        font-size: 1.1rem;
+    }
+    
+    .blog-preview {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        margin-bottom: 14px;
+    }
+    
+    /* Meta */
+    .blog-meta {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .blog-date,
+    .blog-likes {
+        font-size: 0.7rem;
+    }
+    
+    .blog-date i,
+    .blog-likes i {
+        font-size: 0.75rem;
+    }
+    
+    /* Badge catégorie */
+    .blog-category-badge {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+        top: 10px;
+        left: 10px;
+        border-radius: 8px;
+    }
+    
+    .blog-category-badge i {
+        font-size: 0.7rem;
+        margin-right: 3px;
+    }
+    
+    /* Boutons */
+    .btn-read-more {
+        font-size: 0.8rem;
+        padding: 8px 18px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-read-more i {
+        font-size: 0.75rem;
+    }
+    
+    .btn-see-all-blog {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 12px 28px;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .blog-section {
+        padding: 35px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.3rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .label-tag {
+        font-size: 0.55rem;
+        padding: 5px 12px;
+    }
+    
+    /* Cartes blog */
+    .blog-card-body {
+        padding: 18px;
+    }
+    
+    .blog-title {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+    
+    .blog-title a {
+        font-size: 1rem;
+    }
+    
+    .blog-preview {
+        font-size: 0.75rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+    
+    /* Meta */
+    .blog-meta {
+        font-size: 0.65rem;
+        gap: 8px;
+    }
+    
+    .blog-date,
+    .blog-likes {
+        font-size: 0.65rem;
+    }
+    
+    .blog-date i,
+    .blog-likes i {
+        font-size: 0.7rem;
+    }
+    
+    /* Badge catégorie */
+    .blog-category-badge {
+        font-size: 0.6rem;
+        padding: 4px 9px;
+    }
+    
+    /* Boutons */
+    .btn-read-more {
+        font-size: 0.75rem;
+        padding: 7px 16px;
+    }
+    
+    .btn-see-all-blog {
+        font-size: 0.8rem;
+        padding: 11px 24px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE - SECTION ENGAGEMENTS
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .commitments-modern {
+        padding: 60px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.8rem;
+    }
+    
+    /* Cartes */
+    .commit-card {
+        padding: 35px 25px;
+    }
+    
+    .commit-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    
+    .commit-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    /* Numéro */
+    .commit-number {
+        font-size: 3rem;
+    }
+    
+    /* Icône */
+    .commit-icon-bg {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 18px;
+    }
+    
+    .commit-icon-bg i {
+        font-size: 1.8rem;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .commitments-modern {
+        padding: 50px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.5rem;
+    }
+    
+    .label-tag {
+        font-size: 0.65rem;
+        padding: 7px 16px;
+    }
+    
+    /* Grille */
+    .commitments-modern .row {
+        gap: 20px !important;
+    }
+    
+    /* Cartes */
+    .commit-card {
+        padding: 30px 22px;
+        margin-bottom: 20px;
+    }
+    
+    .commit-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .commit-card p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+    
+    /* Numéro */
+    .commit-number {
+        font-size: 2.5rem;
+        top: 15px;
+        right: 15px;
+    }
+    
+    /* Icône */
+    .commit-icon-bg {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 16px;
+    }
+    
+    .commit-icon-bg i {
+        font-size: 1.6rem;
+    }
+    
+    /* Carte active */
+    .commit-card.active {
+        transform: scale(1);
+    }
+    
+    .commit-card:hover {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .commitments-modern {
+        padding: 40px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.4rem;
+    }
+    
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+    }
+    
+    /* Grille */
+    .commitments-modern .row {
+        gap: 15px !important;
+    }
+    
+    /* Cartes */
+    .commit-card {
+        padding: 25px 20px;
+        margin-bottom: 15px;
+        border-radius: 16px;
+    }
+    
+    .commit-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .commit-card p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+    
+    /* Numéro */
+    .commit-number {
+        font-size: 2.2rem;
+        top: 12px;
+        right: 12px;
+    }
+    
+    /* Icône */
+    .commit-icon-bg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 14px;
+    }
+    
+    .commit-icon-bg i {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .commitments-modern {
+        padding: 35px 0;
+    }
+    
+    /* Titre section */
+    .section-title-big {
+        font-size: 1.3rem;
+    }
+    
+    /* Cartes */
+    .commit-card {
+        padding: 22px 18px;
+        margin-bottom: 12px;
+    }
+    
+    .commit-card h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .commit-card p {
+        font-size: 0.75rem;
+        line-height: 1.7;
+    }
+    
+    /* Numéro */
+    .commit-number {
+        font-size: 2rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Icône */
+    .commit-icon-bg {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 12px;
+    }
+    
+    .commit-icon-bg i {
+        font-size: 1.4rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SECTION INFORMATIONS PRATIQUES
+======================================== */
+
+/* ========================================
+   TABLETTES (< 992px)
+======================================== */
+@media (max-width: 991px) {
+    /* Section */
+    .informations-section {
+        padding: 60px 0;
+    }
+    
+    /* Introduction */
+    .info-intro p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    /* Blocs info */
+    .info-block {
+        padding: 35px 28px;
+        margin-bottom: 30px;
+    }
+    
+    .info-block-title {
+        font-size: 1.2rem;
+        margin-bottom: 14px;
+    }
+    
+    .info-block-text {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    /* Icônes circulaires */
+    .info-icon-circle {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+        
+    }
+    
+    .info-icon-circle i {
+        font-size: 2rem;
+    }
+    
+    /* Cartes info */
+    .info-card {
+        padding: 28px 24px;
+    }
+    
+    .info-card-title {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .info-card-text {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .info-card-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 16px;
+    }
+    
+    .info-card-icon i {
+        font-size: 1.5rem;
+    }
+    
+    /* CTA */
+    .info-cta {
+        padding: 18px 24px;
+        font-size: 0.95rem;
+    }
+    
+    /* Bouton contact */
+    .btn-info-contact {
+        font-size: 0.95rem;
+        padding: 14px 36px;
+    }
+}
+
+/* ========================================
+   MOBILES (< 768px)
+======================================== */
+@media (max-width: 767px) {
+    /* Section */
+    .informations-section {
+        padding: 50px 0;
+    }
+    
+    /* Introduction */
+    .info-intro {
+        padding: 22px;
+        margin-bottom: 30px;
+    }
+    
+    .info-intro p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+    
+    /* Blocs info */
+    .info-block {
+        padding: 30px 22px;
+        margin-bottom: 25px;
+        border-radius: 16px;
+    }
+    
+    .info-block .row {
+        text-align: center;
+    }
+    
+    .info-block-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+    
+    .info-block-text {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+    
+    .info-block-text:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Icônes circulaires */
+    .info-icon-circle {
+        width: 75px;
+        height: 75px;
+        margin: 0 auto 18px;
+    }
+    
+    .info-icon-circle i {
+        font-size: 1.8rem;
+    }
+    
+    /* Cartes info */
+    .info-card {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .info-card-title {
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .info-card-text {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+    
+    .info-card-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 14px;
+    }
+    
+    .info-card-icon i {
+        font-size: 1.4rem;
+    }
+    
+    /* CTA */
+    .info-cta {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        text-align: center;
+    }
+    
+    .info-cta p {
+        margin-bottom: 0;
+    }
+    
+    .info-cta i {
+        font-size: 1rem;
+    }
+    
+    /* Bouton contact */
+    .btn-info-contact {
+        font-size: 0.9rem;
+        padding: 13px 32px;
+    }
+}
+
+/* ========================================
+   PETITS MOBILES (< 576px)
+======================================== */
+@media (max-width: 575px) {
+    /* Section */
+    .informations-section {
+        padding: 40px 0;
+    }
+    
+    /* Label tag */
+    .label-tag {
+        font-size: 0.6rem;
+        padding: 6px 14px;
+    }
+    
+    /* Introduction */
+    .info-intro {
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+    }
+    
+    .info-intro p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+    
+    /* Blocs info */
+    .info-block {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+        border-radius: 14px;
+    }
+    
+    .info-block-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .info-block-text {
+        font-size: 0.8rem;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    /* Icônes circulaires */
+    .info-icon-circle {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 16px;
+    }
+    
+    .info-icon-circle i {
+        font-size: 1.7rem;
+    }
+    
+    /* Cartes info */
+    .info-card {
+        padding: 22px 18px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+    }
+    
+    .info-card-title {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+        text-align: center;
+    }
+    
+    .info-card-text {
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+    
+    .info-card-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 12px;
+    }
+    
+    .info-card-icon i {
+        font-size: 1.3rem;
+    }
+    
+    /* CTA */
+    .info-cta {
+        padding: 14px 18px;
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .info-cta i {
+        font-size: 0.95rem;
+    }
+    
+    /* Bouton contact */
+    .btn-info-contact {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 12px 28px;
+    }
+    
+    .btn-info-contact i {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   TRÈS PETITS MOBILES (< 400px)
+======================================== */
+@media (max-width: 399px) {
+    /* Section */
+    .informations-section {
+        padding: 35px 0;
+    }
+    
+    /* Introduction */
+    .info-intro {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .info-intro p {
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+    
+    /* Blocs info */
+    .info-block {
+        padding: 22px 18px;
+        margin-bottom: 18px;
+    }
+    
+    .info-block-title {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .info-block-text {
+        font-size: 0.75rem;
+        line-height: 1.7;
+        margin-bottom: 10px;
+    }
+    
+    /* Icônes circulaires */
+    .info-icon-circle {
+        width: 65px;
+        height: 65px;
+        margin: 0 auto 14px;
+    }
+    
+    .info-icon-circle i {
+        font-size: 1.6rem;
+    }
+    
+    /* Cartes info */
+    .info-card {
+        padding: 20px 16px;
+        margin-bottom: 12px;
+    }
+    
+    .info-card-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    
+    .info-card-text {
+        font-size: 0.75rem;
+        line-height: 1.7;
+    }
+    
+    .info-card-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 10px;
+    }
+    
+    .info-card-icon i {
+        font-size: 1.2rem;
+    }
+    
+    /* CTA */
+    .info-cta {
+        padding: 12px 16px;
+        font-size: 0.8rem;
+        margin-bottom: 18px;
+    }
+    
+    .info-cta i {
+        font-size: 0.9rem;
+    }
+    
+    /* Bouton contact */
+    .btn-info-contact {
+        font-size: 0.8rem;
+        padding: 11px 24px;
+    }
+}

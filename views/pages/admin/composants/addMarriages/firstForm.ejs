@@ -1,0 +1,119 @@
+<div class=" mt-2 bg-body-tertiary p-3 border rounded-4">
+    <div class="row">
+        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 order-1 order-md-1">
+            <h4 class="text-center h2 page-title">Étalon</h4>
+            <input type="text" id="search-male" class="form-control" placeholder="Recherchez un mâle">
+            <div id="male-list" class="mt-3 mb-3">
+                <% males.forEach(animal => { %>
+                <div class="card animal-item mt-2" data-name="<%= animal.name.toLowerCase() %>" data-id="<%= animal.id %>" style="display:none;">
+                    <div class="card-header">
+                        <%= animal.name %>
+                    </div>
+                    <div class="bd-placeholder-img" style="width:100%; height:225px; background-color:#55595c; color:#eceeef; display:flex; align-items:center; justify-content:center;">
+                        <% if (animal.image_path) { %>
+                        <img src="/uploads/<%= animal.image_path %>" alt="<%= animal.name %>" style="width:100%; height:225px; object-fit:cover;">
+                        <% } else { %>
+                        <span>Aucune photo disponible</span>
+                        <% } %>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-body-secondary d-flex align-items-baseline">
+                        <%= animal.gender %>
+                        <% if (animal.gender === 'Male') { %>
+                        <i class="bi bi-gender-male text-primary ms-1" style="margin-top: -2px;"></i>
+                        <% } else if (animal.gender === 'Femelle') { %>
+                        <i class="bi bi-gender-female text-primary ms-1" style="margin-top: -2px;"></i>
+                        <% } %>
+                        </small>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small class="<%= animal.is_online ? 'status-online' : 'status-offline' %>">
+                            <%= animal.is_online ? 'En Ligne' : 'Hors-Ligne' %>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 order-3 order-lg-2">
+            <form id="marriage-form" action="/admin/addMarriages" method="POST">
+                <h4 class="text-center mb-2 h2 page-title">Informations du Mariage</h4>
+                <div class="mb-3">
+                    <label for="male_id" class="form-label">Mâle:</label>
+                    <input type="text" name="male_id" id="male_id" class="form-control male-selected text-center" placeholder="Sélectionner un mâle" readonly>
+                    <input type="hidden" name="male_id" id="male_id">
+                </div>
+                <div class="mb-3">
+                    <label for="female_id" class="form-label">Femelle:</label>
+                    <input type="text" name="female_id" id="female_id" class="form-control female-selected text-center" placeholder="Sélectionner une femelle" readonly>
+                    <input type="hidden" name="female_id" id="female_id">
+                </div>
+                <div class="mb-3">
+                    <label for="expected_puppies" class="form-label">Nombre de chiots attendus:</label>
+                    <input type="number" name="expected_puppies" id="expected_puppies" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="expected_birth_date" class="form-label">Date de naissance prévue:</label>
+                    <input type="date" name="expected_birth_date" id="expected_birth_date" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="actual_birth_date" class="form-label">Date de naissance :</label>
+                    <input type="date" name="actual_birth_date" id="actual_birth_date" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="actual_male_puppies" class="form-label">Nombre de chiots mâles nés:</label>
+                    <input type="number" name="actual_male_puppies" id="actual_male_puppies" class="form-control">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="actual_female_puppies" class="form-label">Nombre de chiots femelles nés :</label>
+                    <input type="number" name="actual_female_puppies" id="actual_female_puppies" class="form-control">
+                </div>
+                <div id="error-message" class="alert alert-warning" role="alert" style="display:none;">
+                    Les champs Mâle et Femelle sont obligatoires.
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="get_banner" name="get_banner" value="0">
+                    <input type="hidden" id="user_id" name="user_id">
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 mt-2 mb-3">Enregistrer</button>
+            </form>
+        </div>
+        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 order-2 order-lg-3">
+            <h4 class="text-center h2 page-title">Lice</h4>
+            <input type="text" id="search-female" class="form-control" placeholder="Recherchez une femelle">
+            <div id="female-list" class="mt-3 mb-3">
+                <% females.forEach(female => { %>
+                <div class="card animal-item mt-2" data-name="<%= female.name.toLowerCase() %>" data-id="<%= female.id %>"  style="display:none;">
+                    <div class="card-header">
+                        <%= female.name %>
+                    </div>
+                    <div class="bd-placeholder-img" style="width:100%; height:225px; background-color:#55595c; color:#eceeef; display:flex; align-items:center; justify-content:center;">
+                        <% if (female.image_path) { %>
+                        <img src="/uploads/<%= female.image_path %>" alt="<%= female.name %>" style="width:100%; height:225px; object-fit:cover;">
+                        <% } else { %>
+                        <span>Aucune photo disponible</span>
+                        <% } %>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-body-secondary d-flex align-items-baseline">
+                        <%= female.gender %>
+                        <% if (female.gender === 'Male') { %>
+                        <i class="bi bi-gender-male text-primary ms-1" style="margin-top: -2px;"></i>
+                        <% } else if (female.gender === 'Femelle') { %>
+                        <i class="bi bi-gender-female ms-1" style="margin-top: -2px;"></i>
+                        <% } %>
+                        </small>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small class="<%= female.is_online ? 'status-online' : 'status-offline' %>">
+                            <%= female.is_online ? 'En Ligne' : 'Hors-Ligne' %>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>

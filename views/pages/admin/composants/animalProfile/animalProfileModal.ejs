@@ -1,0 +1,64 @@
+<!-- modale pour la suppression des photos dans l'onglet gestion photos -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer cette photo ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Supprimer</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+ <!-- Modale pour télécharger une nouvelle photo de profil -->
+  <div class="modal fade" id="uploadProfileModal" tabindex="-1" aria-labelledby="uploadProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadProfileModalLabel">Télécharger une nouvelle image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadProfileForm" enctype="multipart/form-data">
+                    <input type="hidden" name="animal_id" value="<%= animal.id %>">
+                    <div class="mb-3">
+                        <label for="profileImageInput" class="form-label">Choisir une image</label>
+                        <input type="file" class="form-control" id="profileImageInput" name="profileImage" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Télécharger</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+<!-- modale pour la demande de confirmation de suppression de photo de profil -->
+<div class="modal fade" id="deleteProfileImageModal" tabindex="-1" aria-labelledby="deleteProfileImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProfileImageModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer cette photo de profil ?</p>
+                <form id="deleteProfileImageForm">
+                    <input type="hidden" name="animalId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-danger" form="deleteProfileImageForm">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+

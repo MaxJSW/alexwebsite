@@ -1,0 +1,79 @@
+.puppy-card { cursor: pointer; }
+.progress-bar-male { background-color: blue; }
+.progress-bar-female { background-color: pink; }
+
+
+.puppy-icon.bi-gender-male {
+    color: blue;
+}
+
+.puppy-icon.bi-gender-female {
+    color: pink;
+}
+
+.bg-primary {
+    background-color: blue;
+}
+
+.bg-pink {
+    background-color: pink;
+}
+
+.selected-male {
+    border: 2px solid blue !important;
+}
+
+.selected-female {
+    border: 2px solid pink !important;
+}
+
+.btn-info.btn-sm {
+    margin-left: 10px;
+    padding: 0.25rem 0.5rem;
+}
+
+.bi-question-circle {
+    font-size: 1rem;
+}
+
+@keyframes moveUpDown {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .move-up-down {
+    animation: moveUpDown 1s linear infinite;
+  }
+  
+  .stop-move-up-down {
+    animation: none;
+  }
+  
+
+  .input-group {
+    align-items: center; /* Aligner verticalement les éléments dans l'input-group */
+}
+
+.input-group .input-group-text {
+    height: auto; /* Assurer que la hauteur de l'input-group-text s'ajuste automatiquement */
+}
+
+/* Ajoutez ceci à votre fichier CSS */
+.fade-enter {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.fade-enter-active {
+    opacity: 1;
+}
+
+.fade-exit {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-exit-active {
+    opacity: 0;
+}

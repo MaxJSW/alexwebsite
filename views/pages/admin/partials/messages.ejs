@@ -1,0 +1,71 @@
+<% if (messages && messages.length > 0) { %>
+    <% messages.forEach((message) => { 
+        // Déterminer la classe de statut
+        let statusClass = 'status-read';
+        let statusBadge = 'badge-read';
+        let itemClass = '';
+        
+        if (message.status === 'Non lu') {
+            statusClass = 'status-unread';
+            statusBadge = 'badge-unread';
+            itemClass = 'unread';
+        } else if (message.status === 'Répondu') {
+            statusClass = 'status-replied';
+            statusBadge = 'badge-replied';
+        }
+        
+        // Formater la date
+        const messageDate = new Date(message.date_sent);
+        const today = new Date();
+        const isToday = messageDate.toDateString() === today.toDateString();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const isYesterday = messageDate.toDateString() === yesterday.toDateString();
+        
+        let dateDisplay;
+        if (isToday) {
+            dateDisplay = messageDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        } else if (isYesterday) {
+            dateDisplay = 'Hier';
+        } else {
+            dateDisplay = messageDate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
+        }
+        
+        // Créer un aperçu du message (première ligne, max 100 caractères)
+        const preview = message.content.substring(0, 100) + (message.content.length > 100 ? '...' : '');
+    %>
+    <div class="mailbox-item <%= itemClass %> message-item" 
+         data-status="<%= message.status %>"
+         data-id="<%= message.id %>"
+         data-name="<%= message.name %>"
+         data-email="<%= message.email %>"
+         data-phone="<%= message.phone || 'Non renseigné' %>"
+         data-subject="<%= message.subject %>"
+         data-content="<%= message.content %>"
+         data-date="<%= messageDate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }) %> à <%= messageDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) %>">
+        <input type="checkbox" 
+               class="mailbox-checkbox delete-checkbox" 
+               data-id="<%= message.id %>"
+               onclick="event.stopPropagation()">
+        <div class="mailbox-status-indicator <%= statusClass %>"></div>
+        <div class="mailbox-content">
+            <div class="mailbox-header">
+                <div class="d-flex align-items-center">
+                    <span class="mailbox-sender"><%= message.name %></span>
+                    <span class="mailbox-badge <%= statusBadge %>"><%= message.status %></span>
+                </div>
+                <span class="mailbox-date"><%= dateDisplay %></span>
+            </div>
+            <div class="mailbox-subject"><%= message.subject %></div>
+            <div class="mailbox-preview"><%= preview %></div>
+        </div>
+    </div>
+    
+    <% }); %>
+<% } else { %>
+    <div class="mailbox-empty">
+        <i class="fa-solid fa-inbox"></i>
+        <h4>Aucun message</h4>
+        <p>Votre boîte de réception est vide</p>
+    </div>
+<% } %>

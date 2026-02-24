@@ -1,0 +1,13 @@
+<!-- block animal online -->
+
+    <div class="form-group pb-2 d-flex justify-content-end border rounded p-2">
+      <div>
+          <label for="is_online">Fiche en ligne</label>
+          <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="is_online" name="is_online" value="1" <%= animal.is_online ? 'checked' : '' %> onchange="toggleOnlineStatus(<%= animal.id %>)">
+              <label class="form-check-label <%= animal.is_online ? 'online' : 'offline' %>" id="onlineStatusLabel" for="is_online"><%= animal.is_online ? 'En ligne' : 'Hors ligne' %></label>
+          </div>
+      </div>
+  </div>
+  
+  <!-- end block animal online -->

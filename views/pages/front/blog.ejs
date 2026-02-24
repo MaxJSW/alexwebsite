@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><% if (currentPage > 1) { %>Blog & Actualités - Page <%= currentPage %> | Élevage de Bel Air<% } else { %>Blog & Actualités | Élevage de Bel Air<% } %></title>
+    <meta name="description" content="Découvrez nos articles sur l'élevage d'American Bully et de Springer Anglais. Conseils pratiques, actualités, portées à venir et vie quotidienne de notre élevage familial de Bel Air près de Montpellier en Occitanie.">
+    <meta name="keywords" content="blog élevage canin, american bully conseils, springer anglais actualités, portées chiots, élevage de bel air blog, actualités chiens, conseils éleveur, blog american bully">
+    <meta name="author" content="Élevage de Bel Air">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://elevagedebelair.com/blog<%= currentPage > 1 ? '?page=' + currentPage : '' %>">
+    <% if (currentPage > 1) { %>
+    <link rel="prev" href="https://elevagedebelair.com/blog<%= currentPage > 2 ? '?page=' + (currentPage - 1) : '' %>">
+    <% } %>
+    <% if (currentPage < totalPages) { %>
+    <link rel="next" href="https://elevagedebelair.com/blog?page=<%= currentPage + 1 %>">
+    <% } %>
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="FR-OCC">
+    <meta name="geo.placename" content="Occitanie, France">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Élevage de Bel Air">
+    <meta property="og:title" content="Blog & Actualités | Élevage de Bel Air">
+    <meta property="og:description" content="Suivez l'actualité de notre élevage familial d'American Bully et de Springer Anglais. Articles, conseils et vie quotidienne.">
+    <meta property="og:url" content="https://elevagedebelair.com/blog">
+    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Blog - Élevage de Bel Air">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog & Actualités | Élevage de Bel Air">
+    <meta name="twitter:description" content="Suivez l'actualité de notre élevage d'American Bully et de Springer Anglais.">
+    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta name="twitter:image:alt" content="Blog - Élevage de Bel Air">
+<%- include('../front/partials/head-meta-base.ejs') %>
+<%- include('../front/partials/head-fonts-libs.ejs') %>
+    <link rel="stylesheet" href="/front/css/navbar.css"><link rel="stylesheet" href="/front/css/blog.css">
+</head>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
+        <main style="padding-top: 70px;">
+            <section class="page-hero-simple">
+                <div class="page-hero-overlay"></div>
+                <div class="container">
+                    <div class="page-hero-content">
+                        <h1 class="page-hero-title">Blog & Actualités</h1>
+                        <p class="page-hero-subtitle">
+                            Suivez l'actualité de notre élevage, découvrez nos conseils d'experts 
+                            et plongez dans l'univers passionnant de l'American Bully et du Springer Anglais. 
+                            Retrouvez ici tous nos articles, portées à venir et moments privilégiés partagés avec nos chiens.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="blog-filters-section mt-2">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="blog-filters-wrapper" >
+                                <div class="filters-header">
+                                    <h2 class="filters-title">
+                                        <i class="fas fa-filter"></i>
+                                        Filtrer par catégorie
+                                    </h2>
+                                    <p class="filters-subtitle">
+                                        <%= totalItems %> article<%= totalItems > 1 ? 's' : '' %> disponible<%= totalItems > 1 ? 's' : '' %>
+                                    </p>
+                                </div>
+                                <button class="mobile-filters-toggle" id="mobileFiltersToggle">
+                                    <i class="fas fa-filter"></i>
+                                    <span>Sélectionner une catégorie</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="blog-categories-list" id="blogCategoriesList">
+                                    <a href="/blog" class="category-filter-btn <%= !currentCategory ? 'active' : '' %>">
+                                        <i class="fas fa-th-large"></i>
+                                        Tous les articles
+                                        <span class="category-count"><%= totalItems %></span>
+                                    </a>
+                                    <% categories.forEach(category => { %>
+                                        <a href="/blog/categorie/<%= category.category_slug %>" 
+                                        class="category-filter-btn">
+                                            <i class="fas fa-tag"></i>
+                                            <%= category.content %>
+                                            <span class="category-count">
+                                                <%= category.count || 0 %>
+                                            </span>
+                                        </a>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="blog-articles-section mt-3">
+                <div class="container">
+                    <% if (blogs.length > 0) { %>
+                        <div class="row g-4">
+                            <% blogs.forEach((blog, index) => { %>
+                                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                                    <article class="blog-card">
+                                        <div class="blog-card-image">
+                                        <% 
+                                            let blogImageSrc;
+                                            if (blog.optimized_image_path) {
+                                                blogImageSrc = '/uploads/optimized/' + blog.optimized_image_path;
+                                            } else if (blog.image_path) {
+                                                blogImageSrc = '/uploads/' + blog.image_path;
+                                            } else {
+                                                blogImageSrc = '/img/placeholder-blog.jpg';
+                                            }
+                                            
+                                            const blogFallbackSrc = blog.image_path ? 
+                                                '/uploads/' + blog.image_path : 
+                                                '/img/placeholder-blog.jpg';
+                                            %>
+                                        <a href="/blog/<%= blog.slug %>">
+                                        <img src="<%= blogImageSrc %>" 
+                                            alt="<%= blog.balise_alt || blog.titre %>" 
+                                            class="img-fluid"
+                                            onerror="this.onerror=null; this.src='<%= blogFallbackSrc %>';">
+                                        </a>
+                                            <% if (blog.category_content) { %>
+                                                <span class="blog-category-badge">
+                                                    <i class="fas fa-tag"></i>
+                                                    <%= blog.category_content %>
+                                                </span>
+                                            <% } %>
+                                        </div>
+                                        
+                                        <div class="blog-card-body">
+                                            <div class="blog-meta">
+                                                <span class="blog-date">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                    <%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { 
+                                                        year: 'numeric', 
+                                                        month: 'long', 
+                                                        day: 'numeric' 
+                                                    }) %>
+                                                </span>
+                                                <span class="blog-likes">
+                                                    <i class="fas fa-heart"></i>
+                                                    <%= blog.likes || 0 %>
+                                                </span>
+                                            </div>
+                                            <h2 class="blog-title">
+                                                <a href="/blog/<%= blog.slug %>">
+                                                    <%= blog.titre %>
+                                                </a>
+                                            </h2>
+                                            <% if (blog.preview) { %>
+                                            <p class="blog-preview">
+                                                <%= blog.preview.substring(0, 100) %><%= blog.preview.length > 100 ? '...' : '' %>
+                                            </p>
+                                            <% } %>
+                                            <% if (blog.keywords_with_count) { 
+                                                const tagsArray = blog.keywords_with_count.split(',').map(tag => {
+                                                    const parts = tag.split(':');
+                                                    return { 
+                                                        content: parts[0].trim(), 
+                                                        slug: parts[1].trim(), 
+                                                        count: parts[2] 
+                                                    };
+                                                }).slice(0, 3); // Limiter à 3 tags
+                                            %>
+                                                <% if (tagsArray.length > 0) { %>
+                                                    <div class="blog-tags">
+                                                        <% tagsArray.forEach(tag => { %>
+                                                            <a href="/blog/tag/<%= tag.slug %>" class="blog-tag-badge">
+                                                                <i class="fas fa-hashtag"></i>
+                                                                <%= tag.content.replace(/^#/, '') %>
+                                                            </a>
+                                                        <% }); %>
+                                                        <% if (blog.total_tags > 3) { %>
+                                                            <span class="blog-tag-more">+<%= blog.total_tags - 3 %></span>
+                                                        <% } %>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+                                            <a href="/blog/<%= blog.slug %>" class="btn-read-more">
+                                                Lire la suite
+                                                <i class="fas fa-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </article>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <div class="no-articles-found" data-aos="fade-up">
+                            <div class="no-articles-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Aucun article trouvé</h3>
+                            <p>Il n'y a pas encore d'articles dans cette catégorie.</p>
+                            <a href="/blog" class="btn-back-to-blog">
+                                <i class="fas fa-arrow-left"></i>
+                                Retour à tous les articles
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            </section>
+            <% if (totalPages > 1) { %>
+                <section class="blog-pagination-section">
+                    <div class="container">
+                        <nav aria-label="Navigation des pages du blog">
+                            <ul class="blog-pagination">
+                                <% if (currentPage > 1) { %>
+                                    <li class="page-item">
+                                        <a href="/blog?page=<%= currentPage - 1 %>" class="page-link page-prev" aria-label="Page précédente">
+                                            <i class="fas fa-chevron-left"></i>
+                                            <span class="d-none d-md-inline">Précédent</span>
+                                        </a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link page-prev">
+                                            <i class="fas fa-chevron-left"></i>
+                                            <span class="d-none d-md-inline">Précédent</span>
+                                        </span>
+                                    </li>
+                                <% } %>
+                                <% 
+                                const maxVisiblePages = 5;
+                                let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                                
+                                if (endPage - startPage < maxVisiblePages - 1) {
+                                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                                }
+                                %>
+                                <% if (startPage > 1) { %>
+                                    <li class="page-item">
+                                        <a href="/blog?page=1" class="page-link">1</a>
+                                    </li>
+                                    <% if (startPage > 2) { %>
+                                        <li class="page-item disabled">
+                                            <span class="page-link page-ellipsis">...</span>
+                                        </li>
+                                    <% } %>
+                                <% } %>
+                                <% for (let i = startPage; i <= endPage; i++) { %>
+                                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                        <% if (i === currentPage) { %>
+                                            <span class="page-link"><%= i %></span>
+                                        <% } else { %>
+                                            <a href="/blog?page=<%= i %>" class="page-link"><%= i %></a>
+                                        <% } %>
+                                    </li>
+                                <% } %>
+                                <% if (endPage < totalPages) { %>
+                                    <% if (endPage < totalPages - 1) { %>
+                                        <li class="page-item disabled">
+                                            <span class="page-link page-ellipsis">...</span>
+                                        </li>
+                                    <% } %>
+                                    <li class="page-item">
+                                        <a href="/blog?page=<%= totalPages %>" class="page-link"><%= totalPages %></a>
+                                    </li>
+                                <% } %>
+                                <% if (hasNextPage) { %>
+                                    <li class="page-item">
+                                        <a href="/blog?page=<%= currentPage + 1 %>" class="page-link page-next" aria-label="Page suivante">
+                                            <span class="d-none d-md-inline">Suivant</span>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link page-next">
+                                            <span class="d-none d-md-inline">Suivant</span>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </span>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
+            <% } %>
+            </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const toggleBtn = document.getElementById("dogFiltersToggle");
+                const menu = document.getElementById("dogFiltersMenu");
+
+                if (toggleBtn && menu) {
+                    toggleBtn.addEventListener("click", function () {
+                        menu.classList.toggle("active");
+                        toggleBtn.classList.toggle("active");
+                    });
+                    document.addEventListener("click", function (e) {
+                        if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
+                            menu.classList.remove("active");
+                            toggleBtn.classList.remove("active");
+                        }
+                    });
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const toggleBtn = document.getElementById("mobileFiltersToggle");
+                const categoriesList = document.getElementById("blogCategoriesList");
+
+                if (toggleBtn && categoriesList) {
+                    toggleBtn.addEventListener("click", function () {
+                        categoriesList.classList.toggle("active");
+                        toggleBtn.classList.toggle("active");
+                    });
+                    document.addEventListener("click", function (e) {
+                        if (!toggleBtn.contains(e.target) && !categoriesList.contains(e.target)) {
+                            categoriesList.classList.remove("active");
+                            toggleBtn.classList.remove("active");
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<table id="marriages-table" class="table table-striped table-sm">
+    <thead>
+        <tr >
+            <th scope="col">#</th>
+            <th scope="col">Père</th>
+            <th scope="col">Mère</th>
+            <th scope="col">Male(s)</th>
+            <th scope="col">Femelle(s)</th>
+            <th scope="col">Statut</th>
+            <th scope="col" class="text-center">En Ligne</th>
+            <th scope="col" class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="marriages-table-body">
+        <!--  ajout d'un id dans le tbody -->
+        <% marriages.forEach((marriage, index) => { %>
+        <tr >
+            <td><%= index + 1 %></td>
+            <td><%= marriage.father_name %></td>
+            <td><%= marriage.mother_name %></td>
+            <td><%= marriage.actual_male_puppies %></td>
+            <td><%= marriage.actual_female_puppies %></td>
+            <td><%= marriage.marriages_status %></td>
+            <td class="text-center">
+                <% if (marriage.is_online) { %>
+                <i class="bi bi-check-circle text-success"></i>
+                <% } else { %>
+                <i class="bi bi-ban-fill text-danger"></i>
+                <% } %>
+            </td>
+            <td><button class="btn btn-primary w-100" id="edit-marriage-<%= marriage.id %>">Modifier</button></td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>

@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Élevage de Bel Air - American Bully & Springer Anglais</title>
+        <meta name="description" content="Élevage de Bel Air : élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse, accompagnement personnalisé. Découvrez nos reproducteurs et chiots.">
+        <meta name="keywords" content="élevage american bully, élevage springer anglais, chiots american bully, chiots springer anglais, élevage canin, chien de chasse, elevage de bel air, chiots LOF, american bully france, springer anglais france">
+        <meta name="author" content="Élevage de Bel Air">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://elevagedebelair.com/">
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR">
+        <meta name="geo.placename" content="France">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Élevage de Bel Air">
+        <meta property="og:title" content="Élevage de Bel Air - American Bully & Springer Anglais">
+        <meta property="og:description" content="Élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse, accompagnement personnalisé.">
+        <meta property="og:url" content="https://elevagedebelair.com/">
+        <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Élevage de Bel Air - American Bully et Springer Anglais">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Élevage de Bel Air - American Bully & Springer Anglais">
+        <meta name="twitter:description" content="Élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles, sélection rigoureuse.">
+        <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Élevage de Bel Air">
+        <%- include('../front/partials/head-meta-base.ejs') %> 
+        <%- include('../front/partials/head-fonts-libs.ejs') %> 
+        <link rel="stylesheet" href="/front/css/navbar.css"><link rel="stylesheet" href="/front/css/index.css">
+    </head>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %> 
+        <main style="padding-top: 70px;">
+            <!-- <section class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="container hero-content" style="display: none;">
+                    <h1 class="display-3 fw-bold text-white">Élevage de Bel Air</h1>
+                    <p class="lead text-white">Élevage familial d'American Bully et de Springer Anglais</p>
+                </div>
+            </section> -->
+
+            <section class="hero-section">
+                <img src="/img/index/img_index.webp" alt="Élevage de Bel Air" class="hero-img-mobile">
+                <div class="hero-overlay"></div>
+                <div class="container hero-content" style="display: none;">
+                    <h1 class="display-3 fw-bold text-white">Élevage de Bel Air</h1>
+                    <p class="lead text-white">Élevage familial d'American Bully et de Springer Anglais</p>
+                </div>
+            </section>
+            <section class="about-premium">
+                <div class="intro-hero">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <div class="intro-content" data-aos="fade-right">
+                                    <span class="label-tag">À propos de nous</span>
+                                    <h2 class="intro-title">Bonjour et bienvenue à l'Élevage de Bel Air</h2>
+                                    <p class="intro-lead">
+                                        Situé à la campagne dans le petit village de <strong>Pouzols, dans l'Hérault</strong>, au Sud de la France.
+                                    </p>
+                                    <div class="location-tag">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Pouzols, Hérault (34)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" data-aos="fade-left">
+                                <div class="intro-image">
+                                    <img src="/img/index/chien-elevage-1.webp" alt="Chiens de l'élevage" class="img-fluid rounded-4 shadow-lg">
+                                    <div class="image-badge">
+                                        <span>10+ ans</span>
+                                        <small>d'expérience</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Section Races avec données dynamiques -->
+            <div class="races-section">
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Nos Races</span>
+                    </div>
+                    <div class="row g-4 mb-5">
+                        <% 
+                            // Grouper TOUS les animaux par race (utilisation de allAnimals)
+                            const raceGroups = {};
+                            allAnimals.forEach(animal => {
+                                if (!raceGroups[animal.breed_name]) {
+                                    raceGroups[animal.breed_name] = {
+                                        breed_name: animal.breed_name,
+                                        breed_slug: animal.breed_slug,
+                                        animals: []
+                                    };
+                                }
+                                raceGroups[animal.breed_name].animals.push(animal);
+                            });
+                            
+                            const races = Object.values(raceGroups);
+                        %>
+                        <% races.forEach((race, index) => { %>
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="race-card-modern">
+                                <div class="race-image-wrapper">
+                                    <div class="race-main-image">
+                                        <% 
+                                            let imageSrc;
+                                            if (race.animals[0].optimized_image_path) {
+                                                imageSrc = '/uploads/optimized/' + race.animals[0].optimized_image_path;
+                                            } else if (race.animals[0].image_path) {
+                                                imageSrc = '/uploads/' + race.animals[0].image_path;
+                                            } else {
+                                                imageSrc = '/img/placeholder-dog.jpg';
+                                            }
+                                            
+                                            // Fallback pour onerror
+                                            const fallbackSrc = race.animals[0].image_path ? 
+                                                '/uploads/' + race.animals[0].image_path : 
+                                                '/img/placeholder-dog.jpg';
+                                        %>
+                                        <img src="<%= imageSrc %>" 
+                                            alt="<%= race.animals[0].balise_alt || race.breed_name %>" 
+                                            class="img-fluid"
+                                            onerror="this.onerror=null; this.src='<%= fallbackSrc %>';">
+                                        <div class="race-overlay-modern">
+                                            <h3><%= race.breed_name %></h3>
+                                            <span class="race-count"><%= race.animals.length %> <%= race.animals.length > 1 ? 'reproducteurs' : 'reproducteur' %></span>
+                                        </div>
+                                    </div>
+                                    <% if (race.animals.length > 1) { %>
+                                    <div class="race-mini-gallery">
+                                        <% race.animals.slice(1, 4).forEach(animal => { %>
+                                        <div class="mini-thumb">
+                                            <% 
+                                                let miniImgSrc;
+                                                if (animal.optimized_image_path) {
+                                                    miniImgSrc = '/uploads/optimized/' + animal.optimized_image_path;
+                                                } else if (animal.image_path) {
+                                                    miniImgSrc = '/uploads/' + animal.image_path;
+                                                } else {
+                                                    miniImgSrc = '/img/placeholder-dog.jpg';
+                                                }
+                                            %>
+                                            <img src="<%= miniImgSrc %>" 
+                                                alt="<%= animal.name %>" 
+                                                class="img-fluid"
+                                                onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';">
+                                        </div>
+                                        <% }); %>
+                                        <% if (race.animals.length > 4) { %>
+                                        <div class="mini-thumb more-count">
+                                            +<%= race.animals.length - 4 %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="race-content-modern">
+                                    <p class="race-description">
+                                        <% if (race.breed_name.includes('Springer')) { %>
+                                        Une race noble, sportive et affectueuse. Parfaite pour la chasse et la famille.
+                                        <% } else if (race.breed_name.includes('Bully')) { %>
+                                        Puissant, loyal et doux. Un compagnon exceptionnel pour toute la famille.
+                                        <% } else { %>
+                                        Une race d'exception, sélectionnée avec soin pour ses qualités exceptionnelles.
+                                        <% } %>
+                                    </p>
+                                    <div class="reproducteurs-list">
+                                        <h5>Nos Reproducteurs :</h5>
+                                        <div class="repro-tags">
+                                            <% race.animals.forEach(animal => { %>
+                                            <a href="/chiens/<%= race.breed_slug %>/<%= animal.slug %>" class="repro-tag">
+                                            <i class="fas fa-<%= animal.gender === 'Male' ? 'mars' : 'venus' %>"></i>
+                                            <%= animal.name %>
+                                            </a>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                    <div class="race-actions">
+                                        <a href="/races/<%= race.breed_slug %>" class="btn-race-primary">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        En savoir plus
+                                        </a>
+                                        <a href="/chiens?race=<%= race.breed_slug %>" class="btn-race-secondary">
+                                        <i class="fas fa-dog me-2"></i>
+                                        Voir les chiens
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="specialty-text" data-aos="fade-up">
+                        <div class="specialty-box-inline">
+                            <i class="fas fa-award specialty-icon"></i>
+                            <p>
+                                Je me spécialise dans ces races qui me sont chères. Je mets un point d'honneur à sélectionner les meilleurs pedigrees, les meilleurs tempéraments, les couleurs les plus rares…
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+            <!-- Section Nos Reproducteurs -->
+            <section class="our-dogs-section">
+                <div class="quote-parallax mb-5" data-aos="zoom-in">
+                    <div class="container">
+                        <div class="quote-box">
+                            <i class="fas fa-quote-left quote-icon-left"></i>
+                            <p class="quote-big">
+                                Mes chiens sont plus que des animaux de compagnie, ils font partie de la famille, et c'est exactement comme ça que mes chiots doivent être traités dans leur nouvelle famille.
+                            </p>
+                            <i class="fas fa-quote-right quote-icon-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Nos Reproducteurs</span>
+                        <p class="section-subtitle">Des reproducteurs sélectionnés pour leurs qualités exceptionnelles</p>
+                    </div>
+                    <div class="row g-4">
+                        <% animals.forEach((animal, index) => { %>
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="dog-card">
+                                <div class="dog-card-image">
+                                    <% 
+                                        let dogImageSrc;
+                                        if (animal.optimized_image_path) {
+                                            dogImageSrc = '/uploads/optimized/' + animal.optimized_image_path;
+                                        } else if (animal.image_path) {
+                                            dogImageSrc = '/uploads/' + animal.image_path;
+                                        } else {
+                                            dogImageSrc = '/img/placeholder-dog.jpg';
+                                        }
+                                        
+                                        const dogFallbackSrc = animal.image_path ? 
+                                            '/uploads/' + animal.image_path : 
+                                            '/img/placeholder-dog.jpg';
+                                        %>
+                                    <img src="<%= dogImageSrc %>" 
+                                        alt="<%= animal.balise_alt || animal.name %>" 
+                                        class="img-fluid"
+                                        onerror="this.onerror=null; this.src='<%= dogFallbackSrc %>';">
+                                    <div class="dog-gender-badge <%= animal.gender === 'Male' ? 'male' : 'female' %>">
+                                        <i class="fas fa-<%= animal.gender === 'Male' ? 'mars' : 'venus' %>"></i>
+                                    </div>
+                                    <div class="dog-card-overlay">
+                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="btn-view-dog">
+                                        <i class="fas fa-eye me-2"></i>Voir la fiche
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dog-card-body">
+                                    <h4 class="dog-name"><%= animal.name %></h4>
+                                    <div class="dog-info">
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-paw"></i>
+                                            <span><%= animal.breed_name %></span>
+                                        </div>
+                                        <% if (animal.breed_type) { %>
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-tag"></i>
+                                            <span><%= animal.breed_type %></span>
+                                        </div>
+                                        <% } %>
+                                        <% if (animal.color) { %>
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-palette"></i>
+                                            <span><%= animal.color %></span>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="text-center mt-5 mb-5" data-aos="fade-up">
+                        <a href="/chiens" class="btn-see-all-dogs">
+                        <span>Voir tous nos reproducteurs</span>
+                        <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- notre philosophie-->
+            <section>
+                <div class="family-life-section">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7 mb-4 mb-lg-0" data-aos="fade-right">
+                                <div class="family-content">
+                                    <span class="label-tag">Notre philosophie</span>
+                                    <h3 class="section-title">Une Vie de Famille Authentique</h3>
+                                    <p>
+                                        Mes chiens vivent au cœur de ma vie de famille, au sein de la famille, au milieu des enfants. C'est ce qui me différencie des autres élevages, je mets un point d'honneur à socialiser mes chiots dès le plus jeune âge.
+                                    </p>
+                                    <p>
+                                        Je commence la socialisation avec d'autres chiens et des enfants de tous âges…
+                                    </p>
+                                    <div class="motto-banner">
+                                        🐾 Ce n'est pas qu'un chien, c'est la famille !
+                                    </div>
+                                    <p>
+                                        Que vous soyez marié, seul, avec des enfants, mes chiens sont là pour compléter votre vie. Je produis des chiens qui offrent une dévotion sans faille à leur maître.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5" data-aos="fade-left">
+                                <div class="family-image">
+                                    <img src="/img/index/chien-enfants.webp" alt="Chiens avec enfants" class="img-fluid rounded-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section Nos Portées - VERSION PREMIUM -->
+            <section class="our-marriages-section-premium">
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Nos Mariages</span>
+                        <p class="section-subtitle-premium">Nos derniers mariages d'exception issus de reproducteurs sélectionnés</p>
+                    </div>
+                    <div class="row g-4">
+                        <% marriages.forEach((marriage, index) => { %>
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="marriage-card-premium">
+                                <div class="marriage-image-container">
+                                    <% 
+                                        let marriageImageSrc;
+                                        if (marriage.optimized_image_path) {
+                                            marriageImageSrc = '/uploads/optimized/' + marriage.optimized_image_path;
+                                        } else if (marriage.image_path) {
+                                            marriageImageSrc = '/uploads/' + marriage.image_path;
+                                        } else {
+                                            marriageImageSrc = '/img/placeholder-puppies.jpg';
+                                        }
+                                        
+                                        const marriageFallbackSrc = marriage.image_path ? 
+                                            '/uploads/' + marriage.image_path : 
+                                            '/img/placeholder-puppies.jpg';
+                                        %>
+                                    <img src="<%= marriageImageSrc %>" 
+                                        alt="Portée <%= marriage.male_name %> & <%= marriage.female_name %>" 
+                                        class="marriage-image-premium"
+                                        onerror="this.onerror=null; this.src='<%= marriageFallbackSrc %>';">
+                                    <div class="status-badge-premium <%= marriage.marriages_status.replace(' ', '-').toLowerCase() %>">
+                                        <% if (marriage.marriages_status === 'Programmé') { %>
+                                        <span class="status-dot"></span> Programmée
+                                        <% } else if (marriage.marriages_status === 'En Cours') { %>
+                                        <span class="status-dot"></span> En cours
+                                        <% } else if (marriage.marriages_status === 'Confirmé') { %>
+                                        <span class="status-dot"></span> Confirmée
+                                        <% } else if (marriage.marriages_status === 'Archivé') { %>
+                                        <span class="status-dot"></span> Archivée
+                                        <% } else { %>
+                                        <span class="status-dot"></span> <%= marriage.marriages_status %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="marriage-content-premium">
+                                    <div class="marriage-breed-header mb-2">
+                                        <i class="fas fa-paw"></i>
+                                        <span><%= marriage.breed_name %></span>
+                                    </div>
+                                    <div class="parents-section">
+                                        <div class="parent-item male">
+                                            <div class="parent-icon">
+                                                <i class="fas fa-mars"></i>
+                                            </div>
+                                            <div class="parent-info">
+                                                <span class="parent-label">Père</span>
+                                                <span class="parent-name"><%= marriage.male_name %></span>
+                                            </div>
+                                        </div>
+                                        <div class="parent-item female">
+                                            <div class="parent-icon">
+                                                <i class="fas fa-venus"></i>
+                                            </div>
+                                            <div class="parent-info">
+                                                <span class="parent-label">Mère</span>
+                                                <span class="parent-name"><%= marriage.female_name %></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="marriage-stats">
+                                        <div class="stat-item">
+                                            <div class="stat-number"><%= marriage.total_puppies || '?' %></div>
+                                            <div class="stat-label">
+                                                <i class="fas fa-baby"></i> Chiot<%= marriage.total_puppies > 1 ? 's' : '' %>
+                                            </div>
+                                        </div>
+                                        <div class="stat-divider"></div>
+                                        <div class="stat-item highlight">
+                                            <div class="stat-number"><%= marriage.available_puppies %></div>
+                                            <div class="stat-label">
+                                                <i class="fas fa-check-circle"></i> Disponible<%= marriage.available_puppies > 1 ? 's' : '' %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% if (marriage.actual_birth_date) { %>
+                                    <div class="birth-date-premium mb-2">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Nés le <%= new Date(marriage.actual_birth_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+                                    </div>
+                                    <% } %>
+                                    <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>" class="btn-cta-premium">
+                                    <span>Découvrir le mariage</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="text-center mt-5" data-aos="fade-up">
+                        <a href="/mariages" class="btn-all-marriages-premium">
+                        Voir tous nos mariages
+                        <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="mission-section">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                                <div class="mission-image">
+                                    <img src="/img/index/chiot-famille.webp" alt="Chiot en famille" class="img-fluid rounded-4">
+                                    <div class="float-card">
+                                        <i class="fas fa-heart"></i>
+                                        <span>Chiots socialisés</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7" data-aos="fade-left">
+                                <div class="mission-content">
+                                    <h3 class="section-title">Le Meilleur Chien Pour Vous</h3>
+                                    <p>
+                                        Que vous cherchiez un chien de chasse, un chien de garde, de compagnie ou de canapé, je m'efforce à produire le meilleur chien pour vous !
+                                    </p>
+                                    <div class="highlight-box-inline">
+                                        <strong>Quand vous achetez un chiot de chez moi, vous êtes plus qu'un client, vous devenez un membre de la famille Bel Air !</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section Nos Chiots Disponibles -->
+            <section class="our-puppies-section">
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Chiots Disponibles</span>
+                        <p class="section-subtitle">Découvrez nos chiots disponibles</p>
+                    </div>
+                    <div class="row g-4">
+                        <% puppies.forEach((puppy, index) => { %>
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="puppy-card">
+                                <div class="puppy-card-image">
+                                    <% 
+                                        let puppyImageSrc;
+                                        if (puppy.optimized_image_path) {
+                                            puppyImageSrc = '/uploads/optimized/' + puppy.optimized_image_path;
+                                        } else if (puppy.image_path) {
+                                            puppyImageSrc = '/uploads/' + puppy.image_path;
+                                        } else {
+                                            puppyImageSrc = '/img/placeholder-puppy.jpg';
+                                        }
+                                        
+                                        const puppyFallbackSrc = puppy.image_path ? 
+                                            '/uploads/' + puppy.image_path : 
+                                            '/img/placeholder-puppy.jpg';
+                                        %>
+                                    <img src="<%= puppyImageSrc %>" 
+                                        alt="<%= puppy.balise_alt || puppy.puppy_name %>" 
+                                        class="img-fluid"
+                                        onerror="this.onerror=null; this.src='<%= puppyFallbackSrc %>';">
+                                    <div class="puppy-status-badge <%= puppy.sale_status === 'available_for_reservation' ? 'available' : 'for-sale' %>">
+                                        <% if (puppy.sale_status === 'available_for_reservation') { %>
+                                        <i class="fas fa-calendar-check me-1"></i>Disponible
+                                        <% } else { %>
+                                        <i class="fas fa-tag me-1"></i>À vendre
+                                        <% } %>
+                                    </div>
+                                    <div class="puppy-gender-badge <%= puppy.puppy_gender === 'Mâle' ? 'male' : 'female' %>">
+                                        <i class="fas fa-<%= puppy.puppy_gender === 'Mâle' ? 'mars' : 'venus' %>"></i>
+                                    </div>
+                                    <div class="puppy-card-overlay">
+                                        <a href="/chiots/a-vendre/<%= puppy.breed_slug %>/<%= puppy.puppy_slug %>" class="btn-view-puppy">
+                                        <i class="fas fa-eye me-2"></i>Voir le chiot
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="puppy-card-body">
+                                    <h4 class="puppy-name"><%= puppy.puppy_name %></h4>
+                                    <div class="puppy-info">
+                                        <div class="puppy-info-item">
+                                            <i class="fas fa-paw"></i>
+                                            <span><%= puppy.breed_name %></span>
+                                        </div>
+                                        <% if (puppy.puppy_breed_type) { %>
+                                        <div class="puppy-info-item">
+                                            <i class="fas fa-tag"></i>
+                                            <span><%= puppy.puppy_breed_type %></span>
+                                        </div>
+                                        <% } %>
+                                        <% if (puppy.puppy_color) { %>
+                                        <div class="puppy-info-item">
+                                            <i class="fas fa-palette"></i>
+                                            <span><%= puppy.puppy_color %></span>
+                                        </div>
+                                        <% } %>
+                                        <% if (puppy.puppy_eye_color) { %>
+                                        <div class="puppy-info-item">
+                                            <i class="fas fa-eye"></i>
+                                            <span>Yeux <%= puppy.puppy_eye_color %></span>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <% if (puppy.price && puppy.price > 0) { %>
+                                    <div class="puppy-price">
+                                        <span class="price-amount"><%= puppy.price.toLocaleString('fr-FR') %> €</span>
+                                    </div>
+                                    <% } else { %>
+                                    <div class="puppy-price">
+                                        <span class="price-contact">
+                                        <i class="fas fa-phone-alt me-2"></i>Nous Consulter
+                                        </span>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="text-center mt-5" data-aos="fade-up">
+                        <a href="/chiots" class="btn-all-marriages-premium">
+                        Voir tous nos chiots disponibles
+                        <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="values-section">
+                    <div class="container">
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6" data-aos="fade-up">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <h4>Démarche Respectueuse</h4>
+                                    <p>
+                                        Mon élevage s'inscrit dans une démarche respectueuse du bien-être de l'animal. Tous mes chiens évoluent dans un environnement riche et stimulant. Ils sont promenés quotidiennement dans la campagne de Pouzols pour favoriser leur épanouissement physique et mental.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <h4>Élevage à Taille Humaine</h4>
+                                    <p>
+                                        Mon élevage restera à taille humaine afin de produire des chiots de qualité avec lesquels je pourrai consacrer tout mon temps. Dans la mesure du possible, je m'efforce de ne pas avoir plusieurs portées en même temps.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section Derniers Articles du Blog -->
+            <section class="blog-section">
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Blog</span>
+                        <h3 class="section-title-big">Nos Derniers Articles</h3>
+                        <p class="section-subtitle">Conseils, actualités et vie de l'élevage</p>
+                    </div>
+                    <div class="row g-4">
+                        <% blogs.forEach((blog, index) => { %>
+                        <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <article class="blog-card">
+                                <div class="blog-card-image">
+                                    <% 
+                                        let blogImageSrc;
+                                        if (blog.optimized_image_path) {
+                                            blogImageSrc = '/uploads/optimized/' + blog.optimized_image_path;
+                                        } else if (blog.image_path) {
+                                            blogImageSrc = '/uploads/' + blog.image_path;
+                                        } else {
+                                            blogImageSrc = '/img/placeholder-blog.jpg';
+                                        }
+                                        
+                                        const blogFallbackSrc = blog.image_path ? 
+                                            '/uploads/' + blog.image_path : 
+                                            '/img/placeholder-blog.jpg';
+                                        %>
+                                    <a href="/blog/<%= blog.slug %>">
+                                    <img src="<%= blogImageSrc %>" 
+                                        alt="<%= blog.balise_alt || blog.titre %>" 
+                                        class="img-fluid"
+                                        onerror="this.onerror=null; this.src='<%= blogFallbackSrc %>';">
+                                    </a>
+                                    <% if (blog.category_content) { %>
+                                    <div class="blog-category-badge">
+                                        <i class="fas fa-folder me-1"></i><%= blog.category_content %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="blog-card-body">
+                                    <div class="blog-meta">
+                                        <span class="blog-date">
+                                        <i class="far fa-calendar-alt me-1"></i>
+                                        Publié le :  <%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { 
+                                            day: 'numeric', 
+                                            month: 'short', 
+                                            year: 'numeric' 
+                                            }) %>
+                                        </span>
+                                        <% if (blog.likes > 0) { %>
+                                        <span class="blog-likes">
+                                        <i class="far fa-heart me-1"></i><%= blog.likes %>
+                                        </span>
+                                        <% } %>
+                                    </div>
+                                    <h4 class="blog-title">
+                                        <a href="/blog/<%= blog.slug %>">
+                                        <%= blog.titre %>
+                                        </a>
+                                    </h4>
+                                    <% if (blog.preview) { %>
+                                    <p class="blog-preview">
+                                        <%= blog.preview.substring(0, 100) %><%= blog.preview.length > 100 ? '...' : '' %>
+                                    </p>
+                                    <% } %>
+                                    <a href="/blog/<%= blog.slug %>" class="btn-read-more">
+                                    Lire la suite
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="text-center mt-5" data-aos="fade-up">
+                        <a href="/blog" class="btn-see-all-blog">
+                        <span>Voir tous les articles</span>
+                        <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <!-- Engagements MODERNES -->
+                <div class="commitments-modern">
+                    <div class="container">
+                        <div class="text-center mb-5" data-aos="fade-up">
+                            <span class="label-tag">Nos garanties</span>
+                            <h3 class="section-title-big">Mes Engagements</h3>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                                <div class="commit-card">
+                                    <div class="commit-number">01</div>
+                                    <div class="commit-icon-bg">
+                                        <i class="fas fa-heartbeat"></i>
+                                    </div>
+                                    <h4>Santé et Génétique</h4>
+                                    <p>Tous mes reproducteurs sont testés pour garantir l'absence de maladies héréditaires. Les chiens de l'élevage sont suivis par une clinique vétérinaire spécialisée.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                                <div class="commit-card active">
+                                    <div class="commit-number">02</div>
+                                    <div class="commit-icon-bg">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h4>Socialisation</h4>
+                                    <p>Mes chiots sont manipulés quotidiennement, habitués aux bruits ambiants d'une maison mais aussi aux gros bruits de travaux.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                                <div class="commit-card">
+                                    <div class="commit-number">03</div>
+                                    <div class="commit-icon-bg">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <h4>Espaces de Vie Spacieux</h4>
+                                    <p>Tous les chiens disposent d'un espace de vie intérieur / extérieur adapté à leur épanouissement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section Informations -->
+            <section class="informations-section">
+                <div class="container">
+                    <div class="text-center mb-5" data-aos="fade-up">
+                        <span class="label-tag">Informations Pratiques</span>
+                    </div>
+                    <div class="info-intro" data-aos="fade-up">
+                        <p>
+                            Avec cette section informations, nous avons rassemblé différentes pages concernant les moyens de transport mis à la disposition de nos adoptants, les registres utilisés pour nos chiens <strong>English Springer Spaniel</strong> et <strong>American Bully</strong>, ainsi que quelques conseils pratiques pour les premiers instants de partage entre votre nouveau compagnon et vous.
+                        </p>
+                    </div>
+                    <div class="info-block" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                                <div class="info-icon-circle">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 class="info-block-title">Livraison Personnelle dans les Départements Limitrophes</h3>
+                                <p class="info-block-text">
+                                    Pour faciliter l'arrivée d'un chiot au sein de votre foyer, nous pouvons effectuer des livraisons à domicile dans les départements limitrophes au nôtre, en nous déplaçant personnellement dans <strong>l'Hérault (34)</strong>, le <strong>Gard (30)</strong>, l'<strong>Aveyron (12)</strong>, la <strong>Lozère (48)</strong> et l'<strong>Ardèche (07)</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-block" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                                <div class="info-icon-circle">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 class="info-block-title">Transport Professionnel dans toute la France</h3>
+                                <p class="info-block-text">
+                                    Pour nos futurs adoptants situés hors de ces zones, nous mettons à votre disposition un <strong>service de transport professionnel</strong> assuré par notre partenaire spécialisé dans le bien-être animal. Ce service de qualité garantit que nos chiots voyagent dans des conditions optimales, respectant leur confort et leur sécurité tout au long du trajet.
+                                </p>
+                                <p class="info-block-text">
+                                    Nous desservons les principaux départements et villes en France, y compris <strong>Paris (75) et toute l'Île-de-France</strong>, <strong>Lyon (69)</strong>, <strong>Toulouse (31)</strong>, <strong>Nice (06)</strong>, <strong>Nantes (44)</strong>, <strong>Montpellier (34)</strong>, <strong>Strasbourg (67)</strong>, <strong>Bordeaux (33)</strong>, <strong>Lille (59)</strong> et bien d'autres encore.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4 mb-4" data-aos="fade-up">
+                        <div class="col-md-6">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <h4 class="info-card-title">Livraison en Île-de-France</h4>
+                                <p class="info-card-text">
+                                    Grâce à notre organisation, nous pouvons organiser la livraison de votre chiot à un lieu précis convenu ensemble en Île-de-France, afin de faciliter l'arrivée de votre nouveau compagnon dans les meilleures conditions.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fas fa-map"></i>
+                                </div>
+                                <h4 class="info-card-title">Livraison dans toute la France</h4>
+                                <p class="info-card-text">
+                                    Nos services couvrent également l'ensemble du territoire français. Peu importe où vous vous trouvez, nous faisons en sorte que votre chiot vous rejoigne rapidement et en parfaite santé, tout en réduisant le stress lié au transport.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-cta" data-aos="fade-up">
+                        <p>
+                            <i class="fas fa-info-circle me-2"></i>
+                            N'hésitez pas à nous contacter pour plus d'informations sur les modalités et tarifs de ce service, qui est conçu pour répondre au mieux à vos attentes et au bien-être de nos chiots.
+                        </p>
+                    </div>
+                    <div class="info-block international" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                                <div class="info-icon-circle">
+                                    <i class="fas fa-globe-europe"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 class="info-block-title">Expéditions DOM-TOM et International</h3>
+                                <p class="info-block-text">
+                                    Les expéditions vers les <strong>DOM-TOM</strong> : <strong>Nouvelle-Calédonie (988)</strong>, <strong>l'Île de la Réunion (974)</strong>, <strong>Guadeloupe (971)</strong>, <strong>Martinique (972)</strong> sont également possibles, ainsi qu'à l'international.
+                                </p>
+                                <p class="info-block-text">
+                                    Nous avons déjà vendu dans plusieurs pays d'Europe comme la <strong>Belgique</strong>, l'<strong>Allemagne</strong>, la <strong>Suisse</strong>, l'<strong>Espagne</strong> ou encore l'<strong>Italie</strong>. Nous ferons tout notre possible pour vous aider à organiser le transport de votre animal dans votre pays de résidence et ce dans les meilleures conditions possibles.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-block" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-lg-2 text-center mb-3 mb-lg-0">
+                                <div class="info-icon-circle">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 class="info-block-title">Registres et Papiers LOF</h3>
+                                <p class="info-block-text">
+                                    Tous nos chiots sont <strong>inscrits au LOF</strong> (Livre des Origines Français) ou au <strong> registre FBKC</strong> (French Breed Kennel Club), garantissant la pureté de leur lignée. Chaque chiot est livré avec son certificat de naissance, son carnet de santé à jour, sa carte d'identification et son dossier généalogique complet.
+                                </p>
+                                <p class="info-block-text">
+                                    Nos reproducteurs sont testés génétiquement et suivis par une clinique vétérinaire spécialisée, assurant ainsi la meilleure santé possible pour votre futur compagnon.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5" data-aos="fade-up">
+                        <a href="/contact" class="btn-info-contact">
+                        <i class="fas fa-envelope me-2"></i>
+                        Nous Contacter pour Plus d'Informations
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,         
+                easing: 'ease-in-out',   
+                once: true,              
+                offset: 120,             
+                delay: 0,               
+                anchorPlacement: 'top-bottom', 
+                mirror: false,          
+                disable: 'mobile'  
+            });
+        </script>
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "PetStore",
+              "name": "Élevage de Bel Air",
+              "description": "Élevage familial d'American Bully et de Springer Anglais. Chiots LOF disponibles.",
+              "url": "https://elevagedebelair.com",
+              "logo": "https://elevagedebelair.com/images/logo.png",
+              "image": "https://elevagedebelair.com/images/og-image.jpg",
+              "email": "elevagedebelair3@gmail.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "FR"
+              },
+              "priceRange": "$$",
+              "openingHours": "Mo-Su 09:00-19:00",
+              "sameAs": [
+                "https://www.facebook.com/elevagedebelair",
+                "https://www.instagram.com/elevagedebelair"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Nos races",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Product",
+                      "name": "American Bully",
+                      "description": "Chiots American Bully"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Product",
+                      "name": "Springer Anglais",
+                      "description": "Chiots Springer Anglais LOF"
+                    }
+                  }
+                ]
+              }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+/* Animations personnalisées pour les toasts */
+.toast {
+    min-width: 300px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.toast.hide {
+    animation: slideOutRight 0.3s ease-in;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Couleurs personnalisées pour les toasts */
+.toast.bg-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+}
+
+.toast.bg-error,
+.toast.bg-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+}
+
+.toast.bg-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%) !important;
+    color: #000 !important;
+}
+
+.toast.bg-warning .btn-close {
+    filter: invert(1);
+}
+
+.toast.bg-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+}
+
+/* Style du body du toast */
+.toast-body {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Container de toasts */
+#toastContainer {
+    z-index: 9999;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .toast {
+        min-width: 250px;
+        margin: 0 auto;
+    }
+    
+    #toastContainer {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+}

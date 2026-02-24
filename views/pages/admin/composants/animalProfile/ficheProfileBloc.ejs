@@ -1,0 +1,122 @@
+<div class="card widget-card border-light shadow-sm mb-4">
+    <div class="card-header text-bg-primary text-center">Fiche profil</div>
+    <div  id="image-profile-1" class="card-body text-center" >
+        <% if (animal && animal.image_path_profile) { %>
+        <img src="/uploads/<%= animal.image_path_profile %>" class="rounded mb-3" id="image-1" alt="profile-image" width="100px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <h5 class="mb-1 "><%= animal.name %>
+            <% if (animal.gender === 'Male') { %>
+            <i class="bi bi-gender-male text-primary ms-1"></i>
+            <% } else if (animal.gender === 'Femelle') { %>
+            <i class="bi bi-gender-female ms-2"></i>
+            <% } %>
+        </h5>
+        <p class="text-secondary mb-4"><%= animal.breed_name %></p>
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h6 class="m-0">Age</h6>
+                <span><%= animal.age %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h6 class="m-0">Genre</h6>
+                <span><%= animal.gender %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h6 class="m-0">Couleur</h6>
+                <span><%= animal.color %></span>
+            </li>
+        </ul>
+        <div class="d-grid">
+            <button class="btn btn-outline-primary" type="button" onclick="window.location.href='/admin/myanimals';">Mes Animaux</button>
+            <button class="btn btn-outline-primary mt-2" type="button" onclick="window.location.href='/admin/imagesDescription/<%= animal.slug %>';">Description Image</button>
+            <button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="modal" data-bs-target="#resultsModal" data-animal-id="<%= animal.id %>" data-animal-name="<%= animal.name %>">
+            Résultats Concours
+            </button>
+            <button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="modal" data-bs-target="#coverModal" data-animal-id="<%= animal.id %>" data-animal-name="<%= animal.name %>">
+            Photos Couverture
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modale pour l'ajout des résultats -->
+<div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultsModalLabel">Ajouter des résultats pour <span id="animalName"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="resultsForm">
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Année</label>
+                        <input type="number" class="form-control" id="year" name="year" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="awardName" class="form-label">Nom de la récompense</label>
+                        <input type="text" class="form-control" id="awardName" name="award_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="awardDescription" class="form-label">Description de la récompense</label>
+                        <textarea class="form-control" id="awardDescription" name="award_description" rows="10"></textarea>
+                    </div>
+                    <input type="hidden" id="animalId" name="animal_id" data-animal-id="<%= animal.id %>">
+                </form>
+                <!-- Div pour le message de succès -->
+                <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+                    Résultats enregistrés avec succès.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary" form="resultsForm">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modale pour l'enregistrement de la photo de couverture -->
+<div class="modal fade" id="coverModal" tabindex="-1" aria-labelledby="coverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="coverModalLabel">Ajouter une photo de couverture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="coverImageForm" enctype="multipart/form-data">
+                    <input type="hidden" id="animalId" name="animalId">
+                    <input type="hidden" id="animalName" name="animalName">
+                    <div class="mb-3">
+                        <label for="coverImage" class="form-label">Image (1300x500px recommandé)</label><br>
+                        <span>"Animal à droite de la photo"</span>
+                        <input type="file" class="form-control" id="coverImage" name="coverImage" accept="image/*" required>
+                        <div id="imagePreview" class="mt-2 d-none">
+                            <img src="" alt="Prévisualisation" style="max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="baliseTitle" class="form-label">Titre de l'image</label>
+                        <input type="text" class="form-control" id="baliseTitle" name="baliseTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="baliseAlt" class="form-label">Texte alternatif</label>
+                        <input type="text" class="form-control" id="baliseAlt" name="baliseAlt" required>
+                    </div>
+                </form>
+                <div class="alert alert-success alert-dismissible d-none" id="successAlert" role="alert">
+                    <div>Image de couverture enregistrée avec succès !</div>
+                </div>
+                <div class="alert alert-danger alert-dismissible d-none" id="errorAlert" role="alert">
+                    <div id="errorMessage">Une erreur est survenue</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" id="saveCoverImage">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>

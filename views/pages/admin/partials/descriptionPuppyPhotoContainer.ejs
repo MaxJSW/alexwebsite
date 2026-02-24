@@ -1,0 +1,26 @@
+<div class="row row-cols-1 row-cols-sm-2 g-3" id="DescriptionPuppyPhotoContainer-<%= puppy.id %>">
+    <% images.forEach(image => { %>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="card mb-4 shadow-sm">
+                <img src="/uploads/<%= image.image_path %>" class="card-img-top object-fit-cover" alt="<%= image.balise_alt %>" width="200" height="350">
+                <div class="card-body"> 
+                  <form data-id="<%= image.id %>" id="update-alt-form-<%= image.id %>" class="update-alt-form" method="POST" action="/imagesDescription/updateImageAlt">
+                      <div class="form-group">
+                          <label for="balise_alt_<%= image.id %>" class="d-flex align-items-center mb-2">
+                              <span>Balise alt</span>
+                              <span id="badge-<%= image.id %>" class="badge text-bg-success mb-0 ms-2 <%= image.alt_modified ? null : 'd-none' %>" style="margin-bottom: 10px;" >Modifié</span>
+                          </label>
+                          <input type="text" class="form-control <%= image.alt_modified ? 'border-success' : 'border-danger' %>" id="balise_alt_<%= image.id %>" name="balise_alt" value="<%= image.balise_alt %>" placeholder="Décrire l'action ou l'animal">
+                          <input type="hidden" name="imageId" value="<%= image.id %>">
+                          <!-- test -->
+                          <input type="hidden" name="balise_title" value="Photos de <%= puppy.puppy_name %> ">
+                          <input type="hidden" name="puppies_id" id="puppies_id" value="<%= puppy.id %>">
+                          <input type="hidden" name="marriage_id" id="marriage_id" value="<%= marriage.id %>">
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-2">Mettre à jour</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>

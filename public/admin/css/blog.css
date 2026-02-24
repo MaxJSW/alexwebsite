@@ -1,0 +1,21 @@
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+.text-secondary {
+    color: #87898b !important;
+}
+
+.text-muted {
+    color: #87898b !important;
+}
+
+.text-primary-blog{
+    color: #9e7af3!important;
+    border:none;
+}

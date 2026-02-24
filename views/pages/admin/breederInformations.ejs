@@ -1,0 +1,280 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Informations de l'éleveur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/1365cc5822.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <link rel="stylesheet" href="/admin/css/dashboard.css">
+    <link rel="stylesheet" href="/admin/css/breederInformations.css">
+    <link rel="stylesheet" href="/admin/css/sidebar.css">
+    <script src="/admin/js/themes/darkThemeFunction.js"></script>
+</head>
+<body>
+    <%- include('../admin/composants/header') %>
+    <%- include('../admin/composants/topBar') %>
+    <div class="container-fluid mt-5 mb-5 border rounded bg-body-tertiary">
+        <div class="form-container">
+            <h4 class="mb-3 mt-3 ms-1">Mis à jour de vos Informations</h4>
+            <hr>
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mb-5 mt-3">
+                    <div class="card widget-card border-light shadow-sm mb-4 ms-lg-5">
+                        <div class="card-header text-bg-primary d-flex align-items-center justify-content-between">
+                            <span>Réseaux Sociaux</span>
+                            <button id="openModalSocialNetwork" class="btn">
+                            <i class="bi bi-pencil-square text-white"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <% 
+                                // Créer un objet pour accéder rapidement aux liens par ID de réseau social
+                                const socialLinksMap = {};
+                                userSocialLinks.forEach(link => {
+                                  socialLinksMap[link.social_network_id] = link.social_media_link;
+                                });
+                                
+                                // Mapper les IDs des réseaux sociaux aux icônes Bootstrap
+                                  const socialIcons = {
+                                      1: 'bi-facebook',      
+                                      2: 'bi-tiktok',     
+                                      3: 'bi-instagram',     
+                                      4: 'bi-youtube',      
+                                      5: 'bi-twitter-x' 
+                                  };
+                                %>
+                            <% socialNetworks.forEach(network => { 
+                                const link = socialLinksMap[network.id];
+                                const icon = socialIcons[network.id];
+                                const isActive = link ? true : false;
+                                %>
+                            <% if (isActive) { %>
+                            <a href="<%= link %>" target="_blank" rel="noopener noreferrer" class="d-inline-block bg-primary link-light lh-2 p-2 rounded me-2" title="<%= network.name %>">
+                            <i class="<%= icon %>"></i>
+                            </a>
+                            <% } else { %>
+                            <span class="d-inline-block bg-secondary link-light lh-2 p-2 rounded me-2 opacity-50" title="<%= network.name %> - Non configuré">
+                            <i class="<%= icon %>"></i>
+                            </span>
+                            <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-4 ms-lg-5">
+                        <button class="btn btn-primary mb-2 w-100 upload-photo-button" type="button" data-photos-user-id="<%= user.id %>">Télécharger votre logo</button>
+                        <small class="mb-2">Format accepté : PNG ou SVG</small>
+                        <div id="userPhotoContainer-<%= user.id %>" class="bg-body-dark p-3 mb-3 mt-5" style="height:300px; background-color: black;">
+                            <% if (user.image_path) { %>
+                            <img src="/uploads/<%= user.image_path %>" alt="Prévisualisation du logo" title="logo de l'élevage <%= user.kennel_name %>" class="img-fluid preview-image">
+                            <% } else { %>
+                            <small class="text-muted">Aucune image téléchargée</small>
+                            <% } %>
+                        </div>
+                        <label for="photo" class="form-label" style="display:none;">Sélectionner une photo</label>
+                        <input type="file" class="form-control" id="photo-<%= user.id %>" name="photo" style="display:none;" required>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-10 col-md-10 col-sm-12 col-xs-12 offset-md-1 me-5">
+                    <form id="userInfoForm" enctype="multipart/form-data">
+                        <div class="form-group mt-3">
+                            <label for="name" class="ms-1">Prénom</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="surname" class="ms-1">Nom</label>
+                            <input type="text" class="form-control" id="surname" name="surname" value="<%= user.surname %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="kennel_name" class="ms-1">Affixe ou Nom de l'Élevage</label>
+                            <input type="text" class="form-control" id="kennel_name" name="kennel_name" value="<%= user.kennel_name %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="email" class="ms-1">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="siret_number" class="ms-1">SIRET</label>
+                            <input type="text" class="form-control" id="siret_number" name="siret_number" value="<%= user.siret_number %>" maxlength="14" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="acaced_number" class="ms-1">ACACED</label>
+                            <input type="text" class="form-control" id="acaced_number" name="acaced_number" value="<%= user.acaced_number %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="adresse" class="ms-1">Adresse</label>
+                            <input type="text" class="form-control" id="adresse" name="adresse" value="<%= user.adresse %>" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="phone_number" class="ms-1">Téléphone</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="<%= user.phone_number %>" required>
+                        </div>
+                        <div id="userSuccessMessage" class="alert alert-success mt-3 mb-2" role="alert" style="display: none;">
+                            Modifications enregistrées avec succès!
+                        </div>
+                        <div class="d-flex justify-content-end p-4">
+                            <button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="/admin/js/utilities/titleFunction.js"></script>
+<script src="/admin/js/breederInfos/breederInfosFunction.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+const userSocialLinks = JSON.parse('<%- JSON.stringify(userSocialLinks) %>');
+$(document).ready(function() {
+    $('#openModalSocialNetwork').on('click', function() {
+        const selectedNetwork = $('#socialMediaType').val();
+        const link = userSocialLinks.find(link => link.social_network_id == selectedNetwork);
+        $('#socialMediaLink').val(link ? link.social_media_link : '');
+        $('#socialMediaModal').modal('show');
+    });
+
+    $('#socialMediaType').on('change', function() {
+        const selectedNetwork = $(this).val();
+        const link = userSocialLinks.find(link => link.social_network_id == selectedNetwork);
+        $('#socialMediaLink').val(link ? link.social_media_link : '');
+    });
+
+    $('#saveSocialMediaLink').on('click', async function() {
+        const socialNetworkId = $('#socialMediaType').val();
+        const socialMediaLink = $('#socialMediaLink').val();
+
+        const params = new URLSearchParams();
+        params.append('social_network_id', socialNetworkId);
+        params.append('social_media_link', socialMediaLink);
+
+        console.log(params);
+
+        try {
+            const response = await fetch('/admin/breederInformations/update-social-link', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            });
+       console.log(response);
+            const result = await response.json();
+          if (result.success) {
+              $('#successMessageSocial').show();
+              setTimeout(() => {
+                  $('#successMessageSocial').hide();
+                  $('#socialMediaModal').modal('hide');
+                  location.reload();
+              }, 2000);
+            } else {
+                alert('Erreur lors de la mise à jour du lien de réseau social.');
+            }
+        } catch (error) {
+            alert('Erreur lors de la mise à jour du lien de réseau social.');
+        }
+    });
+})
+</script>
+
+  <!-- Modal social network -->
+<div class="modal fade" id="socialMediaModal" tabindex="-1" aria-labelledby="socialMediaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="socialMediaModalLabel">Ajouter un lien de réseau social</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="socialMediaType" class="form-label">Type de réseau social</label>
+                    <select id="socialMediaType" class="form-select">
+                        <% socialNetworks.forEach(network => { %>
+                            <option value="<%= network.id %>" id="socialMediaType"><%= network.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="socialMediaLink" class="form-label">Lien du réseau social</label>
+                    <input type="text" class="form-control" id="socialMediaLink" value="" placeholder="https://www.facebook.com/username">
+                    <div id="successMessageSocial" class="alert alert-success mt-2" role="alert" style="display: none;">
+                        Enregistrement de votre lien réussi
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" id="saveSocialMediaLink">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de recadrage du logo -->
+<div class="modal fade" id="cropperLogoModal" tabindex="-1" aria-labelledby="cropperLogoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropperLogoModalLabel">Recadrer votre logo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="cropper-container-wrapper" style="max-height: 500px; overflow: hidden;">
+                    <img id="logoToCrop" style="max-width: 100%;">
+                </div>
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Conseil :</strong> Recadrez votre logo en format carré pour un meilleur rendu sur le site.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" id="cropAndUploadLogoBtn">Valider et télécharger</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container pour les toasts (notifications en haut à droite) -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    <!-- Toast de succès -->
+    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <span id="successToastMessage"></span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    
+    <!-- Toast d'erreur -->
+    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <span id="errorToastMessage"></span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    
+    <!-- Toast d'avertissement -->
+    <div id="warningToast" class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                <span id="warningToastMessage"></span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

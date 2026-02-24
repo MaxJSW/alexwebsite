@@ -1,0 +1,1571 @@
+/* ========================================
+   SECTION HERO - GALERIE + INFOS
+======================================== */
+
+.puppy-detail-hero {
+    padding: 2.5rem 0;
+    background: #f8f9fa;
+}
+
+.puppy-detail-hero .row {
+    align-items: stretch;
+}
+
+/* ========================================
+   COLONNE GAUCHE - GALERIE
+======================================== */
+
+.puppy-gallery-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Badge Statut */
+.puppy-status-badge {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    padding: 0.35rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.puppy-status-badge.available {
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+}
+
+.puppy-status-badge.reservation {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.puppy-status-badge.reserved {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    color: white;
+}
+
+/* Carrousel Swiper CARRÉ */
+.carousel-wrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.mainPuppySwiper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.puppy-carousel-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.puppy-carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.puppy-carousel-image:hover img {
+    transform: scale(1.05);
+}
+
+.puppy-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.puppy-carousel-image:hover .puppy-carousel-overlay {
+    opacity: 1;
+}
+
+.puppy-carousel-overlay i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* Boutons navigation Swiper */
+.puppy-btn-next,
+.puppy-btn-prev {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.puppy-btn-next:after,
+.puppy-btn-prev:after {
+    font-size: 16px;
+    color: var(--primary-color);
+    font-weight: 900;
+}
+
+/* Compteur d'images */
+.puppy-carousel-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.puppy-carousel-counter i {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+}
+
+/* Thumbnails - 3 par ligne */
+.puppy-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.thumbnail-item {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.thumbnail-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(101, 193, 120, 0.3);
+}
+
+.thumbnail-item:hover img {
+    transform: scale(1.1);
+}
+
+.thumbnail-item.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.4);
+}
+
+.thumbnail-item.active::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--primary-color);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+/* ========================================
+   COLONNE DROITE - INFORMATIONS
+======================================== */
+
+.puppy-info-container {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #1a2416 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Header */
+.puppy-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.puppy-name-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.puppy-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.puppy-gender {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.puppy-gender.male {
+    background: #3498db;
+}
+
+.puppy-gender.female {
+    background: #e91e63;
+}
+
+/* Informations principales */
+.puppy-main-info {
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row.highlight {
+    background: rgba(101, 193, 120, 0.15);
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-top: 0.5rem;
+}
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.info-label i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    width: 18px;
+}
+
+.info-value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.info-value a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.info-value a:hover {
+    color: #7ed492;
+}
+
+.type-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: rgba(101, 193, 120, 0.2);
+    color: var(--primary-color);
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Section Prix */
+.puppy-price-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.price-content {
+    text-align: center;
+}
+
+.price-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouton Contact */
+.btn-puppy-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.4);
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.btn-puppy-contact:hover {
+    background: #7ed492;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.5);
+    color: white;
+}
+
+.btn-puppy-contact i {
+    font-size: 1rem;
+}
+
+/* Likes */
+.puppy-likes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(233, 30, 99, 0.15);
+    border-radius: 10px;
+    color: #ff6b9d;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.puppy-likes i {
+    color: #ff6b9d;
+    font-size: 0.85rem;
+}
+
+.fancybox-hidden {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    visibility: hidden;
+}
+
+
+
+/* ========================================
+   SECTION GÉNÉALOGIE / PEDIGREE
+======================================== */
+
+.puppy-pedigree-section {
+    padding: 3rem 0;
+    background: #f8f9fa;
+}
+
+/* En-tête */
+.pedigree-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.pedigree-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+}
+
+.pedigree-title i {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.pedigree-subtitle {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0;
+}
+
+/* Arbre généalogique */
+.pedigree-tree {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Niveaux */
+.pedigree-level {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.pedigree-level.level-1 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.pedigree-level.level-2 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Cartes */
+.pedigree-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pedigree-card:not(.empty):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.pedigree-card.empty {
+    background: #f8f9fa;
+    border-style: dashed;
+    border-color: #ddd;
+}
+
+/* Contenu des cartes */
+.pedigree-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+}
+
+/* Images - Parents (grandes) */
+.pedigree-level.level-1 .pedigree-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid #e0e0e0;
+}
+
+.pedigree-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Images - Grands-parents (petites) */
+.pedigree-level.level-2 .pedigree-image.small {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #e0e0e0;
+}
+
+/* Badges genre */
+.pedigree-badge {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.pedigree-badge.small {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.pedigree-badge.male {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.pedigree-badge.female {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+
+/* Infos */
+.pedigree-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    text-align: center;
+}
+
+.pedigree-label {
+    font-size: 0.7rem;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.pedigree-name {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.pedigree-name.small {
+    font-size: 0.85rem;
+}
+
+.pedigree-breed {
+    font-size: 0.75rem;
+    color: #777;
+    font-weight: 500;
+}
+
+.pedigree-unknown {
+    font-size: 0.85rem;
+    color: #999;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+/* ========================================
+   SECTION DESCRIPTION
+======================================== */
+
+.puppy-description-section {
+    padding: 3rem 0;
+    background: #ffffff;
+}
+
+.puppy-description-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Titre de section */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.section-title i {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+/* Contenu de la description */
+.description-content {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+    white-space: pre-line;
+    margin-top: -25px;
+}
+
+.description-content p {
+    margin-bottom: 1rem;
+}
+
+.description-content p:last-child {
+    margin-bottom: 0;
+}
+
+.description-content strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.description-content ul,
+.description-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.description-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* ========================================
+   SECTION FRÈRES ET SŒURS
+======================================== */
+
+.puppy-siblings-section{
+    padding: 2.5rem 0;
+    background: #ffffff;
+}
+
+/* En-tête */
+.siblings-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.siblings-header .section-title {
+    justify-content: center;
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+}
+
+.siblings-subtitle {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0;
+}
+
+/* Carte Sibling */
+.sibling-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sibling-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Image */
+.sibling-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.sibling-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sibling-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.sibling-card:hover .sibling-image img {
+    transform: scale(1.1);
+}
+
+/* Badge Genre */
+.sibling-gender {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.sibling-gender.male {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.sibling-gender.female {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+
+/* Badge Statut */
+.sibling-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.sibling-status.available {
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+}
+
+.sibling-status.reserved {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    color: white;
+}
+
+.sibling-status.sold {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+}
+
+/* Corps de la carte */
+.sibling-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sibling-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.sibling-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sibling-name a:hover {
+    color: var(--primary-color);
+}
+
+/* Informations */
+.sibling-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.sibling-breed,
+.sibling-color {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.sibling-breed i,
+.sibling-color i {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+}
+
+/* Bouton */
+.btn-sibling {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--primary-color), #7ed492);
+    color: white;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-sibling:hover {
+    background: linear-gradient(135deg, #7ed492, var(--primary-color));
+    transform: translateX(5px);
+    color: white;
+}
+
+.btn-sibling i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-sibling:hover i {
+    transform: translateX(5px);
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+
+/* ========================================
+   RESPONSIVE PREMIERE SECTION - TABLETTES
+======================================== */
+
+@media (max-width: 991px) {
+    .puppy-detail-hero {
+        padding: 2rem 0;
+    }
+
+    .puppy-info-container {
+        margin-top: 1.5rem;
+        padding: 1.75rem;
+    }
+
+    .puppy-name {
+        font-size: 1.75rem;
+    }
+
+    .price-amount {
+        font-size: 1.55rem;
+    }
+
+    .puppy-status-badge {
+    font-size: 0.45rem;
+    padding: 0.35rem 0.8rem;
+    top: 30px;
+    left: 30px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+======================================== */
+@media (max-width: 767px) {
+    .puppy-detail-hero {
+        padding: 1.75rem 0;
+    }
+
+    .puppy-gallery-container {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .puppy-main-image {
+        margin-bottom: 0.85rem;
+        border-radius: 10px;
+    }
+
+    .puppy-thumbnails {
+        gap: 0.6rem;
+    }
+
+    .thumbnail-item {
+        border-radius: 8px;
+    }
+
+    .puppy-info-container {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .puppy-header {
+        margin-bottom: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .puppy-name {
+        font-size: 1.6rem;
+    }
+
+    .puppy-gender {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.9rem;
+    }
+
+    .info-row {
+        padding: 0.75rem 0;
+    }
+
+    .info-label {
+        font-size: 0.8rem;
+    }
+
+    .info-value {
+        font-size: 0.85rem;
+    }
+
+    .price-amount {
+        font-size: 1.4rem;
+    }
+
+    .btn-puppy-contact {
+        font-size: 0.9rem;
+        padding: 0.95rem;
+    }
+
+    .puppy-status-badge {
+        font-size: 0.45rem;
+        padding: 0.45rem 1rem;
+        top: 20px;
+        left: 20px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - PETITS MOBILES
+======================================== */
+@media (max-width: 575px) {
+    .puppy-detail-hero {
+        padding: 1.5rem 0;
+    }
+
+    .puppy-gallery-container {
+        padding: 1rem;
+    }
+
+    .puppy-main-image {
+        margin-bottom: 0.75rem;
+    }
+
+    .puppy-thumbnails {
+        gap: 0.5rem;
+    }
+
+    .puppy-info-container {
+        padding: 1.35rem;
+    }
+
+    .puppy-name-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .puppy-name {
+        font-size: 1.45rem;
+    }
+
+    .puppy-gender {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.85rem;
+    }
+
+    .info-row {
+        padding: 0.7rem 0;
+    }
+
+    .info-label {
+        font-size: 0.75rem;
+    }
+
+    .info-value {
+        font-size: 0.8rem;
+    }
+
+    .puppy-price-section {
+        padding: 1.1rem;
+    }
+
+    .price-label {
+        font-size: 0.7rem;
+    }
+
+    .price-amount {
+        font-size: 1.25rem;
+    }
+
+    .btn-puppy-contact {
+        font-size: 0.85rem;
+        padding: 0.9rem;
+    }
+
+    .puppy-likes {
+        font-size: 0.75rem;
+        padding: 0.7rem;
+    }
+
+    .puppy-status-badge {
+        font-size: 0.45rem;
+        padding: 0.3rem 0.8rem;
+        top: 25px;
+        left: 25px;
+    }
+
+    .thumbnail-item.active::after {
+        width: 20px;
+        height: 20px;
+        font-size: 0.65rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TRÈS PETITS MOBILES
+======================================== */
+@media (max-width: 400px) {
+    .puppy-name {
+        font-size: 1.3rem;
+    }
+
+    .price-amount {
+        font-size: 1.1rem;
+    }
+
+    .btn-puppy-contact {
+        font-size: 0.8rem;
+    }
+
+    .puppy-thumbnails {
+        gap: 0.4rem;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE DESCRIPTION - TABLETTES
+======================================== */
+@media (max-width: 991px) {
+    .puppy-description-section {
+        padding: 2.5rem 0;
+    }
+
+    .puppy-description-card {
+        padding: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .description-content {
+        font-size: 0.9rem;
+        margin-top: -25px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+======================================== */
+@media (max-width: 767px) {
+    .puppy-description-section {
+        padding: 2rem 0;
+    }
+
+    .puppy-description-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        gap: 0.6rem;
+    }
+
+    .section-title i {
+        font-size: 1.2rem;
+    }
+
+    .description-content {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-top: -25px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - PETITS MOBILES
+======================================== */
+@media (max-width: 575px) {
+    .puppy-description-section {
+        padding: 1.75rem 0;
+    }
+
+    .puppy-description-card {
+        padding: 1.35rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .description-content {
+        font-size: 0.8rem;
+        text-align: left;
+        margin-top: -25px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TRÈS PETITS MOBILES
+======================================== */
+@media (max-width: 400px) {
+    .section-title {
+        font-size: 1rem;
+    }
+
+    .description-content {
+        font-size: 0.78rem;
+        margin-top: -25px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE GENEALOGIE - TABLETTES
+======================================== */
+@media (max-width: 991px) {
+    .puppy-pedigree-section {
+        padding: 2.5rem 0;
+    }
+
+    .pedigree-header {
+        margin-bottom: 2rem;
+    }
+
+    .pedigree-title {
+        font-size: 1.45rem;
+    }
+
+    .pedigree-tree {
+        gap: 1.5rem;
+    }
+
+    .pedigree-level {
+        gap: 1rem;
+    }
+
+    .pedigree-level.level-1 .pedigree-image {
+        width: 240px;
+        height: 240px;
+    }
+
+    .pedigree-level.level-2 .pedigree-image.small {
+        width: 130px;
+        height: 130px;
+    }
+
+    .pedigree-badge {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+
+    .pedigree-badge.small {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+======================================== */
+@media (max-width: 767px) {
+    .puppy-pedigree-section {
+        padding: 2rem 0;
+    }
+
+    .pedigree-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .pedigree-title {
+        font-size: 1.3rem;
+        gap: 0.5rem;
+    }
+
+    .pedigree-title i {
+        font-size: 1.2rem;
+    }
+
+    .pedigree-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .pedigree-tree {
+        gap: 1.25rem;
+    }
+
+    .pedigree-level {
+        gap: 0.85rem;
+    }
+
+    .pedigree-level.level-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pedigree-card {
+        padding: 1rem;
+        min-height: 100px;
+    }
+
+    .pedigree-level.level-1 .pedigree-image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .pedigree-level.level-2 .pedigree-image.small {
+        width: 120px;
+        height: 120px;
+    }
+
+    .pedigree-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .pedigree-badge.small {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .pedigree-name {
+        font-size: 0.9rem;
+    }
+
+    .pedigree-name.small {
+        font-size: 0.8rem;
+    }
+
+    .pedigree-label {
+        font-size: 0.65rem;
+    }
+
+    .pedigree-breed {
+        font-size: 0.7rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - PETITS MOBILES
+======================================== */
+@media (max-width: 575px) {
+    .puppy-pedigree-section {
+        padding: 1.75rem 0;
+    }
+
+    .pedigree-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .pedigree-title {
+        font-size: 1.2rem;
+    }
+
+    .pedigree-tree {
+        gap: 1rem;
+    }
+
+    .pedigree-level {
+        gap: 0.75rem;
+    }
+
+    .pedigree-card {
+        padding: 0.85rem;
+        min-height: 90px;
+        border-radius: 10px;
+    }
+
+    .pedigree-level.level-1 .pedigree-image {
+        width: 140px;
+        height: 140px;
+        border-radius: 8px;
+    }
+
+    .pedigree-level.level-2 .pedigree-image.small {
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+    }
+
+    .pedigree-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .pedigree-badge.small {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .pedigree-card-content {
+        gap: 0.5rem;
+    }
+
+    .pedigree-name {
+        font-size: 0.85rem;
+    }
+
+    .pedigree-name.small {
+        font-size: 0.75rem;
+    }
+
+    .pedigree-label {
+        font-size: 0.6rem;
+    }
+
+    .pedigree-breed {
+        font-size: 0.65rem;
+    }
+
+    .pedigree-unknown {
+        font-size: 0.8rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TRÈS PETITS MOBILES
+======================================== */
+@media (max-width: 400px) {
+    .pedigree-title {
+        font-size: 1.1rem;
+    }
+
+    .pedigree-level.level-1 .pedigree-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .pedigree-level.level-2 .pedigree-image.small {
+        width: 85px;
+        height: 85px;
+    }
+
+    .pedigree-name {
+        font-size: 0.8rem;
+    }
+
+    .pedigree-name.small {
+        font-size: 0.7rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE FRERE ET SOEUR - TABLETTES
+======================================== */
+@media (max-width: 991px) {
+    .puppy-siblings-section {
+        padding: 2.5rem 0;
+    }
+
+    .siblings-header {
+        margin-bottom: 2rem;
+    }
+
+    .sibling-name {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+======================================== */
+@media (max-width: 767px) {
+    .puppy-siblings-section {
+        padding: 2rem 0;
+    }
+
+    .siblings-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .siblings-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .sibling-body {
+        padding: 1.15rem;
+    }
+
+    .sibling-name {
+        font-size: 1.05rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .sibling-breed,
+    .sibling-color {
+        font-size: 0.8rem;
+    }
+
+    .btn-sibling {
+        font-size: 0.8rem;
+        padding: 0.7rem;
+    }
+
+    .sibling-gender {
+        width: 35px;
+        height: 35px;
+        font-size: 0.85rem;
+    }
+
+    .sibling-status {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.8rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - PETITS MOBILES
+======================================== */
+@media (max-width: 575px) {
+    .puppy-siblings-section {
+        padding: 1.75rem 0;
+    }
+
+    .siblings-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .sibling-body {
+        padding: 1rem;
+    }
+
+    .sibling-name {
+        font-size: 1rem;
+    }
+
+    .sibling-info {
+        gap: 0.4rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .sibling-breed,
+    .sibling-color {
+        font-size: 0.75rem;
+    }
+
+    .btn-sibling {
+        font-size: 0.75rem;
+        padding: 0.65rem;
+    }
+
+    .sibling-gender {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+        top: 10px;
+        left: 10px;
+    }
+
+    .sibling-status {
+        font-size: 0.6rem;
+        padding: 0.3rem 0.7rem;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TRÈS PETITS MOBILES
+======================================== */
+@media (max-width: 400px) {
+    .sibling-name {
+        font-size: 0.95rem;
+    }
+
+    .btn-sibling {
+        font-size: 0.7rem;
+    }
+}

@@ -1,0 +1,145 @@
+<!-- <div class="col-xl-2  col-lg-12  col-md-12 col-sm-12 col-xs-12  border d-flex flex-column align-items-center justify-content-center mt-3 animal-info"> -->
+<!-- content -->
+<!-- <% if (animal && animal.image_path_profile) { %>
+    <img src="/uploads/<%= animal.image_path_profile %>" class="rounded mb-3 mt-2" id="image-1" alt="profile-image" width="100px" height="100px">
+    <% } else { %>
+    <p>Image non trouvée.</p>
+    <% } %>
+    <div class="d-flex p-2">
+        <%= animal.name %>
+        <% if (animal.gender === 'Male') { %>
+        <i class="bi bi-gender-male text-primary ms-1"></i>
+        <% } else if (animal.gender === 'Femelle') { %>
+        <i class="bi bi-gender-female ms-2"></i>
+        <% } %>
+    </div>
+    <div ><%= animal.breed_name %></div>
+    <div ><%= animal.color %></div> -->
+<!-- content -->
+<!-- </div> -->
+<!-- Colonne 2: Père et Mère -->
+<div class="col-xl-6  col-lg-6 col-md-6 col-sm-6 col-xs-6 border genealogy-col mt-3">
+    <!-- content père -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Père de <%= animal.name %>: </span>
+        <% if (animal.father_image_path) { %>
+        <img src="/uploads/<%= animal.father_image_path %>" class="rounded mb-3 father-image" alt="father-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.father_name %></span>
+            <i class="bi bi-gender-male text-primary ms-1"></i>
+        </div>
+        <div class="animal-breed text-wrap"><%= animal.father_breed_name %></div>
+        <div class="animal-color text-wrap"><%= animal.father_color %></div>
+        <a href="#fatherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- content père -->
+    <!-- first column -->
+    <!-- second column -->
+    <!-- content mère -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Mère de <%= animal.name %>: </span>
+        <% if (animal.mother_image_path) { %>
+        <img src="/uploads/<%= animal.mother_image_path %>" class="rounded mb-3 mother-image" alt="mother-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name-mother d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.mother_name %></span>
+            <i class="bi bi-gender-female text-pink ms-1"></i>
+        </div>
+        <div class="animal-breed-mother text-wrap"><%= animal.mother_breed_name %></div>
+        <div class="animal-color-mother text-wrap"><%= animal.mother_color %></div>
+        <a href="#motherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- content mère -->
+    <!-- second column -->
+</div>
+<!-- Colonne 3: Grands-parents -->
+<div class="col-xl-6  col-lg-6 col-md-6 col-sm-6 col-xs-6 border genealogy-col mt-3">
+    <!-- content -->
+    <!-- Grand père paternel -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Grand-Père Paternel de <%= animal.name %>: </span>
+        <% if (animal.paternal_grandfather_image_path) { %>
+        <img src="/uploads/<%= animal.paternal_grandfather_image_path %>" class="rounded mb-3 paternal-grandfather-image" alt="paternal-grandfather-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name-paternal-grandfather d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.paternal_grandfather_name %></span>
+            <i class="bi bi-gender-male text-primary ms-1"></i>
+        </div>
+        <div class="animal-breed-paternal-grandfather text-wrap"><%= animal.paternal_grandfather_breed_name %></div>
+        <div class="animal-color-paternal-grandfather text-wrap"><%= animal.paternal_grandfather_color %></div>
+        <a href="#paternalGrandfatherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- Grand père paternel -->
+    <!-- grand mère paternel -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Grand-Mère Paternelle de <%= animal.name %>: </span>
+        <% if (animal.paternal_grandmother_image_path) { %>
+        <img src="/uploads/<%= animal.paternal_grandmother_image_path %>" class="rounded mb-3 paternal-grandmother-image" alt="paternal-grandmother-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name-paternal-grandmother d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.paternal_grandmother_name %></span>
+            <i class="bi bi-gender-female text-danger ms-1"></i>
+        </div>
+        <div class="animal-breed-paternal-grandmother text-wrap"><%= animal.paternal_grandmother_breed_name %></div>
+        <div class="animal-color-paternal-grandmother text-wrap"><%= animal.paternal_grandmother_color %></div>
+        <a href="#paternalGrandmotherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- grand mère paternel -->
+    <!-- grand père maternel -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Grand-Père Maternel de <%= animal.name %>: </span>
+        <% if (animal.maternal_grandfather_image_path) { %>
+        <img src="/uploads/<%= animal.maternal_grandfather_image_path %>" class="rounded mb-3 maternal-grandfather-image" alt="maternal-grandfather-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name-maternal-grandfather d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.maternal_grandfather_name %></span>
+            <i class="bi bi-gender-male text-primary ms-1"></i>
+        </div>
+        <div class="animal-breed-maternal-grandfather text-wrap"><%= animal.maternal_grandfather_breed_name %></div>
+        <div class="animal-color-maternal-grandfather text-wrap"><%= animal.maternal_grandfather_color %></div>
+        <a href="#maternalGrandfatherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- grand père maternel -->
+    <!-- grand mère maternel -->
+    <div class="genealogy-block border d-flex flex-column align-items-center justify-content-center p-4 text-center">
+        <span>Grand-Mère Maternelle de <%= animal.name %>: </span>
+        <% if (animal.maternal_grandmother_image_path) { %>
+        <img src="/uploads/<%= animal.maternal_grandmother_image_path %>" class="rounded mb-3 maternal-grandmother-image" alt="maternal-grandmother-image" width="150px" height="100px">
+        <% } else { %>
+        <p>Image non trouvée.</p>
+        <% } %>
+        <div class="animal-name-maternal-grandmother d-flex flex-column align-items-center p-2 text-wrap">
+            <span><%= animal.maternal_grandmother_name %></span>
+            <i class="bi bi-gender-female text-danger ms-1"></i>
+        </div>
+        <div class="animal-breed-maternal-grandmother text-wrap"><%= animal.maternal_grandmother_breed_name %></div>
+        <div class="animal-color-maternal-grandmother text-wrap"><%= animal.maternal_grandmother_color %></div>
+        <a href="#maternalGrandmotherUpdateModal" class="text-success" data-bs-toggle="modal">
+        Modifier <i class="bi bi-pencil-square text-success"></i>
+        </a>
+    </div>
+    <!-- grand mère maternel -->
+    <!-- content -->
+</div>
+</div>

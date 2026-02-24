@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nos Chiens à la Retraite | Élevage de Bel Air</title>
+    <meta name="description" content="Découvrez nos reproducteurs American Bully et Springer Anglais à la retraite. Élevage de Bel Air : après des années de service, nos chiens profitent d'une retraite bien méritée en Occitanie.">
+    <meta name="keywords" content="chiens retraités, reproducteurs retraite, american bully retraite, springer anglais retraite, anciens reproducteurs, élevage de bel air, retraite élevage">
+    <meta name="author" content="Élevage de Bel Air">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://elevagedebelair.com/nos-retraites">
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="FR-OCC">
+    <meta name="geo.placename" content="Occitanie, France">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Élevage de Bel Air">
+    <meta property="og:title" content="Nos Chiens à la Retraite - Élevage de Bel Air">
+    <meta property="og:description" content="Découvrez nos reproducteurs American Bully et Springer Anglais à la retraite : après des années de service, ils profitent d'une retraite bien méritée.">
+    <meta property="og:url" content="https://elevagedebelair.com/nos-retraites">
+    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Nos Chiens à la Retraite - Élevage de Bel Air">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nos Chiens à la Retraite">
+    <meta name="twitter:description" content="Découvrez nos reproducteurs à la retraite : une retraite bien méritée.">
+    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta name="twitter:image:alt" content="Nos Chiens à la Retraite - Élevage de Bel Air">
+<%- include('../front/partials/head-meta-base.ejs') %>
+<%- include('../front/partials/head-fonts-libs.ejs') %>
+    <link rel="stylesheet" href="/front/css/navbar.css">
+    <link rel="stylesheet" href="/front/css/chiens.css">
+</head>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
+       <main style="padding-top: 70px;">
+            <section class="page-hero-simple">
+                <div class="page-hero-overlay"></div>
+                <div class="container">
+                    <div class="page-hero-content">
+                        <h1 class="page-hero-title">Nos Retraités</h1>
+                        <p class="page-hero-subtitle">
+                            Après avoir consacré leur vie à transmettre leurs meilleures qualités, 
+                            nos reproducteurs et reproductrices méritent une retraite paisible et heureuse. 
+                            Découvrez ces compagnons exceptionnels qui ont fait la fierté de notre élevage 
+                            et qui profitent désormais d'une vie de famille bien méritée.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dog-grid-section">
+                <div class="container">
+                    <% if (animals && animals.length > 0) { %>
+                    <div class="row g-4">
+                        <% animals.forEach((animal, index) => { %>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                            <article class="dog-card">
+                                <div class="dog-card-image">
+                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
+                                        <% let animalImageSrc; if (animal.optimized_image_path) { animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path; } else if (animal.image_path) { animalImageSrc = '/uploads/' +
+                                        animal.image_path; } else { animalImageSrc = '/img/placeholder-dog.jpg'; } %>
+                                        <img src="<%= animalImageSrc %>" alt="<%= animal.balise_alt || animal.name %>" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                    </a>
+                                    <div class="dog-gender-badge <%= animal.gender === 'male' ? 'male' : 'female' %>">
+                                        <i class="fas <%= animal.gender === 'male' ? 'fa-mars' : 'fa-venus' %>"></i>
+                                    </div>
+                                </div>
+                                <div class="dog-card-body">
+                                    <h3 class="dog-card-name">
+                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
+                                            <%= animal.name %>
+                                        </a>
+                                    </h3>
+                                    <div class="dog-card-race">
+                                        <i class="fas fa-paw"></i>
+                                        <a href="/chiens/<%= animal.breed_slug %>">
+                                            <%= animal.breed_name %>
+                                        </a>
+                                    </div>
+                                    
+                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="dog-card-btn">
+                                        Voir le profil
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } else { %>
+                    <div class="text-center py-5">
+                        <div class="no-dogs-message" data-aos="fade-up">
+                            <i class="fas fa-paw fa-3x text-muted mb-4"></i>
+                            <h3>Aucun chien disponible</h3>
+                            <p class="text-muted mb-4">Aucun chien ne correspond à vos critères de recherche</p>
+                            <a href="/chiens" class="btn-back-dogs">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Retour à tous les chiens
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </section>
+            <% if (totalPages > 1) { %>
+            <section class="dog-pagination-section">
+                <div class="container">
+                    <nav aria-label="Navigation pagination" data-aos="fade-up">
+                        <ul class="dog-pagination">
+                            <% if (currentPage > 1) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                    <span>Précédent</span>
+                                </a>
+                            </li>
+                            <% } %>
+                            <% 
+                            // Logique de pagination
+                            let startPage = Math.max(1, currentPage - 2);
+                            let endPage = Math.min(totalPages, currentPage + 2);
+                            
+                            // Première page
+                            if (startPage > 1) { %>
+                                <li class="dog-pagination-item">
+                                    <a href="?page=1" class="dog-pagination-link">1</a>
+                                </li>
+                                <% if (startPage > 2) { %>
+                                    <li class="dog-pagination-item">
+                                        <span class="dog-pagination-dots">...</span>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                            <% for (let i = startPage; i <= endPage; i++) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= i %>" 
+                                class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <% } %>
+                            <% if (endPage < totalPages) { %>
+                                <% if (endPage < totalPages - 1) { %>
+                                    <li class="dog-pagination-item">
+                                        <span class="dog-pagination-dots">...</span>
+                                    </li>
+                                <% } %>
+                                <li class="dog-pagination-item">
+                                    <a href="?page=<%= totalPages %>" class="dog-pagination-link">
+                                        <%= totalPages %>
+                                    </a>
+                                </li>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
+                                    <span>Suivant</span>
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                    <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
+                        Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
+                        (<%= totalItems %> chien(s) au total)
+                    </div>
+                </div>
+            </section>
+            <% } %>
+            <section class="dog-cta-section">
+                <div class="container">
+                    <div class="dog-cta-box" data-aos="zoom-in">
+                        <div class="dog-cta-content">
+                            <h2 class="dog-cta-title">Vous souhaitez adopter un chiot ?</h2>
+                            <p class="dog-cta-text">
+                                Contactez-nous pour plus d'informations sur nos reproducteurs, nos saillies et nos chiots disponibles
+                            </p>
+                            <a href="/contact" class="btn-dog-cta">
+                                <i class="fas fa-envelope me-2"></i>
+                                Nous Contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../front/frontEndAssets/footer') %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="/front/js/header.js"></script>
+        <%- include('./partials/googleAnalytics') %>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const toggleBtn = document.getElementById("dogFiltersToggle");
+                const menu = document.getElementById("dogFiltersMenu");
+
+                if (toggleBtn && menu) {
+                    toggleBtn.addEventListener("click", function () {
+                        menu.classList.toggle("active");
+                        toggleBtn.classList.toggle("active");
+                    });
+                    document.addEventListener("click", function (e) {
+                        if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
+                            menu.classList.remove("active");
+                            toggleBtn.classList.remove("active");
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
