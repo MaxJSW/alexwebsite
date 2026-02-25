@@ -1,84 +1,168 @@
 /* ========================================
-   PAGE RACES - ÉLEVAGE DE BEL AIR
+   BLOC INTRO SPECIALTY
 ======================================== */
 
-
-.races-label-tag {
-    display: inline-block;
-    padding: 0.4rem 1.2rem; 
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50px;
-    font-size: 0.85rem; 
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem; 
+.page-intro-section {
+    padding: 1.5rem 0;
+    background: #0d0d0d;
 }
 
-
-/* Section Introduction */
-.races-intro-section {
-    padding: 5rem 0;
-    background: white;
+.specialty-text {
+    width: 100%;
 }
 
-.races-intro-box {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
-    padding: 3rem;
-    border-radius: 20px;
-    border-left: 5px solid var(--primary-color);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+.specialty-box-inline {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.races-intro-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--secondary-color);
+.specialty-top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px;
     margin-bottom: 1.5rem;
 }
 
-.races-intro-text {
-    font-size: 1rem;
+.specialty-grid {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.specialty-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.specialty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.specialty-main p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.88rem;
     line-height: 1.8;
-    color: #555;
-    margin: 0;
+    margin-bottom: 0.75rem;
 }
 
-/* Section Grille des Races */
+.specialty-main p:last-child {
+    margin-bottom: 0;
+}
+
+.specialty-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-shrink: 0;
+}
+
+.specialty-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: 80px;
+}
+
+.specialty-stat i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.specialty-stat .stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.specialty-stat .stat-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .page-intro-section { padding: 3rem 0; }
+    .specialty-box-inline { padding: 2rem; }
+    .specialty-grid { gap: 2rem; }
+}
+
+@media (max-width: 767px) {
+    .page-intro-section { padding: 2.5rem 0; }
+    .specialty-box-inline { padding: 1.5rem; }
+
+    .specialty-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .specialty-stats {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .page-intro-section { padding: 2rem 0; }
+    .specialty-box-inline { padding: 1.25rem; }
+    .specialty-title { font-size: 1.3rem; }
+    .specialty-main p { font-size: 0.83rem; }
+}
+
+/* ========================================
+   GRILLE DES RACES
+======================================== */
+
 .races-grid-section {
-    padding: 5rem 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 3rem 0 5rem;
+    background: #0d0d0d;
 }
 
-/* Card Race Détaillée */
+/* Carte */
 .race-card-detail {
-    background: white;
-    border-radius: 25px;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .race-card-detail:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 20px 60px rgba(101, 193, 120, 0.25);
+    border-color: rgba(201, 168, 76, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
-/* Image de la race */
+/* Image */
 .race-card-detail-image {
     position: relative;
-    height: 400px;
+    height: 380px;
     overflow: hidden;
 }
 
 .race-card-detail-image a {
     display: block;
-    width: 100%;
     height: 100%;
 }
 
@@ -86,123 +170,93 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s ease;
+    display: block;
+    transition: transform 0.7s ease;
 }
 
 .race-card-detail:hover .race-card-detail-image img {
-    transform: scale(1.15) rotate(2deg);
+    transform: scale(1.06);
 }
 
-/* Badge position */
+.race-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+}
+
+/* Numéro */
 .race-position-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 0.6rem 1.2rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    top: 14px;
+    right: 14px;
     z-index: 2;
 }
 
-/* Overlay hover  */
-.race-card-detail:hover .race-card-detail-overlay {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.btn-discover-race {
-    padding: 1.2rem 2.5rem;
-    
-    color: white;
-    border-radius: 50px;
+.race-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
     font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.4);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    padding: 0.25rem 0.65rem;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
 }
 
-.race-card-detail:hover .btn-discover-race {
-    transform: translateY(0);
+/* Nom sur image */
+.race-name-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    z-index: 2;
 }
 
-.btn-discover-race:hover {
-    background: #7ed492;
-    color: white;
-    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.5);
+.race-name-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-/* Corps de la carte */
+/* Corps */
 .race-card-detail-body {
-    padding: 2.5rem;
+    padding: 1.25rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.85rem;
 }
 
-/* Titre de la race */
-.race-card-detail-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-}
-
-.race-card-detail-title a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.race-card-detail-title a:hover {
-    color: var(--primary-color);
-}
-
-/* Description */
 .race-card-detail-description {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-/* Aperçu du contenu */
-.race-card-detail-preview {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #666;
-    margin-bottom: 2rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.83rem;
+    line-height: 1.7;
+    margin: 0;
     flex: 1;
 }
 
 /* Séparateur */
 .race-card-divider {
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-color), transparent);
-    margin-bottom: 2rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
 }
 
 /* Actions */
 .race-card-detail-actions {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .btn-race-detail-primary,
 .btn-race-detail-secondary {
     flex: 1;
-    padding: 1rem;
-    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     text-align: center;
     text-decoration: none;
     display: flex;
@@ -212,1131 +266,861 @@
 }
 
 .btn-race-detail-primary {
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
 }
 
 .btn-race-detail-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
-    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+    color: #000;
 }
 
 .btn-race-detail-secondary {
-    background: white;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
 }
 
 .btn-race-detail-secondary:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-3px);
+    border-color: rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.05);
 }
 
-/* Message aucune race */
-.no-races-message {
-    padding: 4rem 2rem;
-}
-
+/* Message vide */
 .no-races-message h3 {
-    font-size: 1.8rem;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.5rem;
 }
 
-/* Section CTA Contact */
+.no-races-message p {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .races-grid-section { padding: 2.5rem 0 4rem; }
+    .race-card-detail-image { height: 350px; }
+}
+
+@media (max-width: 767px) {
+    .races-grid-section { padding: 2rem 0 3rem; }
+    .race-card-detail-image { height: 330px; }
+    .race-name-overlay h3 { font-size: 1.15rem; }
+    .race-card-detail-actions { flex-direction: column; }
+    .btn-race-detail-primary,
+    .btn-race-detail-secondary { width: 100%; }
+}
+
+@media (max-width: 575px) {
+    .race-card-detail-image { height: 310px; }
+    .race-name-overlay h3 { font-size: 1.05rem; }
+    .race-card-detail-body { padding: 1rem; }
+    .race-card-detail-description { font-size: 0.8rem; }
+    .btn-race-detail-primary,
+    .btn-race-detail-secondary { font-size: 0.78rem; padding: 0.55rem 0.85rem; }
+}
+
+/* ========================================
+   SECTION CTA
+======================================== */
+
 .races-cta-section {
-    padding: 5rem 0;
-    background: white;
+    padding: 0 0 5rem;
+    background: #0d0d0d;
 }
 
 .races-cta-box {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, #1a2416 100%);
-    padding: 5rem 3rem;
-    border-radius: 30px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-top: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 2.5rem;
 }
 
-.races-cta-box::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(101, 193, 120, 0.2) 0%, transparent 70%);
-    animation: pulse-cta 4s ease-in-out infinite;
-}
-
-@keyframes pulse-cta {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-.races-cta-content {
-    position: relative;
-    z-index: 2;
+.races-cta-left {
+    flex: 1;
 }
 
 .races-cta-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: white;
-    margin-bottom: 1.5rem;
+    color: #ffffff;
+    margin: 0.5rem 0 0.75rem;
+    line-height: 1.3;
 }
 
 .races-cta-text {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2.5rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.87rem;
+    line-height: 1.7;
+    margin: 0;
 }
 
-.btn-races-cta {
+.races-cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.btn-races-cta-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 3rem;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50px;
+    justify-content: center;
+    padding: 0.7rem 1.75rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    border-radius: 6px;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 0.85rem;
     text-decoration: none;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.4);
-    transition: all 0.4s ease;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
-.btn-races-cta:hover {
-    background: #7ed492;
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.5);
-    color: white;
+.btn-races-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+    color: #000;
 }
 
-.btn-races-cta i {
+.btn-races-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.75rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-races-cta-secondary:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.05);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .races-cta-section { padding: 0 0 3.5rem; }
+    .races-cta-box { padding: 2rem; }
+    .races-cta-title { font-size: 1.3rem; }
+}
+
+@media (max-width: 767px) {
+    .races-cta-section { padding: 0 0 3rem; }
+
+    .races-cta-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.75rem;
+        gap: 1.5rem;
+    }
+
+    .races-cta-right {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .btn-races-cta-primary,
+    .btn-races-cta-secondary {
+        flex: 1;
+        font-size: 0.82rem;
+        padding: 0.65rem 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .races-cta-title { font-size: 1.2rem; }
+    .races-cta-text { font-size: 0.83rem; }
+
+    .races-cta-right {
+        flex-direction: column;
+    }
+
+    .btn-races-cta-primary,
+    .btn-races-cta-secondary {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   HERO BREED DETAIL - OPTION A
+======================================== */
+
+.breed-hero-section {
+    position: relative;
+    height: 750px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-bottom: -1px;
+}
+
+.breed-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.7s ease;
+}
+
+.breed-hero-section:hover .breed-hero-bg {
+    transform: scale(1.04);
+}
+
+.breed-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.5) 40%,
+        #0d0d0d 85%,
+        #0d0d0d 100%
+    );
+    z-index: 1;
+}
+
+.breed-hero-content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 3rem;
+    width: 100%;
+}
+
+/* Breadcrumb */
+.breed-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.breed-breadcrumb a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.breed-breadcrumb a:hover {
+    color: var(--gold);
+}
+
+.breed-breadcrumb span {
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.breed-breadcrumb i {
+    color: rgba(255,255,255,0.25);
+    font-size: 0.6rem;
+}
+
+/* Titre */
+.breed-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Navigation */
+.breed-hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.breed-nav-btn {
+    padding: 0.45rem 1rem;
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.breed-nav-btn:hover {
+    background: rgba(201, 168, 76, 0.15);
+    border-color: rgba(201, 168, 76, 0.5);
+    color: var(--gold);
+}
+
+.breed-nav-btn i { font-size: 0.72rem; }
+
+/* Offset ancres */
+#description,
+#photos,
+#reproducteurs,
+#chiots {
+    scroll-margin-top: 100px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .breed-hero-section { height: 680px; }
+    .breed-hero-title { font-size: 2.8rem; }
+}
+
+@media (max-width: 767px) {
+    .breed-hero-section {
+        height: 440px;
+        overflow: visible;
+        background-color: #0d0d0d;
+    }
+
+    .breed-hero-bg { bottom: -4px; }
+
+    .breed-hero-overlay {
+        bottom: -8px;
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.2) 0%,
+            rgba(0,0,0,0.5) 35%,
+            #0d0d0d 78%,
+            #0d0d0d 100%
+        );
+    }
+
+    .breed-hero-title { font-size: 2.2rem; letter-spacing: 1px; }
+    .breed-hero-content { padding-bottom: 1.5rem; }
+    .breed-hero-nav { gap: 0.4rem; }
+    .breed-nav-btn { font-size: 0.73rem; padding: 0.4rem 0.85rem; }
+
+    #description,
+    #photos,
+    #reproducteurs,
+    #chiots { scroll-margin-top: 80px; }
+}
+
+@media (max-width: 575px) {
+    .breed-hero-section { height: 400px; }
+    .breed-hero-title { font-size: 1.8rem; }
+    .breed-breadcrumb { display: none; }
+}
+
+/* ========================================
+   SECTION INTRO DESCRIPTION - OPTION C
+======================================== */
+
+.breed-intro-section {
+    padding: 0 0 4rem;
+    background: #0d0d0d;
+    margin-top: 10px;
+}
+
+.breed-intro-box {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111111;
+}
+
+/* Grande lettre gauche */
+.breed-intro-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    flex-shrink: 0;
+    background: rgba(201, 168, 76, 0.06);
+    border-right: 1px solid rgba(201, 168, 76, 0.15);
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    font-weight: 700;
+    color: rgba(201, 168, 76, 0.25);
+    line-height: 1;
+    user-select: none;
+}
+
+/* Contenu droite */
+.breed-intro-content {
+    flex: 1;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.breed-intro-text {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    margin: 0;
+    white-space: pre-line;
+}
+
+.breed-intro-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.breed-intro-footer .gold-divider {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px;
+}
+
+.breed-intro-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .breed-intro-letter { width: 90px; font-size: 5rem; }
+    .breed-intro-content { padding: 1.75rem 2rem; }
+}
+
+@media (max-width: 767px) {
+    .breed-intro-section { padding: 0 0 3rem; }
+    .breed-intro-letter { width: 70px; font-size: 4rem; }
+    .breed-intro-content { padding: 1.5rem; }
+    .breed-intro-text { font-size: 0.85rem; }
+}
+
+@media (max-width: 575px) {
+    .breed-intro-box { flex-direction: column; }
+    .breed-intro-letter {
+        width: 100%;
+        height: 70px;
+        font-size: 3.5rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .breed-intro-content { padding: 1.25rem; }
+    .breed-intro-text { font-size: 0.83rem; }
+    .breed-intro-name { font-size: 0.75rem; letter-spacing: 2px; }
+}
+
+/* ========================================
+   SECTION PARAGRAPHES - ACCORDÉON
+======================================== */
+
+.breed-content-section {
+    padding: 0 0 4rem;
+    background: #0d0d0d;
+}
+
+.breed-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.breed-accordion-item {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.breed-accordion-item.active {
+    border-color: rgba(201, 168, 76, 0.35);
+}
+
+/* Header */
+.breed-accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    gap: 1rem;
+    transition: background 0.3s ease;
+}
+
+.breed-accordion-header:hover {
+    background: rgba(201, 168, 76, 0.04);
+}
+
+.breed-accordion-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.breed-accordion-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    flex-shrink: 0;
+}
+
+.breed-accordion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-align: left;
+    line-height: 1.3;
+}
+
+.breed-accordion-item.active .breed-accordion-title {
+    color: #ffffff;
+}
+
+/* Icône */
+.breed-accordion-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.breed-accordion-icon i {
+    color: var(--gold);
+    font-size: 0.7rem;
     transition: transform 0.3s ease;
 }
 
-.btn-races-cta:hover i {
-    transform: translateX(5px);
+.breed-accordion-item.active .breed-accordion-icon {
+    background: rgba(201, 168, 76, 0.15);
 }
 
-/* Section Chiots Disponibles */
-.breed-puppies-section {
-    padding: 3rem 0;
-    background: #f8f9fa;
+.breed-accordion-item.active .breed-accordion-icon i {
+    transform: rotate(45deg);
 }
 
-/* Card Chiot */
-.breed-puppy-card {
-    background: white;
-    border-radius: 15px;
+/* Body */
+.breed-accordion-body {
+    max-height: 0;
     overflow: hidden;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-    transition: all 0.4s ease;
-    height: 100%;
-    border: 3px solid #e8e8e8;
+    transition: max-height 0.4s ease, padding 0.3s ease;
 }
 
-.breed-puppy-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(101, 193, 120, 0.35);
-    border-color: var(--primary-color);
+.breed-accordion-item.active .breed-accordion-body {
+    max-height: 2000px;
 }
 
-/* Image */
-.breed-puppy-image {
+.breed-content-text {
+    padding: 0 1.5rem 1.5rem;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.87rem;
+    line-height: 1.9;
+    white-space: pre-line;
+}
+
+.breed-content-text a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.breed-content-text a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .breed-content-section { padding: 0 0 3rem; }
+    .breed-accordion-header { padding: 1rem 1.25rem; }
+    .breed-accordion-title { font-size: 0.88rem; }
+    .breed-content-text { padding: 0 1.25rem 1.25rem; font-size: 0.83rem; }
+}
+
+@media (max-width: 575px) {
+    .breed-accordion-header { padding: 0.9rem 1rem; }
+    .breed-content-text { padding: 0 1rem 1rem; }
+    .breed-accordion-title { font-size: 0.83rem; }
+}
+
+/* ========================================
+   SECTION GALERIE PHOTOS
+======================================== */
+
+.breed-gallery-section {
+    padding: 0 0 4rem;
+    background: #0d0d0d;
+}
+
+/* Header */
+.breed-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.breed-section-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.breed-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.breed-gallery-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+    flex-shrink: 0;
+}
+
+.counter-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.counter-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Grille */
+.breed-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+/* Item */
+.breed-gallery-item {
     position: relative;
-    height: 260px;
+    border-radius: 8px;
     overflow: hidden;
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
 }
 
-.breed-puppy-image a {
+.breed-gallery-item a {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.breed-puppy-image img {
+.breed-gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.breed-gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Hover overlay */
+.breed-gallery-hover {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(0,0,0,0.85) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.breed-gallery-item:hover .breed-gallery-hover {
+    opacity: 1;
+}
+
+.gallery-item-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    padding: 0.2rem 0.55rem;
+    border-radius: 50px;
+}
+
+.breed-gallery-hover i {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .breed-gallery-section { padding: 0 0 3rem; }
+    .breed-gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .breed-section-title { font-size: 1.4rem; }
+}
+
+@media (max-width: 767px) {
+    .breed-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .breed-section-title { font-size: 1.25rem; }
+    .counter-number { font-size: 1.6rem; }
+}
+
+@media (max-width: 575px) {
+    .breed-gallery-section { padding: 0 0 2.5rem; }
+    .breed-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+    .breed-section-title { font-size: 1.15rem; }
+    .breed-gallery-hover { padding: 0.6rem; }
+    .gallery-item-number { font-size: 0.7rem; }
+}
+
+/* ========================================
+   SECTION REPRODUCTEURS
+======================================== */
+
+.breed-animals-section {
+    padding: 0 0 4rem;
+    background: #0d0d0d;
+}
+
+/* Carte chien */
+.dog-card {
+    background: #0d0d0d;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dog-card:hover {
+    border-color: rgba(201, 168, 76, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
+}
+
+/* Image */
+.dog-card-image {
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+}
+
+.dog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     transition: transform 0.6s ease;
+    display: block;
 }
 
-.breed-puppy-card:hover .breed-puppy-image img {
-    transform: scale(1.1);
+.dog-card:hover .dog-card-image img {
+    transform: scale(1.06);
 }
 
-/* Badge Genre */
-.breed-puppy-gender {
+/* Badge genre */
+.dog-gender-badge {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 2;
 }
 
-.breed-puppy-gender.male {
-    background: linear-gradient(135deg, #2196f3, #42a5f5);
+.dog-gender-badge.male {
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
 }
 
-.breed-puppy-gender.female {
-    background: linear-gradient(135deg, #ec407a, #f06292);
-}
-
-/* Corps de la card */
-.breed-puppy-body {
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.breed-puppy-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.breed-puppy-name a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breed-puppy-name a:hover {
-    color: var(--primary-color);
-}
-
-.breed-puppy-type {
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.breed-puppy-type i {
-    font-size: 0.8rem;
-}
-
-/* Bouton chiot (même style) */
-.btn-breed-puppy {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    background: #384738;
-    color: white;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid var(--secondary-color);
-}
-
-.btn-breed-puppy:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(45, 62, 40, 0.4);
-    color: white;
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-breed-puppy i {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.btn-breed-puppy:hover i {
-    transform: translateX(3px);
-}
-
-/* Bouton voir tous les chiots */
-.btn-see-all-breed-chiots {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.5rem;
-    background: #384738;
-    color: white;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.4);
-    transition: all 0.4s ease;
-    border: 3px solid var(--primary-color);
-}
-
-.btn-see-all-breed-chiots:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 45px rgba(101, 193, 120, 0.5);
-    color: white;
-    background: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.btn-see-all-breed-chiots i {
-    transition: transform 0.3s ease;
-}
-
-.btn-see-all-breed-chiots:hover i {
-    transform: translateX(5px);
-}
-
-/* Responsive - IDENTIQUE aux reproducteurs */
-@media (max-width: 767px) {
-    /* FIX LARGEUR MOBILE CHIOTS */
-    .breed-puppies-section .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    .breed-puppies-section .row {
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-    
-    .breed-puppies-section .row > div {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    .breed-puppy-card {
-        margin-bottom: 25px;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .breed-puppy-image {
-        aspect-ratio: 1/1;
-        border-radius: 16px 16px 0 0;
-        width: 100% !important;
-    }
-    
-    .breed-puppy-image img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover;
-    }
-    
-    .breed-puppy-body {
-        padding: 18px;
-    }
-    
-    .breed-puppy-name {
-        font-size: 1.2rem;
-        margin-bottom: 8px;
-    }
-    
-    .breed-puppy-type {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
-    }
-    
-    .breed-puppy-gender {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    
-    .btn-breed-puppy {
-        width: 100%;
-        font-size: 0.8rem;
-        padding: 9px 18px;
-        justify-content: center;
-    }
-    
-    .btn-see-all-breed-chiots {
-        width: 100%;
-        font-size: 0.8rem;
-        padding: 0.9rem 1.5rem;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 991px) {
-    .breed-puppies-section {
-        padding: 2.5rem 0;
-    }
-    
-    .breed-puppy-image {
-        height: 220px;
-    }
-}
-
-@media (max-width: 576px) {
-    .breed-puppies-section {
-        padding: 2rem 0;
-    }
-    
-    .breed-puppy-image {
-        height: 240px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - PAGE NOS RACES
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    
-    .races-label-tag {
-        font-size: 0.7rem;
-        padding: 8px 18px;
-    }
-    
-    /* Section Introduction */
-    .races-intro-section {
-        padding: 50px 0;
-    }
-    
-    .races-intro-box {
-        padding: 35px 28px;
-    }
-    
-    .races-intro-title {
-        font-size: 1.8rem;
-        margin-bottom: 18px;
-    }
-    
-    .races-intro-text {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    /* Grille des races */
-    .races-grid-section {
-        padding: 50px 0;
-    }
-    
-    .race-card-detail-body {
-        padding: 28px;
-    }
-    
-    .race-card-detail-title {
-        font-size: 1.6rem;
-        margin-bottom: 14px;
-    }
-    
-    .race-card-detail-description {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    /* Badge position */
-    .race-position-badge {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-    }
-    
-    /* Boutons */
-    .btn-discover-race {
-        font-size: 0.9rem;
-        padding: 11px 26px;
-    }
-    
-    .btn-race-detail-primary,
-    .btn-race-detail-secondary {
-        font-size: 0.85rem;
-        padding: 11px 22px;
-    }
-    
-    /* CTA Section */
-    .races-cta-section {
-        padding: 50px 0;
-    }
-    
-    .races-cta-box {
-        padding: 45px 35px;
-    }
-    
-    .races-cta-title {
-        font-size: 1.8rem;
-        margin-bottom: 16px;
-    }
-    
-    .races-cta-text {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    .btn-races-cta {
-        font-size: 0.95rem;
-        padding: 14px 36px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-
-    
-    .races-label-tag {
-        font-size: 0.65rem;
-        padding: 0.35rem 1rem;
-        margin-bottom: 12px;
-    }
-    
-    /* Section Introduction */
-    .races-intro-section {
-        padding: 40px 0;
-    }
-    
-    .races-intro-box {
-        padding: 30px 24px;
-        border-radius: 16px;
-    }
-    
-    .races-intro-title {
-        font-size: 1.6rem;
-        margin-bottom: 16px;
-        line-height: 1.3;
-    }
-    
-    .races-intro-text {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    /* Grille des races */
-    .races-grid-section {
-        padding: 40px 0;
-    }
-    
-    .race-card-detail {
-        margin-bottom: 25px;
-    }
-    
-    .race-card-detail-image {
-        border-radius: 16px 16px 0 0;
-    }
-    
-    .race-card-detail-body {
-        padding: 25px;
-    }
-    
-    .race-card-detail-title {
-        font-size: 1.4rem;
-        margin-bottom: 12px;
-        line-height: 1.3;
-    }
-    
-    .race-card-detail-title a {
-        font-size: 1.4rem;
-    }
-    
-    .race-card-detail-description {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 16px;
-    }
-    
-    /* Badge position */
-    .race-position-badge {
-        font-size: 0.7rem;
-        padding: 6px 11px;
-        top: 12px;
-        right: 12px;
-    }
-    
-    /* Divider */
-    .race-card-divider {
-        margin: 18px 0;
-    }
-    
-    /* Overlay toujours visible sur mobile */
-    .race-card-detail-overlay {
-        display: none !important;
-    }
-    
-    .btn-discover-race {
-        transform: translateY(0);
-        font-size: 0.85rem;
-        padding: 10px 22px;
-    }
-    
-    /* Actions */
-    .race-card-detail-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .btn-race-detail-primary,
-    .btn-race-detail-secondary {
-        width: 100%;
-        font-size: 0.8rem;
-        padding: 10px 20px;
-        justify-content: center;
-    }
-    
-    /* Message aucune race */
-    .no-races-message h3 {
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-    }
-    
-    .no-races-message p {
-        font-size: 0.9rem;
-    }
-    
-    .no-races-message i {
-        font-size: 2.5rem !important;
-    }
-    
-    /* CTA Section */
-    .races-cta-section {
-        padding: 40px 0;
-    }
-    
-    .races-cta-box {
-        padding: 35px 28px;
-        border-radius: 16px;
-    }
-    
-    .races-cta-title {
-        font-size: 1.6rem;
-        margin-bottom: 14px;
-        line-height: 1.3;
-    }
-    
-    .races-cta-text {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 20px;
-    }
-    
-    .btn-races-cta {
-        font-size: 0.9rem;
-        padding: 13px 32px;
-    }
-
-    /* FIX LARGEUR MOBILE - AJOUTEZ CECI */
-    .breed-animals-section .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    .breed-animals-section .row {
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-    
-    .breed-animals-section .row > div {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    /* Cartes animaux - FORCER 100% */
-    .breed-animal-card {
-        margin-bottom: 25px;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .breed-animal-image {
-        aspect-ratio: 1/1;
-        border-radius: 16px 16px 0 0;
-        width: 100% !important;
-    }
-    
-    .breed-animal-image img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    
-    .races-label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-        margin-bottom: 10px;
-        letter-spacing: 1.2px;
-    }
-    
-    /* Section Introduction */
-    .races-intro-section {
-        padding: 35px 0;
-    }
-    
-    .races-intro-box {
-        padding: 25px 20px;
-        border-radius: 14px;
-    }
-    
-    .races-intro-title {
-        font-size: 1.4rem;
-        margin-bottom: 14px;
-        line-height: 1.3;
-    }
-    
-    .races-intro-text {
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-    
-    /* Grille des races */
-    .races-grid-section {
-        padding: 35px 0;
-    }
-    
-    .race-card-detail {
-        margin-bottom: 20px;
-    }
-    
-    .race-card-detail-image {
-        border-radius: 14px 14px 0 0;
-    }
-    
-    .race-card-detail-body {
-        padding: 22px;
-    }
-    
-    .race-card-detail-title {
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .race-card-detail-title a {
-        font-size: 1.3rem;
-    }
-    
-    .race-card-detail-description {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    
-    /* Badge position */
-    .race-position-badge {
-        font-size: 0.65rem;
-        padding: 5px 10px;
-        top: 10px;
-        right: 10px;
-        border-radius: 8px;
-    }
-    
-    /* Divider */
-    .race-card-divider {
-        margin: 16px 0;
-    }
-    
-    .btn-discover-race {
-        font-size: 0.8rem;
-        padding: 9px 20px;
-    }
-    
-    .btn-discover-race i {
-        font-size: 0.85rem;
-    }
-    
-    /* Actions */
-    .race-card-detail-actions {
-        gap: 8px;
-    }
-    
-    .btn-race-detail-primary,
-    .btn-race-detail-secondary {
-        width: 100%;
-        font-size: 0.75rem;
-        padding: 9px 18px;
-        justify-content: center;
-    }
-    
-    .btn-race-detail-primary i,
-    .btn-race-detail-secondary i {
-        font-size: 0.8rem;
-    }
-    
-    /* Message aucune race */
-    .no-races-message h3 {
-        font-size: 1.2rem;
-        margin-bottom: 8px;
-    }
-    
-    .no-races-message p {
-        font-size: 0.85rem;
-    }
-    
-    .no-races-message i {
-        font-size: 2rem !important;
-    }
-    
-    /* CTA Section */
-    .races-cta-section {
-        padding: 35px 0;
-    }
-    
-    .races-cta-box {
-        padding: 30px 24px;
-        border-radius: 14px;
-    }
-    
-    .races-cta-title {
-        font-size: 1.4rem;
-        margin-bottom: 12px;
-        line-height: 1.3;
-    }
-    
-    .races-cta-text {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 18px;
-    }
-    
-    .btn-races-cta {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.85rem;
-        padding: 12px 28px;
-    }
-    
-    .btn-races-cta i {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    .races-label-tag {
-        font-size: 0.55rem;
-        padding: 5px 12px;
-    }
-    
-    /* Section Introduction */
-    .races-intro-section {
-        padding: 30px 0;
-    }
-    
-    .races-intro-box {
-        padding: 22px 18px;
-    }
-    
-    .races-intro-title {
-        font-size: 1.25rem;
-        margin-bottom: 12px;
-    }
-    
-    .races-intro-text {
-        font-size: 0.8rem;
-        line-height: 1.7;
-    }
-    
-    /* Grille des races */
-    .races-grid-section {
-        padding: 30px 0;
-    }
-    
-    .race-card-detail-body {
-        padding: 20px;
-    }
-    
-    .race-card-detail-title {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    
-    .race-card-detail-title a {
-        font-size: 1.2rem;
-    }
-    
-    .race-card-detail-description {
-        font-size: 0.75rem;
-        line-height: 1.7;
-        margin-bottom: 12px;
-    }
-    
-    /* Badge position */
-    .race-position-badge {
-        font-size: 0.6rem;
-        padding: 4px 9px;
-    }
-    
-    .btn-discover-race {
-        font-size: 0.75rem;
-        padding: 8px 18px;
-    }
-    
-    /* Actions */
-    .btn-race-detail-primary,
-    .btn-race-detail-secondary {
-        font-size: 0.7rem;
-        padding: 8px 16px;
-    }
-    
-    /* Message aucune race */
-    .no-races-message h3 {
-        font-size: 1.1rem;
-    }
-    
-    .no-races-message p {
-        font-size: 0.8rem;
-    }
-    
-    .no-races-message i {
-        font-size: 1.8rem !important;
-    }
-    
-    /* CTA Section */
-    .races-cta-section {
-        padding: 30px 0;
-    }
-    
-    .races-cta-box {
-        padding: 25px 20px;
-    }
-    
-    .races-cta-title {
-        font-size: 1.25rem;
-        margin-bottom: 10px;
-    }
-    
-    .races-cta-text {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 16px;
-    }
-    
-    .btn-races-cta {
-        font-size: 0.8rem;
-        padding: 11px 24px;
-    }
-}
-
-/* ------------------------------------------------------------------------------------------------------ */
-
-
-/* ========================================
-   PAGES DETAILS DE RACES
-======================================== */
-/* Section Introduction */
-.breed-intro-section {
-    padding: 3rem 0;
-    background: #f8f9fa;
-}
-
-.breed-intro-box {
-    max-width: 1140px;
-    margin: 0 auto;
-    background: white;
-    padding: 2.5rem;
-    border-radius: 15px;
-    border-left: 6px solid var(--primary-color);
-    border-top: 2px solid #e0e0e0;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-.breed-intro-text {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #333;
-    margin: 0;
-    white-space: pre-line;
-}
-
-/* Section Contenu Détaillé */
-.breed-content-section {
-    padding: 3rem 0;
-    background: white;
-}
-
-.breed-content-block {
-    max-width: 1140px;
-    margin: 0 auto 2.5rem;
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 15px;
-    border-left: 5px solid var(--primary-color);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-}
-
-.breed-content-block:last-child {
-    margin-bottom: 0;
-}
-
-.breed-content-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 3px solid var(--primary-color);
-}
-
-.breed-content-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #333;
-    white-space: pre-line;
-    margin-top:-30px;
-}
-
-/* Style des liens dans le contenu */
-.breed-content-text a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.breed-content-text a:hover {
-    color: #7ed492;
-    text-decoration: underline;
-}
-
-
-/* Navigation Rapide */
-.breed-nav-section {
-    padding: 0.65rem 0;
-    background: var(--secondary-color);
-    border-bottom: 3px solid var(--primary-color);
-    position: sticky;
-    top: 65px;
-    z-index: 50;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-
-.breed-nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-}
-
-.breed-nav-btn {
-    padding: 0.5rem 1rem;
-    background: white;
-    color: var(--secondary-color);
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    border: 2px solid white;
-}
-
-.breed-nav-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(101, 193, 120, 0.4);
-}
-
-.breed-nav-btn i {
-    font-size: 0.8rem;
-}
-
-
-
-/* Section Galerie Photos */
-.breed-gallery-section {
-    padding: 3rem 0;
-    background: #f8f9fa;
-}
-
-/* En-tête de section */
-.breed-section-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 3px solid var(--primary-color);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.breed-section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 0.5rem;
-}
-
-.breed-section-subtitle {
-    font-size: 1rem;
-    color: #555;
-    margin: 0;
-}
-
-/* Items de la galerie */
-.breed-gallery-item {
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border: 3px solid white;
-}
-
-.breed-gallery-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(101, 193, 120, 0.3);
-    border-color: var(--primary-color);
-}
-
-
-
-
-.breed-gallery-item img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.breed-gallery-item:hover img {
-    transform: scale(1.1);
+.dog-gender-badge.female {
+    background: linear-gradient(135deg, #EC4899, #DB2777);
 }
 
 /* Overlay hover */
-.breed-gallery-hover {
+.dog-card-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(45, 62, 40, 0.85) 0%, rgba(101, 193, 120, 0.75) 100%);
+    inset: 0;
+    background: rgba(0,0,0,0.75);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1344,640 +1128,396 @@
     transition: opacity 0.4s ease;
 }
 
-.breed-gallery-item:hover .breed-gallery-hover {
+.dog-card:hover .dog-card-overlay {
     opacity: 1;
 }
 
-.breed-gallery-hover i {
-    font-size: 3rem;
-    color: white;
-    animation: zoomPulse 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+.btn-view-dog {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
-@keyframes zoomPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+.dog-card:hover .btn-view-dog {
+    transform: translateY(0);
 }
 
-/* Section Reproducteurs */
-.breed-animals-section {
-    padding: 3rem 0;
-    background: white;
+.btn-view-dog:hover {
+    color: #000;
+    box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
 }
 
-/* Card Animal */
-.breed-animal-card {
-    background: white;
-    border-radius: 15px;
+/* Corps carte */
+.dog-card-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #0d0d0d;
+}
+
+.dog-card-top-bar {
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 1rem;
+    border-radius: 2px;
+}
+
+.dog-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Infos */
+.dog-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.dog-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.dog-info-item:last-child {
+    border-bottom: none;
+}
+
+.dog-info-item i {
+    color: var(--gold);
+    font-size: 0.8rem;
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.dog-info-item span {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+/* Bouton voir tous */
+.btn-see-all-dogs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2.5rem;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-see-all-dogs:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .our-dogs-section { padding: 3.5rem 0; }
+    .dog-card-image { aspect-ratio: 4/5; }
+}
+
+@media (max-width: 767px) {
+    .our-dogs-section { padding: 3rem 0; }
+    .dog-card-image { aspect-ratio: 1/1; }
+    .dog-card-overlay { opacity: 1; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%); }
+    .btn-view-dog { transform: translateY(0); }
+}
+
+@media (max-width: 575px) {
+    .dog-name { font-size: 1.1rem; }
+    .dog-info-item span { font-size: 0.78rem; }
+}
+
+/* ========================================
+   SECTION CHIOTS
+======================================== */
+
+.breed-puppies-section {
+    padding: 1rem 0;
+    background: #0d0d0d;
+}
+
+/* Carte chiot */
+.puppy-card {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
     transition: all 0.4s ease;
     height: 100%;
-    width:100%;
-    border: 3px solid #f8f9fa;
+    display: flex;
+    flex-direction: column;
 }
 
-.breed-animal-card:hover {
+.puppy-card:hover {
+    border-color: rgba(201, 168, 76, 0.45);
     transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(101, 193, 120, 0.35);
-    border-color: var(--primary-color);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
 }
 
 /* Image */
-.breed-animal-image {
+.puppy-card-image {
     position: relative;
     height: 260px;
     overflow: hidden;
 }
 
-/* .breed-animal-image a {
-    display: block;
-    width: 100%;
-    height: 100%;
-} */
-
-.breed-animal-image img {
+.puppy-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
     transition: transform 0.6s ease;
 }
 
-.breed-animal-card:hover .breed-animal-image img {
-    transform: scale(1.1);
+.puppy-card:hover .puppy-card-image img {
+    transform: scale(1.07);
 }
 
-/* Badge Genre */
-.breed-animal-gender {
+/* Badge statut */
+.puppy-status-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: fit-content;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.puppy-status-badge.available {
+    background: rgba(34,197,94,0.85);
+    color: #fff;
+}
+
+.puppy-status-badge.for-sale {
+    background: rgba(201, 168, 76, 0.9);
+    color: #000;
+}
+
+/* Badge genre */
+.puppy-gender-badge {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 2;
 }
 
-.breed-animal-gender.male {
-    background: linear-gradient(135deg, #2196f3, #42a5f5);
+.puppy-gender-badge.male { background: rgba(59,130,246,0.9); }
+.puppy-gender-badge.female { background: rgba(236,72,153,0.9); }
+
+/* Overlay hover */
+.puppy-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
 }
 
-.breed-animal-gender.female {
-    background: linear-gradient(135deg, #ec407a, #f06292);
+.puppy-card:hover .puppy-card-overlay {
+    opacity: 1;
 }
 
-/* Corps de la card */
-.breed-animal-body {
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.breed-animal-name {
-    font-size: 1.2rem;
+.btn-view-puppy {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #000;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
     font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.breed-animal-name a {
-    color: var(--secondary-color);
+    font-size: 0.85rem;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breed-animal-name a:hover {
-    color: var(--primary-color);
-}
-
-.breed-animal-type {
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.breed-animal-type i {
-    font-size: 0.8rem;
-}
-
-/* Bouton */
-.btn-breed-animal {
     display: inline-flex;
     align-items: center;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.puppy-card:hover .btn-view-puppy {
+    transform: translateY(0);
+}
+
+/* Corps carte */
+.puppy-card-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+/* Header nom + prix */
+.puppy-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    background: #384738;
-    color: white;
-    border-radius: 50px;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.puppy-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
     font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.puppy-price-tag {
     font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.puppy-price-tag.consult {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Infos */
+.puppy-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.puppy-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.puppy-info-item:last-child {
+    border-bottom: none;
+}
+
+.puppy-info-item i {
+    color: var(--gold);
+    font-size: 0.78rem;
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.puppy-info-item span {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Bouton fiche */
+.btn-puppy-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem;
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    color: var(--gold);
+    font-size: 0.82rem;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: 2px solid var(--secondary-color);
+    margin-top: auto;
 }
 
-.btn-breed-animal:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(45, 62, 40, 0.4);
-    color: white;
-    background: var(--primary-color);
-    border-color: var(--primary-color);
+.btn-puppy-cta:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
 }
-
-.btn-breed-animal i {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.btn-breed-animal:hover i {
-    transform: translateX(3px);
-}
-
-/* Offset de scroll pour les sections avec ancres */
-#description,
-#photos,
-#reproducteurs,
-#chiots {
-    scroll-margin-top: 150px;
-}
-
 
 /* ========================================
-   RESPONSIVE - PAGE RACE DÉTAILLÉE
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
+   RESPONSIVE
 ======================================== */
 
 @media (max-width: 991px) {
-    /* Ancres de navigation */
-    #description,
-    #photos,
-    #reproducteurs,
-    #chiots {
-        scroll-margin-top: 170px;
-    }
-    
-    /* Section Intro Description */
-    .breed-intro-section {
-        padding: 50px 0;
-    }
-    
-    .breed-intro-box {
-        padding: 35px 28px;
-    }
-    
-    .breed-intro-text {
-        font-size: 0.95rem;
-        line-height: 1.8;
-    }
+    .breed-puppies-section { padding: 3.5rem 0; }
 
-    .breed-content-title {
-        font-size: 0.95rem;
-        line-height: 1.8;
-    }
+    .puppy-card-image { height: 330px; }
 
-    .breed-content-text {
-        font-size: 0.8rem;
-        line-height: 1.8;
-    }
-    
-    /* Navigation Rapide */
-    .breed-nav-section {
-        padding: 20px 0;
-        top: 60px;
-    }
-    
-    .breed-nav-buttons {
-        gap: 12px;
-    }
-    
-    .breed-nav-btn {
-        font-size: 0.75rem;
-        padding: 8px 16px;
-    }
-    
-    .breed-nav-btn i {
-        font-size: 0.7rem;
-    }
-
-    /* Section Reproducteurs */
-    .breed-animals-section {
-        padding: 60px 0;
-    }
-    
-    /* Header section (fusionné - plus de doublons) */
-    .breed-section-header {
-        margin-bottom: 35px;
-    }
-    
-    .breed-section-title {
-        font-size: 1.9rem;
-        margin-bottom: 10px;
-        line-height: 1.2;
-    }
-    
-    .breed-section-subtitle {
-        font-size: 0.95rem;
-        color: #777;
-        margin: 0;
-    }
-    
-    /* Cartes animaux */
-    .breed-animal-image {
-        aspect-ratio: 4/5;
-    }
-    
-    .breed-animal-body {
-        padding: 20px;
-    }
-    
-    .breed-animal-name {
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-    }
-    
-    .breed-animal-name a {
-        font-size: 1.3rem;
-    }
-    
-    .breed-animal-type {
-        font-size: 0.85rem;
-        margin-bottom: 14px;
-    }
-    
-    /* Badge genre */
-    .breed-animal-gender {
-        width: 42px;
-        height: 42px;
-        font-size: 1.1rem;
-    }
-    
-    /* Bouton */
-    .btn-breed-animal {
-        font-size: 0.85rem;
-        padding: 10px 20px;
-    }
-    
-    .btn-breed-animal i {
-        font-size: 0.8rem;
+    .puppy-card-overlay {
+    display: none;
     }
 }
 
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
 @media (max-width: 767px) {
-    /* Ancres de navigation */
-    #description,
-    #photos,
-    #reproducteurs,
-    #chiots {
-        scroll-margin-top: 230px;
-    }
-    
-    /* Section Intro Description */
-    .breed-intro-section {
-        padding: 40px 0;
-    }
-    
-    .breed-intro-box {
-        padding: 30px 24px;
-        border-radius: 16px;
-    }
-    
-    .breed-intro-text {
-        font-size: 0.7rem;
-        line-height: 1.6;
-        text-align: justify;
-    }
-    
-    /* Navigation Rapide */
-    .breed-nav-section {
-        padding: 25px 0;
-    }
-    
-    .breed-nav-buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-    
-    .breed-nav-btn {
-        font-size: 0.6rem;
-        padding: 8px 14px;
-        text-align: center;
-        justify-content: center;
-    }
-    
-    .breed-nav-btn i {
-        font-size: 0.65rem;
+    .breed-puppies-section { padding: 3rem 0; }
+    .puppy-card-image { height: 310px; }
+
+    .puppy-card-overlay {
+    display: none;
     }
 
-    /* Section Reproducteurs */
-    .breed-animals-section {
-        padding: 50px 0;
+    /* Overlay visible sur mobile */
+    .puppy-card-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+        align-items: flex-end;
+        padding-bottom: 1rem;
     }
-    
-    /* Header section (fusionné - plus de doublons) */
-    .breed-section-header {
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    
-    .breed-section-title {
-        font-size: 1.6rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .breed-section-subtitle {
-        font-size: 0.8rem;
-        color: #777;
-        margin: 0;
-        padding: 0 15px;
-    }
-    
-    /* Cartes animaux */
-    .breed-animal-card {
-        margin-bottom: 25px;
-    }
-    
-    .breed-animal-image {
-        aspect-ratio: 1/1;
-        border-radius: 16px 16px 0 0;
-    }
-    
-    .breed-animal-body {
-        padding: 18px;
-    }
-    
-    .breed-animal-name {
-        font-size: 1.2rem;
-        margin-bottom: 8px;
-        line-height: 1.3;
-    }
-    
-    .breed-animal-name a {
-        font-size: 1.2rem;
-    }
-    
-    .breed-animal-type {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
-    }
-    
-    .breed-animal-type i {
-        font-size: 0.85rem;
-    }
-    
-    /* Badge genre */
-    .breed-animal-gender {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    /* Bouton */
-    .btn-breed-animal {
-        width: 100%;
-        font-size: 0.8rem;
-        padding: 9px 18px;
-        justify-content: center;
-    }
-    
-    .btn-breed-animal i {
-        font-size: 0.75rem;
-    }
+
+    .btn-view-puppy { transform: translateY(0); }
 }
 
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
 @media (max-width: 575px) {
-    
-    /* Section Intro Description */
-    .breed-intro-section {
-        padding: 35px 0;
-    }
-    
-    .breed-intro-box {
-        padding: 25px 20px;
-        border-radius: 14px;
-    }
-    
-    .breed-intro-text {
-        font-size: 0.85rem;
-        line-height: 1.8;
-        text-align: justify;
-    }
-    
-    /* Navigation Rapide */
-    .breed-nav-section {
-        padding: 15px 0;
-    }
-    
-    .breed-nav-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .breed-nav-btn {
-        width: 100%;
-        font-size: 0.55rem;
-        padding: 10px 16px;
-        text-align: center;
-        justify-content: center;
-    }
-    
-    .breed-nav-btn i {
-        font-size: 0.6rem;
-        margin-right: 6px;
-    }
+    .puppy-card-image { height: 300px; }
+    .puppy-name { font-size: 1rem; }
+    .puppy-info-item span { font-size: 0.78rem; }
 
-    /* Section Reproducteurs */
-    .breed-animals-section {
-        padding: 40px 0;
-    }
-    
-    /* Header section */
-    .breed-section-header {
-        margin-bottom: 25px;
-    }
-    
-    .breed-section-title {
-        font-size: 1.4rem;
-        margin-bottom: 8px;
-        line-height: 1.3;
-    }
-    
-    .breed-section-subtitle {
-        font-size: 0.85rem;
-        padding: 0 10px;
-    }
-    
-    /* Cartes animaux */
-    .breed-animal-card {
-        margin-bottom: 20px;
-    }
-    
-    .breed-animal-image {
-        border-radius: 14px 14px 0 0;
-    }
-    
-    .breed-animal-body {
-        padding: 16px;
-    }
-    
-    .breed-animal-name {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-        line-height: 1.3;
-    }
-    
-    .breed-animal-name a {
-        font-size: 1.1rem;
-    }
-    
-    .breed-animal-type {
-        font-size: 0.75rem;
-        margin-bottom: 10px;
-    }
-    
-    .breed-animal-type i {
-        font-size: 0.8rem;
-    }
-    
-    /* Badge genre */
-    .breed-animal-gender {
-        width: 38px;
-        height: 38px;
-        font-size: 0.95rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    /* Bouton */
-    .btn-breed-animal {
-        width: 100%;
-        font-size: 0.75rem;
-        padding: 8px 16px;
-        justify-content: center;
-    }
-    
-    .btn-breed-animal i {
-        font-size: 0.7rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    
-    /* Section Intro Description */
-    .breed-intro-section {
-        padding: 30px 0;
-    }
-    
-    .breed-intro-box {
-        padding: 22px 18px;
-    }
-    
-    .breed-intro-text {
-        font-size: 0.8rem;
-        line-height: 1.8;
-    }
-    
-    /* Navigation Rapide */
-    .breed-nav-section {
-        padding: 15px 0;
-    }
-    
-    .breed-nav-buttons {
-        gap: 7px;
-    }
-    
-    .breed-nav-btn {
-        font-size: 0.5rem;
-        padding: 7px 12px;
-    }
-    
-    .breed-nav-btn i {
-        font-size: 0.55rem;
-        margin-right: 5px;
-    }
-
-    /* Section Reproducteurs */
-    .breed-animals-section {
-        padding: 35px 0;
-    }
-    
-    /* Header section */
-    .breed-section-header {
-        margin-bottom: 20px;
-    }
-    
-    .breed-section-title {
-        font-size: 1.25rem;
-        margin-bottom: 8px;
-    }
-    
-    .breed-section-subtitle {
-        font-size: 0.8rem;
-    }
-    
-    /* Cartes animaux */
-    .breed-animal-card {
-        margin-bottom: 18px;
-    }
-    
-    .breed-animal-body {
-        padding: 14px;
-    }
-    
-    .breed-animal-name {
-        font-size: 1rem;
-        margin-bottom: 6px;
-    }
-    
-    .breed-animal-name a {
-        font-size: 1rem;
-    }
-    
-    .breed-animal-type {
-        font-size: 0.7rem;
-        margin-bottom: 10px;
-    }
-    
-    .breed-animal-type i {
-        font-size: 0.75rem;
-    }
-    
-    /* Badge genre */
-    .breed-animal-gender {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-    }
-    
-    /* Bouton */
-    .btn-breed-animal {
-        font-size: 0.7rem;
-        padding: 7px 14px;
-    }
-    
-    .btn-breed-animal i {
-        font-size: 0.65rem;
+    .puppy-card-overlay {
+    display: none;
     }
 }

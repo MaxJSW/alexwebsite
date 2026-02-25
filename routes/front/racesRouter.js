@@ -27,7 +27,18 @@ router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Router principal page races
 router.get('/', (req, res) => {
-    const userId = 8;
+    const userId = 10;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
 
     const queryBreeds = `
         SELECT 
@@ -81,17 +92,36 @@ router.get('/', (req, res) => {
             }))
             .sort((a, b) => a.position - b.position);
 
+            db.query(querySocialLinks, [userId], (err, socialLinks) => {
+            if (err) {
+                console.error('Erreur social links:', err);
+                return res.redirect('/erreur');
+            }
+
         res.render('races', {
-            breeds: processedBreeds
+            breeds: processedBreeds,
+            socialLinks: socialLinks
         });
     });
+  });
 });
 
 
 // Route pour afficher les détails d'une race spécifique (finir les chiots en bas de page)
 router.get('/:slug', (req, res) => {
     const slug = req.params.slug;
-    const userId = 8;
+    const userId = 10;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
 
     const queryBreedDetail = `
         SELECT 
@@ -191,7 +221,7 @@ const queryBreedPuppies = `
 `;
 
 
-    Promise.all([
+Promise.all([
         new Promise((resolve, reject) => {
             db.query(queryBreedDetail, [slug], (err, results) => {
                 if (err) return reject(err);
@@ -222,9 +252,15 @@ const queryBreedPuppies = `
                 if (err) return reject(err);
                 resolve(results);
             });
+        }),
+        new Promise((resolve, reject) => {
+            db.query(querySocialLinks, [userId], (err, results) => {
+                if (err) return reject(err);
+                resolve(results);
+            });
         })
     ])
-    .then(([breedDetail, breedImages, breedParagraphs, breedAnimals, breedPuppies]) => {
+    .then(([breedDetail, breedImages, breedParagraphs, breedAnimals, breedPuppies, socialLinks]) => {
         const firstImage = breedImages && breedImages.length > 0 ? {
             path: breedImages[0].optimized_image_path 
                 ? `/uploads/optimized/${breedImages[0].optimized_image_path}`
@@ -267,7 +303,8 @@ const queryBreedPuppies = `
                     path: puppy.optimized_image_path ? `/uploads/optimized/${puppy.optimized_image_path}` : `/uploads/${puppy.image_path}`,
                     alt: puppy.balise_alt
                 }
-            }))
+            })),
+            socialLinks: socialLinks
         });
     })
     .catch(err => {
