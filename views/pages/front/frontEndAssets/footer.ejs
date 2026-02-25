@@ -1,43 +1,49 @@
 <footer id="footer" class="main-footer">
+
+    <!-- Bande dorée top -->
+    <div class="footer-top-bar"></div>
+
     <div class="footer-main">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="footer-widget">
-                        <h3 class="footer-widget-title">Spirit of Freedom Kennel</h3>
-                        <p class="footer-description">
-                            Élevage d'American Bully de prestige situé à Codognan, dans l'Hérault. 
-                            Sélection rigoureuse, passion et excellence depuis 2016.
-                        </p>
-                        <div class="footer-location">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            <span>Codognan, Hérault (34)</span>
-                        </div>
-                    </div>
+
+            <!-- Ligne 1 : Logo + description centrée -->
+            <div class="footer-brand-row">
+                <img src="/img/index/logo_navbar.webp" alt="Spirit of Freedom Kennel" height="70" onerror="this.style.display='none'">
+                <h3 class="footer-brand-title">Spirit of Freedom <span class="text-gold">Kennel</span></h3>
+                <p class="footer-brand-desc">Élevage d'American Bully Pocket de prestige à Codognan, Hérault. Sélection rigoureuse, passion et excellence depuis 2016.</p>
+                <div class="footer-brand-location">
+                    <i class="fas fa-map-marker-alt me-2"></i>Codognan, Hérault (34)
                 </div>
-                <div class="col-lg-4 col-md-6">
+            </div>
+
+            <!-- Séparateur doré -->
+            <div class="footer-gold-sep"></div>
+
+            <!-- Ligne 2 : Contact + Réseaux sociaux -->
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-5 col-md-6">
                     <div class="footer-widget">
-                        <h3 class="footer-widget-title">Contact</h3>
+                        <h4 class="footer-widget-title">Contact</h4>
                         <ul class="footer-contact-list">
                             <li>
-                                <i class="fas fa-phone-alt"></i>
+                                <div class="footer-contact-icon"><i class="fas fa-phone-alt"></i></div>
                                 <a href="tel:+33600000000">(+33) 06.00.00.00.00</a>
                             </li>
                             <li>
-                                <i class="fas fa-envelope"></i>
+                                <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
                                 <a href="mailto:contact@spiritoffreedomkennel.com">contact@spiritoffreedomkennel.com</a>
                             </li>
                             <li>
-                                <i class="fas fa-clock"></i>
+                                <div class="footer-contact-icon"><i class="fas fa-clock"></i></div>
                                 <span>Lun - Sam : 9h - 19h</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-5 col-md-6">
                     <div class="footer-widget">
-                        <h3 class="footer-widget-title">Suivez-nous</h3>
-                        <p class="footer-social-text">Suivez nos actualités et la vie du kennel</p>
+                        <h4 class="footer-widget-title">Suivez-nous</h4>
+                        <p class="footer-social-text">Retrouvez-nous sur les réseaux pour suivre la vie du kennel au quotidien.</p>
                         <div class="footer-social-icons">
                             <a href="https://www.facebook.com/" title="Facebook" target="_blank" rel="noopener">
                                 <i class="fab fa-facebook-f"></i>
@@ -55,45 +61,47 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
+    <!-- Navigation -->
     <div class="footer-links">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="footer-nav">
-                        <a href="/">Accueil</a>
-                        <a href="/races">Races</a>
-                        <a href="/chiens">Chiens</a>
-                        <a href="/chiots">Chiots</a>
-                        <a href="/mariages">Mariages</a>
-                        <a href="/blog">Blog</a>
-                        <a href="/informations">Informations</a>
-                        <a href="/livre-d-or">Livre d'Or</a>
-                        <a href="/contact">Contact</a>
-                        <a href="/nos-retraites">Nos Retraités</a>
-                    </nav>
-                </div>
-            </div>
+            <nav class="footer-nav">
+                <a href="/">Accueil</a>
+                <a href="/races">Races</a>
+                <a href="/chiens">Chiens</a>
+                <a href="/chiots">Chiots</a>
+                <a href="/mariages">Mariages</a>
+                <a href="/blog">Blog</a>
+                <a href="/informations">Informations</a>
+                <a href="/livre-d-or">Livre d'Or</a>
+                <a href="/contact">Contact</a>
+                <a href="/nos-retraites">Nos Retraités</a>
+            </nav>
         </div>
     </div>
+
+    <!-- Copyright -->
     <div class="footer-bottom">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                     <p class="footer-copyright">
                         ©2016 - <span id="currentYear"></span> <strong>Spirit of Freedom Kennel</strong> — Tous droits réservés
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="footer-credits">
-                        Site réalisé avec <i class="fas fa-heart text-danger"></i> par 
+                        Site réalisé avec <i class="fas fa-heart text-danger"></i> par
                         <a href="https://sourcingdigitale.com" target="_blank" rel="noopener">SD Solutions</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
 </footer>
 <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();

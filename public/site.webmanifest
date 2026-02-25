@@ -1,11 +1,11 @@
 {
-    "name": "Élevage de Bel Air",
-    "short_name": "Bel Air",
-    "description": "Élevage familial d'American Bully et Springer Anglais. Chiots LOF disponibles.",
+    "name": "Spirit of Freedom Kennel",
+    "short_name": "SFK",
+    "description": "Élevage familial d'American Bully Pocket de prestige à Codognan, dans le Gard. Chiots LOF et FBKC disponibles.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#65C178",
+    "background_color": "#0a0a0a",
+    "theme_color": "#c9a84c",
     "orientation": "portrait-primary",
     "icons": [
         {

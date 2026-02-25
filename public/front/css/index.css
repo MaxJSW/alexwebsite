@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/img/index/img_page_accueil.webp');
+    background-image: url('/img/index/og-image.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -1477,12 +1477,12 @@
 
 @media (max-width: 991px) {
     .our-marriages-section-premium { padding: 3.5rem 0; }
-    .marriage-image-container { height: 240px; }
+    .marriage-image-container { height: 280px; }
 }
 
 @media (max-width: 767px) {
     .our-marriages-section-premium { padding: 3rem 0; }
-    .marriage-image-container { height: 210px; }
+    .marriage-image-container { height: 250px; }
 
     /* Footer reste horizontal sur mobile */
     .marriage-footer {
@@ -1498,7 +1498,7 @@
 }
 
 @media (max-width: 480px) {
-    .marriage-image-container { height: 190px; }
+    .marriage-image-container { height: 260px; }
 
     /* Cache label père/mère sur très petit écran */
     .marriage-parent-label { display: none; }
@@ -2217,167 +2217,139 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ========================================
+   SECTION ENGAGEMENTS
+======================================== */
+
+.commitments-section {
+    padding: 5rem 0;
+    background: #111111;
+}
+
+.commitments-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+/* Carte engagement */
+.commit-card {
+    background: #0d0d0d;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commit-card:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.08);
+}
+
+/* Carte dorée centrale */
+.commit-card-gold {
+    background: rgba(201, 168, 76, 0.06);
+    border-color: rgba(201, 168, 76, 0.35);
+}
+
+.commit-card-gold:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: var(--gold);
+}
+
+/* Numéro en arrière-plan */
+.commit-number {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(201, 168, 76, 0.06);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.commit-card:hover .commit-number {
+    color: rgba(201, 168, 76, 0.1);
+}
+
+/* Icône */
+.commit-icon-bg {
+    width: 52px;
+    height: 52px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.commit-icon-bg i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.commit-card:hover .commit-icon-bg {
+    background: rgba(201, 168, 76, 0.2);
+}
+
+/* Titre */
+.commit-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.commit-card-gold h4 {
+    color: var(--gold);
+}
+
+/* Texte */
+.commit-card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.87rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .commitments-section { padding: 3.5rem 0; }
+    .commitments-title { font-size: 1.8rem; }
+}
+
+@media (max-width: 767px) {
+    .commitments-section { padding: 3rem 0; }
+    .commitments-title { font-size: 1.6rem; }
+    .commit-card { padding: 1.5rem; }
+    .commit-number { font-size: 4rem; }
+}
+
+@media (max-width: 575px) {
+    .commitments-section { padding: 2.5rem 0; }
+    .commitments-title { font-size: 1.4rem; }
+    .commit-card { padding: 1.25rem; }
+    .commit-card h4 { font-size: 1rem; }
+    .commit-card p { font-size: 0.83rem; }
+}
 
 
 /* ========================================
@@ -2385,3072 +2357,224 @@
 ======================================== */
 
 .informations-section {
-    padding: 6rem 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 5rem 0;
+    background: #0d0d0d;
 }
 
-/* Introduction */
-.info-intro {
-    max-width: 900px;
-    margin: 0 auto 4rem;
-    text-align: center;
-}
-
-.info-intro p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #555;
-}
-
-/* Bloc d'information */
-.info-block {
-    background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
-    transition: all 0.4s ease;
-}
-
-.info-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
-}
-
-.info-block.international {
-    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-    border-left: 5px solid var(--primary-color);
-}
-
-/* Icône circulaire */
-.info-icon-circle {
-    width: 90px;
-    height: 90px;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    border-radius: 50%;
+/* Grille transport */
+.info-transport-grid {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.info-icon-circle i {
-    font-size: 2.5rem;
-    color: white;
-}
-
-/* Titre du bloc */
-.info-block-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-}
-
-/* Texte du bloc */
-.info-block-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 1rem;
-}
-
-.info-block-text:last-child {
-    margin-bottom: 0;
-}
-
-/* Cards d'information (2 colonnes) */
-.info-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
-    height: 100%;
-    border-left: 4px solid var(--primary-color);
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(101, 193, 120, 0.2);
-}
-
-.info-card-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(101, 193, 120, 0.1);
+.info-transport-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-left: 3px solid var(--gold);
     border-radius: 12px;
+    padding: 1.75rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.info-transport-card:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    border-left-color: var(--gold);
+    background: rgba(201, 168, 76, 0.03);
+    transform: translateX(6px);
+}
+
+.info-transport-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
-.info-card-icon i {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-}
-
-.info-card-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
-
-.info-card-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #666;
-    margin: 0;
-}
-
-/* CTA Informations */
-.info-cta {
-    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-    border-left: 4px solid #ffc107;
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    margin: 2rem 0;
-    box-shadow: 0 5px 20px rgba(255, 193, 7, 0.2);
-}
-
-.info-cta p {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #856404;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.info-cta i {
+.info-transport-icon i {
+    color: var(--gold);
     font-size: 1.3rem;
 }
 
-/* Section conseils pratiques */
-.info-tips {
-    background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    margin-top: 3rem;
-}
-
-.info-tips-title {
+.info-transport-content h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--secondary-color);
-    text-align: center;
-    margin-bottom: 3rem;
+    color: #ffffff;
+    margin-bottom: 0.6rem;
 }
 
-/* Card conseil */
-.tip-card {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: #f8f9fa;
-    border-radius: 15px;
-    transition: all 0.4s ease;
-    height: 100%;
-}
-
-.tip-card:hover {
-    background: white;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-}
-
-.tip-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-}
-
-.tip-icon i {
-    font-size: 2rem;
-    color: white;
-}
-
-.tip-card h5 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 0.75rem;
-}
-
-.tip-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #666;
+.info-transport-content p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.87rem;
+    line-height: 1.8;
     margin: 0;
 }
 
-/* Bouton contact */
-.btn-info-contact {
-    display: inline-flex;
+/* Blocs papiers */
+.info-papers-card {
+    background: #111111;
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+    padding: 1.75rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.info-papers-card:hover {
+    border-color: rgba(201, 168, 76, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.07);
+}
+
+.info-papers-header {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2.7rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
-    font-weight: 700;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.info-papers-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-papers-icon i {
+    color: var(--gold);
     font-size: 1.1rem;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(101, 193, 120, 0.3);
-    transition: all 0.4s ease;
 }
 
-.btn-info-contact:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.4);
-    color: white;
+.info-papers-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
 }
 
-.btn-info-contact i {
-    transition: transform 0.3s ease;
+.info-papers-card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.87rem;
+    line-height: 1.8;
+    margin: 0;
 }
 
-.btn-info-contact:hover i {
-    transform: translateX(3px);
+/* CTA contact */
+.info-cta {
+    margin-top: 1rem;
 }
 
+.info-cta-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+}
 
-/* -------------------------------------------------------------------------------------------------- */
+.info-cta-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-cta-icon i {
+    color: var(--gold);
+    font-size: 1.3rem;
+}
+
+.info-cta-text {
+    flex: 1;
+}
+
+.info-cta-text h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.info-cta-text p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    margin: 0;
+}
 
 /* ========================================
    RESPONSIVE
 ======================================== */
 
 @media (max-width: 991px) {
-    .section-title-premium {
-        font-size: 2.2rem;
-    }
-    
-    .marriage-card-premium {
-        flex-direction: column;
-    }
-    
-    .marriage-image-container {
-        width: 100%;
-        min-height: 280px;
-    }
-    
-    .marriage-content-premium {
-        width: 100%;
-        padding: 30px;
-    }
-    
-    .parents-section {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .parent-item {
-        width: 100%;
-    }
-    
-    .heart-divider {
-        display: none;
-    }
+    .informations-section { padding: 3.5rem 0; }
+    .info-transport-card { padding: 1.5rem; }
 }
 
 @media (max-width: 767px) {
-    .our-marriages-section-premium {
-        padding: 60px 0;
-    }
-    
-    .section-title-premium {
-        font-size: 1.8rem;
-    }
-    
-    .marriage-content-premium {
-        padding: 24px;
-    }
-    
-    .marriage-stats {
-        padding: 20px;
-        gap: 16px;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    .stat-divider {
-        height: 50px;
-    }
-}
+    .informations-section { padding: 3rem 0; }
 
-@media (max-width: 575px) {
-    .section-title-premium {
-        font-size: 1.6rem;
-    }
-    
-    .marriage-breed-header {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-    }
-    
-    .parent-name {
-        font-size: 0.9rem;
-    }
-    
-    .marriage-stats {
+    .info-transport-card {
         flex-direction: column;
-        gap: 20px;
+        gap: 1rem;
+        padding: 1.25rem;
+        transform: none !important;
     }
-    
-    .stat-divider {
-        width: 100%;
-        height: 1px;
+
+    .info-transport-card:hover {
+        transform: none;
     }
-    
+
+    .info-cta-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
     .btn-cta-premium {
-        padding: 14px 24px;
-        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+        font-size: 0.78rem;
+        flex-shrink: 0;
+        gap: 0.5rem;
+        padding: 0.5rem 1.15rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        border-radius: 6px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: 0.3s;
     }
 }
 
-/* ========================================
-   RESPONSIVE - TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Titre section */
-    .section-title-premium {
-        font-size: 1.8rem;
-    }
-    
-    .section-subtitle-premium {
-        font-size: 0.9rem;
-    }
-    
-    /* Image + contenu en colonne */
-    .marriage-card-premium {
-        flex-direction: column;
-    }
-    
-    .marriage-image-container {
-        width: 100%;
-        min-height: 280px;
-    }
-    
-    .marriage-content-premium {
-        width: 100%;
-        padding: 25px;
-    }
-    
-    /* Race */
-    .marriage-breed-header {
-        font-size: 0.75rem;
-    }
-    
-    /* Parents */
-    .parent-label {
-        font-size: 0.6rem;
-    }
-    
-    .parent-name {
-        font-size: 0.8rem;
-    }
-    
-    .parent-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 0.95rem;
-    }
-    
-    /* Stats */
-    .stat-number {
-        font-size: 1.3rem;
-    }
-    
-    .stat-label {
-        font-size: 0.7rem;
-    }
-    
-    /* Date */
-    .birth-date-premium {
-        font-size: 0.75rem;
-        padding: 9px 14px;
-    }
-    
-    /* Bouton */
-    .btn-cta-premium {
-        font-size: 0.85rem;
-        padding: 11px 24px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Titre section */
-    .section-title-premium {
-        font-size: 1.5rem;
-    }
-    
-    .section-subtitle-premium {
-        font-size: 0.85rem;
-    }
-    
-    .label-tag-premium {
-        font-size: 0.65rem;
-        padding: 8px 18px;
-    }
-    
-    /* Contenu carte */
-    .marriage-content-premium {
-        padding: 20px;
-    }
-    
-    /* Race */
-    .marriage-breed-header {
-        font-size: 0.7rem;
-        padding: 5px 12px;
-    }
-    
-    /* Parents */
-    .parent-item {
-        padding: 12px;
-    }
-    
-    .parent-label {
-        font-size: 0.55rem;
-    }
-    
-    .parent-name {
-        font-size: 0.75rem;
-    }
-    
-    .parent-icon {
-        width: 34px;
-        height: 34px;
-        font-size: 0.9rem;
-    }
-    
-    /* Stats */
-    .marriage-stats {
-        padding: 18px;
-        gap: 18px;
-    }
-    
-    .stat-number {
-        font-size: 1.2rem;
-    }
-    
-    .stat-label {
-        font-size: 0.65rem;
-    }
-    
-    .stat-divider {
-        height: 50px;
-    }
-    
-    /* Date */
-    .birth-date-premium {
-        font-size: 0.7rem;
-        padding: 8px 12px;
-    }
-    
-    /* Bouton */
-    .btn-cta-premium {
-        font-size: 0.8rem;
-        padding: 10px 20px;
-    }
-    
-    /* Badge statut */
-    .status-badge-premium {
-        font-size: 0.65rem;
-        padding: 8px 14px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - PETITS MOBILES (< 576px)
-======================================== */
 @media (max-width: 575px) {
-    /* Titre section */
-    .section-title-premium {
-        font-size: 1.3rem;
-    }
-    
-    .section-subtitle-premium {
-        font-size: 0.8rem;
-    }
-    
-    .label-tag-premium {
-        font-size: 0.6rem;
-        padding: 7px 16px;
-    }
-    
-    /* Contenu carte */
-    .marriage-content-premium {
-        padding: 18px;
-    }
-    
-    /* Race */
-    .marriage-breed-header {
-        font-size: 0.65rem;
-        padding: 4px 10px;
-    }
-    
-    /* Parents */
-    .parent-item {
-        padding: 10px;
-        gap: 10px;
-    }
-    
-    .parent-label {
-        font-size: 0.5rem;
-    }
-    
-    .parent-name {
-        font-size: 0.7rem;
-    }
-    
-    .parent-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
-    }
-    
-    /* Stats */
-    .marriage-stats {
-        padding: 16px;
-        gap: 16px;
-        flex-direction: column;
-    }
-    
-    .stat-number {
-        font-size: 1.1rem;
-    }
-    
-    .stat-label {
-        font-size: 0.6rem;
-    }
-    
-    .stat-divider {
-        width: 100%;
-        height: 1px;
-    }
-    
-    /* Date */
-    .birth-date-premium {
-        font-size: 0.65rem;
-        padding: 7px 10px;
-        gap: 6px;
-    }
-    
-    /* Bouton */
-    .btn-cta-premium {
-        font-size: 0.75rem;
-        padding: 9px 18px;
-    }
-    
-    /* Badge statut */
-    .status-badge-premium {
-        font-size: 0.6rem;
-        padding: 7px 12px;
-        top: 10px;
-        left: 10px;
-    }
-    
-    /* Bouton voir toutes */
-    .btn-all-marriages-premium {
-        font-size: 0.85rem;
-        padding: 14px 30px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION ABOUT (À PROPOS)
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section About */
-    .about-premium {
-        padding: 60px 0;
-    }
-    
-    /* Intro Hero */
-    .intro-hero {
-        padding: 40px 0;
-    }
-    
-    .intro-title {
-        font-size: 1.9rem;
-    }
-    
-    .intro-lead {
-        font-size: 0.95rem;
-    }
-    
-    .label-tag {
-        font-size: 0.7rem;
-        padding: 8px 18px;
-    }
-    
-    .location-tag {
-        font-size: 0.85rem;
-        padding: 10px 16px;
-    }
-    
-    .image-badge span {
-        font-size: 1.3rem;
-    }
-    
-    .image-badge small {
-        font-size: 0.7rem;
-    }
-    
-    /* Races Section */
-    .races-section {
-        padding: 50px 0;
-    }
-    
-    .race-overlay-modern h3 {
-        font-size: 1.5rem;
-    }
-    
-    .race-count {
-        font-size: 0.8rem;
-    }
-    
-    .race-description {
-        font-size: 0.9rem;
-    }
-    
-    .reproducteurs-list h5 {
-        font-size: 0.95rem;
-    }
-    
-    .repro-tag {
-        font-size: 0.8rem;
-        padding: 7px 14px;
-    }
-    
-    .btn-race-primary,
-    .btn-race-secondary {
-        font-size: 0.85rem;
-        padding: 11px 22px;
-    }
-    
-    .specialty-box-inline p {
-        font-size: 0.95rem;
-    }
-    
-    .specialty-icon {
-        font-size: 1.8rem;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section About */
-    .about-premium {
-        padding: 50px 0;
-    }
-    
-    /* Intro Hero */
-    .intro-hero {
-        padding: 30px 0;
-    }
-    
-    .intro-title {
-        font-size: 1.6rem;
-        line-height: 1.3;
-    }
-    
-    .intro-lead {
-        font-size: 0.9rem;
-    }
-    
-    .label-tag {
-        font-size: 0.65rem;
-        padding: 7px 16px;
-        letter-spacing: 1.5px;
-    }
-    
-    .location-tag {
-        font-size: 0.8rem;
-        padding: 9px 14px;
-    }
-    
-    .location-tag i {
-        font-size: 0.9rem;
-    }
-    
-    .image-badge {
-        padding: 12px 18px;
-    }
-    
-    .image-badge span {
-        font-size: 1.2rem;
-    }
-    
-    .image-badge small {
-        font-size: 0.65rem;
-    }
-    
-    /* Races Section */
-    .races-section {
-        padding: 40px 0;
-    }
-    
-    .race-card-modern {
-        margin-bottom: 20px;
-    }
-    
-    .race-overlay-modern h3 {
-        font-size: 1.3rem;
-    }
-    
-    .race-count {
-        font-size: 0.75rem;
-        padding: 5px 12px;
-    }
-    
-    .race-description {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
-    
-    .reproducteurs-list h5 {
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-    
-    .repro-tags {
-        gap: 8px;
-    }
-    
-    .repro-tag {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-    }
-    
-    .repro-tag i {
-        font-size: 0.8rem;
-    }
-    
-    .race-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .btn-race-primary,
-    .btn-race-secondary {
-        width: 100%;
-        font-size: 0.8rem;
-        padding: 10px 20px;
-        justify-content: center;
-    }
-    
-    .specialty-box-inline {
-        padding: 20px;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .specialty-box-inline p {
-        font-size: 0.9rem;
-    }
-    
-    .specialty-icon {
-        font-size: 1.6rem;
-        margin-bottom: 12px;
-    }
-    
-    /* Mini Gallery */
-    .race-mini-gallery {
-        gap: 6px;
-    }
-    
-    .mini-thumb {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .mini-thumb.more-count {
-        font-size: 0.8rem;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section About */
-    .about-premium {
-        padding: 0px 0;
-    }
-    
-    /* Intro Hero */
-    .intro-hero {
-        padding: 25px 0;
-    }
-    
-    .intro-content {
-        padding: 0 10px;
-    }
-    
-    .intro-title {
-        font-size: 1.4rem;
-        line-height: 1.3;
-        margin-bottom: 12px;
-    }
-    
-    .intro-lead {
-        font-size: 0.85rem;
-        margin-bottom: 15px;
-    }
-    
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-        letter-spacing: 1.2px;
-    }
-    
-    .location-tag {
-        font-size: 0.75rem;
-        padding: 8px 12px;
-    }
-    
-    .location-tag i {
-        font-size: 0.85rem;
-    }
-    
-    .intro-image {
-        margin-top: 20px;
-    }
-    
-    .image-badge {
-        padding: 10px 16px;
-        right: 15px;
-    }
-    
-    .image-badge span {
-        font-size: 1.1rem;
-    }
-    
-    .image-badge small {
-        font-size: 0.6rem;
-    }
-    
-    /* Races Section */
-    .races-section {
-        padding: 35px 0;
-    }
-    
-    .race-card-modern {
-        margin-bottom: 20px;
-    }
-    
-    .race-content-modern {
-        padding: 20px;
-    }
-    
-    .race-overlay-modern {
-        padding: 20px;
-    }
-    
-    .race-overlay-modern h3 {
-        font-size: 1.2rem;
-        margin-bottom: 6px;
-    }
-    
-    .race-count {
-        font-size: 0.7rem;
-        padding: 4px 10px;
-    }
-    
-    .race-description {
-        font-size: 0.8rem;
-        line-height: 1.5;
-        margin-bottom: 15px;
-    }
-    
-    .reproducteurs-list h5 {
-        font-size: 0.85rem;
-        margin-bottom: 8px;
-    }
-    
-    .repro-tags {
-        gap: 6px;
-    }
-    
-    .repro-tag {
-        font-size: 0.7rem;
-        padding: 5px 10px;
-    }
-    
-    .repro-tag i {
-        font-size: 0.75rem;
-    }
-    
-    .race-actions {
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 15px;
-    }
-    
-    .btn-race-primary,
-    .btn-race-secondary {
-        width: 100%;
-        font-size: 0.75rem;
-        padding: 9px 18px;
-        justify-content: center;
-    }
-    
-    .btn-race-primary i,
-    .btn-race-secondary i {
-        font-size: 0.8rem;
-    }
-    
-    /* Specialty Box */
-    .specialty-box-inline {
-        padding: 18px;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .specialty-box-inline p {
-        font-size: 0.85rem;
-        line-height: 1.6;
-    }
-    
-    .specialty-icon {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-    }
-    
-    /* Mini Gallery */
-    .race-mini-gallery {
-        gap: 5px;
-    }
-    
-    .mini-thumb {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .mini-thumb.more-count {
-        font-size: 0.75rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    .intro-title {
-        font-size: 1.25rem;
-    }
-    
-    .intro-lead {
-        font-size: 0.8rem;
-    }
-    
-    .race-overlay-modern h3 {
-        font-size: 1.1rem;
-    }
-    
-    .race-description {
-        font-size: 0.75rem;
-    }
-    
-    .repro-tag {
-        font-size: 0.65rem;
-        padding: 4px 8px;
-    }
-    
-    .btn-race-primary,
-    .btn-race-secondary {
-        font-size: 0.7rem;
-        padding: 8px 16px;
-    }
-    
-    .specialty-box-inline p {
-        font-size: 0.8rem;
-    }
-    
-    .mini-thumb {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION NOS REPRODUCTEURS
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .our-dogs-section {
-        padding: 60px 0;
-    }
-    
-    /* Quote Parallax */
-    .quote-parallax {
-        padding: 50px 0;
-    }
-    
-    .quote-box {
-        padding: 35px 30px;
-    }
-    
-    .quote-big {
-        font-size: 1.3rem;
-        line-height: 1.6;
-    }
-    
-    .quote-icon-left,
-    .quote-icon-right {
-        font-size: 1.8rem;
-    }
-    
-    /* Cartes chiens */
-    .dog-card-image {
-        aspect-ratio: 4/5;
-    }
-    
-    .dog-name {
-        font-size: 1.3rem;
-    }
-    
-    .dog-info-item span {
-        font-size: 0.9rem;
-    }
-    
-    .dog-info-item i {
-        font-size: 0.95rem;
-    }
-    
-    .dog-gender-badge {
-        width: 42px;
-        height: 42px;
-        font-size: 1.1rem;
-    }
-    
-    .btn-view-dog {
-        font-size: 0.9rem;
-        padding: 11px 26px;
-    }
-    
-    .btn-see-all-dogs {
-        font-size: 0.95rem;
-        padding: 14px 36px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .our-dogs-section {
-        padding: 50px 0;
-    }
-    
-    /* Quote Parallax */
-    .quote-parallax {
-        padding: 40px 0;
-        margin-bottom: 30px !important;
-    }
-    
-    .quote-box {
-        padding: 30px 25px;
-    }
-    
-    .quote-big {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-    
-    .quote-icon-left,
-    .quote-icon-right {
-        font-size: 1.5rem;
-        opacity: 0.3;
-    }
-    
-    .quote-icon-left {
-        top: 15px;
-        left: 15px;
-    }
-    
-    .quote-icon-right {
-        bottom: 15px;
-        right: 15px;
-    }
-    
-    /* Sous-titre section */
-    .section-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    /* Cartes chiens */
-    .dog-card {
-        margin-bottom: 30px;
-    }
-    
-    .dog-card-image {
-        aspect-ratio: 1/1;
-    }
-    
-    .dog-card-body {
-        padding: 20px;
-    }
-    
-    .dog-name {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-    }
-    
-    .dog-info {
-        gap: 8px;
-    }
-    
-    .dog-info-item {
-        padding: 7px 10px;
-    }
-    
-    .dog-info-item span {
-        font-size: 0.85rem;
-    }
-    
-    .dog-info-item i {
-        font-size: 0.9rem;
-        min-width: 18px;
-    }
-    
-    .dog-gender-badge {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    /* Overlay toujours visible sur mobile */
-    .dog-card-overlay {
-        opacity: 1;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 0.8) 100%
-        );
-    }
-    
-    .btn-view-dog {
-        transform: translateY(0);
-        font-size: 0.85rem;
-        padding: 10px 22px;
-    }
-    
-    .btn-see-all-dogs {
-        font-size: 0.9rem;
-        padding: 13px 32px;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .our-dogs-section {
-        padding: 40px 0;
-    }
-    
-    /* Quote Parallax */
-    .quote-parallax {
-        padding: 35px 0;
-        margin-bottom: 25px !important;
-    }
-    
-    .quote-box {
-        padding: 25px 20px;
-    }
-    
-    .quote-big {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    
-    .quote-icon-left,
-    .quote-icon-right {
-        font-size: 1.3rem;
-        opacity: 0.25;
-    }
-    
-    .quote-icon-left {
-        top: 12px;
-        left: 12px;
-    }
-    
-    .quote-icon-right {
-        bottom: 12px;
-        right: 12px;
-    }
-    
-    /* Sous-titre section */
-    .section-subtitle {
-        font-size: 0.9rem;
-        padding: 0 15px;
-    }
-    
-    /* Label tag */
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-    }
-    
-    /* Cartes chiens */
-    .dog-card {
-        margin-bottom: 25px;
-    }
-    
-    .dog-card-body {
-        padding: 18px;
-    }
-    
-    .dog-name {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .dog-info {
-        gap: 7px;
-    }
-    
-    .dog-info-item {
-        padding: 6px 9px;
-        border-radius: 8px;
-    }
-    
-    .dog-info-item span {
-        font-size: 0.8rem;
-    }
-    
-    .dog-info-item i {
-        font-size: 0.85rem;
-        min-width: 16px;
-    }
-    
-    .dog-gender-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 0.95rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .btn-view-dog {
-        font-size: 0.8rem;
-        padding: 9px 20px;
-    }
-    
-    .btn-view-dog i {
-        font-size: 0.85rem;
-    }
-    
-    .btn-see-all-dogs {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.85rem;
-        padding: 12px 28px;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Quote */
-    .quote-big {
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-    
-    .quote-box {
-        padding: 22px 18px;
-    }
-    
-    .quote-icon-left,
-    .quote-icon-right {
-        font-size: 1.2rem;
-    }
-    
-    /* Sous-titre */
-    .section-subtitle {
-        font-size: 0.85rem;
-    }
-    
-    /* Cartes */
-    .dog-card-body {
-        padding: 16px;
-    }
-    
-    .dog-name {
-        font-size: 1rem;
-    }
-    
-    .dog-info-item span {
-        font-size: 0.75rem;
-    }
-    
-    .dog-info-item i {
-        font-size: 0.8rem;
-    }
-    
-    .dog-gender-badge {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-    }
-    
-    .btn-view-dog {
-        font-size: 0.75rem;
-        padding: 8px 18px;
-    }
-    
-    .btn-see-all-dogs {
-        font-size: 0.8rem;
-        padding: 11px 24px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION NOTRE PHILOSOPHIE
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .family-life-section {
-        padding: 60px 0;
-    }
-    
-    /* Contenu */
-    .family-content {
-        padding-right: 0;
-        margin-bottom: 30px;
-    }
-    
-    .family-content p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    .section-title {
-        font-size: 1.9rem;
-    }
-    
-    /* Motto banner */
-    .motto-banner {
-        font-size: 1.1rem;
-        padding: 18px 24px;
-    }
-    
-    /* Image */
-    .family-image {
-        margin-top: 30px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .family-life-section {
-        padding: 50px 0;
-    }
-    
-    /* Contenu */
-    .family-content {
-        padding: 0 10px;
-    }
-    
-    .family-content p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 15px;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-        margin-bottom: 18px;
-        line-height: 1.3;
-    }
-    
-    .label-tag {
-        font-size: 0.65rem;
-        padding: 7px 16px;
-        margin-bottom: 12px;
-    }
-    
-    /* Motto banner */
-    .motto-banner {
-        font-size: 1rem;
-        padding: 16px 20px;
-        margin: 20px 0;
-        border-radius: 12px;
-    }
-    
-    /* Image */
-    .family-image {
-        margin-top: 25px;
-    }
-    
-    .family-image img {
-        border-radius: 16px !important;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .family-life-section {
-        padding: 40px 0;
-    }
-    
-    /* Contenu */
-    .family-content {
-        padding: 0 5px;
-    }
-    
-    .family-content p {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-        margin-bottom: 16px;
-        line-height: 1.3;
-    }
-    
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-        margin-bottom: 10px;
-        letter-spacing: 1.2px;
-    }
-    
-    /* Motto banner */
-    .motto-banner {
-        font-size: 0.9rem;
-        padding: 14px 18px;
-        margin: 18px 0;
-        border-radius: 10px;
-        text-align: center;
-    }
-    
-    /* Image */
-    .family-image {
-        margin-top: 20px;
-    }
-    
-    .family-image img {
-        border-radius: 14px !important;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .family-life-section {
-        padding: 35px 0;
-    }
-    
-    /* Contenu */
-    .family-content p {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 12px;
-    }
-    
-    .section-title {
-        font-size: 1.25rem;
-        margin-bottom: 14px;
-    }
-    
-    .label-tag {
-        font-size: 0.55rem;
-        padding: 5px 12px;
-    }
-    
-    /* Motto banner */
-    .motto-banner {
-        font-size: 0.85rem;
-        padding: 12px 16px;
-        margin: 16px 0;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION MISSION
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .mission-section {
-        padding: 60px 0;
-    }
-    
-    /* Image */
-    .mission-image {
-        margin-bottom: 30px;
-    }
-    
-    .float-card {
-        padding: 14px 20px;
-        font-size: 0.95rem;
-    }
-    
-    .float-card i {
-        font-size: 1.3rem;
-    }
-    
-    /* Contenu */
-    .mission-content {
-        padding-left: 0;
-    }
-    
-    .mission-content .section-title {
-        font-size: 1.9rem;
-    }
-    
-    .mission-content p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    /* Highlight box */
-    .highlight-box-inline {
-        padding: 18px 22px;
-        font-size: 0.95rem;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .mission-section {
-        padding: 50px 0;
-    }
-    
-    /* Image */
-    .mission-image {
-        margin-bottom: 25px;
-    }
-    
-    .mission-image img {
-        border-radius: 16px !important;
-    }
-    
-    .float-card {
-        padding: 12px 18px;
-        font-size: 0.9rem;
-        bottom: 15px;
-        left: 15px;
-    }
-    
-    .float-card i {
-        font-size: 1.2rem;
-        margin-right: 8px;
-    }
-    
-    /* Contenu */
-    .mission-content {
-        padding: 0 10px;
-    }
-    
-    .mission-content .section-title {
-        font-size: 1.6rem;
-        margin-bottom: 18px;
-        line-height: 1.3;
-    }
-    
-    .mission-content p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 18px;
-    }
-    
-    /* Highlight box */
-    .highlight-box-inline {
-        padding: 16px 20px;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        border-radius: 12px;
-    }
-    
-    .highlight-box-inline strong {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .mission-section {
-        padding: 40px 0;
-    }
-    
-    /* Image */
-    .mission-image {
-        margin-bottom: 20px;
-    }
-    
-    .mission-image img {
-        border-radius: 14px !important;
-    }
-    
-    .float-card {
-        padding: 10px 16px;
-        font-size: 0.85rem;
-        bottom: 12px;
-        left: 12px;
-        border-radius: 10px;
-    }
-    
-    .float-card i {
-        font-size: 1.1rem;
-        margin-right: 7px;
-    }
-    
-    /* Contenu */
-    .mission-content {
-        padding: 0 5px;
-    }
-    
-    .mission-content .section-title {
-        font-size: 1.4rem;
-        margin-bottom: 16px;
-        line-height: 1.3;
-    }
-    
-    .mission-content p {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 16px;
-    }
-    
-    /* Highlight box */
-    .highlight-box-inline {
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        line-height: 1.6;
-        border-radius: 10px;
-        text-align: center;
-    }
-    
-    .highlight-box-inline strong {
-        font-size: 0.85rem;
-        font-weight: 700;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .mission-section {
-        padding: 35px 0;
-    }
-    
-    /* Image */
-    .float-card {
-        padding: 9px 14px;
-        font-size: 0.8rem;
-        bottom: 10px;
-        left: 10px;
-    }
-    
-    .float-card i {
-        font-size: 1rem;
-        margin-right: 6px;
-    }
-    
-    /* Contenu */
-    .mission-content .section-title {
-        font-size: 1.25rem;
-        margin-bottom: 14px;
-    }
-    
-    .mission-content p {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    
-    /* Highlight box */
-    .highlight-box-inline {
-        padding: 12px 16px;
-        font-size: 0.8rem;
-        line-height: 1.6;
-    }
-    
-    .highlight-box-inline strong {
-        font-size: 0.8rem;
-    }
-}
-
-
-/* ========================================
-   RESPONSIVE - SECTION NOS CHIOTS DISPONIBLES
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .our-puppies-section {
-        padding: 60px 0;
-    }
-    
-    /* Cartes chiots */
-    .puppy-card-image {
-        aspect-ratio: 4/5;
-    }
-    
-    .puppy-name {
-        font-size: 1.3rem;
-    }
-    
-    .puppy-info-item span {
-        font-size: 0.9rem;
-    }
-    
-    .puppy-info-item i {
-        font-size: 0.95rem;
-    }
-    
-    /* Badges */
-    .puppy-status-badge {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-    }
-    
-    .puppy-gender-badge {
-        width: 42px;
-        height: 42px;
-        font-size: 1.1rem;
-    }
-    
-    /* Prix */
-    .puppy-price .price-amount {
-        font-size: 1.4rem;
-    }
-    
-    .puppy-price .price-contact {
-        font-size: 0.9rem;
-    }
-    
-    /* Bouton */
-    .btn-view-puppy {
-        font-size: 0.9rem;
-        padding: 11px 26px;
-    }
-    
-    .btn-all-marriages-premium {
-        font-size: 0.95rem;
-        padding: 14px 36px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .our-puppies-section {
-        padding: 50px 0;
-    }
-    
-    /* Sous-titre */
-    .section-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    /* Cartes chiots */
-    .puppy-card {
-        margin-bottom: 30px;
-    }
-    
-    .puppy-card-image {
-        aspect-ratio: 1/1;
-    }
-    
-    .puppy-card-body {
-        padding: 20px;
-    }
-    
-    .puppy-name {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-    }
-    
-    /* Infos */
-    .puppy-info {
-        gap: 8px;
-        margin-bottom: 15px;
-    }
-    
-    .puppy-info-item {
-        padding: 7px 10px;
-        border-radius: 8px;
-    }
-    
-    .puppy-info-item span {
-        font-size: 0.85rem;
-    }
-    
-    .puppy-info-item i {
-        font-size: 0.9rem;
-        min-width: 18px;
-    }
-    
-    /* Badges */
-    .puppy-status-badge {
-        font-size: 0.7rem;
-        padding: 6px 11px;
-        top: 10px;
-        left: 10px;
-    }
-    
-    .puppy-status-badge i {
-        font-size: 0.75rem;
-    }
-    
-    .puppy-gender-badge {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    /* Prix */
-    .puppy-price {
-        padding: 12px;
-        margin-top: 15px;
-    }
-    
-    .puppy-price .price-amount {
-        font-size: 1.3rem;
-    }
-    
-    .puppy-price .price-contact {
-        font-size: 0.85rem;
-    }
-    
-    .puppy-price .price-contact i {
-        font-size: 0.8rem;
-    }
-    
-    /* Overlay toujours visible sur mobile */
-    .puppy-card-overlay {
-        opacity: 1;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 0.8) 100%
-        );
-    }
-    
-    .btn-view-puppy {
-        transform: translateY(0);
-        font-size: 0.85rem;
-        padding: 10px 22px;
-    }
-    
-    .btn-all-marriages-premium {
-        font-size: 0.9rem;
-        padding: 13px 32px;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .our-puppies-section {
-        padding: 40px 0;
-    }
-    
-    /* Label et sous-titre */
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem;
-        padding: 0 15px;
-    }
-    
-    /* Cartes chiots */
-    .puppy-card {
-        margin-bottom: 25px;
-    }
-    
-    .puppy-card-body {
-        padding: 18px;
-    }
-    
-    .puppy-name {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    /* Infos */
-    .puppy-info {
-        gap: 7px;
-        margin-bottom: 14px;
-    }
-    
-    .puppy-info-item {
-        padding: 6px 9px;
-    }
-    
-    .puppy-info-item span {
-        font-size: 0.8rem;
-    }
-    
-    .puppy-info-item i {
-        font-size: 0.85rem;
-        min-width: 16px;
-    }
-    
-    /* Badges */
-    .puppy-status-badge {
-        font-size: 0.65rem;
-        padding: 5px 10px;
-        top: 8px;
-        left: 8px;
-    }
-    
-    .puppy-status-badge i {
-        font-size: 0.7rem;
-        margin-right: 3px;
-    }
-    
-    .puppy-gender-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 0.95rem;
-        top: 8px;
-        right: 8px;
-    }
-    
-    /* Prix */
-    .puppy-price {
-        padding: 11px;
-        margin-top: 14px;
-        border-radius: 10px;
-    }
-    
-    .puppy-price .price-amount {
-        font-size: 1.2rem;
-        font-weight: 700;
-    }
-    
-    .puppy-price .price-contact {
-        font-size: 0.8rem;
-    }
-    
-    .puppy-price .price-contact i {
-        font-size: 0.75rem;
-    }
-    
-    /* Boutons */
-    .btn-view-puppy {
-        font-size: 0.8rem;
-        padding: 9px 20px;
-    }
-    
-    .btn-view-puppy i {
-        font-size: 0.85rem;
-    }
-    
-    .btn-all-marriages-premium {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.85rem;
-        padding: 12px 28px;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .our-puppies-section {
-        padding: 35px 0;
-    }
-    
-    /* Sous-titre */
-    .section-subtitle {
-        font-size: 0.85rem;
-    }
-    
-    /* Cartes */
-    .puppy-card-body {
-        padding: 16px;
-    }
-    
-    .puppy-name {
-        font-size: 1rem;
-    }
-    
-    /* Infos */
-    .puppy-info-item span {
-        font-size: 0.75rem;
-    }
-    
-    .puppy-info-item i {
-        font-size: 0.8rem;
-    }
-    
-    /* Badges */
-    .puppy-status-badge {
-        font-size: 0.6rem;
-        padding: 4px 9px;
-    }
-    
-    .puppy-gender-badge {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-    }
-    
-    /* Prix */
-    .puppy-price {
-        padding: 10px;
-    }
-    
-    .puppy-price .price-amount {
-        font-size: 1.1rem;
-    }
-    
-    .puppy-price .price-contact {
-        font-size: 0.75rem;
-    }
-    
-    /* Boutons */
-    .btn-view-puppy {
-        font-size: 0.75rem;
-        padding: 8px 18px;
-    }
-    
-    .btn-all-marriages-premium {
-        font-size: 0.8rem;
-        padding: 11px 24px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION BLOG
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .blog-section {
-        padding: 60px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.8rem;
-    }
-    
-    /* Cartes blog */
-    .blog-card-body {
-        padding: 25px;
-    }
-    
-    .blog-title {
-        font-size: 1.3rem;
-        line-height: 1.4;
-    }
-    
-    .blog-preview {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-    
-    /* Meta */
-    .blog-meta {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
-    }
-    
-    .blog-date,
-    .blog-likes {
-        font-size: 0.8rem;
-    }
-    
-    /* Badge catégorie */
-    .blog-category-badge {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-    }
-    
-    /* Boutons */
-    .btn-read-more {
-        font-size: 0.9rem;
-        padding: 10px 22px;
-    }
-    
-    .btn-see-all-blog {
-        font-size: 0.95rem;
-        padding: 14px 36px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .blog-section {
-        padding: 50px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.5rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    /* Cartes blog */
-    .blog-card {
-        margin-bottom: 25px;
-    }
-    
-    .blog-card-image {
-        border-radius: 16px 16px 0 0;
-    }
-    
-    .blog-card-body {
-        padding: 22px;
-    }
-    
-    .blog-title {
-        font-size: 1.2rem;
-        line-height: 1.4;
-        margin-bottom: 12px;
-    }
-    
-    .blog-title a {
-        font-size: 1.2rem;
-    }
-    
-    .blog-preview {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-    
-    /* Meta */
-    .blog-meta {
-        font-size: 0.75rem;
-        margin-bottom: 10px;
-        gap: 12px;
-    }
-    
-    .blog-date,
-    .blog-likes {
-        font-size: 0.75rem;
-    }
-    
-    .blog-date i,
-    .blog-likes i {
-        font-size: 0.8rem;
-    }
-    
-    /* Badge catégorie */
-    .blog-category-badge {
-        font-size: 0.7rem;
-        padding: 6px 11px;
-        top: 12px;
-        left: 12px;
-    }
-    
-    .blog-category-badge i {
-        font-size: 0.75rem;
-    }
-    
-    /* Boutons */
-    .btn-read-more {
-        font-size: 0.85rem;
-        padding: 9px 20px;
-    }
-    
-    .btn-read-more i {
-        font-size: 0.8rem;
-    }
-    
-    .btn-see-all-blog {
-        font-size: 0.9rem;
-        padding: 13px 32px;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .blog-section {
-        padding: 40px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.4rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.9rem;
-        padding: 0 15px;
-    }
-    
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-    }
-    
-    /* Cartes blog */
-    .blog-card {
-        margin-bottom: 20px;
-    }
-    
-    .blog-card-image {
-        border-radius: 14px 14px 0 0;
-    }
-    
-    .blog-card-body {
-        padding: 20px;
-    }
-    
-    .blog-title {
-        font-size: 1.1rem;
-        line-height: 1.4;
-        margin-bottom: 10px;
-    }
-    
-    .blog-title a {
-        font-size: 1.1rem;
-    }
-    
-    .blog-preview {
-        font-size: 0.8rem;
-        line-height: 1.6;
-        margin-bottom: 14px;
-    }
-    
-    /* Meta */
-    .blog-meta {
-        font-size: 0.7rem;
-        margin-bottom: 10px;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-    
-    .blog-date,
-    .blog-likes {
-        font-size: 0.7rem;
-    }
-    
-    .blog-date i,
-    .blog-likes i {
-        font-size: 0.75rem;
-    }
-    
-    /* Badge catégorie */
-    .blog-category-badge {
-        font-size: 0.65rem;
-        padding: 5px 10px;
-        top: 10px;
-        left: 10px;
-        border-radius: 8px;
-    }
-    
-    .blog-category-badge i {
-        font-size: 0.7rem;
-        margin-right: 3px;
-    }
-    
-    /* Boutons */
-    .btn-read-more {
-        font-size: 0.8rem;
-        padding: 8px 18px;
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .btn-read-more i {
-        font-size: 0.75rem;
-    }
-    
-    .btn-see-all-blog {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.85rem;
-        padding: 12px 28px;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .blog-section {
-        padding: 35px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.3rem;
-    }
-    
-    .section-subtitle {
-        font-size: 0.85rem;
-    }
-    
-    .label-tag {
-        font-size: 0.55rem;
-        padding: 5px 12px;
-    }
-    
-    /* Cartes blog */
-    .blog-card-body {
-        padding: 18px;
-    }
-    
-    .blog-title {
-        font-size: 1rem;
-        line-height: 1.4;
-        margin-bottom: 10px;
-    }
-    
-    .blog-title a {
-        font-size: 1rem;
-    }
-    
-    .blog-preview {
-        font-size: 0.75rem;
-        line-height: 1.6;
-        margin-bottom: 12px;
-    }
-    
-    /* Meta */
-    .blog-meta {
-        font-size: 0.65rem;
-        gap: 8px;
-    }
-    
-    .blog-date,
-    .blog-likes {
-        font-size: 0.65rem;
-    }
-    
-    .blog-date i,
-    .blog-likes i {
-        font-size: 0.7rem;
-    }
-    
-    /* Badge catégorie */
-    .blog-category-badge {
-        font-size: 0.6rem;
-        padding: 4px 9px;
-    }
-    
-    /* Boutons */
-    .btn-read-more {
-        font-size: 0.75rem;
-        padding: 7px 16px;
-    }
-    
-    .btn-see-all-blog {
-        font-size: 0.8rem;
-        padding: 11px 24px;
-    }
-}
-
-
-/* ========================================
-   RESPONSIVE - SECTION ENGAGEMENTS
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .commitments-modern {
-        padding: 60px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.8rem;
-    }
-    
-    /* Cartes */
-    .commit-card {
-        padding: 35px 25px;
-    }
-    
-    .commit-card h4 {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-    }
-    
-    .commit-card p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    /* Numéro */
-    .commit-number {
-        font-size: 3rem;
-    }
-    
-    /* Icône */
-    .commit-icon-bg {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 18px;
-    }
-    
-    .commit-icon-bg i {
-        font-size: 1.8rem;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .commitments-modern {
-        padding: 50px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.5rem;
-    }
-    
-    .label-tag {
-        font-size: 0.65rem;
-        padding: 7px 16px;
-    }
-    
-    /* Grille */
-    .commitments-modern .row {
-        gap: 20px !important;
-    }
-    
-    /* Cartes */
-    .commit-card {
-        padding: 30px 22px;
-        margin-bottom: 20px;
-    }
-    
-    .commit-card h4 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .commit-card p {
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-    
-    /* Numéro */
-    .commit-number {
-        font-size: 2.5rem;
-        top: 15px;
-        right: 15px;
-    }
-    
-    /* Icône */
-    .commit-icon-bg {
-        width: 65px;
-        height: 65px;
-        margin-bottom: 16px;
-    }
-    
-    .commit-icon-bg i {
-        font-size: 1.6rem;
-    }
-    
-    /* Carte active */
-    .commit-card.active {
-        transform: scale(1);
-    }
-    
-    .commit-card:hover {
-        transform: scale(1);
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .commitments-modern {
-        padding: 40px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.4rem;
-    }
-    
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-    }
-    
-    /* Grille */
-    .commitments-modern .row {
-        gap: 15px !important;
-    }
-    
-    /* Cartes */
-    .commit-card {
-        padding: 25px 20px;
-        margin-bottom: 15px;
-        border-radius: 16px;
-    }
-    
-    .commit-card h4 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .commit-card p {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 0;
-    }
-    
-    /* Numéro */
-    .commit-number {
-        font-size: 2.2rem;
-        top: 12px;
-        right: 12px;
-    }
-    
-    /* Icône */
-    .commit-icon-bg {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 14px;
-    }
-    
-    .commit-icon-bg i {
-        font-size: 1.5rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .commitments-modern {
-        padding: 35px 0;
-    }
-    
-    /* Titre section */
-    .section-title-big {
-        font-size: 1.3rem;
-    }
-    
-    /* Cartes */
-    .commit-card {
-        padding: 22px 18px;
-        margin-bottom: 12px;
-    }
-    
-    .commit-card h4 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-    
-    .commit-card p {
-        font-size: 0.75rem;
-        line-height: 1.7;
-    }
-    
-    /* Numéro */
-    .commit-number {
-        font-size: 2rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    /* Icône */
-    .commit-icon-bg {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 12px;
-    }
-    
-    .commit-icon-bg i {
-        font-size: 1.4rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - SECTION INFORMATIONS PRATIQUES
-======================================== */
-
-/* ========================================
-   TABLETTES (< 992px)
-======================================== */
-@media (max-width: 991px) {
-    /* Section */
-    .informations-section {
-        padding: 60px 0;
-    }
-    
-    /* Introduction */
-    .info-intro p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-    }
-    
-    /* Blocs info */
-    .info-block {
-        padding: 35px 28px;
-        margin-bottom: 30px;
-    }
-    
-    .info-block-title {
-        font-size: 1.2rem;
-        margin-bottom: 14px;
-    }
-    
-    .info-block-text {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    /* Icônes circulaires */
-    .info-icon-circle {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 20px;
-        
-    }
-    
-    .info-icon-circle i {
-        font-size: 2rem;
-    }
-    
-    /* Cartes info */
-    .info-card {
-        padding: 28px 24px;
-    }
-    
-    .info-card-title {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-    }
-    
-    .info-card-text {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-    
-    .info-card-icon {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 16px;
-    }
-    
-    .info-card-icon i {
-        font-size: 1.5rem;
-    }
-    
-    /* CTA */
-    .info-cta {
-        padding: 18px 24px;
-        font-size: 0.95rem;
-    }
-    
-    /* Bouton contact */
-    .btn-info-contact {
-        font-size: 0.95rem;
-        padding: 14px 36px;
-    }
-}
-
-/* ========================================
-   MOBILES (< 768px)
-======================================== */
-@media (max-width: 767px) {
-    /* Section */
-    .informations-section {
-        padding: 50px 0;
-    }
-    
-    /* Introduction */
-    .info-intro {
-        padding: 22px;
-        margin-bottom: 30px;
-    }
-    
-    .info-intro p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 0;
-    }
-    
-    /* Blocs info */
-    .info-block {
-        padding: 30px 22px;
-        margin-bottom: 25px;
-        border-radius: 16px;
-    }
-    
-    .info-block .row {
-        text-align: center;
-    }
-    
-    .info-block-title {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-        line-height: 1.3;
-    }
-    
-    .info-block-text {
-        font-size: 0.85rem;
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    
-    .info-block-text:last-child {
-        margin-bottom: 0;
-    }
-    
-    /* Icônes circulaires */
-    .info-icon-circle {
-        width: 75px;
-        height: 75px;
-        margin: 0 auto 18px;
-    }
-    
-    .info-icon-circle i {
-        font-size: 1.8rem;
-    }
-    
-    /* Cartes info */
-    .info-card {
-        padding: 25px 20px;
-        margin-bottom: 20px;
-    }
-    
-    .info-card-title {
-        font-size: 1.15rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .info-card-text {
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-    
-    .info-card-icon {
-        width: 52px;
-        height: 52px;
-        margin: 0 auto 14px;
-    }
-    
-    .info-card-icon i {
-        font-size: 1.4rem;
-    }
-    
-    /* CTA */
-    .info-cta {
-        padding: 16px 20px;
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-        border-radius: 12px;
-        text-align: center;
-    }
-    
-    .info-cta p {
-        margin-bottom: 0;
-    }
-    
-    .info-cta i {
-        font-size: 1rem;
-    }
-    
-    /* Bouton contact */
-    .btn-info-contact {
-        font-size: 0.9rem;
-        padding: 13px 32px;
-    }
-}
-
-/* ========================================
-   PETITS MOBILES (< 576px)
-======================================== */
-@media (max-width: 575px) {
-    /* Section */
-    .informations-section {
-        padding: 40px 0;
-    }
-    
-    /* Label tag */
-    .label-tag {
-        font-size: 0.6rem;
-        padding: 6px 14px;
-    }
-    
-    /* Introduction */
-    .info-intro {
-        padding: 20px;
-        margin-bottom: 25px;
-        border-radius: 12px;
-    }
-    
-    .info-intro p {
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-    
-    /* Blocs info */
-    .info-block {
-        padding: 25px 20px;
-        margin-bottom: 20px;
-        border-radius: 14px;
-    }
-    
-    .info-block-title {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-    }
-    
-    .info-block-text {
-        font-size: 0.8rem;
-        line-height: 1.7;
-        margin-bottom: 12px;
-    }
-    
-    /* Icônes circulaires */
-    .info-icon-circle {
-        width: 70px;
-        height: 70px;
-        margin: 0 auto 16px;
-    }
-    
-    .info-icon-circle i {
-        font-size: 1.7rem;
-    }
-    
-    /* Cartes info */
-    .info-card {
-        padding: 22px 18px;
-        margin-bottom: 15px;
-        border-radius: 12px;
-    }
-    
-    .info-card-title {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
-        text-align: center;
-    }
-    
-    .info-card-text {
-        font-size: 0.8rem;
-        line-height: 1.7;
-    }
-    
-    .info-card-icon {
-        width: 50px;
-        height: 50px;
-        margin: 0 auto 12px;
-    }
-    
-    .info-card-icon i {
-        font-size: 1.3rem;
-    }
-    
-    /* CTA */
-    .info-cta {
-        padding: 14px 18px;
-        font-size: 0.85rem;
-        margin-bottom: 20px;
-        border-radius: 10px;
-    }
-    
-    .info-cta i {
-        font-size: 0.95rem;
-    }
-    
-    /* Bouton contact */
-    .btn-info-contact {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.85rem;
-        padding: 12px 28px;
-    }
-    
-    .btn-info-contact i {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========================================
-   TRÈS PETITS MOBILES (< 400px)
-======================================== */
-@media (max-width: 399px) {
-    /* Section */
-    .informations-section {
-        padding: 35px 0;
-    }
-    
-    /* Introduction */
-    .info-intro {
-        padding: 18px;
-        margin-bottom: 20px;
-    }
-    
-    .info-intro p {
-        font-size: 0.8rem;
-        line-height: 1.7;
-    }
-    
-    /* Blocs info */
-    .info-block {
-        padding: 22px 18px;
-        margin-bottom: 18px;
-    }
-    
-    .info-block-title {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .info-block-text {
-        font-size: 0.75rem;
-        line-height: 1.7;
-        margin-bottom: 10px;
-    }
-    
-    /* Icônes circulaires */
-    .info-icon-circle {
-        width: 65px;
-        height: 65px;
-        margin: 0 auto 14px;
-    }
-    
-    .info-icon-circle i {
-        font-size: 1.6rem;
-    }
-    
-    /* Cartes info */
-    .info-card {
-        padding: 20px 16px;
-        margin-bottom: 12px;
-    }
-    
-    .info-card-title {
-        font-size: 1rem;
-        margin-bottom: 8px;
-        text-align: center;
-    }
-    
-    .info-card-text {
-        font-size: 0.75rem;
-        line-height: 1.7;
-    }
-    
-    .info-card-icon {
-        width: 48px;
-        height: 48px;
-        margin: 0 auto 10px;
-    }
-    
-    .info-card-icon i {
-        font-size: 1.2rem;
-    }
-    
-    /* CTA */
-    .info-cta {
-        padding: 12px 16px;
-        font-size: 0.8rem;
-        margin-bottom: 18px;
-    }
-    
-    .info-cta i {
-        font-size: 0.9rem;
-    }
-    
-    /* Bouton contact */
-    .btn-info-contact {
-        font-size: 0.8rem;
-        padding: 11px 24px;
-    }
+    .informations-section { padding: 2.5rem 0; }
+    .info-transport-content h3 { font-size: 1rem; }
+    .info-transport-content p { font-size: 0.83rem; }
+    .info-papers-card { padding: 1.25rem; }
+    .info-papers-card p { font-size: 0.83rem; }
+    .info-cta-text h5 { font-size: 0.95rem; }
 }

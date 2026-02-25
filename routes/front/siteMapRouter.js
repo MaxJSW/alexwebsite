@@ -14,7 +14,7 @@ function queryDatabase(sql) {
 
 async function generateSitemap() {
     try {
-        const smStream = new SitemapStream({ hostname: 'https://elevagedebelair.com' });
+        const smStream = new SitemapStream({ hostname: 'https://spiritoffreedomkennel.com' });
 
         const staticUrls = [
             { url: '/', changefreq: 'daily', priority: 1.0 }, 
