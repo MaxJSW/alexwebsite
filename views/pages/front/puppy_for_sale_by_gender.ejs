@@ -1,108 +1,134 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chiots <%= selectedGender.value === 'Mâle' ? 'Mâles' : 'Femelles' %> à Vendre | Élevage de Bel Air</title>
-    <meta name="description" content="Chiots <%= selectedGender.value === 'Mâle' ? 'mâles' : 'femelles' %> American Bully et Springer Anglais disponibles à la vente. Élevage de Bel Air : élevage familial, chiots socialisés, garantie santé, accompagnement personnalisé près de Montpellier, en Occitanie.">
-    <meta name="keywords" content="chiots <%= selectedGender.value === 'Mâle' ? 'mâles' : 'femelles' %>, chiot <%= selectedGender.value === 'Mâle' ? 'mâle' : 'femelle' %> à vendre, american bully <%= selectedGender.value === 'Mâle' ? 'mâle' : 'femelle' %>, springer anglais <%= selectedGender.value === 'Mâle' ? 'mâle' : 'femelle' %>, chiots disponibles, élevage de bel air, chiots occitanie">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/chiots/a-vendre/<%= selectedGender.param %>">
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Chiots <%= selectedGender.value === 'Mâle' ? 'Mâles' : 'Femelles' %> Disponibles - Élevage de Bel Air">
-    <meta property="og:description" content="Découvrez nos chiots <%= selectedGender.value === 'Mâle' ? 'mâles' : 'femelles' %> disponibles : élevage familial, chiots socialisés, garantie santé.">
-    <meta property="og:url" content="https://elevagedebelair.com/chiots/a-vendre/<%= selectedGender.param %>">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Chiots <%= selectedGender.value === 'Mâle' ? 'Mâles' : 'Femelles' %> - Élevage de Bel Air">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Chiots <%= selectedGender.value === 'Mâle' ? 'Mâles' : 'Femelles' %> Disponibles">
-    <meta name="twitter:description" content="Chiots <%= selectedGender.value === 'Mâle' ? 'mâles' : 'femelles' %> disponibles : élevage familial, socialisés, garantie santé.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Chiots <%= selectedGender.value === 'Mâle' ? 'Mâles' : 'Femelles' %> - Élevage de Bel Air">
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/puppy-for-sale.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Chiots <%= selectedGender.label %> à Vendre | Spirit of Freedom Kennel</title>
+        <meta name="description" content="Découvrez nos chiots <%= selectedGender.label.toLowerCase() %> disponibles à la vente et à la réservation au Spirit of Freedom Kennel. Chiots issus de lignées ABKC et FBKC, socialisés en famille, suivi vétérinaire rigoureux. Élevage à Codognan, dans le Gard.">
+        <meta name="keywords" content="chiot <%= selectedGender.label.toLowerCase() %> american bully pocket, chiot <%= selectedGender.label.toLowerCase() %> à vendre gard, chiot <%= selectedGender.label.toLowerCase() %> ABKC FBKC, réservation chiot <%= selectedGender.label.toLowerCase() %> american bully, chiot <%= selectedGender.label.toLowerCase() %> codognan">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/chiots/a-vendre/<%= selectedGender.param %>">
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Chiots <%= selectedGender.label %> à Vendre | Spirit of Freedom Kennel">
+        <meta property="og:description" content="Chiots <%= selectedGender.label.toLowerCase() %> American Bully Pocket issus de lignées ABKC et FBKC disponibles à la vente et à la réservation au Spirit of Freedom Kennel, à Codognan dans le Gard.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/chiots/a-vendre/<%= selectedGender.param %>">
+        <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Chiots <%= selectedGender.label %> à Vendre - Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Chiots <%= selectedGender.label %> à Vendre | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Chiots <%= selectedGender.label.toLowerCase() %> American Bully Pocket disponibles à la vente et à la réservation au Spirit of Freedom Kennel, à Codognan dans le Gard.">
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Chiots <%= selectedGender.label %> à Vendre - Spirit of Freedom Kennel">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "Chiots <%= selectedGender.label %> à Vendre",
+                "description": "Chiots <%= selectedGender.label.toLowerCase() %> American Bully Pocket issus de lignées ABKC et FBKC disponibles à la vente et à la réservation",
+                "url": "https://spiritoffreedomkennel.com/chiots/a-vendre/<%= selectedGender.param %>",
+                "provider": {
+                    "@type": "Organization",
+                    "name": "Spirit of Freedom Kennel",
+                    "url": "https://spiritoffreedomkennel.com"
+                }
+            }
+        </script>
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/puppy-for-sale.css">
+    </head>
     <body class="h-100">
-        <%- include('../front/frontEndAssets/header') %> 
+        <%- include('../front/frontEndAssets/header') %>
         <main style="padding-top: 70px;">
-            <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+            <section class="page-intro-section">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">
-                            <%= activeGender === 'Mâle' ? 'Nos Chiots Mâles' : 'Nos Chiots Femelles' %>
-                        </h1>
-                        <p class="page-hero-subtitle">
-                            Découvrez nos adorables chiots <%= activeGender === 'Mâle' ? 'mâles' : 'femelles' %> disponibles à la vente et à la réservation, élevés avec amour dans un environnement familial
-                        </p>
+                    <div class="specialty-text">
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <div class="breed-breadcrumb">
+                                        <a href="/chiots">Chiots</a>
+                                        <i class="fas fa-chevron-right"></i>
+                                        <a href="/chiots/a-vendre">À vendre</a>
+                                        <i class="fas fa-chevron-right"></i>
+                                        <span><%= selectedGender.label %></span>
+                                    </div>
+                                    <h1 class="specialty-title">Chiots <span class="text-gold"><%= selectedGender.label %></span> à Vendre</h1>
+                                    <p>Découvrez nos chiots <strong><%= selectedGender.label.toLowerCase() %></strong> disponibles à la vente et à la réservation. Chaque chiot est élevé au sein de notre famille à Codognan, socialisé dès sa naissance et issu de reproducteurs soigneusement sélectionnés pour leurs qualités morphologiques et comportementales.</p>
+                                    <p>Tous nos chiots sont issus de lignées <strong>ABKC</strong> et <strong>FBKC</strong>, avec un suivi vétérinaire complet, une première vaccination et un accompagnement personnalisé tout au long de leur vie.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
             <section class="puppy-filters-section">
                 <div class="container">
                     <div class="puppy-filters-desktop">
-                        <span class="puppy-stats-mini">
-                            <i class="fas fa-paw"></i>
-                            <strong><%= totalItems %></strong> chiot(s)
-                        </span>
-                        <span class="filter-dot">•</span>
-                        <a href="/chiots/a-vendre" class="puppy-mini-btn <%= !activeBreed ? 'active' : '' %>">
-                            Toutes les races
+                        <a href="/chiots/a-vendre" class="puppy-filter-btn">
+                        <i class="fas fa-paw me-2"></i>Toutes les races
                         </a>
-                        <% breeds.forEach(breed => { 
+                        <% breeds.forEach(breed => {
                             if (breed.hasActivePuppies) { %>
-                        <a href="/chiots/a-vendre/<%= breed.slug %>" 
-                        class="puppy-mini-btn <%= activeBreed === breed.slug ? 'active' : '' %>">
-                            <%= breed.name %>
+                        <a href="/chiots/a-vendre/<%= breed.slug %>" class="puppy-filter-btn">
+                        <%= breed.name %>
                         </a>
                         <% } }); %>
-                        <span class="filter-dot">•</span>
-                        <a href="/chiots/a-vendre/males" 
-                        class="puppy-mini-btn male <%= activeGender === 'Mâle' ? 'active' : '' %>">
-                            <i class="fas fa-mars"></i> Mâles
+                        <div class="puppy-filter-separator"></div>
+                        <a href="/chiots/a-vendre" class="puppy-filter-btn">
+                        <i class="fas fa-paw me-2"></i>Tous
                         </a>
-                        <a href="/chiots/a-vendre/femelles" 
-                        class="puppy-mini-btn female <%= activeGender === 'Female' ? 'active' : '' %>">
-                            <i class="fas fa-venus"></i> Femelles
+                        <a href="/chiots/a-vendre/males" class="puppy-filter-btn male <%= selectedGender.param === 'males' ? 'active' : '' %>">
+                        <i class="fas fa-mars me-2"></i>Mâles
                         </a>
+                        <a href="/chiots/a-vendre/femelles" class="puppy-filter-btn female <%= selectedGender.param === 'femelles' ? 'active' : '' %>">
+                        <i class="fas fa-venus me-2"></i>Femelles
+                        </a>
+                        <div class="puppy-filter-separator"></div>
+                        <span class="puppy-filter-count">
+                        <i class="fas fa-hashtag"></i>
+                        <strong><%= totalItems %></strong> chiot<%= totalItems > 1 ? 's' : '' %>
+                        </span>
                     </div>
-                    <div class="puppy-filters-mobile" data-aos="fade-up">
+                    <div class="puppy-filters-mobile">
                         <button class="puppy-filters-toggle" id="puppyFiltersToggle">
-                            <span>Filtres</span>
+                            <div class="puppy-filters-toggle-left">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Filtrer les chiots</span>
+                            </div>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="puppy-filters-menu" id="puppyFiltersMenu">
-                            <a href="/chiots/a-vendre" 
-                            class="puppy-filter-item <%= !activeBreed ? 'active' : '' %>">
-                                Toutes les races
+                            <a href="/chiots/a-vendre" class="puppy-filter-item">
+                            <i class="fas fa-paw me-2"></i>Toutes les races
                             </a>
-                            <% breeds.forEach(breed => { 
+                            <% breeds.forEach(breed => {
                                 if (breed.hasActivePuppies) { %>
-                            <a href="/chiots/a-vendre/<%= breed.slug %>" 
-                            class="puppy-filter-item <%= activeBreed === breed.slug ? 'active' : '' %>">
-                                <%= breed.name %>
+                            <a href="/chiots/a-vendre/<%= breed.slug %>" class="puppy-filter-item">
+                            <i class="fas fa-dog me-2"></i><%= breed.name %>
                             </a>
                             <% } }); %>
                             <div class="puppy-filter-divider"></div>
-                            <a href="/chiots/a-vendre/males" 
-                            class="puppy-filter-item <%= activeGender === 'Mâle' ? 'active' : '' %>">
-                                Mâles
+                            <a href="/chiots/a-vendre" class="puppy-filter-item">
+                            <i class="fas fa-paw me-2"></i>Tous
                             </a>
-                            <a href="/chiots/a-vendre/femelles" 
-                            class="puppy-filter-item <%= activeGender === 'Female' ? 'active' : '' %>">
-                                Femelles
+                            <a href="/chiots/a-vendre/males" class="puppy-filter-item male <%= selectedGender.param === 'males' ? 'active' : '' %>">
+                            <i class="fas fa-mars me-2"></i>Mâles
+                            </a>
+                            <a href="/chiots/a-vendre/femelles" class="puppy-filter-item female <%= selectedGender.param === 'femelles' ? 'active' : '' %>">
+                            <i class="fas fa-venus me-2"></i>Femelles
                             </a>
                         </div>
                     </div>
@@ -111,84 +137,97 @@
             <section class="puppy-grid-section">
                 <div class="container">
                     <% if (puppies && puppies.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="label-tag"><%= selectedGender.label %></span>
+                            <h2 class="breed-section-title">Chiots <span class="text-gold"><%= selectedGender.label %></span></h2>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= totalItems %></span>
+                            <span class="counter-label">chiot<%= totalItems > 1 ? 's' : '' %></span>
+                        </div>
+                    </div>
                     <div class="row g-4">
                         <% puppies.forEach((puppy, index) => { %>
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
-                            <article class="puppy-card">
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="puppy-card">
                                 <div class="puppy-card-image">
-                                    <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>">
-                                        <img src="<%= puppy.image.path %>" 
-                                            alt="<%= puppy.image.alt %>" 
-                                            onerror="this.onerror=null; this.src='/img/placeholder-puppy.jpg';">
-                                    </a>
-                                    <div class="puppy-status-badge <%= puppy.status === 'À vendre' ? 'available' : puppy.status === 'Disponible à la réservation' ? 'reservation' : 'reserved' %>">
-                                        <%= puppy.status %>
+                                    <img src="<%= puppy.image.path %>"
+                                        alt="<%= puppy.image.alt %>"
+                                        onerror="this.onerror=null; this.src='/img/placeholder-puppy.jpg';">
+                                    <div class="puppy-status-badge <%= puppy.status === 'À vendre' ? 'for-sale' : puppy.status === 'Disponible à la réservation' ? 'reservation' : puppy.status === 'En cours de réservation' ? 'in-reservation' : 'reserved' %>">
+                                        <% if (puppy.status === 'À vendre') { %>
+                                        <i class="fas fa-tag me-1"></i>À vendre
+                                        <% } else if (puppy.status === 'Disponible à la réservation') { %>
+                                        <i class="fas fa-calendar-check me-1"></i>Disponible
+                                        <% } else if (puppy.status === 'En cours de réservation') { %>
+                                        <i class="fas fa-clock me-1"></i>En réservation
+                                        <% } else { %>
+                                        <i class="fas fa-lock me-1"></i>Réservé
+                                        <% } %>
                                     </div>
                                     <div class="puppy-gender-badge <%= puppy.gender === 'Mâle' ? 'male' : 'female' %>">
                                         <i class="fas <%= puppy.gender === 'Mâle' ? 'fa-mars' : 'fa-venus' %>"></i>
                                     </div>
-                                </div>
-                                <div class="puppy-card-body">
-                                    <h3 class="puppy-card-name">
-                                        <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>">
-                                            <%= puppy.name %>
-                                        </a>
-                                    </h3>
-                                    <div class="puppy-card-race">
-                                        <i class="fas fa-paw"></i>
-                                        <a href="/chiots/a-vendre/<%= puppy.breed.slug %>">
-                                            <%= puppy.breed.name %>
+                                    <div class="puppy-card-overlay">
+                                        <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>" class="btn-view-puppy">
+                                        <i class="fas fa-eye me-2"></i>Voir le chiot
                                         </a>
                                     </div>
-                                    <div class="puppy-card-info">
+                                </div>
+                                <div class="puppy-card-body">
+                                    <div class="puppy-card-header">
+                                        <h4 class="puppy-name">
+                                            <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>">
+                                            <%= puppy.name %>
+                                            </a>
+                                        </h4>
+                                        <% if (puppy.price && puppy.price > 0) { %>
+                                        <span class="puppy-price-tag"><%= puppy.price.toLocaleString('fr-FR') %> €</span>
+                                        <% } else { %>
+                                        <span class="puppy-price-tag consult">Sur demande</span>
+                                        <% } %>
+                                    </div>
+                                    <div class="puppy-info">
+                                        <div class="puppy-info-item">
+                                            <i class="fas fa-paw"></i>
+                                            <span><%= puppy.breed.name %></span>
+                                        </div>
                                         <% if (puppy.type) { %>
                                         <div class="puppy-info-item">
                                             <i class="fas fa-dog"></i>
-                                            <span>Type : <%= puppy.type %></span>
+                                            <span><%= puppy.type %></span>
                                         </div>
                                         <% } %>
-
                                         <% if (puppy.color) { %>
                                         <div class="puppy-info-item">
                                             <i class="fas fa-palette"></i>
-                                            <span>Couleur : <%= puppy.color %></span>
+                                            <span><%= puppy.color %></span>
                                         </div>
                                         <% } %>
-
                                         <% if (puppy.eyeColor) { %>
                                         <div class="puppy-info-item">
                                             <i class="fas fa-eye"></i>
-                                            <span>Yeux : <%= puppy.eyeColor %></span>
+                                            <span>Yeux <%= puppy.eyeColor %></span>
                                         </div>
                                         <% } %>
                                     </div>
-                                    <div class="puppy-card-price">
-                                        <i class="fas fa-tag"></i>
-                                        <% if (puppy.price && puppy.price > 0) { %>
-                                            <span><%= puppy.price %> €</span>
-                                        <% } else { %>
-                                            <span>Nous Consulter</span>
-                                        <% } %>
-                                    </div>
-                                    <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>" 
-                                    class="puppy-card-btn">
-                                        Voir le profil
-                                        <i class="fas fa-arrow-right"></i>
+                                    <a href="/chiots/a-vendre/<%= puppy.breed.slug %>/<%= puppy.slug %>" class="btn-puppy-cta">
+                                    Voir la fiche <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
                                 </div>
-                            </article>
+                            </div>
                         </div>
                         <% }); %>
                     </div>
                     <% } else { %>
-                    <div class="text-center py-5">
-                        <div class="no-puppies-message" data-aos="fade-up">
-                            <i class="fas fa-paw fa-3x text-muted mb-4"></i>
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-puppies-message">
+                            <i class="fas fa-paw fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
                             <h3>Aucun chiot disponible</h3>
-                            <p class="text-muted mb-4">Aucun chiot ne correspond à vos critères de recherche</p>
+                            <p>Aucun chiot <%= selectedGender.label.toLowerCase() %> ne correspond à vos critères</p>
                             <a href="/chiots/a-vendre" class="btn-back-puppies">
-                                <i class="fas fa-arrow-left me-2"></i>
-                                Retour à tous les chiots
+                            <i class="fas fa-arrow-left me-2"></i>Retour à tous les chiots
                             </a>
                         </div>
                     </div>
@@ -202,56 +241,53 @@
                         <ul class="puppy-pagination">
                             <% if (currentPage > 1) { %>
                             <li class="puppy-pagination-item">
-                                <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= currentPage - 1 %>" 
-                                class="puppy-pagination-link prev">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>Précédent</span>
+                                <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= currentPage - 1 %>" class="puppy-pagination-link prev">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Précédent</span>
                                 </a>
                             </li>
                             <% } %>
-                            <% 
-                            let startPage = Math.max(1, currentPage - 2);
-                            let endPage = Math.min(totalPages, currentPage + 2);
-                            
-                            // Première page
-                            if (startPage > 1) { %>
-                                <li class="puppy-pagination-item">
-                                    <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=1" 
-                                    class="puppy-pagination-link">1</a>
-                                </li>
-                                <% if (startPage > 2) { %>
-                                    <li class="puppy-pagination-item">
-                                        <span class="puppy-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
+                            <%
+                                let startPage = Math.max(1, currentPage - 2);
+                                let endPage = Math.min(totalPages, currentPage + 2);
+                                
+                                const buildUrl = (page) => `/chiots/a-vendre/${selectedGender.param}?page=${page}`;
+                                
+                                if (startPage > 1) { %>
+                            <li class="puppy-pagination-item">
+                                <a href="<%= buildUrl(1) %>" class="puppy-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="puppy-pagination-item">
+                                <span class="puppy-pagination-dots">...</span>
+                            </li>
+                            <% } %>
                             <% } %>
                             <% for (let i = startPage; i <= endPage; i++) { %>
                             <li class="puppy-pagination-item">
-                                <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= i %>" 
-                                class="puppy-pagination-link <%= i === currentPage ? 'active' : '' %>">
-                                    <%= i %>
+                                <a href="<%= buildUrl(i) %>"
+                                    class="puppy-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                <%= i %>
                                 </a>
                             </li>
                             <% } %>
                             <% if (endPage < totalPages) { %>
-                                <% if (endPage < totalPages - 1) { %>
-                                    <li class="puppy-pagination-item">
-                                        <span class="puppy-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
-                                <li class="puppy-pagination-item">
-                                    <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= totalPages %>" 
-                                    class="puppy-pagination-link">
-                                        <%= totalPages %>
-                                    </a>
-                                </li>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="puppy-pagination-item">
+                                <span class="puppy-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="puppy-pagination-item">
+                                <a href="<%= buildUrl(totalPages) %>" class="puppy-pagination-link">
+                                <%= totalPages %>
+                                </a>
+                            </li>
                             <% } %>
                             <% if (currentPage < totalPages) { %>
                             <li class="puppy-pagination-item">
-                                <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= currentPage + 1 %>" 
-                                class="puppy-pagination-link next">
-                                    <span>Suivant</span>
-                                    <i class="fas fa-chevron-right"></i>
+                                <a href="/chiots/a-vendre/<%= selectedGender.param %>?page=<%= currentPage + 1 %>" class="puppy-pagination-link next">
+                                <span>Suivant</span>
+                                <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
                             <% } %>
@@ -259,25 +295,25 @@
                     </nav>
                     <div class="puppy-pagination-info" data-aos="fade-up" data-aos-delay="100">
                         Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
-                        (<%= totalItems %> chiot(s) au total)
+                        (<%= totalItems %> chiot<%= totalItems > 1 ? 's' : '' %> au total)
                     </div>
                 </div>
             </section>
             <% } %>
             <section class="puppy-cta-section">
                 <div class="container">
-                    <div class="puppy-cta-box" data-aos="zoom-in">
-                        <div class="puppy-cta-icon">
-                            <i class="fas fa-heart"></i>
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Votre futur compagnon <span class="text-gold">vous attend</span></h2>
+                            <p class="dog-cta-text">Contactez-nous pour en savoir plus sur nos chiots <%= selectedGender.label.toLowerCase() %> disponibles, nos prochaines portées et nos conditions d'adoption au Spirit of Freedom Kennel.</p>
                         </div>
-                        <div class="puppy-cta-content">
-                            <h2 class="puppy-cta-title">Vous Craquez pour un de nos chiots ?</h2>
-                            <p class="puppy-cta-text">
-                                Contactez-nous pour réserver votre futur compagnon ou pour plus d'informations sur nos chiots disponibles
-                            </p>
-                            <a href="/contact" class="btn-puppy-cta">
-                                <i class="fas fa-envelope me-2"></i>
-                                Nous Contacter
+                        <div class="dog-cta-right">
+                            <a href="/chiots/a-vendre" class="btn-dog-cta-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Tous les chiots
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
                             </a>
                         </div>
                     </div>
@@ -291,30 +327,28 @@
         <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
         <script>
             AOS.init({
-                duration: 1000,         
-                easing: 'ease-in-out',   
-                once: true,              
-                offset: 120,             
-                delay: 0,               
-                anchorPlacement: 'top-bottom', 
-                mirror: false,          
-                disable: 'mobile'  
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: 'top-bottom',
+                mirror: false,
+                disable: 'mobile'
             });
         </script>
-        <!-- Script pour le menu toggle en mobile -->
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const toggleBtn = document.getElementById('puppyFiltersToggle');
                 const menu = document.getElementById('puppyFiltersMenu');
-                
+            
                 if (toggleBtn && menu) {
-                    toggleBtn.addEventListener('click', function() {
+                    toggleBtn.addEventListener('click', function () {
                         menu.classList.toggle('active');
                         toggleBtn.classList.toggle('active');
                     });
-
-                    // Fermer le menu si on clique ailleurs
-                    document.addEventListener('click', function(e) {
+            
+                    document.addEventListener('click', function (e) {
                         if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
                             menu.classList.remove('active');
                             toggleBtn.classList.remove('active');

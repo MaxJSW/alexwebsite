@@ -30,27 +30,38 @@ const upload = multer({
 // const publicDirectory = path.join(__dirname, './public');
 router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-
-// router pour afficher la page de chiots à vendre par race et par genre
+// router pour afficher la page de chiots à vendre par race et par genre (fait)
 router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
-    const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
- 
+    const genderParam = req.params.gender;
+    const gender = genderParam === 'males' ? 'Mâle' : 'Femelle';
+    const genderLabel = genderParam === 'males' ? 'Mâles' : 'Femelles';
+
     if (req.query.page === '0' || req.query.page === '1') {
-        return res.redirect(`/chiots/a-vendre/${breedSlug}/${req.params.gender}`);
+        return res.redirect(`/chiots/a-vendre/${breedSlug}/${genderParam}`);
     }
- 
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryBreed = `
         SELECT name, slug
         FROM breed_name
-        WHERE slug = ?
+        WHERE slug = ? AND user_id = ?
         LIMIT 1
     `;
- 
+
     const countQuery = `
         SELECT COUNT(DISTINCT p.id) AS total
         FROM puppies p
@@ -61,7 +72,7 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
         AND p.puppy_gender = ?
         AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
     `;
- 
+
     const queryPuppies = `
         SELECT 
             p.id,
@@ -101,7 +112,7 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
         ORDER BY status_order ASC, p.id DESC
         LIMIT ? OFFSET ?
     `;
- 
+
     const queryBreeds = `
         SELECT 
             bn.name,
@@ -118,34 +129,34 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
         AND bn.is_online = 1
         ORDER BY bn.position ASC
     `;
- 
-    db.query(queryBreed, [breedSlug], (err, breedResult) => {
+
+    db.query(queryBreed, [breedSlug, userId], (err, breedResult) => {
         if (err) {
             console.error('Erreur lors de la récupération de la race :', err);
-            return res.redirect('/error');
+            return res.redirect('/erreur');
         }
- 
+
         if (breedResult.length === 0) {
-            return res.status(404).send('Race non trouvée');
+            return res.redirect('/erreur');
         }
- 
-        const breed = breedResult[0];
- 
+
+        const breedData = breedResult[0];
+
         db.query(countQuery, [userId, breedSlug, gender], (err, countResult) => {
             if (err) {
                 console.error('Erreur lors du comptage des chiots :', err);
-                return res.redirect('/error');
+                return res.redirect('/erreur');
             }
- 
+
             const totalItems = countResult[0].total;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
             const offset = (currentPage - 1) * itemsPerPage;
- 
+
             if (currentPage > totalPages && totalPages > 0) {
                 res.status(404);
-                return res.redirect(`/chiots/a-vendre/${breedSlug}/${req.params.gender}?page=${totalPages}`);
+                return res.redirect(`/chiots/a-vendre/${breedSlug}/${genderParam}?page=${totalPages}`);
             }
- 
+
             Promise.all([
                 new Promise((resolve, reject) => {
                     db.query(queryBreeds, [userId, userId], (err, results) => {
@@ -158,16 +169,25 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
                 })
             ])
-            .then(([breeds, puppies]) => {
+            .then(([breeds, puppies, socialLinks]) => {
                 res.render('puppy_for_sale_by_breed_and_gender', {
+                    breed: {
+                        name: breedData.name,
+                        slug: breedData.slug
+                    },
                     breeds: breeds.map(breed => ({
                         name: breed.name,
                         slug: breed.slug,
                         hasActivePuppies: breed.active_puppies_count > 0
                     })),
-                    breed,
                     puppies: puppies.map(puppy => ({
                         name: puppy.puppy_name,
                         gender: puppy.puppy_gender,
@@ -179,7 +199,15 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
                         color: puppy.puppy_color,
                         eyeColor: puppy.puppy_eye_color,
                         price: puppy.price,
-                        status: getSaleStatus(puppy.sale_status),
+                        status: (() => {
+                            switch(puppy.sale_status) {
+                                case 'for_sale': return 'À vendre';
+                                case 'available_for_reservation': return 'Disponible à la réservation';
+                                case 'in_reservation': return 'En cours de réservation';
+                                case 'reserved': return 'Réservé';
+                                default: return 'Statut inconnu';
+                            }
+                        })(),
                         slug: puppy.puppy_slug,
                         image: {
                             path: puppy.optimized_image_path
@@ -192,21 +220,23 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
                     activeGender: gender,
                     selectedGender: {
                         value: gender,
-                        param: req.params.gender
+                        param: genderParam,
+                        label: genderLabel
                     },
                     currentPage,
                     totalPages,
-                    totalItems
+                    totalItems,
+                    socialLinks: socialLinks
                 });
             })
             .catch(err => {
                 console.error('Erreur lors du chargement des données :', err);
-                res.redirect('/error');
+                res.redirect('/erreur');
             });
         });
     });
- });
- 
+});
+
  function getSaleStatus(saleStatus) {
     switch (saleStatus) {
         case 'for_sale':
@@ -222,22 +252,38 @@ router.get('/a-vendre/:breedSlug/:gender(males|femelles)', (req, res) => {
     }
  }
 
-//  route pour la page de tri des chiots produits
+//  route pour la page de tri des chiots produits (fait)
 router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.params.breedSlug;
-    const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
+    const genderParam = req.params.gender;
+    const gender = genderParam === 'males' ? 'Mâle' : 'Femelle';
+    const genderLabel = genderParam === 'males' ? 'Mâles' : 'Femelles';
+
     if (req.query.page === '0' || req.query.page === '1') {
-        return res.redirect(`/produits/${breedSlug}/${req.params.gender}`);
+        return res.redirect(`/chiots/produits/${breedSlug}/${genderParam}`);
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryBreed = `
         SELECT name, slug
         FROM breed_name
-        WHERE slug = ?
+        WHERE slug = ? AND user_id = ?
         LIMIT 1
     `;
+
     const countQuery = `
         SELECT COUNT(DISTINCT p.id) AS total
         FROM puppies p
@@ -248,6 +294,7 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
         AND p.puppy_gender = ?
         AND p.sale_status = 'sold'
     `;
+
     const queryPuppies = `
         SELECT 
             p.id,
@@ -267,7 +314,7 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
         LEFT JOIN breed_name bn ON p.breed_id = bn.id
         LEFT JOIN puppies_images pi ON pi.puppies_id = p.id
         AND pi.id = (
-            SELECT MAX(id)
+            SELECT MIN(id)
             FROM puppies_images
             WHERE puppies_id = p.id
         )
@@ -279,6 +326,7 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
         ORDER BY p.id DESC
         LIMIT ? OFFSET ?
     `;
+
     const queryBreeds = `
         SELECT 
             bn.name,
@@ -295,22 +343,23 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
         AND bn.is_online = 1
         ORDER BY bn.position ASC
     `;
-    db.query(queryBreed, [breedSlug], (err, breedResult) => {
+
+    db.query(queryBreed, [breedSlug, userId], (err, breedResult) => {
         if (err) {
             console.error('Erreur lors de la récupération de la race :', err);
-            return res.redirect('/error');
+            return res.redirect('/erreur');
         }
 
         if (breedResult.length === 0) {
-            return res.status(404).send('Race non trouvée');
+            return res.redirect('/erreur');
         }
 
-        const breed = breedResult[0];
+        const breedData = breedResult[0];
 
         db.query(countQuery, [userId, breedSlug, gender], (err, countResult) => {
             if (err) {
                 console.error('Erreur lors du comptage des chiots :', err);
-                return res.redirect('/error');
+                return res.redirect('/erreur');
             }
 
             const totalItems = countResult[0].total;
@@ -319,7 +368,7 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
 
             if (currentPage > totalPages && totalPages > 0) {
                 res.status(404);
-                return res.redirect(`/produits/${breedSlug}/${req.params.gender}?page=${totalPages}`);
+                return res.redirect(`/chiots/produits/${breedSlug}/${genderParam}?page=${totalPages}`);
             }
 
             Promise.all([
@@ -334,16 +383,25 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
                 })
             ])
-            .then(([breeds, puppies]) => {
+            .then(([breeds, puppies, socialLinks]) => {
                 res.render('puppy_sold_by_breed_and_gender', {
+                    breed: {
+                        name: breedData.name,
+                        slug: breedData.slug
+                    },
                     breeds: breeds.map(breed => ({
                         name: breed.name,
                         slug: breed.slug,
                         hasActivePuppies: breed.active_puppies_count > 0
                     })),
-                    breed,
                     puppies: puppies.map(puppy => ({
                         name: puppy.puppy_name,
                         gender: puppy.puppy_gender,
@@ -354,7 +412,6 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
                         type: puppy.puppy_breed_type,
                         color: puppy.puppy_color,
                         eyeColor: puppy.puppy_eye_color,
-                        price: puppy.price,
                         status: 'Vendu',
                         slug: puppy.puppy_slug,
                         image: {
@@ -368,104 +425,103 @@ router.get('/produits/:breedSlug/:gender(males|femelles)', (req, res) => {
                     activeGender: gender,
                     selectedGender: {
                         value: gender,
-                        param: req.params.gender
+                        param: genderParam,
+                        label: genderLabel
                     },
                     currentPage,
                     totalPages,
-                    totalItems
+                    totalItems,
+                    socialLinks: socialLinks
                 });
             })
             .catch(err => {
                 console.error('Erreur lors du chargement des données :', err);
-                res.redirect('/error');
+                res.redirect('/erreur');
             });
         });
     });
 });
 
-// router pour afficher la page de chiots à vendre par genre
+// router pour afficher la page de chiots à vendre par genre (fait)
 router.get('/a-vendre/:gender(males|femelles)', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
-    const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
-  
+    const genderParam = req.params.gender;
+    const gender = genderParam === 'males' ? 'Mâle' : 'Femelle';
+    const genderLabel = genderParam === 'males' ? 'Mâles' : 'Femelles';
+
     if (req.query.page === '0' || req.query.page === '1') {
-      return res.redirect(`/chiots/a-vendre/${req.params.gender}`);
+        return res.redirect(`/chiots/a-vendre/${genderParam}`);
     }
-  
-    const countQuery = `
-      SELECT COUNT(DISTINCT p.id) AS total
-      FROM puppies p
-      WHERE p.user_id = ?
-      AND p.puppy_is_online = 1
-      AND p.puppy_gender = ?
-      AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
-    `;
-  
-    const queryBreeds = `
-      SELECT 
-        bn.name,
-        bn.slug,
-        (SELECT COUNT(*) 
-         FROM puppies p 
-         WHERE p.breed_id = bn.id 
-         AND p.user_id = ? 
-         AND p.puppy_is_online = 1 
-         AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
-        ) AS active_puppies_count
-      FROM breed_name bn
-      WHERE bn.user_id = ?
-      AND bn.is_online = 1
-      ORDER BY bn.position ASC
-    `;
-  
-    db.query(countQuery, [userId, gender], (err, countResult) => {
-      if (err) {
-        console.error('Error counting puppies:', err);
-        return res.redirect('/error');
-      }
-  
-      const totalItems = countResult[0].total;
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
-  
-      if (currentPage > totalPages && totalPages > 0) {
-        res.status(404);
-        return res.redirect(`/chiots/a-vendre/${req.params.gender}?page=${totalPages}`);
-      }
-  
-      const offset = (currentPage - 1) * itemsPerPage;
-  
-      const queryPuppies = `
+
+    const querySocialLinks = `
         SELECT 
-          p.id,
-          p.puppy_name,
-          p.puppy_gender,
-          p.puppy_breed_type,
-          p.puppy_color,
-          p.puppy_eye_color,
-          p.price,
-          p.sale_status,
-          p.puppy_slug,
-          bn.name AS breed_name,
-          bn.slug AS breed_slug,
-          pi.image_path,
-          pi.optimized_image_path,
-          pi.balise_alt,
-          CASE p.sale_status
-            WHEN 'available_for_reservation' THEN 1
-            WHEN 'for_sale' THEN 2
-            WHEN 'in_reservation' THEN 3
-            WHEN 'reserved' THEN 4
-            ELSE 5
-          END AS status_order
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    const countQuery = `
+        SELECT COUNT(DISTINCT p.id) AS total
+        FROM puppies p
+        WHERE p.user_id = ?
+        AND p.puppy_is_online = 1
+        AND p.puppy_gender = ?
+        AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
+    `;
+
+    const queryBreeds = `
+        SELECT 
+            bn.name,
+            bn.slug,
+            (SELECT COUNT(*) 
+             FROM puppies p 
+             WHERE p.breed_id = bn.id 
+             AND p.user_id = ? 
+             AND p.puppy_is_online = 1 
+             AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
+            ) AS active_puppies_count
+        FROM breed_name bn
+        WHERE bn.user_id = ?
+        AND bn.is_online = 1
+        ORDER BY bn.position ASC
+    `;
+
+    const queryPuppies = `
+        SELECT 
+            p.id,
+            p.puppy_name,
+            p.puppy_gender,
+            p.puppy_breed_type,
+            p.puppy_color,
+            p.puppy_eye_color,
+            p.price,
+            p.sale_status,
+            p.puppy_slug,
+            bn.name AS breed_name,
+            bn.slug AS breed_slug,
+            pi.image_path,
+            pi.optimized_image_path,
+            pi.balise_alt,
+            CASE p.sale_status
+                WHEN 'available_for_reservation' THEN 1
+                WHEN 'for_sale' THEN 2
+                WHEN 'in_reservation' THEN 3
+                WHEN 'reserved' THEN 4
+                ELSE 5
+            END AS status_order
         FROM puppies p
         LEFT JOIN breed_name bn ON p.breed_id = bn.id
         LEFT JOIN puppies_images pi ON pi.puppies_id = p.id
         AND pi.id = (
-          SELECT MAX(id)
-          FROM puppies_images
-          WHERE puppies_id = p.id
+            SELECT MAX(id)
+            FROM puppies_images
+            WHERE puppies_id = p.id
         )
         WHERE p.user_id = ?
         AND p.puppy_is_online = 1
@@ -473,67 +529,99 @@ router.get('/a-vendre/:gender(males|femelles)', (req, res) => {
         AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
         ORDER BY status_order ASC, p.id DESC
         LIMIT ? OFFSET ?
-      `;
-  
-      Promise.all([
-        new Promise((resolve, reject) => {
-          db.query(queryBreeds, [userId, userId], (err, results) => {
-            if (err) return reject(err);
-            resolve(results);
-          });
-        }),
-        new Promise((resolve, reject) => {
-          db.query(queryPuppies, [userId, gender, itemsPerPage, offset], (err, results) => {
-            if (err) return reject(err);
-            resolve(results);
-          });
+    `;
+
+    db.query(countQuery, [userId, gender], (err, countResult) => {
+        if (err) {
+            console.error('Erreur comptage chiots:', err);
+            return res.redirect('/erreur');
+        }
+
+        const totalItems = countResult[0].total;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        if (currentPage > totalPages && totalPages > 0) {
+            res.status(404);
+            return res.redirect(`/chiots/a-vendre/${genderParam}?page=${totalPages}`);
+        }
+
+        const offset = (currentPage - 1) * itemsPerPage;
+
+        Promise.all([
+            new Promise((resolve, reject) => {
+                db.query(queryBreeds, [userId, userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(queryPuppies, [userId, gender, itemsPerPage, offset], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            })
+        ])
+        .then(([breeds, puppies, socialLinks]) => {
+            res.render('puppy_for_sale_by_gender', {
+                breeds: breeds.map(breed => ({
+                    name: breed.name,
+                    slug: breed.slug,
+                    hasActivePuppies: breed.active_puppies_count > 0
+                })),
+                puppies: puppies.map(puppy => ({
+                    name: puppy.puppy_name,
+                    gender: puppy.puppy_gender,
+                    breed: {
+                        name: puppy.breed_name,
+                        slug: puppy.breed_slug
+                    },
+                    type: puppy.puppy_breed_type,
+                    color: puppy.puppy_color,
+                    eyeColor: puppy.puppy_eye_color,
+                    price: puppy.price,
+                    status: (() => {
+                        switch(puppy.sale_status) {
+                            case 'for_sale': return 'À vendre';
+                            case 'available_for_reservation': return 'Disponible à la réservation';
+                            case 'in_reservation': return 'En cours de réservation';
+                            case 'reserved': return 'Réservé';
+                            default: return 'Statut inconnu';
+                        }
+                    })(),
+                    slug: puppy.puppy_slug,
+                    image: {
+                        path: puppy.optimized_image_path
+                            ? `/uploads/optimized/${puppy.optimized_image_path}`
+                            : `/uploads/${puppy.image_path}`,
+                        alt: puppy.balise_alt
+                    }
+                })),
+                activeBreed: '',
+                activeGender: gender,
+                selectedGender: {
+                    value: gender,
+                    param: genderParam,
+                    label: genderLabel
+                },
+                currentPage,
+                totalPages,
+                totalItems,
+                socialLinks: socialLinks
+            });
         })
-      ])
-      .then(([breeds, puppies]) => {
-        res.render('puppy_for_sale_by_gender', {
-          breeds: breeds.map(breed => ({
-            name: breed.name,
-            slug: breed.slug,
-            hasActivePuppies: breed.active_puppies_count > 0
-          })),
-          puppies: puppies.map(puppy => ({
-            name: puppy.puppy_name,
-            gender: puppy.puppy_gender,
-            breed: {
-              name: puppy.breed_name,
-              slug: puppy.breed_slug
-            },
-            type: puppy.puppy_breed_type,
-            color: puppy.puppy_color,
-            eyeColor: puppy.puppy_eye_color,
-            price: puppy.price,
-            status: getSaleStatus(puppy.sale_status),
-            slug: puppy.puppy_slug,
-            image: {
-              path: puppy.optimized_image_path
-                ? `/uploads/optimized/${puppy.optimized_image_path}`
-                : `/uploads/${puppy.image_path}`,
-              alt: puppy.balise_alt
-            }
-          })),
-          activeBreed: '',
-          activeGender: gender,
-          selectedGender: {
-            value: gender,
-            param: req.params.gender
-          },
-          currentPage,
-          totalPages,
-          totalItems
+        .catch(err => {
+            console.error('Erreur:', err);
+            res.redirect('/erreur');
         });
-      })
-      .catch(err => {
-        console.error('Error:', err);
-        res.redirect('/error');
-      });
     });
- });
- 
+});
+
  function getSaleStatus(saleStatus) {
     switch (saleStatus) {
       case 'for_sale':
@@ -1391,21 +1479,30 @@ router.get('/produits/:breedSlug/:slug', (req, res) => {
     });
 });
 
-
-// router pour afficher la page de chiots produits par genre
+// router pour afficher la page de chiots produits par genre (fait)
 router.get('/produits/:gender(males|femelles)', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
-    const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
-    const activeBreed = req.query.breed || null;
+    const genderParam = req.params.gender;
+    const gender = genderParam === 'males' ? 'Mâle' : 'Femelle';
+    const genderLabel = genderParam === 'males' ? 'Mâles' : 'Femelles';
 
-    // Redirection pour les pages 0 et 1
     if (req.query.page === '0' || req.query.page === '1') {
-        return res.redirect(`/chiots/produits/${req.params.gender}`);
+        return res.redirect(`/chiots/produits/${genderParam}`);
     }
 
-    // Requête pour compter les chiots produits par genre
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const countQuery = `
         SELECT COUNT(DISTINCT p.id) AS total
         FROM puppies p
@@ -1415,7 +1512,6 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
         AND p.sale_status = 'sold'
     `;
 
-    // Requête pour récupérer les races avec comptage
     const queryBreeds = `
         SELECT 
             bn.name,
@@ -1433,58 +1529,53 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
         ORDER BY bn.position ASC
     `;
 
-    // Exécution de la requête pour compter les chiots
+    const queryPuppies = `
+        SELECT 
+            p.id,
+            p.puppy_name,
+            p.puppy_gender,
+            p.puppy_breed_type,
+            p.puppy_color,
+            p.puppy_eye_color,
+            p.sale_status,
+            p.puppy_slug,
+            bn.name AS breed_name,
+            bn.slug AS breed_slug,
+            pi.image_path,
+            pi.optimized_image_path,
+            pi.balise_alt
+        FROM puppies p
+        LEFT JOIN breed_name bn ON p.breed_id = bn.id
+        LEFT JOIN puppies_images pi ON pi.puppies_id = p.id
+        AND pi.id = (
+            SELECT MIN(id)
+            FROM puppies_images
+            WHERE puppies_id = p.id
+        )
+        WHERE p.user_id = ?
+        AND p.puppy_is_online = 1
+        AND p.puppy_gender = ?
+        AND p.sale_status = 'sold'
+        ORDER BY p.id DESC
+        LIMIT ? OFFSET ?
+    `;
+
     db.query(countQuery, [userId, gender], (err, countResult) => {
         if (err) {
             console.error('Erreur lors du comptage des chiots produits :', err);
-            return res.redirect('/error');
+            return res.redirect('/erreur');
         }
 
         const totalItems = countResult[0].total;
         const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-        // Redirection si la page demandée est invalide
         if (currentPage > totalPages && totalPages > 0) {
             res.status(404);
-            return res.redirect(`/chiots/produits/${req.params.gender}?page=${totalPages}`);
+            return res.redirect(`/chiots/produits/${genderParam}?page=${totalPages}`);
         }
 
         const offset = (currentPage - 1) * itemsPerPage;
 
-        // Requête pour récupérer les chiots produits par genre
-        const queryPuppies = `
-            SELECT 
-                p.id,
-                p.puppy_name,
-                p.puppy_gender,
-                p.puppy_breed_type,
-                p.puppy_color,
-                p.puppy_eye_color,
-                p.price,
-                p.sale_status,
-                p.puppy_slug,
-                bn.name AS breed_name,
-                bn.slug AS breed_slug,
-                pi.image_path,
-                pi.optimized_image_path,
-                pi.balise_alt
-            FROM puppies p
-            LEFT JOIN breed_name bn ON p.breed_id = bn.id
-            LEFT JOIN puppies_images pi ON pi.puppies_id = p.id
-            AND pi.id = (
-                SELECT MIN(id)
-                FROM puppies_images
-                WHERE puppies_id = p.id
-            )
-            WHERE p.user_id = ?
-            AND p.puppy_is_online = 1
-            AND p.puppy_gender = ?
-            AND p.sale_status = 'sold'
-            ORDER BY p.id DESC
-            LIMIT ? OFFSET ?
-        `;
-
-        // Exécution des requêtes en parallèle
         Promise.all([
             new Promise((resolve, reject) => {
                 db.query(queryBreeds, [userId, userId], (err, results) => {
@@ -1497,9 +1588,15 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
                     if (err) return reject(err);
                     resolve(results);
                 });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
             })
         ])
-        .then(([breeds, puppies]) => {
+        .then(([breeds, puppies, socialLinks]) => {
             res.render('puppy_sold_by_gender', {
                 breeds: breeds.map(breed => ({
                     name: breed.name,
@@ -1516,7 +1613,6 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
                     type: puppy.puppy_breed_type,
                     color: puppy.puppy_color,
                     eyeColor: puppy.puppy_eye_color,
-                    price: puppy.price,
                     status: 'Vendu',
                     slug: puppy.puppy_slug,
                     image: {
@@ -1526,29 +1622,30 @@ router.get('/produits/:gender(males|femelles)', (req, res) => {
                         alt: puppy.balise_alt
                     }
                 })),
-                activeBreed,
+                activeBreed: '',
                 activeGender: gender,
                 selectedGender: {
                     value: gender,
-                    param: req.params.gender
+                    param: genderParam,
+                    label: genderLabel
                 },
                 currentPage,
                 totalPages,
-                totalItems
+                totalItems,
+                socialLinks: socialLinks
             });
         })
         .catch(err => {
             console.error('Erreur lors de la récupération des données :', err);
-            res.redirect('/error');
+            res.redirect('/erreur');
         });
     });
 });
 
-
-// router pour afficher la page de chiots à vendre
+// router pour afficher la page de chiots à vendre (fait)
 router.get('/a-vendre', (req, res) => {
     const userId = 10;
-    const itemsPerPage = 6; 
+    const itemsPerPage = 6;
     const currentPage = parseInt(req.query.page) || 1;
     const breedSlug = req.query.breed;
     const gender = req.query.gender;
@@ -1562,7 +1659,17 @@ router.get('/a-vendre', (req, res) => {
         return res.redirect(queryParams.length ? `${baseUrl}?${queryParams.join('&')}` : baseUrl);
     }
 
-    // Construction de la requête de comptage avec les filtres
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     let countQuery = `
         SELECT COUNT(DISTINCT p.id) as total
         FROM puppies p
@@ -1571,7 +1678,7 @@ router.get('/a-vendre', (req, res) => {
         AND p.puppy_is_online = 1
         AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
     `;
-    
+
     const countParams = [userId];
     if (breedSlug) {
         countQuery += ` AND bn.slug = ?`;
@@ -1582,7 +1689,6 @@ router.get('/a-vendre', (req, res) => {
         countParams.push(gender);
     }
 
-    // Requête modifiée pour les races avec comptage
     const queryBreeds = `
         SELECT 
             bn.name,
@@ -1600,7 +1706,6 @@ router.get('/a-vendre', (req, res) => {
         ORDER BY bn.position ASC
     `;
 
-    // Exécution du comptage
     db.query(countQuery, countParams, (err, countResult) => {
         if (err) {
             console.error('Erreur lors du comptage des chiots:', err);
@@ -1610,7 +1715,6 @@ router.get('/a-vendre', (req, res) => {
         const totalItems = countResult[0].total;
         const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-        // Redirection si page invalide
         if (currentPage > totalPages && totalPages > 0) {
             const baseUrl = '/chiots/a-vendre';
             const queryParams = [`page=${totalPages}`];
@@ -1622,7 +1726,6 @@ router.get('/a-vendre', (req, res) => {
 
         const offset = (currentPage - 1) * itemsPerPage;
 
-        // Requête pour les chiots
         let queryPuppies = `
             SELECT 
                 p.id,
@@ -1672,7 +1775,6 @@ router.get('/a-vendre', (req, res) => {
         queryPuppies += ` ORDER BY status_order ASC, p.id DESC LIMIT ? OFFSET ?`;
         puppiesParams.push(itemsPerPage, offset);
 
-        // Exécution des requêtes en parallèle
         Promise.all([
             new Promise((resolve, reject) => {
                 db.query(queryBreeds, [userId, userId], (err, results) => {
@@ -1685,9 +1787,15 @@ router.get('/a-vendre', (req, res) => {
                     if (err) return reject(err);
                     resolve(results);
                 });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
             })
         ])
-        .then(([breeds, puppies]) => {
+        .then(([breeds, puppies, socialLinks]) => {
             res.render('puppy_for_sale', {
                 breeds: breeds.map(breed => ({
                     name: breed.name,
@@ -1707,22 +1815,17 @@ router.get('/a-vendre', (req, res) => {
                     price: puppy.price,
                     status: (() => {
                         switch(puppy.sale_status) {
-                            case 'for_sale':
-                                return 'À vendre';
-                            case 'available_for_reservation':
-                                return 'Disponible à la réservation';
-                            case 'in_reservation':
-                                return 'En cours de réservation';
-                            case 'reserved':
-                                return 'Réservé';
-                            default:
-                                return 'Statut inconnu';
+                            case 'for_sale': return 'À vendre';
+                            case 'available_for_reservation': return 'Disponible à la réservation';
+                            case 'in_reservation': return 'En cours de réservation';
+                            case 'reserved': return 'Réservé';
+                            default: return 'Statut inconnu';
                         }
                     })(),
                     slug: puppy.puppy_slug,
                     image: {
-                        path: puppy.optimized_image_path ? 
-                            `/uploads/optimized/${puppy.optimized_image_path}` : 
+                        path: puppy.optimized_image_path ?
+                            `/uploads/optimized/${puppy.optimized_image_path}` :
                             `/uploads/${puppy.image_path}`,
                         alt: puppy.balise_alt
                     }
@@ -1731,7 +1834,8 @@ router.get('/a-vendre', (req, res) => {
                 activeGender: gender || '',
                 currentPage,
                 totalPages,
-                totalItems
+                totalItems,
+                socialLinks: socialLinks
             });
         })
         .catch(err => {
@@ -1741,7 +1845,7 @@ router.get('/a-vendre', (req, res) => {
     });
 });
 
-// router pour afficher la page de chiots produits
+// router pour afficher la page de chiots produits (fait)
 router.get('/produits', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
@@ -1749,7 +1853,6 @@ router.get('/produits', (req, res) => {
     const breedSlug = req.query.breed;
     const gender = req.query.gender;
 
-    // Redirection si page 0 ou 1
     if (req.query.page === '0' || req.query.page === '1') {
         const baseUrl = '/chiots/produits';
         const queryParams = [];
@@ -1758,7 +1861,17 @@ router.get('/produits', (req, res) => {
         return res.redirect(queryParams.length ? `${baseUrl}?${queryParams.join('&')}` : baseUrl);
     }
 
-    // Construction de la requête de comptage avec les filtres
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     let countQuery = `
         SELECT COUNT(DISTINCT p.id) as total
         FROM puppies p
@@ -1778,7 +1891,6 @@ router.get('/produits', (req, res) => {
         countParams.push(gender);
     }
 
-    // Requête modifiée pour les races avec comptage
     const queryBreeds = `
         SELECT 
             bn.name,
@@ -1796,7 +1908,6 @@ router.get('/produits', (req, res) => {
         ORDER BY bn.position ASC
     `;
 
-    // Exécution du comptage
     db.query(countQuery, countParams, (err, countResult) => {
         if (err) {
             console.error('Erreur lors du comptage des chiots:', err);
@@ -1806,7 +1917,6 @@ router.get('/produits', (req, res) => {
         const totalItems = countResult[0].total;
         const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-        // Redirection si page invalide
         if (currentPage > totalPages && totalPages > 0) {
             const baseUrl = '/chiots/produits';
             const queryParams = [`page=${totalPages}`];
@@ -1818,7 +1928,6 @@ router.get('/produits', (req, res) => {
 
         const offset = (currentPage - 1) * itemsPerPage;
 
-        // Requête pour les chiots vendus
         let queryPuppies = `
             SELECT 
                 p.id,
@@ -1860,7 +1969,6 @@ router.get('/produits', (req, res) => {
         queryPuppies += ` ORDER BY p.id DESC LIMIT ? OFFSET ?`;
         puppiesParams.push(itemsPerPage, offset);
 
-        // Exécution des requêtes en parallèle
         Promise.all([
             new Promise((resolve, reject) => {
                 db.query(queryBreeds, [userId, userId], (err, results) => {
@@ -1873,9 +1981,15 @@ router.get('/produits', (req, res) => {
                     if (err) return reject(err);
                     resolve(results);
                 });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
             })
         ])
-        .then(([breeds, puppies]) => {
+        .then(([breeds, puppies, socialLinks]) => {
             res.render('puppy_sold', {
                 breeds: breeds.map(breed => ({
                     name: breed.name,
@@ -1892,12 +2006,11 @@ router.get('/produits', (req, res) => {
                     type: puppy.puppy_breed_type,
                     color: puppy.puppy_color,
                     eyeColor: puppy.puppy_eye_color,
-                    price: puppy.price,
                     status: 'Vendu',
                     slug: puppy.puppy_slug,
                     image: {
-                        path: puppy.optimized_image_path ? 
-                            `/uploads/optimized/${puppy.optimized_image_path}` : 
+                        path: puppy.optimized_image_path ?
+                            `/uploads/optimized/${puppy.optimized_image_path}` :
                             `/uploads/${puppy.image_path}`,
                         alt: puppy.balise_alt
                     }
@@ -1906,7 +2019,8 @@ router.get('/produits', (req, res) => {
                 activeGender: gender || '',
                 currentPage,
                 totalPages,
-                totalItems
+                totalItems,
+                socialLinks: socialLinks
             });
         })
         .catch(err => {
@@ -1916,7 +2030,7 @@ router.get('/produits', (req, res) => {
     });
 });
 
-// router pour afficher la page de chiots à vendre par race
+// router pour afficher la page de chiots à vendre par race (fait)
 router.get('/a-vendre/:breedSlug', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
@@ -1924,7 +2038,6 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
     const breedSlug = req.params.breedSlug;
     const gender = req.query.gender;
 
-    // Redirection si page 0 ou 1
     if (req.query.page === '0' || req.query.page === '1') {
         const baseUrl = `/chiots/a-vendre/${breedSlug}`;
         const queryParams = [];
@@ -1932,7 +2045,17 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
         return res.redirect(queryParams.length ? `${baseUrl}?${queryParams.join('&')}` : baseUrl);
     }
 
-    // Requête pour vérifier si la race existe
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryBreedCheck = `
         SELECT id, name, slug 
         FROM breed_name 
@@ -1948,7 +2071,6 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
         const breedId = breedResult[0].id;
         const breedName = breedResult[0].name;
 
-        // Construction de la requête de comptage
         let countQuery = `
             SELECT COUNT(DISTINCT p.id) as total
             FROM puppies p
@@ -1957,14 +2079,13 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
             AND p.puppy_is_online = 1
             AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
         `;
-        
+
         const countParams = [userId, breedId];
         if (gender) {
             countQuery += ` AND p.puppy_gender = ?`;
             countParams.push(gender);
         }
 
-        // Requête pour les races disponibles avec comptage
         const queryBreeds = `
             SELECT 
                 bn.name,
@@ -1982,7 +2103,6 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
             ORDER BY bn.position ASC
         `;
 
-        // Exécution du comptage
         db.query(countQuery, countParams, (err, countResult) => {
             if (err) {
                 console.error('Erreur lors du comptage des chiots:', err);
@@ -1992,7 +2112,6 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
             const totalItems = countResult[0].total;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-            // Redirection si page invalide
             if (currentPage > totalPages && totalPages > 0) {
                 const baseUrl = `/chiots/a-vendre/${breedSlug}`;
                 const queryParams = [`page=${totalPages}`];
@@ -2003,7 +2122,6 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
 
             const offset = (currentPage - 1) * itemsPerPage;
 
-            // Requête pour les chiots
             let queryPuppies = `
                 SELECT 
                     p.id,
@@ -2039,35 +2157,38 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
                 AND p.breed_id = ?
                 AND p.puppy_is_online = 1
                 AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved')
-                `;
+            `;
 
-                const puppiesParams = [userId, breedId];
-                if (gender) {
+            const puppiesParams = [userId, breedId];
+            if (gender) {
                 queryPuppies += ` AND p.puppy_gender = ?`;
                 puppiesParams.push(gender);
-                }
+            }
 
-                queryPuppies += ` ORDER BY status_order ASC, p.id DESC LIMIT ? OFFSET ?`;
-                puppiesParams.push(itemsPerPage, offset);
+            queryPuppies += ` ORDER BY status_order ASC, p.id DESC LIMIT ? OFFSET ?`;
+            puppiesParams.push(itemsPerPage, offset);
 
-            // Exécution des requêtes en parallèle
             Promise.all([
-                // Requête des chiots
                 new Promise((resolve, reject) => {
                     db.query(queryPuppies, puppiesParams, (err, results) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
                 }),
-                // Requête des races
                 new Promise((resolve, reject) => {
                     db.query(queryBreeds, [userId, userId], (err, results) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
                 })
             ])
-            .then(([puppies, breeds]) => {
+            .then(([puppies, breeds, socialLinks]) => {
                 res.render('puppy_for_sale_by_breed', {
                     breed: {
                         name: breedName,
@@ -2091,22 +2212,17 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
                         price: puppy.price,
                         status: (() => {
                             switch(puppy.sale_status) {
-                                case 'for_sale':
-                                    return 'À vendre';
-                                case 'available_for_reservation':
-                                    return 'Disponible à la réservation';
-                                case 'in_reservation':
-                                    return 'En cours de réservation';
-                                case 'reserved':
-                                    return 'Réservé';
-                                default:
-                                    return 'Statut inconnu';
+                                case 'for_sale': return 'À vendre';
+                                case 'available_for_reservation': return 'Disponible à la réservation';
+                                case 'in_reservation': return 'En cours de réservation';
+                                case 'reserved': return 'Réservé';
+                                default: return 'Statut inconnu';
                             }
                         })(),
                         slug: puppy.puppy_slug,
                         image: {
-                            path: puppy.optimized_image_path ? 
-                                `/uploads/optimized/${puppy.optimized_image_path}` : 
+                            path: puppy.optimized_image_path ?
+                                `/uploads/optimized/${puppy.optimized_image_path}` :
                                 `/uploads/${puppy.image_path}`,
                             alt: puppy.balise_alt
                         }
@@ -2115,7 +2231,8 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
                     activeGender: gender || '',
                     currentPage,
                     totalPages,
-                    totalItems
+                    totalItems,
+                    socialLinks: socialLinks
                 });
             })
             .catch(err => {
@@ -2126,7 +2243,7 @@ router.get('/a-vendre/:breedSlug', (req, res) => {
     });
 });
 
-// router pour afficher la page de chiots produits filtrés par races
+// router pour afficher la page de chiots produits filtrés par races (fait)
 router.get('/produits/:breedSlug', (req, res) => {
     const userId = 10;
     const itemsPerPage = 6;
@@ -2134,7 +2251,6 @@ router.get('/produits/:breedSlug', (req, res) => {
     const breedSlug = req.params.breedSlug;
     const gender = req.query.gender;
 
-    // Redirection si page 0 ou 1
     if (req.query.page === '0' || req.query.page === '1') {
         const baseUrl = `/chiots/produits/${breedSlug}`;
         const queryParams = [];
@@ -2142,7 +2258,17 @@ router.get('/produits/:breedSlug', (req, res) => {
         return res.redirect(queryParams.length ? `${baseUrl}?${queryParams.join('&')}` : baseUrl);
     }
 
-    // Requête pour vérifier si la race existe
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryBreedCheck = `
         SELECT id, name, slug 
         FROM breed_name 
@@ -2158,7 +2284,6 @@ router.get('/produits/:breedSlug', (req, res) => {
         const breedId = breedResult[0].id;
         const breedName = breedResult[0].name;
 
-        // Construction de la requête de comptage
         let countQuery = `
             SELECT COUNT(DISTINCT p.id) as total
             FROM puppies p
@@ -2167,14 +2292,13 @@ router.get('/produits/:breedSlug', (req, res) => {
             AND p.puppy_is_online = 1
             AND p.sale_status = 'sold'
         `;
-        
+
         const countParams = [userId, breedId];
         if (gender) {
             countQuery += ` AND p.puppy_gender = ?`;
             countParams.push(gender);
         }
 
-        // Requête pour les races disponibles avec comptage
         const queryBreeds = `
             SELECT 
                 bn.name,
@@ -2192,7 +2316,6 @@ router.get('/produits/:breedSlug', (req, res) => {
             ORDER BY bn.position ASC
         `;
 
-        // Exécution du comptage
         db.query(countQuery, countParams, (err, countResult) => {
             if (err) {
                 console.error('Erreur lors du comptage des chiots produits:', err);
@@ -2202,7 +2325,6 @@ router.get('/produits/:breedSlug', (req, res) => {
             const totalItems = countResult[0].total;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-            // Redirection si page invalide
             if (currentPage > totalPages && totalPages > 0) {
                 const baseUrl = `/chiots/produits/${breedSlug}`;
                 const queryParams = [`page=${totalPages}`];
@@ -2213,7 +2335,6 @@ router.get('/produits/:breedSlug', (req, res) => {
 
             const offset = (currentPage - 1) * itemsPerPage;
 
-            // Requête pour les chiots
             let queryPuppies = `
                 SELECT 
                     p.id,
@@ -2222,7 +2343,6 @@ router.get('/produits/:breedSlug', (req, res) => {
                     p.puppy_breed_type,
                     p.puppy_color,
                     p.puppy_eye_color,
-                    p.price,
                     p.sale_status,
                     p.puppy_slug,
                     bn.name AS breed_name,
@@ -2253,24 +2373,27 @@ router.get('/produits/:breedSlug', (req, res) => {
             queryPuppies += ` ORDER BY p.id DESC LIMIT ? OFFSET ?`;
             puppiesParams.push(itemsPerPage, offset);
 
-            // Exécution des requêtes en parallèle
             Promise.all([
-                // Requête des chiots produits
                 new Promise((resolve, reject) => {
                     db.query(queryPuppies, puppiesParams, (err, results) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
                 }),
-                // Requête des races
                 new Promise((resolve, reject) => {
                     db.query(queryBreeds, [userId, userId], (err, results) => {
                         if (err) return reject(err);
                         resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
                 })
             ])
-            .then(([puppies, breeds]) => {
+            .then(([puppies, breeds, socialLinks]) => {
                 res.render('puppy_sold_by_breed', {
                     breed: {
                         name: breedName,
@@ -2292,11 +2415,10 @@ router.get('/produits/:breedSlug', (req, res) => {
                         type: puppy.puppy_breed_type,
                         color: puppy.puppy_color,
                         eyeColor: puppy.puppy_eye_color,
-                        price: puppy.price,
                         slug: puppy.puppy_slug,
                         image: {
-                            path: puppy.optimized_image_path ? 
-                                `/uploads/optimized/${puppy.optimized_image_path}` : 
+                            path: puppy.optimized_image_path ?
+                                `/uploads/optimized/${puppy.optimized_image_path}` :
                                 `/uploads/${puppy.image_path}`,
                             alt: puppy.balise_alt
                         }
@@ -2305,7 +2427,8 @@ router.get('/produits/:breedSlug', (req, res) => {
                     activeGender: gender || '',
                     currentPage,
                     totalPages,
-                    totalItems
+                    totalItems,
+                    socialLinks: socialLinks
                 });
             })
             .catch(err => {
@@ -2316,12 +2439,21 @@ router.get('/produits/:breedSlug', (req, res) => {
     });
 });
 
-
-// router principal de la page chiots
+// router principal de la page chiots (fait)
 router.get('/', (req, res) => {
     const userId = 10;
 
-    // Requête pour les chiots à vendre/disponibles
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryAvailablePuppies = `
         SELECT 
             puppies.puppy_name,
@@ -2342,7 +2474,6 @@ router.get('/', (req, res) => {
         LIMIT 1;
     `;
 
-    // Requête pour les chiots vendus
     const querySoldPuppies = `
         SELECT 
             puppies.puppy_name,
@@ -2363,7 +2494,6 @@ router.get('/', (req, res) => {
         LIMIT 1;
     `;
 
-    // Requête pour compter les chiots
     const queryCount = `
         SELECT 
             COUNT(*) as available_count,
@@ -2395,9 +2525,15 @@ router.get('/', (req, res) => {
                 if (err) return reject(err);
                 resolve(results[0]);
             });
+        }),
+        new Promise((resolve, reject) => {
+            db.query(querySocialLinks, [userId], (err, results) => {
+                if (err) return reject(err);
+                resolve(results);
+            });
         })
     ])
-    .then(([availablePuppy, soldPuppy, counts]) => {
+    .then(([availablePuppy, soldPuppy, counts, socialLinks]) => {
         res.render('chiots', {
             availablePuppy: availablePuppy ? {
                 image: {
@@ -2418,7 +2554,8 @@ router.get('/', (req, res) => {
             counts: {
                 available: counts.available_count,
                 sold: counts.sold_count
-            }
+            },
+            socialLinks: socialLinks
         });
     })
     .catch(err => {
