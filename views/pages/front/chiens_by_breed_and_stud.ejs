@@ -4,128 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Nos Mâles <%= currentBreed %> Disponibles en Saillie</title>
-    <meta name="description" content="Nos Mâles <%= currentBreed %> disponibles en saillie : mâles d'exception testés génétiquement, confirmés au standard, avec pedigree. Contactez-nous pour une saillie <%= currentBreed %> de qualité.">
-    <meta name="keywords" content="saillie <%= currentBreed.toLowerCase() %>, étalon <%= currentBreed.toLowerCase() %> saillie, <%= currentBreed.toLowerCase() %> mâle saillie, saillie <%= currentBreed.toLowerCase() %> avec pedigree, tarif saillie <%= currentBreed.toLowerCase() %>, étalon <%= currentBreed.toLowerCase() %> disponible, reproducteur <%= currentBreed.toLowerCase() %>">
-    <meta name="author" content="Élevage de Bel Air">
+    <title>Étalons <%= currentBreed %> en Saillie | Spirit of Freedom Kennel</title>
+    <meta name="description" content="Découvrez nos étalons <%= currentBreed %> disponibles en saillie au Spirit of Freedom Kennel : mâles d'exception conformes aux standards ABKC et FBKC, sélectionnés pour leur génétique et leur morphologie. Élevage à Codognan, dans le Gard.">
+    <meta name="keywords" content="saillie <%= currentBreed.toLowerCase() %>, étalon <%= currentBreed.toLowerCase() %> saillie, <%= currentBreed.toLowerCase() %> mâle saillie gard, étalon <%= currentBreed.toLowerCase() %> FBKC ABKC, saillie <%= currentBreed.toLowerCase() %> codognan, reproducteur <%= currentBreed.toLowerCase() %> spirit of freedom kennel">
+    <meta name="author" content="Spirit of Freedom Kennel">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/chiens/<%= breedSlug %>/saillies">
+    <link rel="canonical" href="https://spiritoffreedomkennel.com/chiens/<%= breedSlug %>/saillies">
     <meta name="language" content="fr">
-    <meta name="geo.region" content="FR">
-    <meta name="geo.placename" content="France">
+    <meta name="geo.region" content="FR-30">
+    <meta name="geo.placename" content="Codognan, Gard">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Mâles <%= currentBreed %> Disponibles en Saillie - Élevage de Bel Air">
-    <meta property="og:description" content="Nos Mâles <%= currentBreed %> disponibles en saillie : mâles d'exception testés génétiquement et conformes au standard.">
-    <meta property="og:url" content="https://elevagedebelair.com/chiens/<%= breedSlug %>/saillies">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
+    <meta property="og:site_name" content="Spirit of Freedom Kennel">
+    <meta property="og:title" content="Étalons <%= currentBreed %> en Saillie | Spirit of Freedom Kennel">
+    <meta property="og:description" content="Nos étalons <%= currentBreed %> disponibles en saillie au Spirit of Freedom Kennel : mâles d'exception conformes aux standards ABKC et FBKC.">
+    <meta property="og:url" content="https://spiritoffreedomkennel.com/chiens/<%= breedSlug %>/saillies">
+    <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mâles <%= currentBreed %> en Saillie - Élevage de Bel Air">
+    <meta property="og:image:alt" content="Étalons <%= currentBreed %> en Saillie - Spirit of Freedom Kennel">
     <meta property="og:locale" content="fr_FR">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mâles <%= currentBreed %> Disponibles en Saillie">
-    <meta name="twitter:description" content="Nos Mâles <%= currentBreed %> disponibles en saillie : mâles d'exception.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Mâles <%= currentBreed %> en Saillie">
+    <meta name="twitter:title" content="Étalons <%= currentBreed %> en Saillie | Spirit of Freedom Kennel">
+    <meta name="twitter:description" content="Nos étalons <%= currentBreed %> disponibles en saillie au Spirit of Freedom Kennel, à Codognan dans le Gard.">
+    <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+    <meta name="twitter:image:alt" content="Spirit of Freedom Kennel - Étalons <%= currentBreed %> en Saillie">
     <%- include('../front/partials/head-meta-base.ejs') %>
     <%- include('../front/partials/head-fonts-libs.ejs') %>
     <link rel="stylesheet" href="/front/css/navbar.css">
     <link rel="stylesheet" href="/front/css/chiens.css">
 </head>
-    <body class="h-100">
-        <%- include('../front/frontEndAssets/header') %>
-        <main style="padding-top: 70px;">
-            <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+<body class="h-100">
+    <%- include('../front/frontEndAssets/header') %>
+    <main style="padding-top: 70px;">
+            <section class="page-intro-section">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">Les <%= currentBreed %> disponibles en saillie</h1>
-                            <p class="page-hero-subtitle">
-                                Découvrez nos Mâles <%= currentBreed %> sélectionnés avec soin pour leurs qualités exceptionnelles. 
-                                Chaque mâle disponible en saillie est confirmé, testé santé et possède un excellent caractère. 
-                                Consultez leurs profils pour découvrir leurs caractéristiques, tarifs et conditions de saillie.
-                            </p>
+                    <div class="specialty-text">
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <h1 class="specialty-title">Étalons <span class="text-gold"><%= currentBreed %></span> en Saillie</h1>
+                                    <p>Retrouvez ici l'ensemble de nos étalons <strong><%= currentBreed %></strong> actuellement disponibles pour la saillie. Chaque mâle présenté a été rigoureusement évalué sur sa morphologie, sa génétique et sa conformité aux exigences des registres ABKC et FBKC.</p>
+                                    <p>Pour toute demande de saillie, nous vous invitons à consulter le profil de chaque étalon afin de découvrir ses caractéristiques détaillées, puis à nous contacter directement pour étudier ensemble la meilleure alliance pour votre lice.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
             <section class="dog-filters-section">
                 <div class="container">
                     <div class="dog-filters-desktop">
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens" class="dog-mini-btn active">Toutes les races</a>
+                        <a href="/chiens" class="dog-filter-btn">
+                            <i class="fas fa-paw me-2"></i>Toutes les races
+                        </a>
                         <% races.forEach(race => { %>
-                       <a href="/chiens/<%= race.breed_slug %>/saillies" 
-                            class="dog-mini-btn <%= race.breed_slug === breedSlug ? 'active' : '' %>">
-                                <%= race.breed_name %>
+                        <a href="/chiens/<%= race.breed_slug %>/saillies"
+                            class="dog-filter-btn <%= race.breed_slug === breedSlug ? 'active' : '' %>">
+                            <%= race.breed_name %>
                         </a>
                         <% }); %>
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens/males" class="dog-mini-btn male"> <i class="fas fa-mars"></i> Mâles </a>
-                        <a href="/chiens/femelles" class="dog-mini-btn female"> <i class="fas fa-venus"></i> Femelles </a>
-
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens/saillies" class="dog-mini-btn saillie"> <i class="fas fa-heart"></i> Mâles en Saillies </a>
+                        <div class="dog-filter-separator"></div>
+                        <a href="/chiens/males" class="dog-filter-btn male">
+                            <i class="fas fa-mars me-2"></i>Mâles
+                        </a>
+                        <a href="/chiens/femelles" class="dog-filter-btn female">
+                            <i class="fas fa-venus me-2"></i>Femelles
+                        </a>
+                        <div class="dog-filter-separator"></div>
+                        <a href="/chiens/saillies" class="dog-filter-btn saillie">
+                            <i class="fas fa-heart me-2"></i>Toutes les Saillies
+                        </a>
                     </div>
                     <div class="dog-filters-mobile">
                         <button class="dog-filters-toggle" id="dogFiltersToggle">
-                            <span>Filtres</span>
+                            <div class="dog-filters-toggle-left">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Filtrer les chiens</span>
+                            </div>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dog-filters-menu" id="dogFiltersMenu">
-                            <a href="/chiens" class="dog-filter-item active">
-                                Tous les chiens
+                            <a href="/chiens" class="dog-filter-item">
+                                <i class="fas fa-paw me-2"></i>Toutes les races
                             </a>
                             <% races.forEach(race => { %>
-                            <a href="/chiens/<%= race.breed_slug %>/saillies" 
+                            <a href="/chiens/<%= race.breed_slug %>/saillies"
                                 class="dog-filter-item <%= race.breed_slug === breedSlug ? 'active' : '' %>">
-                                    <%= race.breed_name %>
+                                <i class="fas fa-dog me-2"></i><%= race.breed_name %>
                             </a>
                             <% }); %>
                             <div class="dog-filter-divider"></div>
-                            <a href="/chiens/males" class="dog-filter-item">
-                                Mâles
+                            <a href="/chiens/males" class="dog-filter-item male">
+                                <i class="fas fa-mars me-2"></i>Mâles
                             </a>
-                            <a href="/chiens/femelles" class="dog-filter-item">
-                                Femelles
+                            <a href="/chiens/femelles" class="dog-filter-item female">
+                                <i class="fas fa-venus me-2"></i>Femelles
                             </a>
                             <div class="dog-filter-divider"></div>
                             <a href="/chiens/saillies" class="dog-filter-item saillie">
-                                Mâles en saillie
+                                <i class="fas fa-heart me-2"></i>Toutes les Saillies
                             </a>
                         </div>
                     </div>
                 </div>
             </section>
+
             <section class="dog-grid-section">
                 <div class="container">
                     <% if (animals && animals.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="label-tag">Saillies <%= currentBreed %></span>
+                            <h2 class="breed-section-title">Nos Étalons <span class="text-gold"><%= currentBreed %></span></h2>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= totalItems %></span>
+                            <span class="counter-label">étalons</span>
+                        </div>
+                    </div>
                     <div class="row g-4">
                         <% animals.forEach((animal, index) => { %>
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
                             <article class="dog-card">
                                 <div class="dog-card-image">
+                                    <%
+                                        let animalImageSrc;
+                                        if (animal.optimized_image_path) {
+                                            animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path;
+                                        } else if (animal.image_path) {
+                                            animalImageSrc = '/uploads/' + animal.image_path;
+                                        } else {
+                                            animalImageSrc = '/img/placeholder-dog.jpg';
+                                        }
+                                    %>
                                     <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                        <% let animalImageSrc; if (animal.optimized_image_path) { animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path; } else if (animal.image_path) { animalImageSrc = '/uploads/' +
-                                        animal.image_path; } else { animalImageSrc = '/img/placeholder-dog.jpg'; } %>
-                                        <img src="<%= animalImageSrc %>" alt="<%= animal.balise_alt || animal.name %>" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                        <img src="<%= animalImageSrc %>"
+                                            alt="<%= animal.balise_alt || animal.name %>"
+                                            onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';">
                                     </a>
-                                    <div class="dog-gender-badge <%= animal.gender === 'Male' ? 'male' : 'female' %>">
-                                        <i class="fas <%= animal.gender === 'Male' ? 'fa-mars' : 'fa-venus' %>"></i>
+                                    <div class="dog-gender-badge male">
+                                        <i class="fas fa-mars"></i>
                                     </div>
                                 </div>
                                 <div class="dog-card-body">
+                                    <div class="dog-card-top-bar"></div>
                                     <h3 class="dog-card-name">
-                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                            <%= animal.name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>"><%= animal.name %></a>
                                     </h3>
                                     <div class="dog-card-race">
                                         <i class="fas fa-paw"></i>
-                                        <a href="/chiens/<%= animal.breed_slug %>">
-                                            <%= animal.breed_name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>"><%= animal.breed_name %></a>
                                     </div>
                                     <div class="dog-card-info">
                                         <% if (animal.breed_type) { %>
@@ -133,26 +164,28 @@
                                             <i class="fas fa-dog"></i>
                                             <span><%= animal.breed_type %></span>
                                         </div>
-                                        <% } %> <% if (animal.color) { %>
+                                        <% } %>
+                                        <% if (animal.color) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-palette"></i>
                                             <span><%= animal.color %></span>
                                         </div>
-                                        <% } %> <% if (animal.eye_color) { %>
+                                        <% } %>
+                                        <% if (animal.eye_color) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-eye"></i>
                                             <span><%= animal.eye_color %></span>
                                         </div>
-                                        <% } %> <% if (animal.register_name) { %>
+                                        <% } %>
+                                        <% if (animal.register_name) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-certificate"></i>
                                             <span><%= animal.register_name %></span>
                                         </div>
                                         <% } %>
                                     </div>
-                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="dog-card-btn">
-                                        Voir le profil
-                                        <i class="fas fa-arrow-right"></i>
+                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="btn-view-dog-card">
+                                        Voir le profil <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
                                 </div>
                             </article>
@@ -160,20 +193,20 @@
                         <% }); %>
                     </div>
                     <% } else { %>
-                    <div class="text-center py-5">
-                        <div class="no-dogs-message" data-aos="fade-up">
-                            <i class="fas fa-paw fa-3x text-muted mb-4"></i>
-                            <h3>Aucun chien disponible</h3>
-                            <p class="text-muted mb-4">Aucun chien ne correspond à vos critères de recherche</p>
-                            <a href="/chiens" class="btn-back-dogs">
-                                <i class="fas fa-arrow-left me-2"></i>
-                                Retour à tous les chiens
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-dogs-message">
+                            <i class="fas fa-paw fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
+                            <h3>Aucun étalon disponible</h3>
+                            <p>Aucun étalon <strong><%= currentBreed %></strong> n'est actuellement ouvert à la saillie</p>
+                            <a href="/chiens/saillies" class="btn-back-dogs">
+                                <i class="fas fa-arrow-left me-2"></i>Voir toutes les saillies
                             </a>
                         </div>
                     </div>
                     <% } %>
                 </div>
             </section>
+
             <% if (totalPages > 1) { %>
             <section class="dog-pagination-section">
                 <div class="container">
@@ -181,77 +214,78 @@
                         <ul class="dog-pagination">
                             <% if (currentPage > 1) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
+                                <a href="/chiens/<%= breedSlug %>/saillies?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
                                     <i class="fas fa-chevron-left"></i>
                                     <span>Précédent</span>
                                 </a>
                             </li>
                             <% } %>
-                            <% 
-                            // Logique de pagination
-                            let startPage = Math.max(1, currentPage - 2);
-                            let endPage = Math.min(totalPages, currentPage + 2);
-                            
-                            // Première page
-                            if (startPage > 1) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=1" class="dog-pagination-link">1</a>
-                                </li>
-                                <% if (startPage > 2) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
+                            <%
+                                let startPage = Math.max(1, currentPage - 2);
+                                let endPage = Math.min(totalPages, currentPage + 2);
+
+                                if (startPage > 1) { %>
+                            <li class="dog-pagination-item">
+                                <a href="/chiens/<%= breedSlug %>/saillies?page=1" class="dog-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
                             <% } %>
                             <% for (let i = startPage; i <= endPage; i++) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= i %>" 
-                                class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                <a href="/chiens/<%= breedSlug %>/saillies?page=<%= i %>"
+                                    class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
                                     <%= i %>
                                 </a>
                             </li>
                             <% } %>
                             <% if (endPage < totalPages) { %>
-                                <% if (endPage < totalPages - 1) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= totalPages %>" class="dog-pagination-link">
-                                        <%= totalPages %>
-                                    </a>
-                                </li>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="dog-pagination-item">
+                                <a href="/chiens/<%= breedSlug %>/saillies?page=<%= totalPages %>" class="dog-pagination-link">
+                                    <%= totalPages %>
+                                </a>
+                            </li>
                             <% } %>
                             <% if (currentPage < totalPages) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
+                                <a href="/chiens/<%= breedSlug %>/saillies?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
                                     <span>Suivant</span>
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
                             <% } %>
-                            
                         </ul>
                     </nav>
                     <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
                         Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
-                        (<%= totalItems %> chien(s) au total)
+                        (<%= totalItems %> étalon(s) <%= currentBreed %> au total)
                     </div>
                 </div>
             </section>
             <% } %>
+
             <section class="dog-cta-section">
                 <div class="container">
-                    <div class="dog-cta-box" data-aos="zoom-in">
-                        <div class="dog-cta-content">
-                            <h2 class="dog-cta-title">Vous souhaitez adopter un chiot ?</h2>
-                            <p class="dog-cta-text">
-                                Contactez-nous pour plus d'informations sur nos reproducteurs, nos saillies et nos chiots disponibles
-                            </p>
-                            <a href="/contact" class="btn-dog-cta">
-                                <i class="fas fa-envelope me-2"></i>
-                                Nous Contacter
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Votre futur compagnon <span class="text-gold">vous attend</span></h2>
+                            <p class="dog-cta-text">Contactez-nous pour en savoir plus sur nos reproducteurs, nos saillies disponibles et nos chiots FBKC & ABKC à venir.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/chiots" class="btn-dog-cta-secondary">
+                            <i class="fas fa-paw me-2"></i>Voir les chiots
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
                             </a>
                         </div>
                     </div>

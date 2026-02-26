@@ -30,16 +30,41 @@ const upload = multer({
 // const publicDirectory = path.join(__dirname, './public');
 router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Route pour afficher les chiens en saillie
+// Route pour afficher les chiens en saillie (fait)
 router.get('/saillies', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const itemsPerPage = 8;
     const currentPage = parseInt(req.query.page) || 1;
 
-    // Redirection explicite pour page 0 et 1
     if (req.query.page === '0' || req.query.page === '1') {
         return res.redirect('/chiens/saillies');
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    const countQuery = `
+        SELECT COUNT(DISTINCT animals.id) AS total
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND animals.gender = 'Male'
+            AND animals.open_for_stud = 1
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+    `;
+
     const queryAllRaces = `
         SELECT DISTINCT 
             breed_name.name AS breed_name,
@@ -55,94 +80,97 @@ router.get('/saillies', (req, res) => {
         ORDER BY breed_name.name ASC
     `;
 
-    db.query(queryAllRaces, [userId], (err, allRaces) => {
+    const queryAnimals = `
+        SELECT 
+            animals.id,
+            animals.name,
+            animals.gender,
+            animals.breed_type,
+            animals.color,
+            animals.eye_color,
+            animals.slug,
+            breed_name.name AS breed_name,
+            breed_name.slug AS breed_slug,
+            register_name.name AS register_name,
+            images.image_path,
+            images.optimized_image_path,
+            images.balise_alt
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN register_name ON animals.register_id = register_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND animals.gender = 'Male'
+            AND animals.open_for_stud = 1
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+            AND images.id = (
+                SELECT MIN(id)
+                FROM images
+                WHERE images.animal_id = animals.id
+            )
+        ORDER BY animals.id DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    db.query(countQuery, [userId], (err, countResult) => {
         if (err) {
-            console.error('Erreur lors de la récupération des races:', err);
-            return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
+            console.error('Erreur lors du comptage des animaux:', err);
+            return res.redirect('/erreur');
         }
-        const countQuery = `
-            SELECT COUNT(DISTINCT animals.id) AS total
-            FROM animals
-            LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-            LEFT JOIN images ON images.animal_id = animals.id
-            WHERE 
-                animals.user_id = ?
-                AND animals.gender = 'Male'
-                AND animals.open_for_stud = 1
-                AND animals.is_online = 1
-                AND animals.in_breeding = 1
-                AND animals.retreat = 0
-        `;
 
-        db.query(countQuery, [userId], (err, countResult) => {
-            if (err) {
-                console.error('Erreur lors du comptage des animaux:', err);
-                return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-            }
+        const totalItems = countResult[0].total;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-            const totalItems = countResult[0].total;
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            if (currentPage > totalPages) {
-                res.status(404);
-                return res.redirect(`/chiens/saillies?page=${totalPages}`);
-            }
-            const offset = (currentPage - 1) * itemsPerPage;
-            const queryAnimals = `
-                SELECT 
-                    animals.id,
-                    animals.name,
-                    animals.gender,
-                    animals.breed_type,
-                    animals.color,
-                    animals.eye_color,
-                    animals.slug,
-                    breed_name.name AS breed_name,
-                    breed_name.slug AS breed_slug,
-                    register_name.name AS register_name,
-                    images.image_path,
-                    images.optimized_image_path,
-                    images.balise_alt
-                FROM animals
-                LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-                LEFT JOIN register_name ON animals.register_id = register_name.id
-                LEFT JOIN images ON images.animal_id = animals.id
-                WHERE 
-                    animals.user_id = ?
-                    AND animals.gender = 'Male'
-                    AND animals.open_for_stud = 1
-                    AND animals.is_online = 1
-                    AND animals.in_breeding = 1
-                    AND animals.retreat = 0
-                    AND images.id = (
-                        SELECT MIN(id)
-                        FROM images
-                        WHERE images.animal_id = animals.id
-                    )
-                ORDER BY animals.id DESC
-                LIMIT ? OFFSET ?
-            `;
+        if (currentPage > totalPages && totalPages > 0) {
+            res.status(404);
+            return res.redirect(`/chiens/saillies?page=${totalPages}`);
+        }
 
-            db.query(queryAnimals, [userId, itemsPerPage, offset], (err, animals) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des animaux:', err);
-                    return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-                }
+        const offset = (currentPage - 1) * itemsPerPage;
 
-                res.render('chiens_by_stud', {
-                    animals: animals,
-                    races: allRaces,
-                    currentPage: currentPage,
-                    totalPages: totalPages,
-                    totalItems: totalItems
+        Promise.all([
+            new Promise((resolve, reject) => {
+                db.query(queryAllRaces, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
                 });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(queryAnimals, [userId, itemsPerPage, offset], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            })
+        ])
+        .then(([allRaces, animals, socialLinks]) => {
+            res.render('chiens_by_stud', {
+                animals: animals,
+                races: allRaces,
+                currentPage: currentPage,
+                totalPages: totalPages,
+                totalItems: totalItems,
+                socialLinks: socialLinks
             });
+        })
+        .catch(err => {
+            console.error('Erreur:', err);
+            res.redirect('/erreur');
         });
     });
 });
 
-// Route pour afficher les mâles ouverts à la saillie par race
+// Route pour afficher les mâles ouverts à la saillie par race (fait)
 router.get('/:breed_slug/saillies', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const breedSlug = req.params.breed_slug;
     const itemsPerPage = 8;
     const currentPage = parseInt(req.query.page) || 1;
@@ -150,6 +178,24 @@ router.get('/:breed_slug/saillies', (req, res) => {
     if (req.query.page === '0' || req.query.page === '1') {
         return res.redirect(`/chiens/${req.params.breed_slug}/saillies`);
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    const queryBreedName = `
+        SELECT name
+        FROM breed_name
+        WHERE slug = ?
+    `;
+
     const queryAllRaces = `
         SELECT DISTINCT 
             breed_name.name AS breed_name,
@@ -164,111 +210,126 @@ router.get('/:breed_slug/saillies', (req, res) => {
             AND animals.open_for_stud = 1
         ORDER BY breed_name.name ASC
     `;
-    db.query(queryAllRaces, [userId], (err, allRaces) => {
-        if (err) {
-            console.error('Erreur lors de la récupération des races:', err);
-            return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
+
+    const countQuery = `
+        SELECT COUNT(DISTINCT animals.id) AS total
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND breed_name.slug = ?
+            AND animals.gender = 'Male'
+            AND animals.open_for_stud = 1
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+    `;
+
+    const queryAnimals = `
+        SELECT 
+            animals.id,
+            animals.name,
+            animals.gender,
+            animals.breed_type,
+            animals.color,
+            animals.eye_color,
+            animals.slug,
+            breed_name.name AS breed_name,
+            breed_name.slug AS breed_slug,
+            register_name.name AS register_name,
+            images.image_path,
+            images.optimized_image_path,
+            images.balise_alt
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN register_name ON animals.register_id = register_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND breed_name.slug = ?
+            AND animals.gender = 'Male'
+            AND animals.open_for_stud = 1
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+            AND images.id = (
+                SELECT MIN(id)
+                FROM images
+                WHERE images.animal_id = animals.id
+            )
+        ORDER BY animals.id DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    // On récupère d'abord le nom de la race pour vérifier qu'elle existe
+    db.query(queryBreedName, [breedSlug], (err, breedNameResult) => {
+        if (err || breedNameResult.length === 0) {
+            console.error('Erreur lors de la récupération du nom de la race:', err);
+            return res.redirect('/erreur');
         }
-        const queryBreedName = `
-            SELECT name
-            FROM breed_name
-            WHERE slug = ?
-        `;
 
-        db.query(queryBreedName, [breedSlug], (err, breedNameResult) => {
+        const currentBreed = breedNameResult[0].name;
+
+        db.query(countQuery, [userId, breedSlug], (err, countResult) => {
             if (err) {
-                console.error('Erreur lors de la récupération du nom de la race:', err);
-                return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
+                console.error('Erreur lors du comptage des animaux:', err);
+                return res.redirect('/erreur');
             }
-            const currentBreed = breedNameResult[0].name;
-            const countQuery = `
-                SELECT COUNT(DISTINCT animals.id) AS total
-                FROM animals
-                LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-                LEFT JOIN images ON images.animal_id = animals.id
-                WHERE 
-                    animals.user_id = ?
-                    AND breed_name.slug = ?
-                    AND animals.gender = 'Male'
-                    AND animals.open_for_stud = 1
-                    AND animals.is_online = 1
-                    AND animals.in_breeding = 1
-                    AND animals.retreat = 0
-            `;
-            db.query(countQuery, [userId, breedSlug], (err, countResult) => {
-                if (err) {
-                    console.error('Erreur lors du comptage des animaux:', err);
-                    return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-                }
 
-                const totalItems = countResult[0].total;
-                const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const totalItems = countResult[0].total;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-                if (currentPage > totalPages && totalPages > 0) {
-                    res.status(404);
-                    return res.redirect(`/chiens/${req.params.breed_slug}/saillies?page=${totalPages}`);
-                }
-                const offset = (currentPage - 1) * itemsPerPage;
-                const queryAnimals = `
-                    SELECT 
-                        animals.id,
-                        animals.name,
-                        animals.gender,
-                        animals.breed_type,
-                        animals.color,
-                        animals.eye_color,
-                        animals.slug,
-                        breed_name.name AS breed_name,
-                        breed_name.slug AS breed_slug,
-                        register_name.name AS register_name,
-                        images.image_path,
-                        images.optimized_image_path,
-                        images.balise_alt
-                    FROM animals
-                    LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-                    LEFT JOIN register_name ON animals.register_id = register_name.id
-                    LEFT JOIN images ON images.animal_id = animals.id
-                    WHERE 
-                        animals.user_id = ?
-                        AND breed_name.slug = ?
-                        AND animals.gender = 'Male'
-                        AND animals.open_for_stud = 1
-                        AND animals.is_online = 1
-                        AND animals.in_breeding = 1
-                        AND animals.retreat = 0
-                        AND images.id = (
-                            SELECT MIN(id)
-                            FROM images
-                            WHERE images.animal_id = animals.id
-                        )
-                    ORDER BY animals.id DESC
-                    LIMIT ? OFFSET ?
-                `;
+            if (currentPage > totalPages && totalPages > 0) {
+                res.status(404);
+                return res.redirect(`/chiens/${breedSlug}/saillies?page=${totalPages}`);
+            }
 
-                db.query(queryAnimals, [userId, breedSlug, itemsPerPage, offset], (err, animals) => {
-                    if (err) {
-                        console.error('Erreur lors de la récupération des animaux:', err);
-                        return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-                    }
+            const offset = (currentPage - 1) * itemsPerPage;
 
-                    res.render('chiens_by_breed_and_stud', {
-                        animals: animals,
-                        races: allRaces,
-                        currentBreed: currentBreed,
-                        currentPage: currentPage,
-                        totalPages: totalPages,
-                        totalItems: totalItems,
-                        breedSlug: breedSlug 
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    db.query(queryAllRaces, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(queryAnimals, [userId, breedSlug, itemsPerPage, offset], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                })
+            ])
+            .then(([allRaces, animals, socialLinks]) => {
+                res.render('chiens_by_breed_and_stud', {
+                    animals: animals,
+                    races: allRaces,
+                    currentBreed: currentBreed,
+                    currentPage: currentPage,
+                    totalPages: totalPages,
+                    totalItems: totalItems,
+                    breedSlug: breedSlug,
+                    socialLinks: socialLinks
                 });
+            })
+            .catch(err => {
+                console.error('Erreur:', err);
+                res.redirect('/erreur');
             });
         });
     });
 });
 
-// router pour afficher les chiens de l'éleveur selon sa race, son genre et sa page
-router.get('/:breed_slug/:gender(males|femelles|saillies)', (req, res) => {
-    const userId = 8;
+// router pour afficher les chiens de l'éleveur selon sa race, son genre et sa page (fait)
+router.get('/:breed_slug/:gender(males|femelles)', (req, res) => {
+    const userId = 10;
     const breedSlug = req.params.breed_slug;
     const gender = req.params.gender;
     let genderFilter = '';
@@ -281,10 +342,29 @@ router.get('/:breed_slug/:gender(males|femelles|saillies)', (req, res) => {
     }
     const itemsPerPage = 8;
     const currentPage = parseInt(req.query.page) || 1;
+
     if (req.query.page === '0' || req.query.page === '1') {
         res.status(404);
         return res.redirect(`/chiens/${req.params.breed_slug}/${req.params.gender}`);
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    const queryBreedName = `
+        SELECT name
+        FROM breed_name
+        WHERE slug = ?
+    `;
+
     const queryAllRaces = `
         SELECT DISTINCT 
             breed_name.name AS breed_name,
@@ -297,113 +377,144 @@ router.get('/:breed_slug/:gender(males|femelles|saillies)', (req, res) => {
             AND animals.in_breeding = 1
         ORDER BY breed_name.name ASC
     `;
-    db.query(queryAllRaces, [userId], (err, allRaces) => {
-        if (err) {
-            console.error('Erreur lors de la récupération des races:', err);
-            return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
+
+    const countQuery = `
+        SELECT COUNT(DISTINCT animals.id) AS total
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND breed_name.slug = ?
+            AND animals.gender = ?
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+    `;
+
+    const queryAnimals = `
+        SELECT 
+            animals.id,
+            animals.name,
+            animals.gender,
+            animals.breed_type,
+            animals.color,
+            animals.eye_color,
+            animals.slug,
+            breed_name.name AS breed_name,
+            breed_name.slug AS breed_slug,
+            register_name.name AS register_name,
+            images.image_path,
+            images.optimized_image_path,
+            images.balise_alt
+        FROM animals
+        LEFT JOIN breed_name ON animals.breed_id = breed_name.id
+        LEFT JOIN register_name ON animals.register_id = register_name.id
+        LEFT JOIN images ON images.animal_id = animals.id
+        WHERE 
+            animals.user_id = ?
+            AND breed_name.slug = ?
+            AND animals.gender = ?
+            AND animals.is_online = 1
+            AND animals.in_breeding = 1
+            AND animals.retreat = 0
+            AND images.id = (
+                SELECT MIN(id)
+                FROM images
+                WHERE images.animal_id = animals.id
+            )
+        ORDER BY animals.id DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    // On récupère d'abord le nom de la race pour vérifier qu'elle existe
+    db.query(queryBreedName, [breedSlug], (err, breedNameResult) => {
+        if (err || breedNameResult.length === 0) {
+            console.error('Erreur lors de la récupération du nom de la race:', err);
+            return res.redirect('/erreur');
         }
-        const queryBreedName = `
-            SELECT name
-            FROM breed_name
-            WHERE slug = ?
-        `;
-        db.query(queryBreedName, [breedSlug], (err, breedNameResult) => {
+
+        const currentBreed = breedNameResult[0].name;
+
+        db.query(countQuery, [userId, breedSlug, genderFilter], (err, countResult) => {
             if (err) {
-                console.error('Erreur lors de la récupération du nom de la race:', err);
-                return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
+                console.error('Erreur lors du comptage des animaux:', err);
+                return res.redirect('/erreur');
             }
-            const currentBreed = breedNameResult[0].name;
-            const countQuery = `
-                SELECT COUNT(DISTINCT animals.id) AS total
-                FROM animals
-                LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-                LEFT JOIN images ON images.animal_id = animals.id
-                WHERE 
-                    animals.user_id = ?
-                    AND breed_name.slug = ?
-                    AND animals.gender = ?
-                    AND animals.is_online = 1
-                    AND animals.in_breeding = 1
-                    AND animals.retreat = 0
-            `;
-            db.query(countQuery, [userId, breedSlug, genderFilter], (err, countResult) => {
-                if (err) {
-                    console.error('Erreur lors du comptage des animaux:', err);
-                    return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-                }
 
-                const totalItems = countResult[0].total;
-                const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const totalItems = countResult[0].total;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-                if (currentPage > totalPages && totalPages > 0) {
-                    return res.redirect(`/chiens/${req.params.breed_slug}/${req.params.gender}?page=${totalPages}`);
-                }
-                const offset = (currentPage - 1) * itemsPerPage;
-                const queryAnimals = `
-                    SELECT 
-                        animals.id,
-                        animals.name,
-                        animals.gender,
-                        animals.breed_type,
-                        animals.color,
-                        animals.eye_color,
-                        animals.slug,
-                        breed_name.name AS breed_name,
-                        breed_name.slug AS breed_slug,
-                        register_name.name AS register_name,
-                        images.image_path,
-                        images.optimized_image_path,
-                        images.balise_alt
-                    FROM animals
-                    LEFT JOIN breed_name ON animals.breed_id = breed_name.id
-                    LEFT JOIN register_name ON animals.register_id = register_name.id
-                    LEFT JOIN images ON images.animal_id = animals.id
-                    WHERE 
-                        animals.user_id = ?
-                        AND breed_name.slug = ?
-                        AND animals.gender = ?
-                        AND animals.is_online = 1
-                        AND animals.in_breeding = 1
-                        AND animals.retreat = 0
-                        AND images.id = (
-                            SELECT MIN(id)
-                            FROM images
-                            WHERE images.animal_id = animals.id
-                        )
-                    ORDER BY animals.id DESC
-                    LIMIT ? OFFSET ?
-                `;
-                db.query(queryAnimals, [userId, breedSlug, genderFilter, itemsPerPage, offset], (err, animals) => {
-                    if (err) {
-                        console.error('Erreur lors de la récupération des animaux:', err);
-                        return res.status(500).render('error', { message: 'Erreur lors du chargement des données' });
-                    }
-                    res.render('chiens_by_breed_and_gender', {
-                        animals: animals,
-                        races: allRaces,
-                        currentGender: genderFilter,
-                        currentBreed: currentBreed,
-                        genderPath: req.params.gender,
-                        currentBreedSlug: breedSlug,
-                        currentPage: currentPage,
-                        totalPages: totalPages,
-                        totalItems: totalItems
+            if (currentPage > totalPages && totalPages > 0) {
+                return res.redirect(`/chiens/${req.params.breed_slug}/${req.params.gender}?page=${totalPages}`);
+            }
+
+            const offset = (currentPage - 1) * itemsPerPage;
+
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    db.query(queryAllRaces, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(queryAnimals, [userId, breedSlug, genderFilter, itemsPerPage, offset], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                })
+            ])
+            .then(([allRaces, animals, socialLinks]) => {
+                res.render('chiens_by_breed_and_gender', {
+                    animals: animals,
+                    races: allRaces,
+                    currentGender: genderFilter,
+                    currentBreed: currentBreed,
+                    genderPath: req.params.gender,
+                    currentBreedSlug: breedSlug,
+                    currentPage: currentPage,
+                    totalPages: totalPages,
+                    totalItems: totalItems,
+                    socialLinks: socialLinks
                 });
+            })
+            .catch(err => {
+                console.error('Erreur:', err);
+                res.redirect('/erreur');
             });
         });
     });
 });
 
-// route de la page des chiens triés par genre
+// route de la page des chiens triés par genre (fait)
 router.get('/:gender(males|femelles)', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const gender = req.params.gender === 'males' ? 'Male' : 'Femelle';
     const itemsPerPage = 8;
     const currentPage = parseInt(req.query.page) || 1;
+
     if (req.query.page === '0' || req.query.page === '1') {
         return res.redirect(`/chiens/${req.params.gender}`);
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const countQuery = `
         SELECT COUNT(DISTINCT animals.id) AS total 
         FROM animals
@@ -415,6 +526,7 @@ router.get('/:gender(males|femelles)', (req, res) => {
             AND animals.in_breeding = 1
             AND animals.retreat = 0
     `;
+
     db.query(countQuery, [userId, gender], (err, countResult) => {
         if (err) {
             console.error('Erreur lors du comptage des animaux:', err);
@@ -428,6 +540,7 @@ router.get('/:gender(males|femelles)', (req, res) => {
             res.status(404);
             return res.redirect(`/chiens/${req.params.gender}?page=${totalPages}`);
         }
+
         const offset = (currentPage - 1) * itemsPerPage;
 
         const queryAllRaces = `
@@ -442,6 +555,7 @@ router.get('/:gender(males|femelles)', (req, res) => {
                 AND animals.in_breeding = 1
             ORDER BY breed_name.name ASC
         `;
+
         const queryAnimals = `
             SELECT 
                 animals.id,
@@ -475,51 +589,83 @@ router.get('/:gender(males|femelles)', (req, res) => {
             ORDER BY animals.id DESC
             LIMIT ? OFFSET ?
         `;
-        db.query(queryAllRaces, [userId], (err, allRaces) => {
-            if (err) {
-                console.error('Erreur lors de la récupération des races:', err);
-                return res.redirect('/erreur');
-            }
-            db.query(queryAnimals, [userId, gender, itemsPerPage, offset], (err, animals) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des animaux:', err);
-                    return res.redirect('/erreur');
-                }
-                res.render('chiens_by_gender', {
-                    animals: animals,
-                    races: allRaces,
-                    currentGender: gender,
-                    genderPath: req.params.gender,
-                    currentPage: currentPage,
-                    totalPages: totalPages,
-                    totalItems: totalItems,
-                    breedSlug: null,
+
+        Promise.all([
+            new Promise((resolve, reject) => {
+                db.query(queryAllRaces, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
                 });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(queryAnimals, [userId, gender, itemsPerPage, offset], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, results) => {
+                    if (err) return reject(err);
+                    resolve(results);
+                });
+            })
+        ])
+        .then(([allRaces, animals, socialLinks]) => {
+            res.render('chiens_by_gender', {
+                animals: animals,
+                races: allRaces,
+                currentGender: gender,
+                genderPath: req.params.gender,
+                currentPage: currentPage,
+                totalPages: totalPages,
+                totalItems: totalItems,
+                breedSlug: null,
+                socialLinks: socialLinks
             });
+        })
+        .catch(err => {
+            console.error('Erreur:', err);
+            res.redirect('/erreur');
         });
     });
 });
 
-// Route pour afficher les animaux par race
+// Route pour afficher les animaux par race (fait)
 router.get('/:breed_slug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const breedSlug = req.params.breed_slug;
     const itemsPerPage = 8;
     const currentPage = parseInt(req.query.page) || 1;
+
     if (req.query.page === '0' || req.query.page === '1') {
         return res.redirect(`/chiens/${breedSlug}`);
     }
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const checkBreedQuery = `
         SELECT id, name 
         FROM breed_name 
         WHERE slug = ?
     `;
+
     db.query(checkBreedQuery, [breedSlug], (err, breedResult) => {
         if (err || breedResult.length === 0) {
             return res.redirect('/erreur');
         }
+
         const breedId = breedResult[0].id;
         const breedName = breedResult[0].name;
+
         const countQuery = `
             SELECT COUNT(DISTINCT animals.id) AS total 
             FROM animals
@@ -531,18 +677,23 @@ router.get('/:breed_slug', (req, res) => {
                 AND animals.in_breeding = 1
                 AND animals.retreat = 0
         `;
+
         db.query(countQuery, [userId, breedId], (err, countResult) => {
             if (err) {
                 console.error('Erreur lors du comptage des animaux:', err);
                 return res.redirect('/erreur');
             }
+
             const totalItems = countResult[0].total;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
+
             if (currentPage > totalPages && totalPages > 0) {
                 res.status(404);
                 return res.redirect(`/chiens/${breedSlug}?page=${totalPages}`);
             }
+
             const offset = (currentPage - 1) * itemsPerPage;
+
             const queryAllRaces = `
                 SELECT DISTINCT 
                     breed_name.name AS breed_name,
@@ -555,6 +706,7 @@ router.get('/:breed_slug', (req, res) => {
                     AND animals.in_breeding = 1
                 ORDER BY breed_name.name ASC
             `;
+
             const queryAnimals = `
                 SELECT 
                     animals.id,
@@ -588,39 +740,67 @@ router.get('/:breed_slug', (req, res) => {
                 ORDER BY animals.id DESC
                 LIMIT ? OFFSET ?
             `;
-            db.query(queryAllRaces, [userId], (err, allRaces) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des races:', err);
-                    return res.redirect('/erreur');
-                }
-                db.query(queryAnimals, [userId, breedId, itemsPerPage, offset], (err, animals) => {
-                    if (err) {
-                        console.error('Erreur lors de la récupération des animaux:', err);
-                        return res.redirect('/erreur');
-                    }
-                    res.render('chiens_by_breed', {
-                        animals: animals,
-                        races: allRaces,
-                        currentBreed: breedName,
-                        breed: {              
-                            name: breedName,
-                            slug: breedSlug
-                        },
-                        breedSlug: breedSlug,
-                        currentPage: currentPage,
-                        totalPages: totalPages,
-                        totalItems: totalItems
+
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    db.query(queryAllRaces, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(queryAnimals, [userId, breedId, itemsPerPage, offset], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                })
+            ])
+            .then(([allRaces, animals, socialLinks]) => {
+                res.render('chiens_by_breed', {
+                    animals: animals,
+                    races: allRaces,
+                    currentBreed: breedName,
+                    breed: {
+                        name: breedName,
+                        slug: breedSlug
+                    },
+                    breedSlug: breedSlug,
+                    currentPage: currentPage,
+                    totalPages: totalPages,
+                    totalItems: totalItems,
+                    socialLinks: socialLinks
                 });
+            })
+            .catch(err => {
+                console.error('Erreur:', err);
+                res.redirect('/erreur');
             });
         });
     });
 });
 
-// Route pour afficher le profil d'un animal
+// Route pour afficher le profil d'un animal (fait)
 router.get('/:breed_slug/:slug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const slug = req.params.slug;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
     const queryAnimal = ` 
         SELECT
             animal.id,
@@ -659,69 +839,46 @@ router.get('/:breed_slug/:slug', (req, res) => {
             profile_images.optimized_image_path AS profile_optimized_image_path 
         FROM
             animals AS animal 
-            LEFT JOIN
-                breed_name 
-                ON animal.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON animal.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON animal.country_id = country_name.id 
-            LEFT JOIN
-                animals AS father_table 
-                ON animal.father_id = father_table.id 
-            LEFT JOIN
-                animals AS mother_table 
-                ON animal.mother_id = mother_table.id 
-            LEFT JOIN
-                images 
-                ON images.animal_id = animal.id 
-                AND images.id = 
-                (
-                    SELECT
-                        MIN(id) 
-                    FROM
-                        images 
-                    WHERE
-                        images.animal_id = animal.id 
+            LEFT JOIN breed_name ON animal.breed_id = breed_name.id 
+            LEFT JOIN register_name ON animal.register_id = register_name.id 
+            LEFT JOIN country_name ON animal.country_id = country_name.id 
+            LEFT JOIN animals AS father_table ON animal.father_id = father_table.id 
+            LEFT JOIN animals AS mother_table ON animal.mother_id = mother_table.id 
+            LEFT JOIN images ON images.animal_id = animal.id 
+                AND images.id = (
+                    SELECT MIN(id) 
+                    FROM images 
+                    WHERE images.animal_id = animal.id 
                 )
-            LEFT JOIN
-                profile_images 
-                ON profile_images.animal_id = animal.id 
+            LEFT JOIN profile_images ON profile_images.animal_id = animal.id 
         WHERE
             animal.user_id = ? 
             AND animal.slug = ? 
             AND animal.is_online = 1;
-        `;
-        const queryAnimalImages = ` 
+    `;
+
+    const queryAnimalImages = ` 
         SELECT
             image_path,
             optimized_image_path,
             balise_alt,
             balise_title 
-        FROM
-            images 
-        WHERE
-            animal_id = 
-            (
-                SELECT
-                    id 
-                FROM
-                    animals 
-                WHERE
-                    slug = ? 
-                    AND user_id = ? 
-            )
-        ORDER BY
-            id ASC;
-        `;
-        const queryCoverImage = `
+        FROM images 
+        WHERE animal_id = (
+            SELECT id 
+            FROM animals 
+            WHERE slug = ? 
+            AND user_id = ? 
+        )
+        ORDER BY id ASC;
+    `;
+
+    const queryCoverImage = `
         SELECT 
-        image_path, 
-        optimized_image_path, 
-        balise_alt,
-        balise_title
+            image_path, 
+            optimized_image_path, 
+            balise_alt,
+            balise_title
         FROM animals_cover_images 
         WHERE animal_id = (
             SELECT id 
@@ -731,7 +888,8 @@ router.get('/:breed_slug/:slug', (req, res) => {
         )
         LIMIT 1;
     `;
-        const queryFather = ` 
+
+    const queryFather = ` 
         SELECT
             f.*,
             breed_name.name AS breed_name,
@@ -741,30 +899,17 @@ router.get('/:breed_slug/:slug', (req, res) => {
             images_father.optimized_image_path,
             gf.id AS grandfather_id,
             gm.id AS grandmother_id 
-        FROM
-            father_table f 
-            LEFT JOIN
-                breed_name 
-                ON f.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON f.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON f.country_id = country_name.id 
-            LEFT JOIN
-                images_father 
-                ON images_father.father_id = f.id 
-            LEFT JOIN
-                grandfather_table gf 
-                ON f.paternal_grandfather_id = gf.id 
-            LEFT JOIN
-                grandmother_table gm 
-                ON f.paternal_grandmother_id = gm.id 
-        WHERE
-            f.id = ? ;
-        `;
-        const queryGrandfather = ` 
+        FROM father_table f 
+            LEFT JOIN breed_name ON f.breed_id = breed_name.id 
+            LEFT JOIN register_name ON f.register_id = register_name.id 
+            LEFT JOIN country_name ON f.country_id = country_name.id 
+            LEFT JOIN images_father ON images_father.father_id = f.id 
+            LEFT JOIN grandfather_table gf ON f.paternal_grandfather_id = gf.id 
+            LEFT JOIN grandmother_table gm ON f.paternal_grandmother_id = gm.id 
+        WHERE f.id = ?;
+    `;
+
+    const queryGrandfather = ` 
         SELECT
             g.*,
             breed_name.name AS breed_name,
@@ -772,24 +917,15 @@ router.get('/:breed_slug/:slug', (req, res) => {
             country_name.name AS country_name,
             images_grandfather.image_path,
             images_grandfather.optimized_image_path 
-        FROM
-            grandfather_table g 
-            LEFT JOIN
-                breed_name 
-                ON g.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON g.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON g.country_id = country_name.id 
-            LEFT JOIN
-                images_grandfather 
-                ON images_grandfather.grandfather_id = g.id 
-        WHERE
-            g.id = ? ;
-        `;
-        const queryGrandmother = ` 
+        FROM grandfather_table g 
+            LEFT JOIN breed_name ON g.breed_id = breed_name.id 
+            LEFT JOIN register_name ON g.register_id = register_name.id 
+            LEFT JOIN country_name ON g.country_id = country_name.id 
+            LEFT JOIN images_grandfather ON images_grandfather.grandfather_id = g.id 
+        WHERE g.id = ?;
+    `;
+
+    const queryGrandmother = ` 
         SELECT
             g.*,
             breed_name.name AS breed_name,
@@ -797,24 +933,15 @@ router.get('/:breed_slug/:slug', (req, res) => {
             country_name.name AS country_name,
             images_grandmother.image_path,
             images_grandmother.optimized_image_path 
-        FROM
-            grandmother_table g 
-            LEFT JOIN
-                breed_name 
-                ON g.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON g.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON g.country_id = country_name.id 
-            LEFT JOIN
-                images_grandmother 
-                ON images_grandmother.grandmother_id = g.id 
-        WHERE
-            g.id = ? ;
-        `;
-        const queryMother = ` 
+        FROM grandmother_table g 
+            LEFT JOIN breed_name ON g.breed_id = breed_name.id 
+            LEFT JOIN register_name ON g.register_id = register_name.id 
+            LEFT JOIN country_name ON g.country_id = country_name.id 
+            LEFT JOIN images_grandmother ON images_grandmother.grandmother_id = g.id 
+        WHERE g.id = ?;
+    `;
+
+    const queryMother = ` 
         SELECT
             m.*,
             breed_name.name AS breed_name,
@@ -822,24 +949,15 @@ router.get('/:breed_slug/:slug', (req, res) => {
             country_name.name AS country_name,
             images_mother.image_path,
             images_mother.optimized_image_path 
-        FROM
-            mother_table m 
-            LEFT JOIN
-                breed_name 
-                ON m.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON m.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON m.country_id = country_name.id 
-            LEFT JOIN
-                images_mother 
-                ON images_mother.mother_id = m.id 
-        WHERE
-            m.id = ? ;
-        `;
-        const queryMaternalGrandfather = ` 
+        FROM mother_table m 
+            LEFT JOIN breed_name ON m.breed_id = breed_name.id 
+            LEFT JOIN register_name ON m.register_id = register_name.id 
+            LEFT JOIN country_name ON m.country_id = country_name.id 
+            LEFT JOIN images_mother ON images_mother.mother_id = m.id 
+        WHERE m.id = ?;
+    `;
+
+    const queryMaternalGrandfather = ` 
         SELECT
             g.*,
             breed_name.name AS breed_name,
@@ -847,24 +965,15 @@ router.get('/:breed_slug/:slug', (req, res) => {
             country_name.name AS country_name,
             images_grandfather.image_path,
             images_grandfather.optimized_image_path 
-        FROM
-            grandfather_table g 
-            LEFT JOIN
-                breed_name 
-                ON g.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON g.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON g.country_id = country_name.id 
-            LEFT JOIN
-                images_grandfather 
-                ON images_grandfather.grandfather_id = g.id 
-        WHERE
-            g.id = ? ;
-        `;
-        const queryMaternalGrandmother = ` 
+        FROM grandfather_table g 
+            LEFT JOIN breed_name ON g.breed_id = breed_name.id 
+            LEFT JOIN register_name ON g.register_id = register_name.id 
+            LEFT JOIN country_name ON g.country_id = country_name.id 
+            LEFT JOIN images_grandfather ON images_grandfather.grandfather_id = g.id 
+        WHERE g.id = ?;
+    `;
+
+    const queryMaternalGrandmother = ` 
         SELECT
             g.*,
             breed_name.name AS breed_name,
@@ -872,23 +981,13 @@ router.get('/:breed_slug/:slug', (req, res) => {
             country_name.name AS country_name,
             images_grandmother.image_path,
             images_grandmother.optimized_image_path 
-        FROM
-            grandmother_table g 
-            LEFT JOIN
-                breed_name 
-                ON g.breed_id = breed_name.id 
-            LEFT JOIN
-                register_name 
-                ON g.register_id = register_name.id 
-            LEFT JOIN
-                country_name 
-                ON g.country_id = country_name.id 
-            LEFT JOIN
-                images_grandmother 
-                ON images_grandmother.grandmother_id = g.id 
-        WHERE
-            g.id = ? ;
-        `;
+        FROM grandmother_table g 
+            LEFT JOIN breed_name ON g.breed_id = breed_name.id 
+            LEFT JOIN register_name ON g.register_id = register_name.id 
+            LEFT JOIN country_name ON g.country_id = country_name.id 
+            LEFT JOIN images_grandmother ON images_grandmother.grandmother_id = g.id 
+        WHERE g.id = ?;
+    `;
 
     db.query(queryAnimal, [userId, slug], (err, animal) => {
         if (err) {
@@ -896,75 +995,95 @@ router.get('/:breed_slug/:slug', (req, res) => {
             return res.redirect('/erreur');
         }
 
-        if (animal.length === 0) return res.status(404).send('Animal non trouvé');
+        if (animal.length === 0) return res.redirect('/erreur');
 
         db.query(queryCoverImage, [slug, userId], (err, coverImage) => {
             if (err) {
                 console.error('Erreur lors de la récupération de l\'image de couverture:', err);
             }
 
-        db.query(queryAnimalImages, [slug, userId], (err, animalImages) => {
-            if (err) {
-                console.error('Erreur lors de la récupération des images:', err);
-                return res.redirect('/erreur');
-            }
-
-            db.query(queryFather, [animal[0].father_id], (err, fatherInfo) => {
+            db.query(queryAnimalImages, [slug, userId], (err, animalImages) => {
                 if (err) {
-                    console.error('Erreur lors de la récupération du père:', err);
+                    console.error('Erreur lors de la récupération des images:', err);
                     return res.redirect('/erreur');
                 }
 
-                if (!fatherInfo[0]) {
-                    return res.render('dog_detail', {
-                        animal: animal[0],
-                        animalImages: animalImages,
-                        father: null,
-                        grandfather: null,
-                        grandmother: null
-                    });
-                }
-
-                db.query(queryGrandfather, [fatherInfo[0].grandfather_id], (err, grandfatherInfo) => {
+                db.query(queryFather, [animal[0].father_id], (err, fatherInfo) => {
                     if (err) {
-                        console.error('Erreur lors de la récupération du grand-père:', err);
+                        console.error('Erreur lors de la récupération du père:', err);
                         return res.redirect('/erreur');
                     }
 
-                    db.query(queryGrandmother, [fatherInfo[0].grandmother_id], (err, grandmotherInfo) => {
+                    if (!fatherInfo[0]) {
+                        return db.query(querySocialLinks, [userId], (err, socialLinks) => {
+                            if (err) {
+                                console.error('Erreur socialLinks:', err);
+                                socialLinks = [];
+                            }
+                            return res.render('dog_detail', {
+                                animal: animal[0],
+                                animalImages: animalImages,
+                                coverImage: coverImage ? coverImage[0] || null : null,
+                                father: null,
+                                grandfather: null,
+                                grandmother: null,
+                                mother: null,
+                                maternalGrandfather: null,
+                                maternalGrandmother: null,
+                                socialLinks: socialLinks
+                            });
+                        });
+                    }
+
+                    db.query(queryGrandfather, [fatherInfo[0].grandfather_id], (err, grandfatherInfo) => {
                         if (err) {
-                            console.error('Erreur lors de la récupération de la grand-mère:', err);
+                            console.error('Erreur lors de la récupération du grand-père:', err);
                             return res.redirect('/erreur');
                         }
 
-                        db.query(queryMother, [animal[0].mother_id], (err, motherInfo) => {
+                        db.query(queryGrandmother, [fatherInfo[0].grandmother_id], (err, grandmotherInfo) => {
                             if (err) {
-                                console.error('Erreur lors de la récupération de la mère:', err);
+                                console.error('Erreur lors de la récupération de la grand-mère:', err);
                                 return res.redirect('/erreur');
                             }
 
-                            db.query(queryMaternalGrandfather, [motherInfo[0].maternal_grandfather_id], (err, maternalGrandfatherInfo) => {
+                            db.query(queryMother, [animal[0].mother_id], (err, motherInfo) => {
                                 if (err) {
-                                    console.error('Erreur lors de la récupération du grand-père maternel:', err);
+                                    console.error('Erreur lors de la récupération de la mère:', err);
                                     return res.redirect('/erreur');
                                 }
 
-                                db.query(queryMaternalGrandmother, [motherInfo[0].maternal_grandmother_id], (err, maternalGrandmotherInfo) => {
+                                db.query(queryMaternalGrandfather, [motherInfo[0].maternal_grandfather_id], (err, maternalGrandfatherInfo) => {
                                     if (err) {
-                                        console.error('Erreur lors de la récupération de la grand-mère maternelle:', err);
+                                        console.error('Erreur lors de la récupération du grand-père maternel:', err);
                                         return res.redirect('/erreur');
                                     }
 
-                                    res.render('dog_detail', {
-                                        animal: animal[0],
-                                        animalImages: animalImages,
-                                        coverImage: coverImage[0] || null,
-                                        father: fatherInfo[0] || null,
-                                        grandfather: grandfatherInfo[0] || null,
-                                        grandmother: grandmotherInfo[0] || null,
-                                        mother: motherInfo[0] || null,
-                                        maternalGrandfather: maternalGrandfatherInfo[0] || null,
-                                        maternalGrandmother: maternalGrandmotherInfo[0] || null
+                                    db.query(queryMaternalGrandmother, [motherInfo[0].maternal_grandmother_id], (err, maternalGrandmotherInfo) => {
+                                        if (err) {
+                                            console.error('Erreur lors de la récupération de la grand-mère maternelle:', err);
+                                            return res.redirect('/erreur');
+                                        }
+
+                                        db.query(querySocialLinks, [userId], (err, socialLinks) => {
+                                            if (err) {
+                                                console.error('Erreur socialLinks:', err);
+                                                socialLinks = [];
+                                            }
+
+                                            res.render('dog_detail', {
+                                                animal: animal[0],
+                                                animalImages: animalImages,
+                                                coverImage: coverImage ? coverImage[0] || null : null,
+                                                father: fatherInfo[0] || null,
+                                                grandfather: grandfatherInfo[0] || null,
+                                                grandmother: grandmotherInfo[0] || null,
+                                                mother: motherInfo[0] || null,
+                                                maternalGrandfather: maternalGrandfatherInfo[0] || null,
+                                                maternalGrandmother: maternalGrandmotherInfo[0] || null,
+                                                socialLinks: socialLinks
+                                            });
+                                        });
                                     });
                                 });
                             });
@@ -975,9 +1094,8 @@ router.get('/:breed_slug/:slug', (req, res) => {
         });
     });
 });
-});
 
-//  route principal pour la page chiens
+//  route principal pour la page chiens (fait)
 router.get('/', (req, res) => {
     const userId = 10;
     const itemsPerPage = 8;

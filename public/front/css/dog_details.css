@@ -1,381 +1,613 @@
 /* ========================================
-   SECTION PROFIL - DESIGN MODERNE
+   VARIABLES
 ======================================== */
-
-.dog-profile-hero {
-    padding: 6rem 0 4rem 0;
-    background: #f8f9fa;
-}
-
-.dog-profile-card {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 3rem;
-    background: white;
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.12);
-    border-left: 6px solid var(--primary-color);
-    border-top: 2px solid #e0e0e0;
+:root {
+    --gold: #C9A84C;
+    --gold-light: #e0c068;
+    --dark: #0a0a0a;
+    --dark-2: #111111;
+    --dark-3: #1a1a1a;
+    --dark-4: #222222;
+    --dark-card: #161616;
+    --border-gold: rgba(201, 168, 76, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --text-muted: rgba(255, 255, 255, 0.45);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --male-color: #4a9eda;
+    --female-color: #da4a7a;
+    --stud-color: #C9A84C;
 }
 
 /* ========================================
-   PHOTO DE PROFIL
+   HERO SECTION
 ======================================== */
 
-.dog-profile-image-wrapper {
-    display: flex;
-    justify-content: center;
+.dog-detail-hero {
+    position: relative;
+    background: var(--dark-2);
+    padding-bottom: 4rem;
 }
 
-.dog-profile-image {
+/* Cover image */
+.dog-detail-cover {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.dog-detail-cover-default {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.dog-detail-cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(10, 10, 10, 0.7) 60%,
+        rgba(10, 10, 10, 0.95) 100%
+    );
+}
+
+/* Card hero */
+.dog-detail-hero-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    margin-top: -140px;
+    position: relative;
+    z-index: 2;
+    background: var(--dark-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 168, 76, 0.1);
+}
+
+/* Image profil */
+.dog-detail-profile-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.dog-detail-profile-image {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border: 2px solid var(--border-gold);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
-.dog-profile-image img {
+.dog-detail-profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.dog-profile-card:hover .dog-profile-image img {
-    transform: scale(1.05);
+.dog-detail-profile-image:hover img {
+    transform: scale(1.04);
 }
 
 /* Badge genre */
-.profile-gender-badge {
+.dog-detail-gender-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.3rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-.profile-gender-badge.male {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+.dog-detail-gender-badge.male {
+    background: linear-gradient(135deg, #4a9eda, #2980b9);
 }
 
-.profile-gender-badge.female {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
+.dog-detail-gender-badge.female {
+    background: linear-gradient(135deg, #da4a7a, #c2185b);
 }
 
-/* ========================================
-   INFORMATIONS DU PROFIL
-======================================== */
-
-.dog-profile-info {
+/* Infos hero */
+.dog-detail-hero-info {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.75rem;
 }
 
-/* Header */
-.profile-header {
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 1.25rem;
-    text-align: center;
+.dog-detail-hero-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-gold);
 }
 
-/* Conteneur du nom et du badge */
-.profile-header > div {
-    justify-content: center;
+/* Nom + badges */
+.dog-detail-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
 }
 
-.profile-name {
+.dog-detail-name {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    color: var(--secondary-color);
-    margin: 0 0 0.5rem 0;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
 }
 
-.profile-other-name {
-    font-size: 0.9rem;
-    color: #777;
+.dog-detail-badge-retired {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    background: rgba(149, 165, 166, 0.15);
+    border: 1px solid rgba(149, 165, 166, 0.4);
+    color: #95a5a6;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.dog-detail-badge-stud {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid var(--border-gold);
+    color: var(--gold);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.dog-detail-other-name {
+    font-size: 0.95rem;
+    color: var(--text-muted);
     font-style: italic;
     margin: 0;
 }
 
-/* Race */
-.profile-breed {
+.dog-detail-breed-row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
-    color: #555;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
 }
 
-.profile-breed i {
-    color: var(--primary-color);
-    font-size: 1rem;
+.dog-detail-breed-row i {
+    color: var(--gold);
+    font-size: 0.9rem;
 }
 
-.profile-breed a {
-    color: var(--primary-color);
+.dog-detail-breed-row a {
+    color: var(--gold);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
-.profile-breed a:hover {
-    color: #7ed492;
+.dog-detail-breed-row a:hover {
+    color: var(--gold-light);
 }
 
-.divider {
-    color: #ddd;
-    margin: 0 0.25rem;
+.dog-detail-breed-dot {
+    color: var(--border-gold);
+    margin: 0 0.2rem;
 }
 
-/* Grille de détails */
-.profile-details-grid {
+/* Grille infos */
+.dog-detail-info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
 }
 
-/* Détails du profil */
-.detail-item {
+.dog-detail-info-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.75rem;
-    padding: 1rem;
-    background: rgb(231, 231, 231);
+    padding: 0.85rem 1rem;
+    background: var(--dark-3);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     transition: all 0.3s ease;
-    border: 2px solid #f0f0f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.detail-item:hover {
-    background: #e8f5e9;
-    transform: translateY(-2px);
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.2);
+.dog-detail-info-item:hover {
+    border-color: var(--border-gold);
+    background: var(--dark-4);
 }
 
-.detail-item i {
-    color: var(--primary-color);
-    font-size: 1rem;
-    margin-top: 2px;
+.dog-detail-info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.detail-content {
+.dog-detail-info-icon i {
+    color: var(--gold);
+    font-size: 0.85rem;
+}
+
+.dog-detail-info-content {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.15rem;
+    min-width: 0;
 }
 
-.detail-label {
-    font-size: 0.8rem;
-    color: #888;
+.dog-detail-info-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
 }
 
-.detail-value {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
+.dog-detail-info-value {
+    font-size: 0.85rem;
+    color: white;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Bouton saillie */
-.profile-action {
-    margin-top: 0.5rem;
+.dog-detail-stud-action {
+    margin-top: -0.25rem;
 }
 
-/* Bouton saillie */
-.btn-profile-stud {
+.btn-dog-detail-stud {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: #e74c3c;
-    color: white;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: #0a0a0a;
     border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
     transition: all 0.3s ease;
-    border: 2px solid #e74c3c;
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
 }
 
-.btn-profile-stud:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.5);
-    color: white;
-    background: #c0392b;
-    border-color: #c0392b;
+.btn-dog-detail-stud:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
+    color: #0a0a0a;
 }
 
-.btn-profile-stud i {
-    font-size: 1.1rem;
-}
-
-/* badge retraité */
-.badge-retired {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-    color: white;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(127, 140, 141, 0.3);
-    animation: fadeInScale 0.5s ease-out;
-}
-
-.badge-retired i {
-    font-size: 14px;
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* ========================================
-   SECTION INFO + GALERIE
-======================================== */
-
-.dog-info-gallery-section {
-    padding: 4rem 0;
-    background: white;
-}
-
-.info-gallery-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    background: #f8f9fa;
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.12);
-    border-left: 6px solid var(--primary-color);
-    border-top: 2px solid #e0e0e0;
-}
-
-/* ========================================
-   COLONNE GAUCHE : INFORMATIONS
-======================================== */
-
-.info-gallery-left {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.info-block {
-    background: white;
-    border-radius: 15px;
-    padding: 1.75rem;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.info-block.stud-info-block {
-    background: white;
-    border: 2px solid rgba(231, 76, 60, 0.3);
-    border-left: 4px solid #e74c3c;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.15);
-}
-
-.info-block-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin: 0 0 1.25rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--primary-color);
-}
-
-.info-block-content {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: #333;
-}
-
-.info-block-title i {
-    color: var(--primary-color);
-    font-size: 1.4rem;
-}
-
-.info-block-subtitle {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin: 0 0 1rem 0;
+/* Breadcrumb */
+.dog-detail-breadcrumb {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e0e0e0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
 }
 
-.info-block-subtitle i {
-    color: var(--primary-color);
-    font-size: 1rem;
+.dog-detail-breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-/* Description */
-.description-text p {
+.dog-detail-breadcrumb a:hover {
+    color: var(--gold);
+}
+
+.breadcrumb-sep {
+    color: var(--border-gold);
+}
+
+/* ========================================
+   RESPONSIVE HERO
+======================================== */
+
+@media (max-width: 1199px) {
+    .dog-detail-hero-card {
+        grid-template-columns: 280px 1fr;
+        gap: 2.5rem;
+        padding: 2.25rem;
+    }
+
+    .dog-detail-name {
+        font-size: 2rem;
+    }
+
+    .dog-detail-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    .dog-detail-cover {
+        height: 260px;
+    }
+
+    .dog-detail-hero-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+        margin-top: -100px;
+    }
+
+    .dog-detail-profile-image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .dog-detail-name {
+        font-size: 1.85rem;
+    }
+
+    .dog-detail-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .dog-detail-cover {
+        height: 220px;
+    }
+
+    .dog-detail-hero-card {
+        padding: 1.75rem;
+        margin-top: -80px;
+        gap: 1.75rem;
+        border-radius: 16px;
+    }
+
+    .dog-detail-profile-image {
+        max-width: 260px;
+    }
+
+    .dog-detail-name {
+        font-size: 1.65rem;
+    }
+
+    .dog-detail-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .btn-dog-detail-stud {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .dog-detail-cover {
+        height: 180px;
+    }
+
+    .dog-detail-hero-card {
+        padding: 1.5rem;
+        margin-top: -60px;
+        gap: 1.5rem;
+        border-radius: 14px;
+    }
+
+    .dog-detail-profile-image {
+        max-width: 240px;
+    }
+
+    .dog-detail-name {
+        font-size: 1.5rem;
+    }
+
+    .dog-detail-name-row {
+        gap: 0.6rem;
+    }
+
+    .dog-detail-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+    }
+
+    .dog-detail-info-item {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .dog-detail-info-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .dog-detail-info-value {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 399px) {
+    .dog-detail-cover {
+        height: 150px;
+    }
+
+    .dog-detail-hero-card {
+        padding: 1.25rem;
+        margin-top: -50px;
+        border-radius: 12px;
+    }
+
+    .dog-detail-profile-image {
+        max-width: 200px;
+    }
+
+    .dog-detail-name {
+        font-size: 1.35rem;
+    }
+
+    .dog-detail-info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .dog-detail-info-item {
+        padding: 0.65rem 0.75rem;
+        gap: 0.6rem;
+    }
+
+    .dog-detail-info-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+    }
+
+    .dog-detail-info-label {
+        font-size: 0.62rem;
+    }
+
+    .dog-detail-info-value {
+        font-size: 0.75rem;
+    }
+}
+
+
+/* ========================================
+   SECTION CONTENT : DESCRIPTION + GALERIE
+======================================== */
+
+.dog-detail-content-section {
+    padding: 4rem 0;
+    background: var(--dark-2);
+}
+
+.dog-detail-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* ========================================
+   BLOCS INFOS - COLONNE GAUCHE
+======================================== */
+
+.dog-detail-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dog-detail-block {
+    background: var(--dark-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: border-color 0.3s ease;
+}
+
+.dog-detail-block:hover {
+    border-color: var(--border-gold);
+}
+
+.dog-detail-block-stud {
+    border-color: rgba(201, 168, 76, 0.3);
+    background: rgba(201, 168, 76, 0.04);
+}
+
+.dog-detail-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.dog-detail-block-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dog-detail-block-icon i {
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+.dog-detail-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.dog-detail-block-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+.dog-detail-block-content p {
     margin-bottom: 0.85rem;
 }
 
-.description-text p:last-child {
+.dog-detail-block-content p:last-child {
     margin-bottom: 0;
 }
 
-/* Pedigree */
-.pedigree-item {
+/* Pedigree items */
+.dog-detail-pedigree-item {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.85rem;
-    background: #f8f9fa;
-    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    background: var(--dark-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
     margin-bottom: 0.65rem;
-    border-left: 3px solid transparent;
     transition: all 0.3s ease;
 }
 
-.pedigree-item:hover {
-    background: #e8f5e9;
-    border-left-color: var(--primary-color);
-    transform: translateX(3px);
-}
-
-.pedigree-item:last-child {
+.dog-detail-pedigree-item:last-child {
     margin-bottom: 0;
 }
 
-.pedigree-icon {
+.dog-detail-pedigree-item:hover {
+    border-color: var(--border-gold);
+    transform: translateX(4px);
+}
+
+.pedigree-item-icon {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -387,231 +619,175 @@
     flex-shrink: 0;
 }
 
-.pedigree-icon.male {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+.pedigree-item-icon.male {
+    background: linear-gradient(135deg, #4a9eda, #2980b9);
 }
 
-.pedigree-icon.female {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
+.pedigree-item-icon.female {
+    background: linear-gradient(135deg, #da4a7a, #c2185b);
 }
 
-.pedigree-item > div {
+.pedigree-item-info {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 }
 
-.pedigree-label {
-    font-size: 0.75rem;
-    color: #999;
+.pedigree-item-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
-.pedigree-value {
-    font-size: 0.95rem;
-    color: var(--secondary-color);
+.pedigree-item-value {
+    font-size: 0.9rem;
+    color: white;
     font-weight: 600;
 }
 
-/* Tests de santé */
-.health-text {
+/* Health tests */
+.dog-detail-health-text {
     margin: 0;
     white-space: pre-line;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border-left: 3px solid var(--primary-color);
+    padding: 1rem 1.25rem;
+    background: var(--dark-3);
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.75;
 }
 
-/* Saillie - Version améliorée */
-/* Item saillie */
-.stud-info-item {
+/* Bloc saillie */
+.dog-detail-stud-row {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.85rem;
-    background: #f8f9fa;
-    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    background: var(--dark-3);
+    border-radius: 12px;
     margin-bottom: 1rem;
-    border-left: 3px solid #e74c3c;
+    border-left: 3px solid var(--gold);
 }
 
-.stud-icon-wrapper {
+.dog-detail-stud-icon {
     width: 38px;
     height: 38px;
     border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    font-size: 0.95rem;
+    color: #0a0a0a;
+    font-size: 0.9rem;
     flex-shrink: 0;
 }
 
-.stud-details {
+.dog-detail-stud-info {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 }
 
-.stud-label {
-    font-size: 0.75rem;
-    color: #999;
+.dog-detail-stud-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
-.stud-status {
-    font-size: 0.95rem;
-    color: var(--secondary-color);
+.dog-detail-stud-status {
+    font-size: 0.9rem;
+    color: var(--gold);
     font-weight: 600;
 }
 
-/* Bouton contact saillie amélioré */
-.btn-contact-stud-improved {
+.btn-dog-detail-contact {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.9rem 1.65rem;
-    background: #202c19;
-    color: white;
-    border-radius: 10px;
+    padding: 0.9rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--border-gold);
+    color: var(--gold);
+    border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
     width: 100%;
-    border: 2px solid var(--secondary-color);
 }
 
-.btn-contact-stud-improved:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
+.btn-dog-detail-contact:hover {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-color: var(--gold);
+    color: #0a0a0a;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
-    color: white;
-}
-
-.btn-contact-stud-improved i {
-    font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(201, 168, 76, 0.3);
 }
 
 /* ========================================
-   COLONNE DROITE : GALERIE
+   GALERIE - COLONNE DROITE
 ======================================== */
 
-.info-gallery-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-/* Carrousel */
-.carousel-wrapper {
-    position: relative;
-}
-
-.mainGallerySwiper {
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* IMPORTANT : Forcer le format carré */
-.mainGallerySwiper .swiper-slide {
-    width: 100% !important;
-}
-
-.carousel-image {
+/* Image principale */
+.dog-detail-gallery-main {
+    display: block;
     position: relative;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 16px;
     overflow: hidden;
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     cursor: pointer;
-    background: #f0f0f0;
 }
 
-.carousel-image img {
+.dog-detail-gallery-main img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    display: block;
     transition: transform 0.5s ease;
 }
 
-.carousel-image:hover img {
-    transform: scale(1.05);
+.dog-detail-gallery-main:hover img {
+    transform: scale(1.04);
 }
 
-.carousel-overlay {
+.dog-detail-gallery-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none;
 }
 
-.carousel-image:hover .carousel-overlay {
+.dog-detail-gallery-main:hover .dog-detail-gallery-overlay {
     opacity: 1;
 }
 
-.carousel-overlay i {
-    color: white;
+.dog-detail-gallery-overlay i {
+    color: var(--gold);
     font-size: 2.5rem;
 }
 
-/* Navigation */
-.carousel-btn-next,
-.carousel-btn-prev {
-    width: 45px;
-    height: 45px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.carousel-btn-next:after,
-.carousel-btn-prev:after {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.carousel-btn-next:hover,
-.carousel-btn-prev:hover {
-    background: var(--primary-color);
-    transform: scale(1.1);
-}
-
-.carousel-btn-next:hover:after,
-.carousel-btn-prev:hover:after {
-    color: white;
-}
-
-/* Compteur */
-.carousel-counter {
+/* Compteur photos */
+.dog-detail-gallery-counter {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.7);
+    top: 14px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid var(--border-gold);
     color: white;
-    padding: 0.6rem 1.1rem;
+    padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -620,1104 +796,525 @@
     backdrop-filter: blur(10px);
 }
 
-.carousel-counter i {
-    color: var(--primary-color);
-}
-
-/* Miniatures en grille */
-.thumbnails-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 10px;
-    margin-top: 1.25rem;
-}
-
-.thumbnail-item {
-    width: 100%;
-    aspect-ratio: 1;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-}
-
-.thumbnail-item:hover,
-.thumbnail-item.active {
-    opacity: 1;
-}
-
-.thumbnail-item .thumbnail-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 3px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.thumbnail-item:hover .thumbnail-image,
-.thumbnail-item.active .thumbnail-image {
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.3);
-}
-
-.thumbnail-item .thumbnail-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Pas d'images */
-.no-images {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    background: #f8f9fa;
-    border-radius: 20px;
-    text-align: center;
-}
-
-.no-images i {
-    font-size: 3rem;
-    color: #ddd;
-    margin-bottom: 1rem;
-}
-
-.no-images p {
-    font-size: 1rem;
-    color: #999;
-    margin: 0;
-}
-
-/* Navigation */
-.carousel-btn-next,
-.carousel-btn-prev {
-    width: 45px;
-    height: 45px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.carousel-btn-next:after,
-.carousel-btn-prev:after {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.carousel-btn-next:hover,
-.carousel-btn-prev:hover {
-    background: var(--primary-color);
-    transform: scale(1.1);
-}
-
-.carousel-btn-next:hover:after,
-.carousel-btn-prev:hover:after {
-    color: white;
-}
-
-/* Compteur */
-.carousel-counter {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 0.6rem 1.1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-}
-
-.carousel-counter i {
-    color: var(--primary-color);
+.dog-detail-gallery-counter i {
+    color: var(--gold);
+    font-size: 0.75rem;
 }
 
 /* Miniatures */
-.thumbnails-wrapper {
-    margin-top: 0;
+.dog-detail-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
 }
 
-.thumbGallerySwiper {
-    padding: 0.5rem 0;
-}
-
-.thumbGallerySwiper .swiper-slide {
-    width: 90px;
-    height: 90px;
-    opacity: 0.5;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.thumbGallerySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-}
-
-.thumbnail-image {
-    width: 100%;
-    height: 100%;
+.dog-detail-thumb {
+    display: block;
+    aspect-ratio: 1;
     border-radius: 10px;
     overflow: hidden;
-    border: 3px solid transparent;
+    cursor: pointer;
+    opacity: 0.45;
+    border: 2px solid transparent;
     transition: all 0.3s ease;
 }
 
-.thumbGallerySwiper .swiper-slide-thumb-active .thumbnail-image {
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.3);
+.dog-detail-thumb:hover,
+.dog-detail-thumb.active {
+    opacity: 1;
+    border-color: var(--gold);
+    box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
 }
 
-.thumbnail-image img {
+.dog-detail-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Pas d'images */
-.no-images {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-    background: #f8f9fa;
-    border-radius: 20px;
-    text-align: center;
-}
-
-.no-images i {
-    font-size: 3rem;
-    color: #ddd;
-    margin-bottom: 1rem;
-}
-
-.no-images p {
-    font-size: 1rem;
-    color: #999;
-    margin: 0;
 }
 
 /* ========================================
-   SECTION PEDIGREE / GÉNÉALOGIE
+   RESPONSIVE CONTENT SECTION
 ======================================== */
 
-.dog-pedigree-section {
-    padding: 4rem 0;
-    background: #f0f0f0;
+@media (max-width: 1199px) {
+    .dog-detail-content-grid {
+        gap: 2.5rem;
+    }
 }
 
-/* En-tête */
-.pedigree-header {
+@media (max-width: 991px) {
+    .dog-detail-content-section {
+        padding: 3rem 0;
+    }
+
+    .dog-detail-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dog-detail-content-right {
+        position: static;
+    }
+
+    .dog-detail-gallery-slide {
+        aspect-ratio: 4/3;
+    }
+}
+
+@media (max-width: 767px) {
+    .dog-detail-content-section {
+        padding: 2.5rem 0;
+    }
+
+    .dog-detail-block {
+        padding: 1.5rem;
+        border-radius: 14px;
+    }
+
+    .dog-detail-block-title {
+        font-size: 1.05rem;
+    }
+
+    .dog-detail-gallery-slide {
+        aspect-ratio: 4/3;
+    }
+
+    .dog-detail-thumbnails {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .dog-detail-content-section {
+        padding: 2rem 0;
+    }
+
+    .dog-detail-block {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .dog-detail-block-header {
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.85rem;
+    }
+
+    .dog-detail-block-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .dog-detail-block-title {
+        font-size: 1rem;
+    }
+
+    .dog-detail-block-content {
+        font-size: 0.85rem;
+    }
+
+    .dog-detail-gallery-slide {
+        aspect-ratio: 1;
+    }
+
+    .dog-detail-thumbnails {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+
+    .dog-detail-thumb {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 399px) {
+    .dog-detail-block {
+        padding: 1rem;
+    }
+
+    .dog-detail-pedigree-item {
+        padding: 0.75rem;
+    }
+
+    .pedigree-item-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+    }
+
+    .dog-detail-thumbnails {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+}
+
+/* ========================================
+   SECTION PEDIGREE
+======================================== */
+
+/* bloc arbre généalogique */
+.dog-detail-pedigree-header {
     text-align: center;
     margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 3px solid var(--primary-color);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-gold);
 }
 
-.pedigree-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
+.pedigree-header-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
     font-weight: 700;
-    color: var(--secondary-color);
     margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
 }
 
-.pedigree-title i {
-    color: var(--primary-color);
-    font-size: 1.6rem;
+.pedigree-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
 }
 
-.pedigree-subtitle {
+.pedigree-header-text {
     font-size: 0.95rem;
-    color: #555;
-    margin: 0;
+    color: var(--text-secondary);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
 }
 
-/* Arbre généalogique */
-.pedigree-tree {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+@media (max-width: 767px) {
+    .dog-detail-pedigree-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .pedigree-header-title {
+        font-size: 1.65rem;
+    }
+
+    .pedigree-header-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .dog-detail-pedigree-header {
+        margin-bottom: 1.75rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .pedigree-header-label {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
+
+    .pedigree-header-title {
+        font-size: 1.4rem;
+    }
+
+    .pedigree-header-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 399px) {
+    .pedigree-header-title {
+        font-size: 1.25rem;
+    }
+
+    .pedigree-header-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* généalogie */
+.dog-detail-pedigree-section {
+    padding: 4rem 0;
+    background: var(--dark);
+    border-top: 1px solid var(--border-gold);
+}
+
+.dog-detail-pedigree-header {
+    margin-bottom: 3rem;
 }
 
 /* Niveaux */
-.pedigree-level {
+.pedigree-level-1 {
     display: grid;
-    gap: 1.5rem;
-}
-
-.pedigree-level.level-0 {
-    grid-template-columns: 1fr;
-    justify-items: center;
-}
-
-.pedigree-level.level-1 {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.pedigree-level.level-2 {
+.pedigree-level-2 {
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 }
 
-
-
-/* Cartes */
+/* Cards */
 .pedigree-card {
-    background: white;
-    border: 3px solid #e0e0e0;
-    border-radius: 15px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.pedigree-card:not(.empty):hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 35px rgba(101, 193, 120, 0.25);
-    border-color: var(--primary-color);
-    border-width: 3px;
-}
-
-.pedigree-card.main-dog {
-    background: var(--secondary-color);
-    border-color: var(--secondary-color);
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 8px 30px rgba(45, 62, 40, 0.3);
-}
-
-.pedigree-card.empty {
-    background: #f0f0f0;
-    border-style: dashed;
-    border-color: #ccc;
-    border-width: 3px;
-}
-
-
-
-/* Contenu des cartes */
-.pedigree-card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-}
-
-.pedigree-image {
-    width: 320px;
-    height: 320px;
-    border-radius: 12px;
+    background: var(--dark-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
     overflow: hidden;
-    flex-shrink: 0;
-    border: 3px solid #e0e0e0;
+    transition: all 0.3s ease;
 }
 
-.pedigree-image img {
+.pedigree-card:hover {
+    border-color: var(--border-gold);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.pedigree-card-sm {
+    border-radius: 12px;
+}
+
+/* Image */
+.pedigree-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--dark-3);
+}
+
+.pedigree-card-sm .pedigree-card-image {
+    aspect-ratio: 1;
+}
+
+.pedigree-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
+    transition: transform 0.5s ease;
 }
 
-/* Centrer les infos sous l'image */
-.pedigree-card .pedigree-info {
-    align-items: center;
-    text-align: center;
+.pedigree-card:hover .pedigree-card-image img {
+    transform: scale(1.04);
 }
 
-/* Version plus petite pour les grands-parents */
-.pedigree-level.level-2 .pedigree-image {
-    width: 65px;
-    height: 65px;
-}
-
-/* Images - Grands-parents (petites) */
-.pedigree-level.level-2 .pedigree-image.small {
-    width: 170px;
-    height: 170px;
-}
-
-
-
-.pedigree-card.main-dog .pedigree-card-content {
-    justify-content: center;
-}
-
-/* Icône principale (chien) */
-.pedigree-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: white;
+/* Placeholder sans image */
+.pedigree-card-placeholder {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    flex-shrink: 0;
+    font-size: 3rem;
 }
 
-/* Badges genre */
-.pedigree-badge {
-    width: 40px;
-    height: 40px;
+.pedigree-card-sm .pedigree-card-placeholder {
+    font-size: 2rem;
+}
+
+.pedigree-card-placeholder.male {
+    background: linear-gradient(135deg, rgba(74, 158, 218, 0.1), rgba(41, 128, 185, 0.05));
+    color: #4a9eda;
+}
+
+.pedigree-card-placeholder.female {
+    background: linear-gradient(135deg, rgba(218, 74, 122, 0.1), rgba(194, 24, 91, 0.05));
+    color: #da4a7a;
+}
+
+/* Badge genre */
+.pedigree-gender-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-
-.pedigree-badge.small {
-    width: 35px;
-    height: 35px;
     font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.pedigree-badge.male {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+.pedigree-card-sm .pedigree-gender-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    top: 8px;
+    right: 8px;
 }
 
-.pedigree-badge.female {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
+.pedigree-gender-badge.male {
+    background: linear-gradient(135deg, #4a9eda, #2980b9);
 }
 
-/* Infos */
-.pedigree-info {
+.pedigree-gender-badge.female {
+    background: linear-gradient(135deg, #da4a7a, #c2185b);
+}
+
+/* Body */
+.pedigree-card-body {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.4rem;
 }
 
-.pedigree-card.main-dog .pedigree-info {
-    align-items: center;
+.pedigree-card-sm .pedigree-card-body {
+    padding: 1rem;
 }
 
-.pedigree-label {
-    font-size: 0.7rem;
-    color: #999;
+.pedigree-card-label {
+    font-size: 0.68rem;
+    color: var(--gold);
     text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.pedigree-card.main-dog .pedigree-label {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.pedigree-name {
-    font-size: 1rem;
-    color: var(--secondary-color);
     font-weight: 700;
+    letter-spacing: 0.8px;
 }
 
-.pedigree-name.small {
-    font-size: 0.9rem;
-}
-
-.pedigree-card.main-dog .pedigree-name {
+.pedigree-card-name {
+    font-size: 1rem;
     color: white;
-    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.3;
 }
 
-.pedigree-breed {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-}
-
-.pedigree-unknown {
+.pedigree-card-sm .pedigree-card-name {
     font-size: 0.9rem;
-    color: #999;
+}
+
+.pedigree-card-breed {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.pedigree-card-register,
+.pedigree-card-country {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.pedigree-card-register i,
+.pedigree-card-country i {
+    color: var(--gold);
+    font-size: 0.7rem;
+}
+
+/* Card inconnue */
+.pedigree-card-unknown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    gap: 0.75rem;
+    min-height: 120px;
+}
+
+.pedigree-card-unknown i {
+    font-size: 1.5rem;
+    color: var(--border-gold);
+}
+
+.pedigree-card-unknown span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
     font-style: italic;
 }
 
 /* ========================================
-   RESPONSIVE PREMIERE SECTION
+   RESPONSIVE PEDIGREE
 ======================================== */
 
-/* Grands écrans (< 1400px) */
-@media (max-width: 1399px) {
-    .dog-profile-card {
-        grid-template-columns: 320px 1fr;
-        gap: 2.5rem;
-        padding: 2.25rem;
-    }
-    
-    .profile-name {
-        font-size: 2rem;
-    }
-}
-
-/* Écrans moyens (< 1200px) */
 @media (max-width: 1199px) {
-    .dog-profile-card {
-        grid-template-columns: 280px 1fr;
-        gap: 2rem;
-        padding: 2rem;
-    }
-    
-    .profile-name {
-        font-size: 1.85rem;
-    }
-    
-    .profile-details-grid {
+    .pedigree-level-2 {
+        grid-template-columns: repeat(4, 1fr);
         gap: 0.85rem;
     }
 }
 
-/* Tablettes paysage (< 992px) */
 @media (max-width: 991px) {
-    .dog-profile-hero {
-        padding: 4rem 0 3rem 0;
-    }
-    
-    .dog-profile-card {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem;
-    }
-    
-    .dog-profile-image {
-        max-width: 350px;
-        margin: 0 auto;
-    }
-    
-    .profile-name {
-        font-size: 1.75rem;
-        text-align: center;
-    }
-    
-    .profile-other-name {
-        text-align: center;
-        font-size: 0.9rem;
-    }
-    
-    .profile-breed {
-        justify-content: center;
-        font-size: 0.95rem;
-    }
-    
-    .profile-details-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Tablettes portrait (< 768px) */
-@media (max-width: 767px) {
-    .dog-profile-hero {
-        padding: 3.5rem 0 2.5rem 0;
-    }
-    
-    .dog-profile-card {
-        padding: 2rem;
-        gap: 1.75rem;
-    }
-    
-    .dog-profile-image {
-        max-width: 300px;
-    }
-    
-    .profile-gender-badge {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-        top: 12px;
-        right: 12px;
-    }
-    
-    .profile-name {
-        font-size: 1.6rem;
-    }
-    
-    .profile-other-name {
-        font-size: 0.85rem;
-    }
-    
-    .profile-breed {
-        font-size: 0.9rem;
-    }
-    
-    .profile-breed i {
-        font-size: 0.95rem;
-    }
-    
-    .profile-details-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    
-    .detail-item {
-        padding: 0.9rem;
-    }
-    
-    .detail-item i {
-        font-size: 1rem;
-    }
-    
-    .detail-label {
-        font-size: 0.75rem;
-    }
-    
-    .detail-value {
-        font-size: 0.9rem;
-    }
-    
-    .btn-profile-stud {
-        width: 100%;
-        justify-content: center;
-        padding: 0.95rem 1.75rem;
-        font-size: 0.9rem;
-    }
-
-    .stud-info-item {
-        padding: 0.75rem;
-    }
-    
-    .stud-icon-wrapper {
-        width: 35px;
-        height: 35px;
-        font-size: 0.7rem;
-    }
-    
-    .stud-status {
-        font-size: 0.7rem;
-    }
-    
-    .btn-contact-stud-improved {
-        padding: 0.85rem;
-        font-size: 0.8rem;
-    }
-}
-
-/* Mobiles (< 576px) */
-@media (max-width: 575px) {
-    .dog-profile-hero {
-        padding: 3rem 0 2rem 0;
-    }
-    
-    .dog-profile-card {
-        padding: 1.5rem;
-        gap: 1.5rem;
-        border-radius: 16px;
-        margin-top:0.7rem;
-    }
-    
-    .dog-profile-image {
-        max-width: 280px;
-        border-radius: 16px;
-    }
-    
-    .profile-gender-badge {
-        width: 42px;
-        height: 42px;
-        font-size: 1.1rem;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .profile-header {
-        padding-bottom: 1rem;
-    }
-    
-    .profile-name {
-        font-size: 1.5rem;
-        line-height: 1.3;
-    }
-    
-    .profile-other-name {
-        font-size: 0.8rem;
-    }
-    
-    .profile-breed {
-        font-size: 0.85rem;
-        flex-wrap: wrap;
-    }
-    
-    .profile-details-grid {
-        gap: 0.65rem;
-    }
-    
-    .detail-item {
-        padding: 0.85rem;
-        gap: 0.65rem;
-    }
-    
-    .detail-item i {
-        font-size: 0.95rem;
-    }
-    
-    .detail-label {
-        font-size: 0.7rem;
-    }
-    
-    .detail-value {
-        font-size: 0.85rem;
-    }
-    
-    .btn-profile-stud {
-        padding: 0.9rem 1.5rem;
-        font-size: 0.85rem;
-    }
-    
-    .btn-profile-stud i {
-        font-size: 1rem;
-    }
-
-        /* badge retraité */
-    .badge-retired {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 12px;
-        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-        color: white;
-        border-radius: 20px;
-        font-size: 10px;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(127, 140, 141, 0.3);
-        animation: fadeInScale 0.5s ease-out;
-    }
-
-    .badge-retired i {
-        font-size: 14px;
-    }
-}
-
-/* Petits mobiles (< 400px) */
-@media (max-width: 399px) {
-    .dog-profile-hero {
-        padding: 2.5rem 0 1.75rem 0;
-    }
-    
-    .dog-profile-card {
-        padding: 1.25rem;
-        gap: 1.25rem;
-        border-radius: 14px;
-    }
-    
-    .dog-profile-image {
-        max-width: 100%;
-        border-radius: 14px;
-    }
-    
-    .profile-gender-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-    }
-    
-    .profile-name {
-        font-size: 1.35rem;
-    }
-    
-    .profile-other-name {
-        font-size: 0.75rem;
-    }
-    
-    .profile-breed {
-        font-size: 0.8rem;
-    }
-    
-    .detail-item {
-        padding: 0.75rem;
-        gap: 0.6rem;
-    }
-    
-    .detail-item i {
-        font-size: 0.9rem;
-    }
-    
-    .detail-label {
-        font-size: 0.68rem;
-    }
-    
-    .detail-value {
-        font-size: 0.8rem;
-    }
-    
-    .btn-profile-stud {
-        padding: 0.85rem 1.25rem;
-        font-size: 0.8rem;
-        gap: 0.6rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE DEUXIEME SECTION
-======================================== */
-
-@media (max-width: 1199px) {
-    .info-gallery-card {
-        gap: 2.5rem;
-        padding: 2.25rem;
-    }
-    
-    .carousel-image {
-        height: 450px;
-    }
-}
-
-@media (max-width: 991px) {
-    .dog-info-gallery-section {
-        padding: 3.5rem 0;
-    }
-    
-    .info-gallery-card {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 2rem;
-    }
-    
-    .carousel-image {
-        height: 400px;
-    }
-}
-
-@media (max-width: 767px) {
-    .dog-info-gallery-section {
+    .dog-detail-pedigree-section {
         padding: 3rem 0;
     }
-    
-    .info-gallery-card {
-        padding: 1.75rem;
-        gap: 2rem;
-        border-radius: 16px;
-    }
-    
-    .info-gallery-left {
-        gap: 1.5rem;
-    }
-    
-    .info-block {
-        padding: 1.5rem;
-        border-radius: 12px;
-    }
-    
-    .info-block-title {
-        font-size: 1.3rem;
-    }
-    
-    .info-block-subtitle {
-        font-size: 1.05rem;
-    }
-    
-    .carousel-image {
-        height: 350px;
-    }
-    
-    .carousel-btn-next,
-    .carousel-btn-prev {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .thumbGallerySwiper .swiper-slide {
-        width: 80px;
-        height: 80px;
-    }
-}
 
-@media (max-width: 575px) {
-    .dog-info-gallery-section {
-        padding: 2.5rem 0;
-    }
-    
-    .info-gallery-card {
-        padding: 1.5rem;
-        gap: 1.75rem;
-        border-radius: 14px;
-    }
-    
-    .info-gallery-left {
+    .pedigree-level-1 {
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.25rem;
     }
-    
-    .info-block {
-        padding: 1.35rem;
-    }
-    
-    .info-block-title {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-    }
-    
-    .info-block-subtitle {
-        font-size: 1rem;
-        margin-bottom: 0.85rem;
-    }
-    
-    .info-block-content {
-        font-size: 0.8rem;
-    }
-    
-    .pedigree-item {
-        padding: 0.75rem;
-    }
-    
-    .pedigree-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-    }
-    
-    .pedigree-value {
-        font-size: 0.9rem;
-    }
-    
-    .btn-contact-stud {
-        width: 100%;
-        padding: 0.85rem;
-    }
-    
-    .carousel-image {
-        height: 320px;
-    }
-    
-    .carousel-btn-next,
-    .carousel-btn-prev {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .carousel-btn-next:after,
-    .carousel-btn-prev:after {
-        font-size: 0.95rem;
-    }
-    
-    .carousel-counter {
-        padding: 0.5rem 0.95rem;
-        font-size: 0.8rem;
-    }
-    
-    .thumbGallerySwiper .swiper-slide {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .thumbnail-image {
-        border-radius: 8px;
-        border-width: 2px;
-    }
-}
 
-/* Responsive grille - 3 colonnes sur mobile */
-@media (max-width: 575px) {
-    .thumbnails-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-    }
-    
-    .thumbnail-item .thumbnail-image {
-        border-radius: 8px;
-        border-width: 2px;
-    }
-}
-
-@media (max-width: 399px) {
-    .info-gallery-card {
-        padding: 1.25rem;
-    }
-    
-    .info-block {
-        padding: 1.15rem;
-    }
-    
-    .carousel-image {
-        height: 280px;
-    }
-    
-    .carousel-btn-next,
-    .carousel-btn-prev {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .thumbGallerySwiper .swiper-slide {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-
-/* ========================================
-   RESPONSIVE GENEALOGIE
-======================================== */
-
-@media (max-width: 991px) {
-    .dog-pedigree-section {
-        padding: 3.5rem 0;
-    }
-    
-    .pedigree-title {
-        font-size: 1.6rem;
-    }
-    
-    .pedigree-level.level-2 {
+    .pedigree-level-2 {
         grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    .dog-pedigree-section {
-        padding: 3rem 0;
-    }
-    
-    .pedigree-header {
-        margin-bottom: 2rem;
-    }
-    
-    .pedigree-title {
-        font-size: 1.4rem;
-    }
-    
-    .pedigree-title i {
-        font-size: 1.4rem;
-    }
-    
-    .pedigree-subtitle {
-        font-size: 0.7rem;
-    }
-    
-    .pedigree-tree {
-        gap: 1.5rem;
-    }
-    
-    .pedigree-level {
         gap: 1rem;
     }
-    
-    .pedigree-level.level-1 {
-        grid-template-columns: 1fr;
-    }
-    
-    .pedigree-level.level-2 {
-        grid-template-columns: 1fr;
-    }
-    
-    .pedigree-card {
-        padding: 1.25rem;
-        min-height: 100px;
-    }
-    
-    .pedigree-card.main-dog {
-        max-width: 100%;
-    }
 }
 
-@media (max-width: 575px) {
-    .dog-pedigree-section {
+@media (max-width: 767px) {
+    .dog-detail-pedigree-section {
         padding: 2.5rem 0;
     }
-    
-    .pedigree-title {
-        font-size: 1.3rem;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .pedigree-card {
-        padding: 1.15rem;
-        min-height: 90px;
-        border-radius: 12px;
-    }
-    
-    .pedigree-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-    }
-    
-    .pedigree-badge {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-    }
-    
-    .pedigree-badge.small {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
-    }
-    
-    .pedigree-name {
-        font-size: 0.95rem;
-    }
-    
-    .pedigree-card.main-dog .pedigree-name {
-        font-size: 1.2rem;
-    }
-    
-    .pedigree-name.small {
-        font-size: 0.85rem;
+
+    .dog-detail-pedigree-header {
+        margin-bottom: 2rem;
     }
 
-    .pedigree-label {
-    font-size: 0.65rem;
-    color: #999;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-}
-
-@media (max-width: 399px) {
-    .pedigree-card {
-        padding: 1rem;
+    .pedigree-level-1 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
-    
-    .pedigree-card-content {
+
+    .pedigree-card-image {
+        aspect-ratio: 4/3;
+    }
+
+    .pedigree-level-2 {
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.85rem;
     }
 }
 
-/* Responsive */
-@media (max-width: 767px) {
-    .pedigree-level.level-1 .pedigree-image {
-        width: 300px;
-        height: 300px;
+@media (max-width: 575px) {
+    .dog-detail-pedigree-section {
+        padding: 2rem 0;
     }
-    
-    .pedigree-level.level-2 .pedigree-image.small {
-        width: 300px;
-        height: 300px;
+
+    .pedigree-card-body {
+        padding: 1rem;
+    }
+
+    .pedigree-card-name {
+        font-size: 0.95rem;
+    }
+
+    .pedigree-level-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+    }
+
+    .pedigree-card-sm .pedigree-card-body {
+        padding: 0.85rem;
+    }
+
+    .pedigree-card-sm .pedigree-card-name {
+        font-size: 0.82rem;
     }
 }
 
-@media (max-width: 575px) {
-    .pedigree-level.level-1 .pedigree-image {
-        width: 300px;
-        height: 300px;
+@media (max-width: 399px) {
+    .pedigree-level-1,
+    .pedigree-level-2 {
+        grid-template-columns: 1fr;
     }
-    
-    .pedigree-level.level-2 .pedigree-image.small {
-        width: 300px;
-        height: 300px;
+
+    .pedigree-card-image {
+        aspect-ratio: 4/3;
     }
 }

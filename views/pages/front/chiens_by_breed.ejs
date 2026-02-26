@@ -1,104 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= breed.name %> - Étalons et Lices | Élevage de Bel Air</title>
-    <meta name="description" content="Découvrez nos reproducteurs <%= breed.name %> : étalons et lices d'exception, testés génétiquement et conformes au standard. Élevage familial près de Montpellier.">
-    <meta name="keywords" content="reproducteurs <%= breed.name.toLowerCase() %>, étalon <%= breed.name.toLowerCase() %>, lice <%= breed.name.toLowerCase() %>, <%= breed.name.toLowerCase() %> avec pedigree, <%= breed.name.toLowerCase() %> reproducteur, élevage <%= breed.name.toLowerCase() %>, <%= breed.name.toLowerCase() %> étalon saillie">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/chiens/<%= breed.slug %>">
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR">
-    <meta name="geo.placename" content="France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Reproducteurs <%= breed.name %> avec pedigree - Élevage de Bel Air">
-    <meta property="og:description" content="Découvrez nos reproducteurs <%= breed.name %> d'exception : étalons et lices sélectionnés pour leur génétique et conformité au standard.">
-    <meta property="og:url" content="https://elevagedebelair.com/chiens/<%= breed.slug %>">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Reproducteurs <%= breed.name %> - Élevage de Bel Air">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Reproducteurs <%= breed.name %> avec pedigree - Élevage de Bel Air">
-    <meta name="twitter:description" content="Nos reproducteurs <%= breed.name %> d'exception : étalons et lices sélectionnés avec soin.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Reproducteurs <%= breed.name %> - Élevage de Bel Air">
-    <%- include('../front/partials/head-meta-base.ejs') %>
-    <%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/chiens.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Nos <%= breed.name %> | Spirit of Freedom Kennel</title>
+        <meta name="description" content="Découvrez nos reproducteurs <%= breed.name %> au Spirit of Freedom Kennel : étalons et lices soigneusement sélectionnés pour leurs qualités morphologiques, leur santé et leur tempérament. Chiots ABKC et FBKC disponibles à Codognan, dans le Gard.">
+        <meta name="keywords" content="reproducteurs <%= breed.name.toLowerCase() %>, étalon <%= breed.name.toLowerCase() %>, lice <%= breed.name.toLowerCase() %>, <%= breed.name.toLowerCase() %> reproducteur gard, spirit of freedom kennel <%= breed.name.toLowerCase() %>, <%= breed.name.toLowerCase() %> étalon saillie, reproducteurs ABKC FBKC, chiens élevage codognan">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/chiens/<%= breed.slug %>">
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Nos <%= breed.name %> - Reproducteurs | Spirit of Freedom Kennel">
+        <meta property="og:description" content="Découvrez nos reproducteurs <%= breed.name %> d'exception au Spirit of Freedom Kennel : étalons et lices sélectionnés avec soin, chiots ABKC et FBKC disponibles.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/chiens/<%= breed.slug %>">
+        <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Reproducteurs <%= breed.name %> - Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Nos <%= breed.name %> - Reproducteurs | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Nos reproducteurs <%= breed.name %> d'exception : étalons et lices sélectionnés avec soin, chiots ABKC et FBKC disponibles à Codognan.">
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Spirit of Freedom Kennel - Reproducteurs <%= breed.name %>">
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/chiens.css">
+    </head>
     <body class="h-100">
         <%- include('../front/frontEndAssets/header') %>
-         <main style="padding-top: 70px;">
-            <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+        <main style="padding-top: 70px;">
+            <section class="page-intro-section">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">Mes <%= currentBreed %></h1>
-                        <p class="page-hero-subtitle">
-                            Découvrez l'ensemble de nos <%= currentBreed %>, reproducteurs d'exception sélectionnés avec passion. 
-                            Chaque chien reflète notre engagement pour la qualité, la santé et le respect du standard de la race. 
-                            Nos reproducteurs ne sont pas à vendre.
-                        </p>
+                    <div class="specialty-text" >
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <h1 class="specialty-title">Nos <span class="text-gold"><%= currentBreed %></span></h1>
+                                    <p>Chez Spirit of Freedom Kennel, nos <strong><%= currentBreed %></strong> sont le reflet d'un travail passionné et exigeant. Chaque reproducteur est choisi pour son équilibre morphologique, sa robustesse et son caractère stable.</p>
+                                    <p>Issus pour la plupart de lignées internationales d'exception, nos chiens incarnent les plus hauts standards de la race sur le territoire français.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
             <section class="dog-filters-section">
                 <div class="container">
                     <div class="dog-filters-desktop">
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens" class="dog-mini-btn">Toutes les races</a>
+                        <a href="/chiens" class="dog-filter-btn">
+                        <i class="fas fa-paw me-2"></i>Toutes les races
+                        </a>
                         <% races.forEach(race => { %>
                         <a href="/chiens/<%= race.breed_slug %>" 
-                            class="dog-mini-btn <%= race.breed_slug === breedSlug ? 'active' : '' %>">
-                                <%= race.breed_name %>
+                            class="dog-filter-btn <%= race.breed_slug === breedSlug ? 'active' : '' %>">
+                        <%= race.breed_name %>
                         </a>
                         <% }); %>
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens/<%= breedSlug %>/males" class="dog-mini-btn male"> 
-                            <i class="fas fa-mars"></i> Les Mâles <%= currentBreed %> 
+                        <div class="dog-filter-separator"></div>
+                        <a href="/chiens/<%= breedSlug %>/males" class="dog-filter-btn male">
+                        <i class="fas fa-mars me-2"></i>Mâles <%= currentBreed %>
                         </a>
-                        <a href="/chiens/<%= breedSlug %>/femelles" class="dog-mini-btn female"> 
-                            <i class="fas fa-venus"></i> Les Femelles <%= currentBreed %> 
+                        <a href="/chiens/<%= breedSlug %>/femelles" class="dog-filter-btn female">
+                        <i class="fas fa-venus me-2"></i>Femelles <%= currentBreed %>
                         </a>
-
-                        <span class="filter-dot">•</span>
-                        <a href="/chiens/<%= breedSlug %>/saillies" class="dog-mini-btn saillie"> 
-                            <i class="fas fa-heart"></i> Mâles en Saillies 
+                        <div class="dog-filter-separator"></div>
+                        <a href="/chiens/<%= breedSlug %>/saillies" class="dog-filter-btn saillie">
+                        <i class="fas fa-heart me-2"></i>Mâles en Saillie
                         </a>
                     </div>
                     <div class="dog-filters-mobile">
                         <button class="dog-filters-toggle" id="dogFiltersToggle">
-                            <span>Filtres</span>
+                            <div class="dog-filters-toggle-left">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Filtrer les chiens</span>
+                            </div>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dog-filters-menu" id="dogFiltersMenu">
                             <a href="/chiens" class="dog-filter-item">
-                                Tous les chiens
+                            <i class="fas fa-paw me-2"></i>Toutes les races
                             </a>
                             <% races.forEach(race => { %>
                             <a href="/chiens/<%= race.breed_slug %>" 
                                 class="dog-filter-item <%= race.breed_slug === breedSlug ? 'active' : '' %>">
-                                    <%= race.breed_name %>
+                            <i class="fas fa-dog me-2"></i><%= race.breed_name %>
                             </a>
                             <% }); %>
                             <div class="dog-filter-divider"></div>
-                            <a href="/chiens/<%= breedSlug %>/males" class="dog-filter-item">
-                                Mâles
+                            <a href="/chiens/<%= breedSlug %>/males" class="dog-filter-item male">
+                            <i class="fas fa-mars me-2"></i>Mâles <%= currentBreed %>
                             </a>
-                            <a href="/chiens/<%= breedSlug %>/femelles" class="dog-filter-item">
-                                Femelles
+                            <a href="/chiens/<%= breedSlug %>/femelles" class="dog-filter-item female">
+                            <i class="fas fa-venus me-2"></i>Femelles <%= currentBreed %>
                             </a>
                             <div class="dog-filter-divider"></div>
                             <a href="/chiens/<%= breedSlug %>/saillies" class="dog-filter-item saillie">
-                                Mâles en saillie
+                            <i class="fas fa-heart me-2"></i>Mâles en Saillie
                             </a>
                         </div>
                     </div>
@@ -107,31 +113,48 @@
             <section class="dog-grid-section">
                 <div class="container">
                     <% if (animals && animals.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="label-tag"><%= currentBreed %></span>
+                            <h2 class="breed-section-title">Nos <span class="text-gold"><%= currentBreed %></span></h2>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= totalItems %></span>
+                            <span class="counter-label">chiens</span>
+                        </div>
+                    </div>
                     <div class="row g-4">
                         <% animals.forEach((animal, index) => { %>
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
                             <article class="dog-card">
                                 <div class="dog-card-image">
+                                    <%
+                                        let animalImageSrc;
+                                        if (animal.optimized_image_path) {
+                                            animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path;
+                                        } else if (animal.image_path) {
+                                            animalImageSrc = '/uploads/' + animal.image_path;
+                                        } else {
+                                            animalImageSrc = '/img/placeholder-dog.jpg';
+                                        }
+                                        %>
                                     <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                        <% let animalImageSrc; if (animal.optimized_image_path) { animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path; } else if (animal.image_path) { animalImageSrc = '/uploads/' +
-                                        animal.image_path; } else { animalImageSrc = '/img/placeholder-dog.jpg'; } %>
-                                        <img src="<%= animalImageSrc %>" alt="<%= animal.balise_alt || animal.name %>" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                    <img src="<%= animalImageSrc %>"
+                                        alt="<%= animal.balise_alt || animal.name %>"
+                                        onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';">
                                     </a>
                                     <div class="dog-gender-badge <%= animal.gender === 'Male' ? 'male' : 'female' %>">
                                         <i class="fas <%= animal.gender === 'Male' ? 'fa-mars' : 'fa-venus' %>"></i>
                                     </div>
                                 </div>
                                 <div class="dog-card-body">
+                                    <div class="dog-card-top-bar"></div>
                                     <h3 class="dog-card-name">
-                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                            <%= animal.name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>"><%= animal.name %></a>
                                     </h3>
                                     <div class="dog-card-race">
                                         <i class="fas fa-paw"></i>
-                                        <a href="/chiens/<%= animal.breed_slug %>">
-                                            <%= animal.breed_name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>"><%= animal.breed_name %></a>
                                     </div>
                                     <div class="dog-card-info">
                                         <% if (animal.breed_type) { %>
@@ -139,26 +162,28 @@
                                             <i class="fas fa-dog"></i>
                                             <span><%= animal.breed_type %></span>
                                         </div>
-                                        <% } %> <% if (animal.color) { %>
+                                        <% } %>
+                                        <% if (animal.color) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-palette"></i>
                                             <span><%= animal.color %></span>
                                         </div>
-                                        <% } %> <% if (animal.eye_color) { %>
+                                        <% } %>
+                                        <% if (animal.eye_color) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-eye"></i>
                                             <span><%= animal.eye_color %></span>
                                         </div>
-                                        <% } %> <% if (animal.register_name) { %>
+                                        <% } %>
+                                        <% if (animal.register_name) { %>
                                         <div class="dog-info-item">
                                             <i class="fas fa-certificate"></i>
                                             <span><%= animal.register_name %></span>
                                         </div>
                                         <% } %>
                                     </div>
-                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="dog-card-btn">
-                                        Voir le profil
-                                        <i class="fas fa-arrow-right"></i>
+                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="btn-view-dog-card">
+                                    Voir le profil <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
                                 </div>
                             </article>
@@ -166,14 +191,13 @@
                         <% }); %>
                     </div>
                     <% } else { %>
-                    <div class="text-center py-5">
-                        <div class="no-dogs-message" data-aos="fade-up">
-                            <i class="fas fa-paw fa-3x text-muted mb-4"></i>
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-dogs-message">
+                            <i class="fas fa-paw fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
                             <h3>Aucun chien disponible</h3>
-                            <p class="text-muted mb-4">Aucun chien ne correspond à vos critères de recherche</p>
+                            <p>Aucun <%= currentBreed %> ne correspond à vos critères de recherche</p>
                             <a href="/chiens" class="btn-back-dogs">
-                                <i class="fas fa-arrow-left me-2"></i>
-                                Retour à tous les chiens
+                            <i class="fas fa-arrow-left me-2"></i>Retour à tous les chiens
                             </a>
                         </div>
                     </div>
@@ -187,53 +211,51 @@
                         <ul class="dog-pagination">
                             <% if (currentPage > 1) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>Précédent</span>
+                                <a href="/chiens/<%= breedSlug %>?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Précédent</span>
                                 </a>
                             </li>
                             <% } %>
-                            <% 
-                            // Logique de pagination
-                            let startPage = Math.max(1, currentPage - 2);
-                            let endPage = Math.min(totalPages, currentPage + 2);
-                            
-                            // Première page
-                            if (startPage > 1) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=1" class="dog-pagination-link">1</a>
-                                </li>
-                                <% if (startPage > 2) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
+                            <%
+                                let startPage = Math.max(1, currentPage - 2);
+                                let endPage = Math.min(totalPages, currentPage + 2);
+                                
+                                if (startPage > 1) { %>
+                            <li class="dog-pagination-item">
+                                <a href="/chiens/<%= breedSlug %>?page=1" class="dog-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
                             <% } %>
                             <% for (let i = startPage; i <= endPage; i++) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= i %>" 
-                                class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
-                                    <%= i %>
+                                <a href="/chiens/<%= breedSlug %>?page=<%= i %>"
+                                    class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                <%= i %>
                                 </a>
                             </li>
                             <% } %>
                             <% if (endPage < totalPages) { %>
-                                <% if (endPage < totalPages - 1) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= totalPages %>" class="dog-pagination-link">
-                                        <%= totalPages %>
-                                    </a>
-                                </li>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="dog-pagination-item">
+                                <a href="/chiens/<%= breedSlug %>?page=<%= totalPages %>" class="dog-pagination-link">
+                                <%= totalPages %>
+                                </a>
+                            </li>
                             <% } %>
                             <% if (currentPage < totalPages) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
-                                    <span>Suivant</span>
-                                    <i class="fas fa-chevron-right"></i>
+                                <a href="/chiens/<%= breedSlug %>?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
+                                <span>Suivant</span>
+                                <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
                             <% } %>
@@ -248,15 +270,18 @@
             <% } %>
             <section class="dog-cta-section">
                 <div class="container">
-                    <div class="dog-cta-box" data-aos="zoom-in">
-                        <div class="dog-cta-content">
-                            <h2 class="dog-cta-title">Vous souhaitez adopter un chiot ?</h2>
-                            <p class="dog-cta-text">
-                                Contactez-nous pour plus d'informations sur nos reproducteurs, nos saillies et nos chiots disponibles
-                            </p>
-                            <a href="/contact" class="btn-dog-cta">
-                                <i class="fas fa-envelope me-2"></i>
-                                Nous Contacter
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Votre futur compagnon <span class="text-gold">vous attend</span></h2>
+                            <p class="dog-cta-text">Contactez-nous pour en savoir plus sur nos reproducteurs, nos saillies disponibles et nos chiots FBKC & ABKC à venir.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/chiots" class="btn-dog-cta-secondary">
+                            <i class="fas fa-paw me-2"></i>Voir les chiots
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
                             </a>
                         </div>
                     </div>
@@ -284,7 +309,7 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const toggleBtn = document.getElementById("dogFiltersToggle");
                 const menu = document.getElementById("dogFiltersMenu");
-
+            
                 if (toggleBtn && menu) {
                     toggleBtn.addEventListener("click", function () {
                         menu.classList.toggle("active");
