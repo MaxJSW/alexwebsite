@@ -1,421 +1,419 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mariage <%= father.name %> x <%= mother.name %> - <%= father.breed.name %></title>
-    <meta name="description" content="<%= marriage.description || 'Découvrez la portée de ' + father.name + ' et ' + mother.name + ', ' + father.breed.name + (father.breed.type ? ' ' + father.breed.type : '') + '. ' + (marriage.totalPuppies || 0) + ' chiot(s) ' + father.breed.name.toLowerCase() + ' issu(s) de notre élevage familial en Occitanie.' %>">
-    <meta name="keywords" content="mariage <%= father.breed.name.toLowerCase() %>, portée <%= father.name %> <%= mother.name %>, chiots <%= father.breed.name.toLowerCase() %><% if (father.breed.type) { %> <%= father.breed.type.toLowerCase() %><% } %>, <%= father.color.toLowerCase() %>, <%= mother.color.toLowerCase() %>, élevage <%= father.breed.name.toLowerCase() %>, élevage de bel air">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/mariages/<%= father.breed.slug %>/<%= marriage.slug %>">
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Mariage <%= father.name %> x <%= mother.name %> | <%= father.breed.name %>">
-    <meta property="og:description" content="Portée <%= father.breed.name %><% if (father.breed.type) { %> <%= father.breed.type %><% } %> - <%= marriage.totalPuppies || 0 %> chiot(s). Élevage de Bel Air en Occitanie.">
-    <meta property="og:url" content="https://elevagedebelair.com/mariages/<%= father.breed.slug %>/<%= marriage.slug %>">
-    <meta property="og:image" content="<%= marriage.image.path ? 'https://elevagedebelair.com' + marriage.image.path : 'https://elevagedebelair.com/img/og/og-image.webp' %>">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mariage <%= father.name %> x <%= mother.name %> - <%= father.breed.name %>">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mariage <%= father.name %> x <%= mother.name %>">
-    <meta name="twitter:description" content="Portée <%= father.breed.name %> - Élevage de Bel Air">
-    <meta name="twitter:image" content="<%= marriage.image.path ? 'https://elevagedebelair.com' + marriage.image.path : 'https://elevagedebelair.com/img/og/og-image.webp' %>">
-    <meta name="twitter:image:alt" content="<%= father.name %> x <%= mother.name %>">
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/mariages-details.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mariage <%= father.name %> x <%= mother.name %> - <%= father.breed.name %></title>
+        <meta name="description" content="<%= marriage.description || 'Découvrez la portée de ' + father.name + ' et ' + mother.name + ', ' + father.breed.name + (father.breed.type ? ' ' + father.breed.type : '') + '. ' + (marriage.totalPuppies || 0) + ' chiot(s) ' + father.breed.name.toLowerCase() + ' issu(s) du Spirit of Freedom Kennel à Codognan, dans le Gard.' %>">
+        <meta name="keywords" content="mariage <%= father.breed.name.toLowerCase() %>, portée <%= father.name %> <%= mother.name %>, chiots <%= father.breed.name.toLowerCase() %><% if (father.breed.type) { %> <%= father.breed.type.toLowerCase() %><% } %><% if (father.color) { %>, <%= father.color.toLowerCase() %><% } %><% if (mother.color) { %>, <%= mother.color.toLowerCase() %><% } %>, élevage <%= father.breed.name.toLowerCase() %>, spirit of freedom kennel, chiots ABKC FBKC, élevage canin gard, codognan">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/mariages/<%= father.breed.slug %>/<%= marriage.slug %>">
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="article">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Mariage <%= father.name %> x <%= mother.name %> | <%= father.breed.name %> - Spirit of Freedom Kennel">
+        <meta property="og:description" content="Portée <%= father.breed.name %><% if (father.breed.type) { %> <%= father.breed.type %><% } %> - <%= marriage.totalPuppies || 0 %> chiot(s). Spirit of Freedom Kennel à Codognan, dans le Gard.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/mariages/<%= father.breed.slug %>/<%= marriage.slug %>">
+        <meta property="og:image" content="<%= marriage.image && marriage.image.path ? 'https://spiritoffreedomkennel.com' + marriage.image.path : 'https://spiritoffreedomkennel.com/img/og/og-image.webp' %>">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Mariage <%= father.name %> x <%= mother.name %> - <%= father.breed.name %> - Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Mariage <%= father.name %> x <%= mother.name %> | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Portée <%= father.breed.name %><% if (father.breed.type) { %> <%= father.breed.type %><% } %> - <%= marriage.totalPuppies || 0 %> chiot(s). Spirit of Freedom Kennel à Codognan, dans le Gard.">
+        <meta name="twitter:image" content="<%= marriage.image && marriage.image.path ? 'https://spiritoffreedomkennel.com' + marriage.image.path : 'https://spiritoffreedomkennel.com/img/og/og-image.webp' %>">
+        <meta name="twitter:image:alt" content="<%= father.name %> x <%= mother.name %> - Spirit of Freedom Kennel">
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/mariages-details.css">
+    </head>
     <body class="h-100">
         <%- include('../front/frontEndAssets/header') %>
         <main style="padding-top: 70px;">
-           <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+            <div class="marriage-breadcrumb-mobile">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">Portée <%= father.breed.name %></h1>
-                        <p class="page-hero-subtitle">
-                            Découvrez la magnifique portée de <%= father.name %> et <%= mother.name %>. 
-                            <% if (marriage.totalPuppies > 0) { %>
-                                <%= marriage.totalPuppies %> chiot<%= marriage.totalPuppies > 1 ? 's' : '' %> <%= father.breed.name %> 
-                            <% } %>, socialisé<%= marriage.totalPuppies > 1 ? 's' : '' %> et élevé<%= marriage.totalPuppies > 1 ? 's' : '' %> avec soin dans un environnement familial.<br>
-                            <% if (marriage.availablePuppies > 0) { %>
-                                <%= marriage.availablePuppies %> chiot<%= marriage.availablePuppies > 1 ? 's' : '' %> disponible<%= marriage.availablePuppies > 1 ? 's' : '' %> à la réservation.
-                            <% } %>
-                        </p>
+                    <div class="marriage-breadcrumb">
+                        <a href="/mariages"><i class="fas fa-heart me-1"></i>Mariages</a>
+                        <span class="breadcrumb-sep">›</span>
+                        <a href="/mariages/<%= father.breed.slug %>"><%= father.breed.name %></a>
+                        <span class="breadcrumb-sep">›</span>
+                        <span><%= father.name %> x <%= mother.name %></span>
                     </div>
                 </div>
-            </section>
+            </div>
             <section class="marriage-hero-section">
                 <div class="container">
-                    <div class="row align-items-center g-4">
-                        <div class="col-lg-6" data-aos="fade-right">
-                            <div class="marriage-hero-content">
-                                <nav aria-label="breadcrumb" class="marriage-breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="/mariages">Mariages</a></li>
-                                        <li class="breadcrumb-item"><a href="/mariages/<%= father.breed.slug %>"><%= father.breed.name %></a></li>
-                                        <li class="breadcrumb-item active text-success" aria-current="page"><%= marriage.title %></li>
-                                    </ol>
-                                </nav>
+                    <div class="marriage-hero-grid">
+                        <div class="marriage-hero-left" data-aos="fade-right">
+                            <div class="marriage-hero-banner">
+                                <% if (marriage.image && marriage.image.path) { %>
+                                <img src="<%= marriage.image.path %>"
+                                    alt="Mariage <%= father.name %> x <%= mother.name %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-marriage.webp';">
+                                <% } else { %>
+                                <div class="marriage-hero-banner-placeholder">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <% } %>
+                                <div class="marriage-hero-status-badge <%=
+                                    marriage.status === 'in_progress' ? 'status-progress' :
+                                    marriage.status === 'planned' ? 'status-planned' : 'status-completed'
+                                    %>">
+                                    <% if (marriage.status === 'in_progress') { %>
+                                    <i class="fas fa-spinner"></i>En cours
+                                    <% } else if (marriage.status === 'planned') { %>
+                                    <i class="fas fa-calendar"></i>À venir
+                                    <% } else { %>
+                                    <i class="fas fa-check"></i>Terminé
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marriage-hero-right" data-aos="fade-left">
+                            <div class="marriage-breadcrumb desktop-only">
+                                <a href="/mariages"><i class="fas fa-heart me-1"></i>Mariages</a>
+                                <span class="breadcrumb-sep">›</span>
+                                <a href="/mariages/<%= father.breed.slug %>"><%= father.breed.name %></a>
+                                <span class="breadcrumb-sep">›</span>
+                                <span><%= father.name %> x <%= mother.name %></span>
+                            </div>
+                            <div class="marriage-hero-title-row">
                                 <h1 class="marriage-hero-title">
-                                    <%= father.name %> <span class="x-separator">×</span> <%= mother.name %>
+                                    <span class="text-gold"><%= father.name %></span>
+                                    <span class="marriage-hero-x">×</span>
+                                    <span class="text-gold"><%= mother.name %></span>
                                 </h1>
-                                <div class="marriage-hero-breed">
-                                    <i class="fas fa-paw"></i>
-                                    <span><%= father.breed.name %></span>
-                                </div>
-                                <div class="marriage-hero-info-grid">
-                                    <% if (marriage.birthDate) { %>
-                                    <div class="marriage-info-card">
-                                        <div class="info-icon">
-                                            <i class="fas fa-calendar-day"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <span class="info-label">Date de naissance</span>
-                                            <span class="info-value"><%= marriage.birthDate %></span>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                    <% if (marriage.availableDate) { %>
-                                    <div class="marriage-info-card">
-                                        <div class="info-icon">
-                                            <i class="fas fa-home"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <span class="info-label">Disponibles dès le</span>
-                                            <span class="info-value"><%= marriage.availableDate %></span>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                    <div class="marriage-info-card">
-                                        <div class="info-icon">
-                                            <i class="fas fa-baby"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <span class="info-label">Nombre de chiots</span>
-                                            <span class="info-value"><%= marriage.totalPuppies || marriage.expectedPuppies || 0 %></span>
-                                        </div>
-                                    </div>
-                                    <% if (marriage.availablePuppies > 0) { %>
-                                    <div class="marriage-info-card highlight">
-                                        <div class="info-icon">
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <span class="info-label">Chiots disponibles</span>
-                                            <span class="info-value"><%= marriage.availablePuppies %></span>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6" data-aos="fade-left">
-                            <div class="marriage-hero-image">
-                                <img src="<%= marriage.image.path %>" 
-                                    alt="Mariage <%= father.name %> × <%= mother.name %>" 
-                                    onerror="this.onerror=null; this.src='/img/placeholder-marriage.jpg';" />
-                                <% 
-                                let statusClass = '';
-                                let statusIcon = '';
-                                let statusText = '';
-                                if (marriage.status === 'Programmé') {
-                                    statusClass = 'status-planned';
-                                    statusIcon = 'fa-calendar-check';
-                                    statusText = 'Programmée';
-                                } else if (marriage.status === 'En Cours') {
-                                    statusClass = 'status-progress';
-                                    statusIcon = 'fa-heart-pulse';
-                                    statusText = 'En cours';
-                                } else if (marriage.status === 'Confirmé') {
-                                    statusClass = 'status-born';
-                                    statusIcon = 'fa-baby';
-                                    statusText = 'Confirmée';
-                                } else if (marriage.status === 'Archivé') {
-                                    statusClass = 'status-completed';
-                                    statusIcon = 'fa-check-circle';
-                                    statusText = 'Portée Archivée';
-                                }
-                                %>
-                                <div class="marriage-status-badge-hero <%= statusClass %>">
-                                    <i class="fas <%= statusIcon %>"></i>
-                                    <span><%= statusText %></span>
-                                </div>
+                            <div class="marriage-hero-breed">
+                                <i class="fas fa-paw"></i>
+                                <a href="/mariages/<%= father.breed.slug %>"><%= father.breed.name %></a>
+                                <% if (father.breed.type) { %>
+                                <span class="marriage-hero-breed-dot">•</span>
+                                <span><%= father.breed.type %></span>
+                                <% } %>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="marriage-contact-section">
-                <div class="container">
-                    <div class="marriage-contact-box" data-aos="fade-up">
-                        <div class="contact-box-content">
-                            <p class="contact-text">
-                                Vous souhaitez réserver un chiot de cette portée ?
-                            </p>
-                            <a href="/contact" class="btn-marriage-contact">
-                                <i class="fas fa-envelope"></i>
-                                <span>Nous Contacter</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                            <div class="marriage-hero-stats">
+                                <div class="marriage-stat-item">
+                                    <div class="marriage-stat-icon">
+                                        <i class="fas fa-dog"></i>
+                                    </div>
+                                    <div class="marriage-stat-content">
+                                        <span class="marriage-stat-value"><%= marriage.totalPuppies || 0 %></span>
+                                        <span class="marriage-stat-label">Chiots dans la portée</span>
+                                    </div>
+                                </div>
+                                <% if (marriage.availablePuppies > 0) { %>
+                                <div class="marriage-stat-item highlight">
+                                    <div class="marriage-stat-icon">
+                                        <i class="fas fa-paw"></i>
+                                    </div>
+                                    <div class="marriage-stat-content">
+                                        <span class="marriage-stat-value"><%= marriage.availablePuppies %></span>
+                                        <span class="marriage-stat-label">Disponible<%= marriage.availablePuppies > 1 ? 's' : '' %></span>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <% if (marriage.expectedPuppies) { %>
+                                <div class="marriage-stat-item">
+                                    <div class="marriage-stat-icon">
+                                        <i class="fas fa-list-ol"></i>
+                                    </div>
+                                    <div class="marriage-stat-content">
+                                        <span class="marriage-stat-value"><%= marriage.expectedPuppies %></span>
+                                        <span class="marriage-stat-label">Chiots attendus</span>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <% if (marriage.birthDate) { %>
+                                <div class="marriage-stat-item">
+                                    <div class="marriage-stat-icon">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="marriage-stat-content">
+                                        <span class="marriage-stat-value"><%= marriage.birthDate %></span>
+                                        <span class="marriage-stat-label">Date de naissance</span>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <% if (marriage.availableDate) { %>
+                                <div class="marriage-stat-item">
+                                    <div class="marriage-stat-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="marriage-stat-content">
+                                        <span class="marriage-stat-value"><%= marriage.availableDate %></span>
+                                        <span class="marriage-stat-label">Départ en famille</span>
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
+                            <% if (marriage.description) { %>
+                            <div class="marriage-hero-description">
+                                <%- marriage.description %>
+                            </div>
+                            <% } %>
+                            <div class="marriage-hero-actions">
+                                <% if (marriage.availablePuppies > 0) { %>
+                                <a href="#portee" class="btn-marriage-primary">
+                                <i class="fas fa-paw me-2"></i>Voir les chiots disponibles
+                                </a>
+                                <% } %>
+                                <a href="/contact" class="btn-marriage-secondary">
+                                <i class="fas fa-envelope me-2"></i>Nous contacter
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="marriage-parents-section">
                 <div class="container">
-                    <div class="section-header" data-aos="fade-up">
-                        <h2 class="section-title">Les Parents</h2>
-                        <p class="section-subtitle">Découvrez les reproducteurs de cette magnifique portée</p>
+                    <div class="marriage-section-header" data-aos="fade-up">
+                        <span class="label-tag">Reproducteurs</span>
+                        <h2 class="marriage-section-title">Les <span class="text-gold">Parents</span></h2>
                     </div>
-                    <div class="row g-4">
-                        <div class="col-lg-6" data-aos="fade-right">
-                            <article class="parent-card">
-                                <div class="parent-card-header">
-                                    <div class="parent-image">
-                                        <img src="<%= father.image.path %>" 
-                                             alt="<%= father.image.alt || father.name %>" 
-                                             onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
-                                        <div class="parent-gender-badge male">
-                                            <i class="fas fa-mars"></i>
-                                        </div>
-                                    </div>
+                    <div class="marriage-parents-grid">
+                        <div class="marriage-parent-card" data-aos="fade-right">
+                            <div class="marriage-parent-card-image">
+                                <% if (father.image && father.image.path) { %>
+                                <img src="<%= father.image.path %>"
+                                    alt="<%= father.image.alt || father.name %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-dog.webp';">
+                                <% } else { %>
+                                <div class="marriage-parent-placeholder male">
+                                    <i class="fas fa-mars"></i>
                                 </div>
-                                <div class="parent-card-body">
-                                    <h3 class="parent-name">
-                                        <a href="/chiens/<%= father.breed.slug %>/<%= father.slug %>">
-                                            <%= father.name %>
-                                        </a>
-                                    </h3>
-                                    <div class="parent-role">
-                                        <i class="fas fa-paw"></i>
-                                        <span>Père</span>
-                                    </div>
-                                    <div class="parent-info-grid">
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Race</span>
-                                            <span class="info-value"><%= father.breed.name %></span>
-                                        </div>
-                                        <% if (father.breed.type) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Type</span>
-                                            <span class="info-value"><%= father.breed.type %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (father.color) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Couleur</span>
-                                            <span class="info-value"><%= father.color %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (father.eyeColor) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Yeux</span>
-                                            <span class="info-value"><%= father.eyeColor %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (father.coatType) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Poil</span>
-                                            <span class="info-value"><%= father.coatType %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (father.country) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Origine</span>
-                                            <span class="info-value"><%= father.country %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (father.register) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Registre</span>
-                                            <span class="info-value"><%= father.register %></span>
-                                        </div>
-                                        <% } %>
-                                    </div>
-                                    <% if (father.description) { %>
-                                    <div class="parent-description">
-                                        <p><%= father.description.substring(0, 150) %><%= father.description.length > 150 ? '...' : '' %></p>
+                                <% } %>
+                                <div class="marriage-parent-gender-badge male">
+                                    <i class="fas fa-mars"></i>
+                                </div>
+                                <div class="marriage-parent-role-badge">Père</div>
+                            </div>
+                            <div class="marriage-parent-card-body">
+                                <div class="dog-card-top-bar"></div>
+                                <h3 class="marriage-parent-name">
+                                    <% if (father.slug) { %>
+                                    <a href="/chiens/<%= father.breed.slug %>/<%= father.slug %>"><%= father.name %></a>
+                                    <% } else { %>
+                                    <%= father.name %>
+                                    <% } %>
+                                </h3>
+                                <div class="marriage-parent-breed">
+                                    <i class="fas fa-paw"></i>
+                                    <span><%= father.breed.name %><% if (father.breed.type) { %> · <%= father.breed.type %><% } %></span>
+                                </div>
+                                <div class="marriage-parent-info">
+                                    <% if (father.color) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-palette"></i>
+                                        <span><%= father.color %></span>
                                     </div>
                                     <% } %>
-                                    <a href="/chiens/<%= father.breed.slug %>/<%= father.slug %>" class="btn-parent-profile">
-                                        Voir le profil complet
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
+                                    <% if (father.eyeColor) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-eye"></i>
+                                        <span><%= father.eyeColor %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (father.coatType) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-cut"></i>
+                                        <span><%= father.coatType %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (father.register) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-certificate"></i>
+                                        <span><%= father.register %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (father.country) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span><%= father.country %></span>
+                                    </div>
+                                    <% } %>
                                 </div>
-                            </article>
+                                <% if (father.slug) { %>
+                                <a href="/chiens/<%= father.breed.slug %>/<%= father.slug %>" class="btn-view-dog-card">
+                                Voir le profil <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                                <% } %>
+                            </div>
                         </div>
-                        <div class="col-lg-6" data-aos="fade-left">
-                            <article class="parent-card">
-                                <div class="parent-card-header">
-                                    <div class="parent-image">
-                                        <img src="<%= mother.image.path %>" 
-                                             alt="<%= mother.image.alt || mother.name %>" 
-                                             onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
-                                        <div class="parent-gender-badge female">
-                                            <i class="fas fa-venus"></i>
-                                        </div>
-                                    </div>
+                        <div class="marriage-parents-separator" data-aos="fade-up">
+                            <div class="marriage-parents-sep-line"></div>
+                            <div class="marriage-parents-sep-icon">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="marriage-parents-sep-line"></div>
+                        </div>
+                        <div class="marriage-parent-card" data-aos="fade-left">
+                            <div class="marriage-parent-card-image">
+                                <% if (mother.image && mother.image.path) { %>
+                                <img src="<%= mother.image.path %>"
+                                    alt="<%= mother.image.alt || mother.name %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-dog.webp';">
+                                <% } else { %>
+                                <div class="marriage-parent-placeholder female">
+                                    <i class="fas fa-venus"></i>
                                 </div>
-                                <div class="parent-card-body">
-                                    <h3 class="parent-name">
-                                        <a href="/chiens/<%= mother.breed.slug %>/<%= mother.slug %>">
-                                            <%= mother.name %>
-                                        </a>
-                                    </h3>
-                                    <div class="parent-role">
-                                        <i class="fas fa-paw"></i>
-                                        <span>Mère</span>
-                                    </div>
-                                    <div class="parent-info-grid">
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Race</span>
-                                            <span class="info-value"><%= mother.breed.name %></span>
-                                        </div>
-                                        <% if (mother.breed.type) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Type</span>
-                                            <span class="info-value"><%= mother.breed.type %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (mother.color) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Couleur</span>
-                                            <span class="info-value"><%= mother.color %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (mother.eyeColor) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Yeux</span>
-                                            <span class="info-value"><%= mother.eyeColor %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (mother.coatType) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Poil</span>
-                                            <span class="info-value"><%= mother.coatType %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (mother.country) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Origine</span>
-                                            <span class="info-value"><%= mother.country %></span>
-                                        </div>
-                                        <% } %>
-                                        <% if (mother.register) { %>
-                                        <div class="parent-info-item">
-                                            <span class="info-label">Registre</span>
-                                            <span class="info-value"><%= mother.register %></span>
-                                        </div>
-                                        <% } %>
-                                    </div>
-                                    <% if (mother.description) { %>
-                                    <div class="parent-description">
-                                        <p><%= mother.description.substring(0, 150) %><%= mother.description.length > 150 ? '...' : '' %></p>
+                                <% } %>
+                                <div class="marriage-parent-gender-badge female">
+                                    <i class="fas fa-venus"></i>
+                                </div>
+                                <div class="marriage-parent-role-badge">Mère</div>
+                            </div>
+                            <div class="marriage-parent-card-body">
+                                <div class="dog-card-top-bar"></div>
+                                <h3 class="marriage-parent-name">
+                                    <% if (mother.slug) { %>
+                                    <a href="/chiens/<%= mother.breed.slug %>/<%= mother.slug %>"><%= mother.name %></a>
+                                    <% } else { %>
+                                    <%= mother.name %>
+                                    <% } %>
+                                </h3>
+                                <div class="marriage-parent-breed">
+                                    <i class="fas fa-paw"></i>
+                                    <span><%= mother.breed.name %><% if (mother.breed.type) { %> · <%= mother.breed.type %><% } %></span>
+                                </div>
+                                <div class="marriage-parent-info">
+                                    <% if (mother.color) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-palette"></i>
+                                        <span><%= mother.color %></span>
                                     </div>
                                     <% } %>
-                                    <a href="/chiens/<%= mother.breed.slug %>/<%= mother.slug %>" class="btn-parent-profile">
-                                        Voir le profil complet
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
+                                    <% if (mother.eyeColor) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-eye"></i>
+                                        <span><%= mother.eyeColor %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (mother.coatType) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-cut"></i>
+                                        <span><%= mother.coatType %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (mother.register) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-certificate"></i>
+                                        <span><%= mother.register %></span>
+                                    </div>
+                                    <% } %>
+                                    <% if (mother.country) { %>
+                                    <div class="marriage-parent-info-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span><%= mother.country %></span>
+                                    </div>
+                                    <% } %>
                                 </div>
-                            </article>
+                                <% if (mother.slug) { %>
+                                <a href="/chiens/<%= mother.breed.slug %>/<%= mother.slug %>" class="btn-view-dog-card">
+                                Voir le profil <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="marriage-puppies-section">
+            <section class="marriage-puppies-section" id="portee">
                 <div class="container">
-                    <div class="section-header" data-aos="fade-up">
-                        <h2 class="section-title">Les Chiots de cette Portée</h2>
-                        <% if (puppies && puppies.length > 0) { %>
-                        <p class="section-subtitle">
-                            <%= puppies.length %> chiot<%= puppies.length > 1 ? 's' : '' %> 
-                            <% if (marriage.availablePuppies > 0) { %>
-                                • <%= marriage.availablePuppies %> disponible<%= marriage.availablePuppies > 1 ? 's' : '' %>
-                            <% } %>
-                        </p>
-                        <% } %>
+                    <div class="marriage-section-header" data-aos="fade-up">
+                        <span class="label-tag">Portée</span>
+                        <h2 class="marriage-section-title">Les <span class="text-gold">Chiots</span></h2>
                     </div>
                     <% if (puppies && puppies.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="marriage-puppies-subtitle"><%= father.name %> × <%= mother.name %></span>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= puppies.length %></span>
+                            <span class="counter-label">chiot<%= puppies.length > 1 ? 's' : '' %></span>
+                        </div>
+                    </div>
                     <div class="row g-4">
                         <% puppies.forEach((puppy, index) => { %>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
-                            <article class="puppy-card">
-                                <div class="puppy-card-image">
-                                    <a href="/chiots/<%= puppy.breed.slug %>/<%= puppy.slug %>">
-                                        <img src="<%= puppy.image.path %>" 
-                                             alt="<%= puppy.image.alt || puppy.name %>" 
-                                             onerror="this.onerror=null; this.src='/img/placeholder-puppy.jpg';" />
+                        <%
+                            let puppyStatusClass = '';
+                            switch (puppy.saleStatus) {
+                                case 'for_sale':
+                                case 'available_for_reservation':
+                                    puppyStatusClass = 'available';
+                                    break;
+                                case 'in_reservation':
+                                    puppyStatusClass = 'in-reservation';
+                                    break;
+                                case 'reserved':
+                                    puppyStatusClass = 'reserved';
+                                    break;
+                                case 'sold':
+                                    puppyStatusClass = 'sold';
+                                    break;
+                            }
+                            
+                            const puppyUrl = (puppy.saleStatus === 'sold')
+                                ? `/chiots/produits/${puppy.breed.slug}/${puppy.slug}`
+                                : `/chiots/a-vendre/${puppy.breed.slug}/${puppy.slug}`;
+                            %>
+                        <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                            <article class="dog-card marriage-puppy-card">
+                                <div class="dog-card-image">
+                                    <a href="<%= puppyUrl %>">
+                                    <img src="<%= puppy.image.path %>"
+                                        alt="<%= puppy.image.alt || puppy.name %>"
+                                        onerror="this.onerror=null; this.src='/img/placeholder-dog.webp';">
                                     </a>
-                                    <div class="puppy-gender-badge <%= puppy.gender === 'Male' ? 'male' : 'female' %>">
+                                    <div class="dog-gender-badge <%= puppy.gender === 'Male' ? 'male' : 'female' %>">
                                         <i class="fas <%= puppy.gender === 'Male' ? 'fa-mars' : 'fa-venus' %>"></i>
                                     </div>
-                                    <% 
-                                    let statusClass = '';
-                                    let statusIcon = '';
-                                    
-                                    if (puppy.status === 'À vendre' || puppy.status === 'Disponible à la réservation') {
-                                        statusClass = 'status-available';
-                                        statusIcon = 'fa-check-circle';
-                                    } else if (puppy.status === 'En cours de réservation') {
-                                        statusClass = 'status-pending';
-                                        statusIcon = 'fa-clock';
-                                    } else if (puppy.status === 'Réservé') {
-                                        statusClass = 'status-reserved';
-                                        statusIcon = 'fa-bookmark';
-                                    } else if (puppy.status === 'Vendu') {
-                                        statusClass = 'status-sold';
-                                        statusIcon = 'fa-check-double';
-                                    }
-                                    %>
-                                    <div class="puppy-status-badge <%= statusClass %>">
-                                        <i class="fas <%= statusIcon %>"></i>
-                                        <span><%= puppy.status %></span>
+                                    <div class="marriage-puppy-status-badge <%= puppyStatusClass %>">
+                                        <% if (puppyStatusClass === 'available') { %>
+                                        <i class="fas fa-check-circle"></i><%= puppy.status %>
+                                        <% } else if (puppyStatusClass === 'in-reservation') { %>
+                                        <i class="fas fa-clock"></i><%= puppy.status %>
+                                        <% } else if (puppyStatusClass === 'reserved') { %>
+                                        <i class="fas fa-lock"></i><%= puppy.status %>
+                                        <% } else { %>
+                                        <i class="fas fa-times-circle"></i><%= puppy.status %>
+                                        <% } %>
                                     </div>
                                 </div>
-                                <div class="puppy-card-body">
-                                    <%
-                                    // Déterminer le chemin selon le statut
-                                    let puppyPath = puppy.status === 'Vendu' ? '/chiots/produits' : '/chiots/a-vendre';
-                                    %>
-                                    <h3 class="puppy-card-name">
-                                        <a href="<%= puppyPath %>/<%= puppy.breed.slug %>/<%= puppy.slug %>">
-                                            <%= puppy.name %>
-                                        </a>
+                                <div class="dog-card-body">
+                                    <div class="dog-card-top-bar"></div>
+                                    <h3 class="dog-card-name">
+                                        <a href="<%= puppyUrl %>"><%= puppy.name %></a>
                                     </h3>
-                                    <div class="puppy-card-info">
-                                        <% if (puppy.breed.type) { %>
-                                        <div class="puppy-info-item">
-                                            <i class="fas fa-dog"></i>
-                                            <span><%= puppy.breed.type %></span>
-                                        </div>
-                                        <% } %>
+                                    <div class="dog-card-race">
+                                        <i class="fas fa-paw"></i>
+                                        <span><%= puppy.breed.name %><% if (puppy.breed.type) { %> · <%= puppy.breed.type %><% } %></span>
+                                    </div>
+                                    <div class="dog-card-info">
                                         <% if (puppy.color) { %>
-                                        <div class="puppy-info-item">
+                                        <div class="dog-info-item">
                                             <i class="fas fa-palette"></i>
                                             <span><%= puppy.color %></span>
                                         </div>
                                         <% } %>
                                         <% if (puppy.eyeColor) { %>
-                                        <div class="puppy-info-item">
+                                        <div class="dog-info-item">
                                             <i class="fas fa-eye"></i>
                                             <span><%= puppy.eyeColor %></span>
                                         </div>
                                         <% } %>
                                     </div>
-                                    <a href="<%= puppyPath %>/<%= puppy.breed.slug %>/<%= puppy.slug %>" class="puppy-card-btn">
-                                        Voir le profil
-                                        <i class="fas fa-arrow-right"></i>
+                                    <a href="<%= puppyUrl %>" class="btn-view-dog-card">
+                                    Voir le profil <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
                                 </div>
                             </article>
@@ -424,17 +422,35 @@
                     </div>
                     <% } else { %>
                     <div class="text-center py-5" data-aos="fade-up">
-                        <div class="no-puppies-message">
-                            <i class="fas fa-heart fa-3x text-muted mb-4"></i>
-                            <h3>Aucun chiot en ligne</h3>
-                            <p class="text-muted mb-4">Les chiots de cette portée ne sont pas encore disponibles ou ont tous trouvé leur famille</p>
-                            <a href="/contact" class="btn-contact-puppies">
-                                <i class="fas fa-envelope me-2"></i>
-                                Nous contacter pour plus d'infos
+                        <div class="no-dogs-message">
+                            <i class="fas fa-paw fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
+                            <h3>Aucun chiot disponible</h3>
+                            <p>Les chiots de cette portée ne sont pas encore en ligne</p>
+                            <a href="/contact" class="btn-back-dogs">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
                             </a>
                         </div>
                     </div>
                     <% } %>
+                </div>
+            </section>
+            <section class="dog-cta-section">
+                <div class="container">
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Un chiot de cette <span class="text-gold">portée vous intéresse ?</span></h2>
+                            <p class="dog-cta-text">Contactez-nous pour en savoir plus sur les chiots disponibles, les conditions d'adoption et nos prochaines portées.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/mariages" class="btn-dog-cta-secondary">
+                            <i class="fas fa-heart me-2"></i>Voir tous les mariages
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -459,7 +475,7 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const toggleBtn = document.getElementById("dogFiltersToggle");
                 const menu = document.getElementById("dogFiltersMenu");
-
+            
                 if (toggleBtn && menu) {
                     toggleBtn.addEventListener("click", function () {
                         menu.classList.toggle("active");

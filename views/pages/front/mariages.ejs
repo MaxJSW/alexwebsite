@@ -1,297 +1,329 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><% if (currentPage > 1) { %>Mariages & Portées - Page <%= currentPage %> | Élevage de Bel Air<% } else { %>Mariages & Portées Réalisés | Élevage de Bel Air<% } %></title>
-    <meta name="description" content="Découvrez tous les mariages et portées réalisés dans notre élevage de Bel Air. American Bully et Springer Anglais, sélection rigoureuse des reproducteurs, chiots disponibles près de Montpellier en Occitanie.">
-    <meta name="keywords" content="mariage american bully, portée springer anglais, saillie american bully, portée american bully, chiots à venir, élevage canin, reproducteurs, élevage de bel air, portées occitanie">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/mariages<%= currentPage > 1 ? '?page=' + currentPage : '' %>">
-    <% if (currentPage > 1) { %>
-    <link rel="prev" href="https://elevagedebelair.com/mariages<%= currentPage > 2 ? '?page=' + (currentPage - 1) : '' %>">
-    <% } %>
-    <% if (currentPage < totalPages) { %>
-    <link rel="next" href="https://elevagedebelair.com/mariages?page=<%= currentPage + 1 %>">
-    <% } %>
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Mariages & Portées Réalisés | Élevage de Bel Air">
-    <meta property="og:description" content="Découvrez tous les mariages et portées réalisés dans notre élevage familial d'American Bully et de Springer Anglais.">
-    <meta property="og:url" content="https://elevagedebelair.com/mariages">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mariages & Portées - Élevage de Bel Air">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mariages & Portées Réalisés">
-    <meta name="twitter:description" content="Découvrez tous les mariages et portées de notre élevage.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Mariages & Portées - Élevage de Bel Air">
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/mariages.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title><% if (currentPage > 1) { %>Mariages & Portées - Page <%= currentPage %> | Spirit of Freedom Kennel<% } else { %>Mariages & Portées | Spirit of Freedom Kennel<% } %></title>
+        <meta name="description" content="Découvrez tous les mariages et portées du Spirit of Freedom Kennel à Codognan, dans le Gard. Sélection rigoureuse des reproducteurs American Bully, chiots ABKC et FBKC disponibles.">
+        <meta name="keywords" content="mariage american bully, portée american bully, saillie american bully, chiots à venir, élevage canin gard, reproducteurs spirit of freedom kennel, portées occitanie, american bully pocket portée, chiots ABKC FBKC">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/mariages<%= currentPage > 1 ? '?page=' + currentPage : '' %>">
+        <% if (currentPage > 1) { %>
+        <link rel="prev" href="https://spiritoffreedomkennel.com/mariages<%= currentPage > 2 ? '?page=' + (currentPage - 1) : '' %>">
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+        <link rel="next" href="https://spiritoffreedomkennel.com/mariages?page=<%= currentPage + 1 %>">
+        <% } %>
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Mariages & Portées | Spirit of Freedom Kennel">
+        <meta property="og:description" content="Découvrez tous les mariages et portées du Spirit of Freedom Kennel : reproducteurs American Bully sélectionnés avec soin, chiots ABKC et FBKC disponibles à Codognan.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/mariages">
+        <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Mariages & Portées - Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Mariages & Portées | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Découvrez tous les mariages et portées du Spirit of Freedom Kennel à Codognan, dans le Gard.">
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Mariages & Portées - Spirit of Freedom Kennel">
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/mariages.css">
+    </head>
     <body class="h-100">
         <%- include('../front/frontEndAssets/header') %>
         <main style="padding-top: 70px;">
-                <section class="page-hero-simple">
-                    <div class="page-hero-overlay"></div>
-                    <div class="container">
-                        <div class="page-hero-content">
-                            <h1 class="page-hero-title">Nos Mariages</h1>
-                            <p class="page-hero-subtitle">
-                                Découvrez toutes les portées réalisées dans notre élevage familial. 
-                                Chaque mariage est soigneusement planifié pour garantir la santé, 
-                                la beauté et le tempérament exceptionnel de nos chiots American Bully et Springer Anglais.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section class="dog-filters-section">
-                    <div class="container">
-                        <div class="dog-filters-desktop">
-                            <span class="filter-dot">•</span>
-                            <a href="/mariages" class="dog-mini-btn active">Tous les mariages</a>
-                            <% breeds.forEach(breed => { %>
-                            <a href="/mariages/<%= breed.slug %>" class="dog-mini-btn"><%= breed.name %></a>
-                            <% }); %>
-                        </div>
-                        <div class="dog-filters-mobile">
-                            <button class="dog-filters-toggle" id="dogFiltersToggle">
-                                <span>Filtres</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dog-filters-menu" id="dogFiltersMenu">
-                                <a href="/mariages" class="dog-filter-item active">
-                                    Tous les mariages
-                                </a>
-                                <% breeds.forEach(breed => { %>
-                                <a href="/mariages/<%= breed.slug %>" class="dog-filter-item">
-                                    <%= breed.name %>
-                                </a>
-                                <% }); %>
+            <section class="page-intro-section">
+                <div class="container">
+                    <div class="specialty-text">
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <h1 class="specialty-title">Nos <span class="text-gold">Mariages</span></h1>
+                                    <p>Découvrez les unions soigneusement planifiées au sein de notre élevage. Chaque mariage est le fruit d'une réflexion approfondie sur les lignées, la morphologie et le tempérament.</p>
+                                    <p>Retrouvez ici nos portées passées, en cours et à venir, avec les chiots disponibles pour chaque union.</p>
+                                </div>
+                                <div class="specialty-stats">
+                                    <div class="specialty-stat-item">
+                                        <span class="specialty-stat-number"><%= totalItems %></span>
+                                        <span class="specialty-stat-label">Mariages</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section class="dog-grid-section">
-                    <div class="container">
-                        <% if (marriages && marriages.length > 0) { %>
-                        <div class="row g-4">
-                            <% marriages.forEach((marriage, index) => { %>
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
-                                <article class="marriage-card">
-                                    <div class="marriage-card-image">
-                                        <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>">
-                                            <% 
-                                            let marriageImageSrc; 
-                                            if (marriage.optimized_image_path) { 
-                                                marriageImageSrc = '/uploads/optimized/' + marriage.optimized_image_path; 
-                                            } else if (marriage.image_path) { 
-                                                marriageImageSrc = '/uploads/' + marriage.image_path; 
-                                            } else { 
-                                                marriageImageSrc = '/img/placeholder-marriage.jpg'; 
-                                            } 
-                                            %>
-                                            <img src="<%= marriageImageSrc %>" 
-                                                alt="Mariage <%= marriage.male_name %> x <%= marriage.female_name %>" 
-                                                onerror="this.onerror=null; this.src='/img/placeholder-marriage.jpg';" />
-                                        </a>
-                                        <% 
-                                        let statusClass = '';
-                                        let statusIcon = '';
-                                        let statusText = '';
-                                        
-                                        if (marriage.marriages_status === 'Programmé') {
-                                            statusClass = 'status-planned';
-                                            statusIcon = 'fa-calendar-check';
-                                            statusText = 'Programmé';
-                                        } else if (marriage.marriages_status === 'En Cours') {
-                                            statusClass = 'status-progress';
-                                            statusIcon = 'fa-heart-pulse';
-                                            statusText = 'En cours';
-                                        } else if (marriage.marriages_status === 'Confirmé') {
-                                            statusClass = 'status-born';
-                                            statusIcon = 'fa-baby';
-                                            statusText = 'Confirmé';
-                                        } else if (marriage.marriages_status === 'Archivé') {
-                                            statusClass = 'status-completed';
-                                            statusIcon = 'fa-check-circle';
-                                            statusText = 'Archivé';
-                                        }
-                                        %>
-                                        <div class="marriage-status-badge <%= statusClass %>">
-                                            <i class="fas <%= statusIcon %>"></i>
-                                            <span><%= statusText %></span>
+                </div>
+            </section>
+            <section class="dog-filters-section">
+                <div class="container">
+                    <div class="dog-filters-desktop">
+                        <a href="/mariages" class="dog-filter-btn active">
+                        <i class="fas fa-heart me-2"></i>Tous les mariages
+                        </a>
+                        <% if (breeds && breeds.length > 0) { %>
+                        <% breeds.forEach(breed => { %>
+                        <a href="/mariages/<%= breed.slug %>" class="dog-filter-btn">
+                        <%= breed.name %>
+                        </a>
+                        <% }); %>
+                        <% } %>
+                    </div>
+                    <div class="dog-filters-mobile">
+                        <button class="dog-filters-toggle" id="mariageFiltersToggle">
+                            <div class="dog-filters-toggle-left">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Filtrer les mariages</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dog-filters-menu" id="mariageFiltersMenu">
+                            <a href="/mariages" class="dog-filter-item active">
+                            <i class="fas fa-heart me-2"></i>Tous les mariages
+                            </a>
+                            <% if (breeds && breeds.length > 0) { %>
+                            <% breeds.forEach(breed => { %>
+                            <a href="/mariages/<%= breed.slug %>" class="dog-filter-item">
+                            <i class="fas fa-dog me-2"></i><%= breed.name %>
+                            </a>
+                            <% }); %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="dog-grid-section">
+                <div class="container">
+                    <% if (marriages && marriages.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="label-tag">Portées</span>
+                            <h2 class="breed-section-title">Nos <span class="text-gold">Mariages</span></h2>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= totalItems %></span>
+                            <span class="counter-label">mariages</span>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <% marriages.forEach((marriage, index) => { %>
+                        <%
+                            let imageSrc;
+                            if (marriage.optimized_image_path) {
+                                imageSrc = '/uploads/optimized/' + marriage.optimized_image_path;
+                            } else if (marriage.image_path) {
+                                imageSrc = '/uploads/' + marriage.image_path;
+                            } else {
+                                imageSrc = '/img/placeholder-marriage.webp';
+                            }
+                            
+                            let statusText = '';
+                            let statusClass = '';
+                            switch (marriage.marriages_status) {
+                                case 'in_progress':
+                                    statusText = 'En cours';
+                                    statusClass = 'status-progress';
+                                    break;
+                                case 'planned':
+                                    statusText = 'À venir';
+                                    statusClass = 'status-planned';
+                                    break;
+                                case 'completed':
+                                    statusText = 'Terminé';
+                                    statusClass = 'status-completed';
+                                    break;
+                                default:
+                                    statusText = marriage.marriages_status;
+                                    statusClass = '';
+                            }
+                            
+                            const birthDate = marriage.actual_birth_date || marriage.expected_birth_date;
+                            const formattedBirth = birthDate ? new Intl.DateTimeFormat('fr-FR', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                            }).format(new Date(birthDate)) : null;
+                            %>
+                        <div class="col-xl-4 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                            <article class="marriage-card">
+                                <div class="marriage-card-image">
+                                    <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>">
+                                    <img src="<%= imageSrc %>"
+                                        alt="Mariage <%= marriage.male_name %> x <%= marriage.female_name %>"
+                                        onerror="this.onerror=null; this.src='/img/placeholder-marriage.webp';">
+                                    </a>
+                                    <div class="marriage-status-badge <%= statusClass %>">
+                                        <% if (marriage.marriages_status === 'in_progress') { %>
+                                        <i class="fas fa-spinner"></i>
+                                        <% } else if (marriage.marriages_status === 'planned') { %>
+                                        <i class="fas fa-calendar"></i>
+                                        <% } else { %>
+                                        <i class="fas fa-check"></i>
+                                        <% } %>
+                                        <%= statusText %>
+                                    </div>
+                                    <% if (marriage.availablePuppies > 0) { %>
+                                    <div class="marriage-puppies-badge">
+                                        <i class="fas fa-paw"></i>
+                                        <%= marriage.availablePuppies %> chiot<%= marriage.availablePuppies > 1 ? 's' : '' %> disponible<%= marriage.availablePuppies > 1 ? 's' : '' %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="marriage-card-body">
+                                    <div class="dog-card-top-bar"></div>
+                                    <div class="marriage-parents">
+                                        <div class="marriage-parent male">
+                                            <div class="marriage-parent-icon">
+                                                <i class="fas fa-mars"></i>
+                                            </div>
+                                            <span class="marriage-parent-name"><%= marriage.male_name %></span>
                                         </div>
-                                        <% if (marriage.availablePuppies > 0) { %>
-                                        <div class="marriage-available-badge">
-                                            <i class="fas fa-star"></i>
-                                            <span><%= marriage.availablePuppies %> Disponible(s)</span>
+                                        <div class="marriage-x-separator">
+                                            <span>×</span>
+                                        </div>
+                                        <div class="marriage-parent female">
+                                            <div class="marriage-parent-icon">
+                                                <i class="fas fa-venus"></i>
+                                            </div>
+                                            <span class="marriage-parent-name"><%= marriage.female_name %></span>
+                                        </div>
+                                    </div>
+                                    <div class="marriage-card-info">
+                                        <% if (marriage.breed_name) { %>
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-paw"></i>
+                                            <span><%= marriage.breed_name %></span>
+                                        </div>
+                                        <% } %>
+                                        <% if (formattedBirth) { %>
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span><%= marriage.actual_birth_date ? 'Née le' : 'Prévue le' %> <%= formattedBirth %></span>
+                                        </div>
+                                        <% } %>
+                                        <% if (marriage.onlinePuppies > 0) { %>
+                                        <div class="dog-info-item">
+                                            <i class="fas fa-dog"></i>
+                                            <span><%= marriage.onlinePuppies %> chiot<%= marriage.onlinePuppies > 1 ? 's' : '' %> dans la portée</span>
                                         </div>
                                         <% } %>
                                     </div>
-                                    <div class="marriage-card-body">
-                                        <h3 class="marriage-card-title">
-                                            <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>">
-                                                <%= marriage.male_name %> <span class="x-separator">×</span> <%= marriage.female_name %>
-                                            </a>
-                                        </h3>
-                                        <div class="marriage-card-race">
-                                            <i class="fas fa-paw"></i>
-                                            <a href="/mariages/<%= marriage.breed_slug %>">
-                                                <%= marriage.breed_name %>
-                                            </a>
-                                        </div>
-                                        <div class="marriage-card-info">
-                                            <% if (marriage.expected_puppies || marriage.actual_male_puppies || marriage.actual_female_puppies) { %>
-                                            <div class="marriage-info-item">
-                                                <i class="ms-2 fas fa-baby"></i>
-                                                <span>
-                                                    <% if (marriage.actual_male_puppies !== null && marriage.actual_female_puppies !== null) { %>
-                                                        <%= marriage.actual_male_puppies + marriage.actual_female_puppies %> chiots 
-                                                        (<%= marriage.actual_male_puppies %>♂ / <%= marriage.actual_female_puppies %>♀)
-                                                    <% } else if (marriage.expected_puppies) { %>
-                                                        <%= marriage.expected_puppies %> chiots attendus
-                                                    <% } %>
-                                                </span>
-                                            </div>
-                                            <% } %>
-                                            <% if (marriage.expected_birth_date || marriage.actual_birth_date) { %>
-                                            <div class="marriage-info-item">
-                                                <i class="ms-2 fas fa-calendar-alt"></i>
-                                                <span>
-                                                    <% if (marriage.actual_birth_date) { %>
-                                                        Nés le <%= new Date(marriage.actual_birth_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
-                                                    <% } else if (marriage.expected_birth_date) { %>
-                                                        Naissance prévue <%= new Date(marriage.expected_birth_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
-                                                    <% } %>
-                                                </span>
-                                            </div>
-                                            <% } %>
-                                            <% if (marriage.onlinePuppies > 0) { %>
-                                            <div class="marriage-info-item puppies-online">
-                                                <i class="ms-2 fas fa-heart"></i>
-                                                <span><%= marriage.onlinePuppies %> chiot<%= marriage.onlinePuppies > 1 ? 's' : '' %> en ligne</span>
-                                            </div>
-                                            <% } %>
-                                        </div>
-                                        <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>" class="marriage-card-btn">
-                                            Voir la portée
-                                            <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </article>
-                            </div>
-                            <% }); %>
-                        </div>
-                        <% } else { %>
-                        <div class="text-center py-5">
-                            <div class="no-marriages-message" data-aos="fade-up">
-                                <i class="fas fa-heart fa-3x text-muted mb-4"></i>
-                                <h3>Aucun mariage disponible</h3>
-                                <p class="text-muted mb-4">Aucun mariage ne correspond à vos critères de recherche</p>
-                                <a href="/mariages" class="btn-back-marriages">
-                                    <i class="fas fa-arrow-left me-2"></i>
-                                    Retour à tous les mariages
-                                </a>
-                            </div>
-                        </div>
-                        <% } %>
-                    </div>
-                </section>
-                <% if (totalPages > 1) { %>
-                <section class="dog-pagination-section">
-                    <div class="container">
-                        <nav aria-label="Navigation pagination" data-aos="fade-up">
-                            <ul class="dog-pagination">
-                                <% if (currentPage > 1) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
-                                        <i class="fas fa-chevron-left"></i>
-                                        <span>Précédent</span>
+                                    <a href="/mariages/<%= marriage.breed_slug %>/<%= marriage.marriages_slug %>" class="btn-view-dog-card">
+                                    Voir la portée <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
-                                </li>
-                                <% } %>
-                                <% 
-                                // Logique de pagination
+                                </div>
+                            </article>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } else { %>
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-dogs-message">
+                            <i class="fas fa-heart fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
+                            <h3>Aucun mariage disponible</h3>
+                            <p>Aucun mariage ne correspond à vos critères de recherche</p>
+                            <a href="/mariages" class="btn-back-dogs">
+                            <i class="fas fa-arrow-left me-2"></i>Retour à tous les mariages
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </section>
+            <% if (totalPages > 1) { %>
+            <section class="dog-pagination-section">
+                <div class="container">
+                    <nav aria-label="Navigation pagination" data-aos="fade-up">
+                        <ul class="dog-pagination">
+                            <% if (currentPage > 1) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Précédent</span>
+                                </a>
+                            </li>
+                            <% } %>
+                            <%
                                 let startPage = Math.max(1, currentPage - 2);
                                 let endPage = Math.min(totalPages, currentPage + 2);
-                                // Première page
-                                if (startPage > 1) { %>
-                                    <li class="dog-pagination-item">
-                                        <a href="?page=1" class="dog-pagination-link">1</a>
-                                    </li>
-                                    <% if (startPage > 2) { %>
-                                        <li class="dog-pagination-item">
-                                            <span class="dog-pagination-dots">...</span>
-                                        </li>
-                                    <% } %>
-                                <% } %>
-                                <% for (let i = startPage; i <= endPage; i++) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= i %>" 
+                                if (startPage > 1) {
+                                %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=1" class="dog-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <% } %>
+                            <% for (let i = startPage; i <= endPage; i++) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= i %>"
                                     class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
-                                        <%= i %>
-                                    </a>
-                                </li>
-                                <% } %>
-                                <% if (endPage < totalPages) { %>
-                                    <% if (endPage < totalPages - 1) { %>
-                                        <li class="dog-pagination-item">
-                                            <span class="dog-pagination-dots">...</span>
-                                        </li>
-                                    <% } %>
-                                    <li class="dog-pagination-item">
-                                        <a href="?page=<%= totalPages %>" class="dog-pagination-link">
-                                            <%= totalPages %>
-                                        </a>
-                                    </li>
-                                <% } %>
-                                <% if (currentPage < totalPages) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
-                                        <span>Suivant</span>
-                                        <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                                <% } %>
-                            </ul>
-                        </nav>
-                        <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
-                            Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
-                            (<%= totalItems %> mariage<%= totalItems > 1 ? 's' : '' %> au total)
-                        </div>
-                    </div>
-                </section>
-                <% } %>
-                <section class="dog-cta-section">
-                    <div class="container">
-                        <div class="dog-cta-box" data-aos="zoom-in">
-                            <div class="dog-cta-content">
-                                <h2 class="dog-cta-title">Vous souhaitez réserver un chiot ?</h2>
-                                <p class="dog-cta-text">
-                                    Contactez-nous pour plus d'informations sur nos portées actuelles et à venir, 
-                                    les disponibilités et les modalités de réservation.
-                                </p>
-                                <a href="/contact" class="btn-dog-cta">
-                                    <i class="fas fa-envelope me-2"></i>
-                                    Nous Contacter
+                                <%= i %>
                                 </a>
-                            </div>
+                            </li>
+                            <% } %>
+                            <% if (endPage < totalPages) { %>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= totalPages %>" class="dog-pagination-link">
+                                <%= totalPages %>
+                                </a>
+                            </li>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
+                                <span>Suivant</span>
+                                <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                    <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
+                        Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
+                        (<%= totalItems %> mariage(s) au total)
+                    </div>
+                </div>
+            </section>
+            <% } %>
+            <section class="dog-cta-section">
+                <div class="container">
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Un chiot de nos <span class="text-gold">prochaines portées</span></h2>
+                            <p class="dog-cta-text">Contactez-nous pour être informé de nos prochains mariages, réserver un chiot ou en savoir plus sur nos reproducteurs ABKC et FBKC.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/chiots" class="btn-dog-cta-secondary">
+                            <i class="fas fa-paw me-2"></i>Voir les chiots
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
+                            </a>
                         </div>
                     </div>
-                </section>
-         </main>
+                </div>
+            </section>
+        </main>
         <%- include('../front/frontEndAssets/footer') %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="/front/js/header.js"></script>
@@ -311,9 +343,9 @@
         </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const toggleBtn = document.getElementById("dogFiltersToggle");
-                const menu = document.getElementById("dogFiltersMenu");
-
+                const toggleBtn = document.getElementById("mariageFiltersToggle");
+                const menu = document.getElementById("mariageFiltersMenu");
+            
                 if (toggleBtn && menu) {
                     toggleBtn.addEventListener("click", function () {
                         menu.classList.toggle("active");

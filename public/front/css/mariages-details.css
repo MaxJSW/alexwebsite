@@ -1,354 +1,375 @@
 /* ========================================
-   SECTION HERO - DÉTAILS MARIAGE
+   VARIABLES & BASE
 ======================================== */
 
-.marriage-hero-section {
-    padding: 4rem 0;
-    background: #f1f1f1;
-}
-
-.marriage-hero-section .row {
-    background: #ffffff;
-    border: 2px solid #e8e8e8;
-    border-radius: 25px;
-    padding: 2.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e0c068;
 }
 
 /* ========================================
-   CONTENU GAUCHE - INFOS
+   BREADCRUMB MOBILE
 ======================================== */
 
-.marriage-hero-content {
-    padding-right: 2rem;
+.marriage-breadcrumb-mobile {
+    display: none;
+    background: #0d0d0d;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 0.65rem 0;
 }
 
-/* Fil d'Ariane */
 .marriage-breadcrumb {
-    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top:20px;
 }
 
-.marriage-breadcrumb .breadcrumb {
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-.marriage-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
-    content: "›";
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-.marriage-breadcrumb .breadcrumb-item a {
-    color: #666;
+.marriage-breadcrumb a {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.88rem;
     text-decoration: none;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.marriage-breadcrumb .breadcrumb-item a:hover {
-    color: var(--primary-color);
-}
+.marriage-breadcrumb a:hover { color: #c9a84c; }
 
-.marriage-breadcrumb .breadcrumb-item.active {
-    color: var(--secondary-color);
+.marriage-breadcrumb span:last-child {
+    color: #c9a84c;
+    font-size: 0.88rem;
     font-weight: 600;
 }
 
-/* Titre principal */
-.marriage-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
-.marriage-hero-title .x-separator {
-    display: inline-block;
-    margin: 0 0.75rem;
-    color: var(--primary-color);
-    font-weight: 400;
-    font-size: 2rem;
-    vertical-align: middle;
-}
-
-/* Race */
-.marriage-hero-breed {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.25rem;
-    background: var(--primary-color);
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    border: none;
-}
-
-.marriage-hero-breed i {
-    color: white;
-    font-size: 1rem;
-}
-
-.marriage-hero-breed span {
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-/* Badge de statut - Positionné en haut à gauche de l'image */
-.marriage-status-badge-hero {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: inline-flex !important; 
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.1rem;
-    border-radius: 50px;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    width: auto !important; 
-    max-width: none !important; 
-    white-space: nowrap;
-}
-
-.marriage-status-badge-hero i {
-    font-size: 0.85rem;
-    flex-shrink: 0;
-}
-
-/* Couleurs des statuts */
-.marriage-status-badge-hero.status-planned {
-    background: linear-gradient(135deg, #3a8340, #409147);
-}
-
-.marriage-status-badge-hero.status-progress {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.marriage-status-badge-hero.status-born {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.marriage-status-badge-hero.status-completed {
-    background: linear-gradient(135deg, #182c0c, #223f12);
-}
-
-/* Grille d'infos */
-.marriage-hero-info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-.marriage-info-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: #f8f9fa;
-    border-radius: 15px;
-    border: 2px solid #e8e8e8;
-    transition: all 0.3s ease;
-}
-
-.marriage-info-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(101, 193, 120, 0.15);
-}
-
-.marriage-info-card.highlight {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.info-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(101, 193, 120, 0.15);
-    border-radius: 12px;
-    flex-shrink: 0;
-}
-
-.info-icon i {
-    color: var(--primary-color);
-    font-size: 1.3rem;
-}
-
-.marriage-info-card.highlight .info-icon {
-    background: white;
-}
-
-.marriage-info-card.highlight .info-icon i {
-    color: var(--primary-color);
-}
-
-.marriage-info-card.highlight .info-label {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.marriage-info-card.highlight .info-value {
-    color: white!important;
-}
-
-.info-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.info-label {
+.breadcrumb-sep {
+    color: rgba(255,255,255,0.15);
     font-size: 0.8rem;
-    color: #888;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.info-value {
-    font-size: 0.85rem;
-    color: var(--secondary-color);
-    font-weight: 700;
-}
-
-.marriage-info-card.highlight .info-value {
-    color: var(--primary-color);
-}
+.desktop-only { display: flex; }
 
 /* ========================================
-   COLONNE DROITE - IMAGE
+   HERO SECTION
 ======================================== */
 
-.marriage-hero-image {
-    position: relative;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    height: 500px;
+.marriage-hero-section {
+    padding: 3rem 0 4rem;
+    background: #0d0d0d;
 }
 
-.marriage-hero-image img {
+.marriage-hero-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+
+/* Bannière gauche */
+.marriage-hero-left { position: sticky; top: 90px; }
+
+.marriage-hero-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(201,168,76,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    background: #111;
+}
+
+.marriage-hero-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    object-position: top center;
 }
 
-.marriage-hero-image:hover img {
-    transform: scale(1.05);
-}
-
-@keyframes pulse-hero-badge {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-/* ========================================
-   SECTION BOUTON CONTACT
-======================================== */
-
-.marriage-contact-section {
-    padding: 3rem 0;
-    background: #ffffff;
-}
-
-.marriage-contact-box {
-    background: linear-gradient(135deg, rgba(101, 193, 120, 0.08), rgba(126, 212, 146, 0.08));
-    border: 2px solid var(--primary-color);
-    border-radius: 20px;
-    padding: 2rem 1.5rem;
-    text-align: center;
-}
-
-.contact-box-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-text {
-    font-size: 1rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+.marriage-hero-banner-placeholder {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    font-size: 4rem;
+    color: rgba(201,168,76,0.2);
 }
 
-/* Bouton contact */
-.btn-marriage-contact {
+/* Badge statut sur bannière */
+.marriage-hero-status-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.8rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
+    gap: 0.4rem;
+    padding: 0.4rem 1rem;
     border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+}
+
+.marriage-hero-status-badge.status-progress {
+    background: rgba(249,115,22,0.2);
+    border: 1px solid rgba(249,115,22,0.4);
+    color: #fb923c;
+}
+
+.marriage-hero-status-badge.status-planned {
+    background: rgba(59,130,246,0.2);
+    border: 1px solid rgba(59,130,246,0.4);
+    color: #60a5fa;
+}
+
+.marriage-hero-status-badge.status-completed {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.4);
+    color: #4ade80;
+}
+
+/* Infos droite */
+.marriage-hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.marriage-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.marriage-hero-x {
+    display: inline-block;
+    color: rgba(255,255,255,0.25);
+    margin: 0 0.5rem;
+    font-size: 2rem;
+}
+
+.marriage-hero-breed {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.marriage-hero-breed i { color: #c9a84c; font-size: 0.8rem; }
+
+.marriage-hero-breed a {
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.3);
-    transition: all 0.3s ease;
-    position: relative;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.marriage-hero-breed a:hover { color: #c9a84c; }
+.marriage-hero-breed-dot { color: rgba(255,255,255,0.2); }
+
+/* Stats */
+.marriage-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+}
+
+.marriage-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 0.8rem 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.marriage-stat-item:hover {
+    border-color: rgba(201,168,76,0.2);
+}
+
+.marriage-stat-item.highlight {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.25);
+}
+
+.marriage-stat-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(201,168,76,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.marriage-stat-icon i {
+    color: #c9a84c;
+    font-size: 0.85rem;
+}
+
+.marriage-stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
+.marriage-stat-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.btn-marriage-contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #7ed492, var(--primary-color));
-    transition: left 0.4s ease;
-    z-index: 0;
+.marriage-stat-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
-.btn-marriage-contact:hover::before {
-    left: 0;
+/* Description */
+.marriage-hero-description {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.6);
+    background: #111;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 10px;
+    padding: 1.10rem;
+    white-space: pre-line;
 }
 
-.btn-marriage-contact:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
-    color: white;
+.marriage-hero-description p { margin-bottom: 0.75rem; }
+.marriage-hero-description p:last-child { margin-bottom: 0; }
+
+/* Boutons */
+.marriage-hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
-.btn-marriage-contact i,
-.btn-marriage-contact span {
-    position: relative;
-    z-index: 1;
+.btn-marriage-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #c9a84c, #e0c068);
+    color: #000;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
-.btn-marriage-contact i:first-child {
-    font-size: 1rem;
+.btn-marriage-primary:hover {
+    opacity: 0.9;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201,168,76,0.3);
 }
 
-.btn-marriage-contact i:last-child {
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
+.btn-marriage-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
-.btn-marriage-contact:hover i:last-child {
-    transform: translateX(5px);
+.btn-marriage-secondary:hover {
+    border-color: rgba(201,168,76,0.4);
+    color: #c9a84c;
+    background: rgba(201,168,76,0.06);
 }
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1199px) {
+    .marriage-hero-grid { grid-template-columns: 320px 1fr; gap: 2.5rem; }
+    .marriage-hero-title { font-size: 2.4rem; }
+    .marriage-breadcrumb a { font-size: 0.65rem; }
+    .marriage-breadcrumb span:last-child { font-size: 0.65rem; }
+    .marriage-stat-value { font-size: 0.75rem; }
+    .marriage-stat-item {padding: 0.65rem 0.8rem;}
+    .marriage-hero-description {font-size: 0.8rem; padding: 1.05rem; white-space: pre-line;}
+    .btn-marriage-primary {padding: 0.65rem 1.5rem;font-weight: 600;font-size: 0.85rem;}
+    .btn-marriage-secondary {padding: 0.65rem 1.5rem;font-size: 0.85rem;}
+}
+
+@media (max-width: 991px) {
+    .marriage-hero-grid { grid-template-columns: 280px 1fr; gap: 2rem; }
+    .marriage-hero-left { position: static; }
+    .marriage-hero-title { font-size: 2rem; }
+    .marriage-hero-section { padding: 2rem 0 3rem; }
+    .marriage-breadcrumb a { font-size: 0.65rem; }
+    .marriage-breadcrumb span:last-child { font-size: 0.65rem; }
+    .marriage-stat-value { font-size: 0.75rem; }
+    .marriage-stat-item {padding: 0.55rem 0.7rem;}
+    .marriage-hero-description {font-size: 0.8rem; padding: 1.05rem; white-space: pre-line;}
+    .btn-marriage-primary {padding: 0.65rem 1.5rem;font-weight: 600;font-size: 0.85rem;}
+    .btn-marriage-secondary {padding: 0.65rem 1.5rem;font-size: 0.85rem;}
+}
+
+@media (max-width: 767px) {
+    .marriage-breadcrumb-mobile { display: block; }
+    .desktop-only { display: none; }
+    .marriage-hero-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .marriage-hero-banner { aspect-ratio: 3 / 4; max-width: 320px; margin: 0 auto; }
+    .marriage-hero-title { font-size: 1.25rem; text-align: center; }
+    .marriage-hero-breed { justify-content: center; }
+    .marriage-hero-actions { flex-direction: column; }
+    .btn-marriage-primary, .btn-marriage-secondary { width: 100%; }
+    .marriage-hero-section { padding: 1.5rem 0 2.5rem; }
+    .marriage-breadcrumb a { font-size: 0.65rem; }
+    .marriage-breadcrumb span:last-child { font-size: 0.65rem; }
+    .marriage-stat-value { font-size: 0.75rem; }
+    .marriage-stat-item {padding: 0.55rem 0.7rem;}
+    .marriage-hero-description {font-size: 0.75rem; padding: 1.05rem; white-space: pre-line;}
+    .btn-marriage-primary {padding: 0.65rem 1.5rem;font-weight: 600;font-size: 0.78rem;}
+    .btn-marriage-secondary {padding: 0.65rem 1.5rem;font-size: 0.78rem;}
+}
+
+@media (max-width: 575px) {
+    .marriage-hero-stats { grid-template-columns: 1fr; }
+    .marriage-hero-title { font-size: 1.2rem; }
+    .marriage-hero-banner { max-width: 100%; }
+    .marriage-breadcrumb a { font-size: 0.65rem; }
+    .marriage-breadcrumb span:last-child { font-size: 0.65rem; }
+    .marriage-stat-value { font-size: 0.75rem; }
+    .marriage-stat-item {padding: 0.55rem 0.7rem;}
+    .marriage-hero-description {font-size: 0.75rem; padding: 1.05rem; white-space: pre-line;}
+    .btn-marriage-primary {padding: 0.65rem 1.5rem;font-weight: 600;font-size: 0.78rem;}
+    .btn-marriage-secondary {padding: 0.65rem 1.5rem;font-size: 0.78rem;}
+}
+
+
 
 /* ========================================
    SECTION PARENTS
@@ -356,1050 +377,711 @@
 
 .marriage-parents-section {
     padding: 4rem 0;
-    background: #f1f1f1;
+    background: #111111;
 }
 
-/* En-tête de section */
-.section-header {
+.marriage-section-header {
     text-align: center;
     margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.section-title {
+.marriage-section-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 0.75rem;
+    color: #ffffff;
+    margin: 0;
 }
 
-.section-subtitle {
-    font-size: 1rem;
-    color: #666;
-    font-weight: 400;
+.marriage-parents-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 1.5rem;
+    align-items: start;
 }
 
-/* ========================================
-   CARTE PARENT
-======================================== */
-
-.parent-card {
-    background: white;
-    border-radius: 20px;
+/* Card parent */
+.marriage-parent-card {
+    background: #0d0d0d;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e8e8e8;
     transition: all 0.4s ease;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.parent-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(101, 193, 120, 0.2);
-    border-color: var(--primary-color);
+.marriage-parent-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
-/* Image du parent */
-.parent-card-header {
-    position: relative;
-    height: 450px;
-    overflow: hidden;
-}
-
-.parent-image {
+/* Image */
+.marriage-parent-card-image {
     position: relative;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1a1a1a;
 }
 
-.parent-image img {
+.marriage-parent-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    object-position: top center;
+    transition: transform 0.5s ease;
 }
 
-.parent-card:hover .parent-image img {
-    transform: scale(1.1);
+.marriage-parent-card:hover .marriage-parent-card-image img {
+    transform: scale(1.05);
 }
 
-/* Badge genre */
-.parent-gender-badge {
+.marriage-parent-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.marriage-parent-placeholder.male { color: rgba(59,130,246,0.2); }
+.marriage-parent-placeholder.female { color: rgba(236,72,153,0.2); }
+
+/* Badges */
+.marriage-parent-gender-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 55px;
-    height: 55px;
+    bottom: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.9rem;
     color: white;
-    font-size: 1.3rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    z-index: 2;
-    transition: transform 0.3s ease;
-    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-.parent-card:hover .parent-gender-badge {
-    transform: scale(1.1) rotate(10deg);
+.marriage-parent-gender-badge.male { background: rgba(59,130,246,0.9); }
+.marriage-parent-gender-badge.female { background: rgba(236,72,153,0.9); }
+
+.marriage-parent-role-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.3rem 0.85rem;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.parent-gender-badge.male {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.parent-gender-badge.female {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
-}
-
-/* Corps de la carte */
-.parent-card-body {
-    padding: 1.8rem;
+/* Body */
+.marriage-parent-card-body {
+    padding: 1.25rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.75rem;
 }
 
-/* Nom du parent */
-.parent-name {
+.marriage-parent-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
+    color: #ffffff;
+    margin: 0;
 }
 
-.parent-name a {
-    color: var(--secondary-color);
+.marriage-parent-name a {
+    color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.parent-name a:hover {
-    color: var(--primary-color);
-}
+.marriage-parent-name a:hover { color: #c9a84c; }
 
-/* Badge rôle (Père/Mère) */
-.parent-role {
-    display: inline-flex;
+.marriage-parent-breed {
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(101, 193, 120, 0.1);
-    border: 2px solid var(--primary-color);
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    width: fit-content;
+    font-size: 0.82rem;
+    color: #c9a84c;
+    font-weight: 500;
 }
 
-.parent-role i {
-    color: var(--primary-color);
-    font-size: 0.9rem;
-}
+.marriage-parent-breed i { font-size: 0.75rem; }
 
-.parent-role span {
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-/* Grille d'infos */
-.parent-info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-    margin-bottom: 1.5rem;
-}
-
-.parent-info-item {
+.marriage-parent-info {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 1px solid #e8e8e8;
-    transition: all 0.3s ease;
-}
-
-.parent-info-item:hover {
-    background: rgba(101, 193, 120, 0.08);
-    border-color: var(--primary-color);
-}
-
-
-/* Description */
-.parent-description {
+    gap: 0.35rem;
     flex: 1;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: rgba(101, 193, 120, 0.05);
-    border-left: 3px solid var(--primary-color);
-    border-radius: 8px;
 }
 
-.parent-description p {
-    font-size: 0.9rem;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
+.marriage-parent-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
 }
 
-/* Bouton profil */
-.btn-parent-profile {
+.marriage-parent-info-item:last-child { border-bottom: none; }
+.marriage-parent-info-item i { color: #c9a84c; font-size: 0.75rem; width: 14px; text-align: center; }
+
+/* Bouton voir profil — réutilise btn-view-dog-card */
+.btn-view-dog-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    padding: 0.65rem;
+    background: linear-gradient(135deg, #c9a84c, #e0c068);
+    color: #000;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.2);
     margin-top: auto;
 }
 
-.btn-parent-profile:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.35);
-    color: white;
+.btn-view-dog-card:hover {
+    opacity: 0.9;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.3);
 }
 
-.btn-parent-profile i {
-    font-size: 0.85rem;
-    transition: transform 0.3s ease;
+.btn-view-dog-card i { transition: transform 0.3s ease; }
+.btn-view-dog-card:hover i { transform: translateX(3px); }
+
+/* Séparateur × */
+.marriage-parents-separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8rem;
+    gap: 0.5rem;
 }
 
-.btn-parent-profile:hover i {
-    transform: translateX(5px);
+.marriage-parents-sep-line {
+    width: 1px;
+    flex: 1;
+    background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3), transparent);
+    max-height: 80px;
+}
+
+.marriage-parents-sep-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a84c;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* label-tag réutilisé */
+.label-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.2rem 0.75rem;
+    border-radius: 50px;
+}
+
+.text-gold { color: #c9a84c; }
+
+/* dog-card-top-bar réutilisé */
+.dog-card-top-bar {
+    height: 2px;
+    background: linear-gradient(90deg, #c9a84c, transparent);
+    border-radius: 2px;
 }
 
 /* ========================================
-   SECTION CHIOTS
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+    .marriage-parents-section { padding: 3rem 0; }
+    .marriage-parents-grid { grid-template-columns: 1fr 50px 1fr; }
+    .marriage-section-title { font-size: 1.6rem; }
+}
+
+@media (max-width: 767px) {
+    .marriage-parents-section { padding: 2rem 0; }
+    .marriage-parents-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .marriage-parents-separator {
+        flex-direction: row;
+        padding-top: 0;
+        height: 50px;
+    }
+    .marriage-parents-sep-line {
+        width: 100%;
+        height: 1px;
+        max-height: none;
+        background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+    }
+    .marriage-section-header { margin-bottom: 1.8rem; }
+    .marriage-section-title { font-size: 1.2rem; }
+}
+
+@media (max-width: 575px) {
+    .marriage-parents-section { padding: 1.5rem 0; }
+    .marriage-parent-card-body { padding: 1rem; }
+    .marriage-parent-name { font-size: 1.05rem; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   SECTION PORTÉE CHIOTS
 ======================================== */
 
 .marriage-puppies-section {
     padding: 4rem 0;
-    background: #ffffff;
+    background: #0d0d0d;
 }
 
-/* ========================================
-   CARTE CHIOT
-======================================== */
+.marriage-puppies-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+}
 
-.puppy-card {
-    background: white;
-    border-radius: 20px;
+/* Badge statut chiot */
+.marriage-puppy-status-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.marriage-puppy-status-badge.available {
+    background: rgba(34,197,94,0.85);
+    border: 1px solid rgba(34,197,94,0.9);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.marriage-puppy-status-badge.in-reservation {
+    background: rgba(249,115,22,0.85);
+    border: 1px solid rgba(249,115,22,0.9);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.marriage-puppy-status-badge.reserved {
+    background: rgba(59,130,246,0.85);
+    border: 1px solid rgba(59,130,246,0.9);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.marriage-puppy-status-badge.sold {
+    background: rgba(80,80,80,0.85);
+    border: 1px solid rgba(150,150,150,0.5);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.marriage-puppy-card .dog-card-image {
+    height: 280px;
+}
+
+/* breed-section-header réutilisé */
+.breed-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.breed-section-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.breed-gallery-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+}
+
+.counter-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #c9a84c;
+    line-height: 1;
+}
+
+.counter-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* dog-card styles */
+.dog-card {
+    background: #111111;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    border: 2px solid #e8e8e8;
     transition: all 0.4s ease;
     height: 100%;
     display: flex;
     flex-direction: column;
+    isolation: isolate;
 }
 
-.puppy-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(101, 193, 120, 0.25);
-    border-color: var(--primary-color);
+.dog-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(201,168,76,0.08);
 }
 
-/* Image du chiot */
-.puppy-card-image {
+.dog-card-image {
     position: relative;
     height: 280px;
     overflow: hidden;
 }
 
-.puppy-card-image a {
+.dog-card-image a {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.puppy-card-image img {
+.dog-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
 }
 
-.puppy-card:hover .puppy-card-image img {
-    transform: scale(1.15) rotate(2deg);
+.dog-card:hover .dog-card-image img {
+    transform: scale(1.06);
 }
 
-/* Badge genre */
-.puppy-gender-badge {
+.dog-gender-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 35px;
-    height: 35px;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    transition: transform 0.3s ease;
-    border: 3px solid white;
-}
-
-.puppy-card:hover .puppy-gender-badge {
-    transform: scale(1.1);
-}
-
-.puppy-gender-badge.male {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.puppy-gender-badge.female {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
-}
-
-/* Badge statut */
-.puppy-status-badge {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.9rem;
-    border-radius: 25px;
     color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 2;
 }
 
-.puppy-status-badge span {
-    font-size: 0.6rem;
-}
+.dog-gender-badge.male { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+.dog-gender-badge.female { background: linear-gradient(135deg, #EC4899, #DB2777); }
 
-.puppy-status-badge i {
-    font-size: 0.85rem;
-}
-
-/* Couleurs des statuts */
-.puppy-status-badge.status-available {
-    background: linear-gradient(135deg, #27ae60, #229954);
-}
-
-.puppy-status-badge.status-pending {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.puppy-status-badge.status-reserved {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.puppy-status-badge.status-sold {
-    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-}
-
-/* Corps de la carte */
-.puppy-card-body {
-    padding: 1.5rem;
+.dog-card-body {
+    padding: 1.25rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: #111111;
 }
 
-/* Nom du chiot */
-.puppy-card-name {
+.dog-card-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-bottom: 0.5rem;
 }
 
-.puppy-card-name a {
-    color: var(--secondary-color);
+.dog-card-name a {
+    color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.puppy-card-name a:hover {
-    color: var(--primary-color);
-}
+.dog-card-name a:hover { color: #c9a84c; }
 
-/* Informations */
-.puppy-card-info {
-    flex: 1;
-    margin-bottom: 1.25rem;
-}
-
-.puppy-info-item {
+.dog-card-race {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 0;
-    color: #666;
-    font-size: 0.85rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.82rem;
+    color: #c9a84c;
+    font-weight: 500;
 }
 
-.puppy-info-item i {
-    color: var(--primary-color);
-    font-size: 0.85rem;
-    width: 16px;
-    text-align: center;
-}
+.dog-card-race i { font-size: 0.75rem; }
 
-.puppy-info-item span {
-    color: #555;
-}
+.dog-card-info { flex: 1; }
 
-/* Bouton */
-.puppy-card-btn {
+.dog-info-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.3rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(101, 193, 120, 0.2);
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.puppy-card-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.35);
-    color: white;
-}
+.dog-info-item:last-child { border-bottom: none; }
+.dog-info-item i { color: #c9a84c; font-size: 0.78rem; width: 14px; text-align: center; }
+.dog-info-item span { color: rgba(255,255,255,0.65); font-size: 0.8rem; }
 
-.puppy-card-btn i {
-    font-size: 0.85rem;
-    transition: transform 0.3s ease;
-}
-
-.puppy-card-btn:hover i {
-    transform: translateX(3px);
-}
-
-/* ========================================
-   MESSAGE AUCUN CHIOT
-======================================== */
-
-.no-puppies-message {
+.no-dogs-message {
     padding: 4rem 2rem;
+    background: #111111;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 12px;
 }
 
-.no-puppies-message h3 {
+.no-dogs-message h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
 }
 
-.no-puppies-message p {
-    font-size: 1.1rem;
-}
+.no-dogs-message p { color: rgba(255,255,255,0.5); font-size: 0.88rem; }
 
-.btn-contact-puppies {
+.btn-back-dogs {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--primary-color), #7ed492);
-    color: white;
-    border-radius: 50px;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    color: #c9a84c;
+    font-size: 0.85rem;
     font-weight: 600;
-    font-size: 1.05rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(101, 193, 120, 0.3);
+    margin-top: 1.5rem;
 }
 
-.btn-contact-puppies:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(101, 193, 120, 0.4);
-    color: white;
-}
-
-/* ========================================
-   RESPONSIVE PREMIERE SECTION - TABLETTES
-======================================== */
-@media (max-width: 991px) {
-    .marriage-hero-section {
-        padding: 3rem 0;
-    }
-
-    .marriage-hero-content {
-        padding-right: 0;
-        margin-bottom: 2rem;
-    }
-
-    .marriage-hero-title {
-        font-size: 1.4rem;
-    }
-
-    .marriage-hero-title .x-separator {
-        font-size: 1.6rem;
-        margin: 0 0.5rem;
-    }
-
-    .marriage-hero-image {
-        height: 500px;
-    }
-
-    .marriage-hero-info-grid {
-        grid-template-columns: 1fr;
-    }
+.btn-back-dogs:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: #c9a84c;
+    color: #c9a84c;
 }
 
 /* ========================================
-   RESPONSIVE - MOBILES
+   RESPONSIVE
 ======================================== */
-@media (max-width: 767px) {
-    .marriage-hero-section {
-        padding: 2.5rem 0;
-    }
-
-    .marriage-status-badge-hero {
-        font-size: 0.6rem;
-        padding: 0.45rem 0.95rem;
-        top: 15px;
-        left: 15px;
-        width: auto !important;
-    }
-    
-    .marriage-status-badge-hero i {
-        font-size: 0.7rem;
-    }
-
-    .marriage-hero-title {
-        font-size: 1.2rem;
-    }
-
-    .marriage-hero-title .x-separator {
-        font-size: 1.4rem;
-        margin: 0 0.4rem;
-    }
-
-    .marriage-hero-breed {
-        padding: 0.3rem 0.9rem;
-        font-size: 0.7rem;
-    }
-
-    .marriage-info-card {
-        padding: 1rem;
-    }
-
-    .info-icon {
-        width: 45px;
-        height: 45px;
-    }
-
-    .info-icon i {
-        font-size: 0.9rem;
-    }
-
-    .info-label {
-        font-size: 0.55rem;
-    }
-
-    .info-value {
-        font-size: 0.7rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - PETITS MOBILES
-======================================== */
-@media (max-width: 575px) {
-    .marriage-hero-section {
-        padding: 2rem 0;
-    }
-
-    .marriage-hero-title {
-        font-size: 1.05rem;
-    }
-
-    .marriage-hero-title .x-separator {
-        font-size: 1.2rem;
-        margin: 0 0.3rem;
-    }
-
-    .marriage-breadcrumb .breadcrumb {
-        font-size: 0.7rem;
-    }
-
-    .marriage-hero-breed {
-        padding: 0.2rem 0.7rem;
-        font-size: 0.65rem;
-    }
-
-        .marriage-hero-breed span {
-        font-size: 0.75rem;
-    }
-
-    .marriage-info-card {
-        padding: 0.85rem;
-    }
-
-    .info-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .info-icon i {
-        font-size: 0.8rem;
-    }
-}
 
 @media (max-width: 991px) {
-    .marriage-hero-section .row {
-        padding: 2rem;
-        border-radius: 20px;
-    }
+    .marriage-puppies-section { padding: 3rem 0; }
+    .marriage-puppy-card .dog-card-image { height: 300px; }
 }
 
 @media (max-width: 767px) {
-    .marriage-hero-section .row {
-        padding: 1.5rem;
-        border-radius: 18px;
-        border: 1.5px solid #e8e8e8;
-    }
+    .marriage-puppies-section { padding: 2rem 0; }
+    .marriage-puppy-card .dog-card-image { height: 300px; }
+    .breed-section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .breed-gallery-counter { align-items: flex-start; }
 }
 
 @media (max-width: 575px) {
-    .marriage-hero-section .row {
-        padding: 1.25rem;
-        border-radius: 15px;
-    }
+    .marriage-puppies-section { padding: 1.5rem 0; }
+    .marriage-puppy-card .dog-card-image { height: 300px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   SECTION CTA
+======================================== */
+
+.dog-cta-section {
+    padding: 0 0 4rem;
+    background: #0d0d0d;
+}
+
+.dog-cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: #111111;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-top: 3px solid #c9a84c;
+    border-radius: 12px;
+    padding: 2.5rem;
+}
+
+.dog-cta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+    align-items: flex-start;
+}
+
+.dog-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.dog-cta-text {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.87rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 500px;
+}
+
+.dog-cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.btn-dog-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    background: linear-gradient(135deg, #c9a84c, #e0c068);
+    color: #000;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-dog-cta-primary:hover {
+    opacity: 0.9;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+}
+
+.btn-dog-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-dog-cta-secondary:hover {
+    border-color: rgba(201,168,76,0.4);
+    color: #c9a84c;
+    background: rgba(201,168,76,0.06);
 }
 
 /* ========================================
-   RESPONSIVE SECTION BOUTON DE CONTACT - TABLETTES
+   RESPONSIVE CTA
 ======================================== */
+
 @media (max-width: 991px) {
-    .marriage-contact-section {
-        padding: 2rem 0;
-    }
-
-    .marriage-contact-box {
-        padding: 1.8rem 1.3rem;
-        border-radius: 18px;
-    }
-
-    .contact-text {
-        font-size: 0.9rem;
-    }
-
-    .btn-marriage-contact {
-        font-size: 0.9rem;
-        padding: 0.75rem 1.8rem;
-    }
+    .dog-cta-section { padding: 0 0 3rem; }
+    .dog-cta-title { font-size: 1.4rem; }
 }
 
-/* ========================================
-   RESPONSIVE - MOBILES
-======================================== */
 @media (max-width: 767px) {
-    .marriage-contact-section {
-        padding: 1rem 0;
-    }
-
-    .marriage-contact-box {
-        padding: 1.75rem 1.25rem;
-        border-radius: 16px;
-    }
-
-    .contact-text {
-        font-size: 0.75rem;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .btn-marriage-contact {
-        font-size: 0.7rem;
-        padding: 0.6rem 1.45rem;
-    }
+    .dog-cta-box { flex-direction: column; align-items: flex-start; padding: 2rem; }
+    .dog-cta-left { align-items: center; width: 100%; }
+    .dog-cta-title { text-align: center; font-size: 1.25rem; }
+    .dog-cta-text { text-align: center; max-width: 100%; }
+    .dog-cta-right { flex-direction: row; width: 100%; }
+    .btn-dog-cta-primary, .btn-dog-cta-secondary { flex: 1; font-size: 0.75rem; }
 }
 
-/* ========================================
-   RESPONSIVE - PETITS MOBILES
-======================================== */
 @media (max-width: 575px) {
-    .marriage-contact-section {
-        padding: 1.55rem 0;
-    }
-
-    .marriage-contact-box {
-        padding: 1.3rem 0.9rem;
-        border-radius: 15px;
-    }
-
-    .contact-text {
-        font-size: 0.75rem;
-    }
-
-    .btn-marriage-contact {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.75rem;
-        padding: 0.7rem 1.3rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE SECTION DES PARENTS - TABLETTES
-======================================== */
-@media (max-width: 991px) {
-    .marriage-parents-section {
-        padding: 3rem 0;
-    }
-
-    .section-header {
-        margin-bottom: 2.5rem;
-    }
-
-    .section-title {
-        font-size: 1.6rem;
-    }
-
-    .section-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .parent-card-header {
-        height: 400px;
-    }
-
-    .parent-card-body {
-        padding: 1.75rem;
-    }
-
-    .parent-name {
-        font-size: 1.4rem;
-    }
-
-    .parent-gender-badge {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - MOBILES
-======================================== */
-@media (max-width: 767px) {
-    .marriage-parents-section {
-        padding: 2.5rem 0;
-    }
-
-    .section-header {
-        margin-bottom: 2rem;
-    }
-
-    .section-title {
-        font-size: 1.3rem;
-    }
-
-    .section-subtitle {
-        font-size: 0.8rem;
-    }
-
-    .parent-card {
-        margin-bottom: 1.5rem;
-    }
-
-    .parent-card-header {
-        height: 400px;
-    }
-
-    .parent-card-body {
-        padding: 1.5rem;
-    }
-
-    .parent-name {
-        font-size: 1.3rem;
-        margin-bottom: 0.65rem;
-    }
-
-    .parent-role {
-        padding: 0.45rem 0.85rem;
-        font-size: 0.8rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .parent-info-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .parent-info-item {
-        padding: 0.65rem;
-    }
-
-    .info-label {
-        font-size: 0.65rem;
-    }
-
-    .info-value {
-        font-size: 0.65rem;
-    }
-
-    .parent-description {
-        padding: 0.85rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .parent-description p {
-        font-size: 0.85rem;
-    }
-
-    .btn-parent-profile {
-        font-size: 0.85rem;
-        padding: 0.8rem 1.35rem;
-    }
-
-    .parent-gender-badge {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-        top: 15px;
-        right: 15px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - PETITS MOBILES
-======================================== */
-@media (max-width: 575px) {
-    .marriage-parents-section {
-        padding: 2rem 0;
-    }
-
-    .section-header {
-        margin-bottom: 1.75rem;
-    }
-
-    .section-title {
-        font-size: 1.2rem;
-    }
-
-    .parent-description p {
-        font-size: 0.75rem;
-    }
-
-    .section-subtitle {
-        font-size: 0.75rem;
-    }
-
-    .parent-card-header {
-        height: 340px;
-    }
-
-    .parent-card-body {
-        padding: 1.1rem;
-    }
-
-    .parent-name {
-        font-size: 1.2rem;
-    }
-
-    .parent-role {
-        padding: 0.05rem 0.5rem;
-        font-size: 0.6rem;
-        margin-bottom: 1rem;
-    }
-
-    .parent-gender-badge {
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
-        border: 2px solid white;
-    }
-
-    .btn-parent-profile {
-        font-size: 0.75rem;
-        padding: 0.75rem 1.25rem;
-    }
-}
-
-
-/* ========================================
-   RESPONSIVE SECTION CHIOTS - TABLETTES
-======================================== */
-@media (max-width: 991px) {
-    .marriage-puppies-section {
-        padding: 3rem 0;
-    }
-
-    .puppy-card-image {
-        height: 360px;
-    }
-
-    .puppy-card-body {
-        padding: 1.35rem;
-    }
-
-    .puppy-card-name {
-        font-size: 1.3rem;
-    }
-
-    .puppy-info-item {
-        font-size: 0.8rem;
-        padding: 0.4rem 0;
-    }
-
-    .puppy-card-btn {
-        font-size: 0.9rem;
-        padding: 0.75rem 1.25rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - MOBILES
-======================================== */
-@media (max-width: 767px) {
-    .marriage-puppies-section {
-        padding: 2.5rem 0;
-    }
-
-    .puppy-card-image {
-        height: 360px;
-    }
-
-    .puppy-card-body {
-        padding: 1.25rem;
-    }
-
-    .puppy-card-name {
-        font-size: 1.2rem;
-        margin-bottom: 0.85rem;
-    }
-
-    .puppy-info-item {
-        font-size: 0.75rem;
-        padding: 0.35rem 0;
-    }
-
-    .puppy-card-btn {
-        font-size: 0.85rem;
-        padding: 0.7rem 1.15rem;
-    }
-
-    .puppy-gender-badge {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-        top: 12px;
-        right: 12px;
-        border: 2px solid white;
-    }
-
-    .puppy-status-badge {
-        font-size: 0.7rem;
-        padding: 0.5rem 0.85rem;
-        bottom: 12px;
-        left: 12px;
-    }
-
-    .puppy-status-badge i {
-        font-size: 0.8rem;
-    }
-
-    .no-puppies-message {
-        padding: 3rem 1.5rem;
-    }
-
-    .no-puppies-message h3 {
-        font-size: 1.5rem;
-    }
-
-    .no-puppies-message p {
-        font-size: 1rem;
-    }
-
-    .btn-contact-puppies {
-        font-size: 0.95rem;
-        padding: 0.85rem 1.75rem;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - PETITS MOBILES
-======================================== */
-@media (max-width: 575px) {
-    .marriage-puppies-section {
-        padding: 2rem 0;
-    }
-
-    .puppy-card-image {
-        height: 380px;
-    }
-
-    .puppy-card-body {
-        padding: 1.15rem;
-    }
-
-    .puppy-card-name {
-        font-size: 1.15rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .puppy-info-item {
-        font-size: 0.7rem;
-        padding: 0.3rem 0;
-    }
-
-    .puppy-card-btn {
-        font-size: 0.8rem;
-        padding: 0.65rem 1rem;
-    }
-
-    .puppy-gender-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
-    }
-
-    .puppy-status-badge {
-        font-size: 0.65rem;
-        padding: 0.45rem 0.75rem;
-        bottom: 10px;
-        left: 10px;
-    }
-
-    .no-puppies-message {
-        padding: 2.5rem 1rem;
-    }
-
-    .no-puppies-message h3 {
-        font-size: 1.4rem;
-    }
-
-    .btn-contact-puppies {
-        font-size: 0.9rem;
-        padding: 0.75rem 1.5rem;
-        width: 100%;
-        justify-content: center;
-    }
+    .dog-cta-section { padding: 0 0 2.5rem; }
+    .dog-cta-box { padding: 1.5rem; }
+    .dog-cta-right { flex-direction: column; }
+    .dog-cta-title { font-size: 1.15rem; }
+    .dog-cta-text { font-size: 0.83rem; }
 }
