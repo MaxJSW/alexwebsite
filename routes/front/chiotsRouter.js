@@ -637,18 +637,26 @@ router.get('/a-vendre/:gender(males|femelles)', (req, res) => {
     }
  }
 
-// router pour afficher la page de détail d'un chiot à vendre
+// router pour afficher la page de détail d'un chiot à vendre (fait)
 router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
     const userId = 10;
-    const {
-        breedSlug,
-        slug
-    } = req.params;
+    const { breedSlug, slug } = req.params;
 
     const queryBreedCheck = `
         SELECT id FROM breed_name 
         WHERE slug = ? AND user_id = ? AND is_online = 1
         LIMIT 1
+    `;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
     `;
 
     db.query(queryBreedCheck, [breedSlug, userId], (err, breedResult) => {
@@ -660,174 +668,171 @@ router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
         const breedId = breedResult[0].id;
 
         const queryPuppy = `
-    SELECT 
-        -- Puppy information
-        p.*, 
-        bn.name AS breed_name,
-        bn.slug AS breed_slug,
-        cn.name AS country_name,
-        rn.name AS register_name,
+            SELECT 
+                p.*, 
+                bn.name AS breed_name,
+                bn.slug AS breed_slug,
+                cn.name AS country_name,
+                rn.name AS register_name,
 
-        -- Father information from animals
-        father.id AS father_id,
-        father.name AS father_name,
-        father.gender AS father_gender,
-        father.breed_type AS father_breed_type,
-        father.coat_type AS father_coat_type,
-        father.color AS father_color,
-        father.eye_color AS father_eye_color,
-        father.in_breeding AS father_in_breeding,
-        father_bn.name AS father_breed_name,
-        father_bn.slug AS father_breed_slug,
-        father_rn.name AS father_register_name,
-        father_img.image_path AS father_image_path,
-        father_img.optimized_image_path AS father_optimized_image_path,
-        father_img.balise_alt AS father_image_alt,
+                father.id AS father_id,
+                father.name AS father_name,
+                father.gender AS father_gender,
+                father.breed_type AS father_breed_type,
+                father.coat_type AS father_coat_type,
+                father.color AS father_color,
+                father.eye_color AS father_eye_color,
+                father.in_breeding AS father_in_breeding,
+                father_bn.name AS father_breed_name,
+                father_bn.slug AS father_breed_slug,
+                father_rn.name AS father_register_name,
+                father_img.image_path AS father_image_path,
+                father_img.optimized_image_path AS father_optimized_image_path,
+                father_img.balise_alt AS father_image_alt,
 
-        -- Mother information from animals
-        mother.id AS mother_id,
-        mother.name AS mother_name,
-        mother.gender AS mother_gender,
-        mother.breed_type AS mother_breed_type,
-        mother.coat_type AS mother_coat_type,
-        mother.color AS mother_color,
-        mother.eye_color AS mother_eye_color,
-        mother.in_breeding AS mother_in_breeding,
-        mother_bn.name AS mother_breed_name,
-        mother_bn.slug AS mother_breed_slug,
-        mother_rn.name AS mother_register_name,
-        mother_img.image_path AS mother_image_path,
-        mother_img.optimized_image_path AS mother_optimized_image_path,
-        mother_img.balise_alt AS mother_image_alt,
+                mother.id AS mother_id,
+                mother.name AS mother_name,
+                mother.gender AS mother_gender,
+                mother.breed_type AS mother_breed_type,
+                mother.coat_type AS mother_coat_type,
+                mother.color AS mother_color,
+                mother.eye_color AS mother_eye_color,
+                mother.in_breeding AS mother_in_breeding,
+                mother_bn.name AS mother_breed_name,
+                mother_bn.slug AS mother_breed_slug,
+                mother_rn.name AS mother_register_name,
+                mother_img.image_path AS mother_image_path,
+                mother_img.optimized_image_path AS mother_optimized_image_path,
+                mother_img.balise_alt AS mother_image_alt,
 
-        -- Father's father information from father_table
-        gfather.father_name AS grandfather_name,
-        gfather.father_gender AS grandfather_gender,
-        gfather.father_breed_type AS grandfather_breed_type,
-        gfather.father_coat_type AS grandfather_coat_type,
-        gfather.father_color AS grandfather_color,
-        gfather.father_eye_color AS grandfather_eye_color,
-        gfather.father_is_online AS grandfather_is_online,
-        gfather_bn.name AS grandfather_breed_name,
-        gfather_rn.name AS grandfather_register_name,
-        gfather_img.image_path AS grandfather_image_path,
-        gfather_img.optimized_image_path AS grandfather_optimized_image_path,
+                gfather.father_name AS grandfather_name,
+                gfather.father_gender AS grandfather_gender,
+                gfather.father_breed_type AS grandfather_breed_type,
+                gfather.father_coat_type AS grandfather_coat_type,
+                gfather.father_color AS grandfather_color,
+                gfather.father_eye_color AS grandfather_eye_color,
+                gfather.father_is_online AS grandfather_is_online,
+                gfather_bn.name AS grandfather_breed_name,
+                gfather_rn.name AS grandfather_register_name,
+                gfather_img.image_path AS grandfather_image_path,
+                gfather_img.optimized_image_path AS grandfather_optimized_image_path,
 
-        -- Father's mother information from mother_table
-        gmother.mother_name AS grandmother_name,
-        gmother.mother_gender AS grandmother_gender,
-        gmother.mother_breed_type AS grandmother_breed_type,
-        gmother.mother_coat_type AS grandmother_coat_type,
-        gmother.mother_color AS grandmother_color,
-        gmother.mother_eye_color AS grandmother_eye_color,
-        gmother.mother_is_online AS grandmother_is_online,
-        gmother_bn.name AS grandmother_breed_name,
-        gmother_rn.name AS grandmother_register_name,
-        gmother_img.image_path AS grandmother_image_path,
-        gmother_img.optimized_image_path AS grandmother_optimized_image_path,
+                gmother.mother_name AS grandmother_name,
+                gmother.mother_gender AS grandmother_gender,
+                gmother.mother_breed_type AS grandmother_breed_type,
+                gmother.mother_coat_type AS grandmother_coat_type,
+                gmother.mother_color AS grandmother_color,
+                gmother.mother_eye_color AS grandmother_eye_color,
+                gmother.mother_is_online AS grandmother_is_online,
+                gmother_bn.name AS grandmother_breed_name,
+                gmother_rn.name AS grandmother_register_name,
+                gmother_img.image_path AS grandmother_image_path,
+                gmother_img.optimized_image_path AS grandmother_optimized_image_path,
 
-        -- Mother's father information (maternal grandfather)
-        mgfather.father_name AS maternal_grandfather_name,
-        mgfather.father_gender AS maternal_grandfather_gender,
-        mgfather.father_breed_type AS maternal_grandfather_breed_type,
-        mgfather.father_coat_type AS maternal_grandfather_coat_type,
-        mgfather.father_color AS maternal_grandfather_color,
-        mgfather.father_eye_color AS maternal_grandfather_eye_color,
-        mgfather.father_is_online AS maternal_grandfather_is_online,
-        mgfather_bn.name AS maternal_grandfather_breed_name,
-        mgfather_rn.name AS maternal_grandfather_register_name,
-        mgfather_img.image_path AS maternal_grandfather_image_path,
-        mgfather_img.optimized_image_path AS maternal_grandfather_optimized_image_path,
+                mgfather.father_name AS maternal_grandfather_name,
+                mgfather.father_gender AS maternal_grandfather_gender,
+                mgfather.father_breed_type AS maternal_grandfather_breed_type,
+                mgfather.father_coat_type AS maternal_grandfather_coat_type,
+                mgfather.father_color AS maternal_grandfather_color,
+                mgfather.father_eye_color AS maternal_grandfather_eye_color,
+                mgfather.father_is_online AS maternal_grandfather_is_online,
+                mgfather_bn.name AS maternal_grandfather_breed_name,
+                mgfather_rn.name AS maternal_grandfather_register_name,
+                mgfather_img.image_path AS maternal_grandfather_image_path,
+                mgfather_img.optimized_image_path AS maternal_grandfather_optimized_image_path,
 
-        -- Mother's mother information (maternal grandmother)
-        mgmother.mother_name AS maternal_grandmother_name,
-        mgmother.mother_gender AS maternal_grandmother_gender,
-        mgmother.mother_breed_type AS maternal_grandmother_breed_type,
-        mgmother.mother_coat_type AS maternal_grandmother_coat_type,
-        mgmother.mother_color AS maternal_grandmother_color,
-        mgmother.mother_eye_color AS maternal_grandmother_eye_color,
-        mgmother.mother_is_online AS maternal_grandmother_is_online,
-        mgmother_bn.name AS maternal_grandmother_breed_name,
-        mgmother_rn.name AS maternal_grandmother_register_name,
-        mgmother_img.image_path AS maternal_grandmother_image_path,
-        mgmother_img.optimized_image_path AS maternal_grandmother_optimized_image_path
+                mgmother.mother_name AS maternal_grandmother_name,
+                mgmother.mother_gender AS maternal_grandmother_gender,
+                mgmother.mother_breed_type AS maternal_grandmother_breed_type,
+                mgmother.mother_coat_type AS maternal_grandmother_coat_type,
+                mgmother.mother_color AS maternal_grandmother_color,
+                mgmother.mother_eye_color AS maternal_grandmother_eye_color,
+                mgmother.mother_is_online AS maternal_grandmother_is_online,
+                mgmother_bn.name AS maternal_grandmother_breed_name,
+                mgmother_rn.name AS maternal_grandmother_register_name,
+                mgmother_img.image_path AS maternal_grandmother_image_path,
+                mgmother_img.optimized_image_path AS maternal_grandmother_optimized_image_path
 
-    FROM puppies p
-    LEFT JOIN breed_name bn ON p.breed_id = bn.id
-    LEFT JOIN country_name cn ON p.country_id = cn.id
-    LEFT JOIN register_name rn ON p.register_id = rn.id
+            FROM puppies p
+            LEFT JOIN breed_name bn ON p.breed_id = bn.id
+            LEFT JOIN country_name cn ON p.country_id = cn.id
+            LEFT JOIN register_name rn ON p.register_id = rn.id
 
-    -- Father joins
-    LEFT JOIN animals father ON p.father_id = father.id
-    LEFT JOIN breed_name father_bn ON father.breed_id = father_bn.id
-    LEFT JOIN register_name father_rn ON father.register_id = father_rn.id
-    LEFT JOIN images father_img ON father_img.animal_id = father.id
-        AND father_img.id = (SELECT MIN(id) FROM images WHERE animal_id = father.id)
+            LEFT JOIN animals father ON p.father_id = father.id
+            LEFT JOIN breed_name father_bn ON father.breed_id = father_bn.id
+            LEFT JOIN register_name father_rn ON father.register_id = father_rn.id
+            LEFT JOIN images father_img ON father_img.animal_id = father.id
+                AND father_img.id = (SELECT MIN(id) FROM images WHERE animal_id = father.id)
 
-    -- Mother joins
-    LEFT JOIN animals mother ON p.mother_id = mother.id
-    LEFT JOIN breed_name mother_bn ON mother.breed_id = mother_bn.id
-    LEFT JOIN register_name mother_rn ON mother.register_id = mother_rn.id
-    LEFT JOIN images mother_img ON mother_img.animal_id = mother.id
-        AND mother_img.id = (SELECT MIN(id) FROM images WHERE animal_id = mother.id)
+            LEFT JOIN animals mother ON p.mother_id = mother.id
+            LEFT JOIN breed_name mother_bn ON mother.breed_id = mother_bn.id
+            LEFT JOIN register_name mother_rn ON mother.register_id = mother_rn.id
+            LEFT JOIN images mother_img ON mother_img.animal_id = mother.id
+                AND mother_img.id = (SELECT MIN(id) FROM images WHERE animal_id = mother.id)
 
-    -- Paternal Grandfather joins
-    LEFT JOIN father_table gfather ON father.father_id = gfather.id
-    LEFT JOIN breed_name gfather_bn ON gfather.breed_id = gfather_bn.id
-    LEFT JOIN register_name gfather_rn ON gfather.register_id = gfather_rn.id
-    LEFT JOIN images_father gfather_img ON gfather_img.father_id = gfather.id
-        AND gfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = gfather.id)
+            LEFT JOIN father_table gfather ON father.father_id = gfather.id
+            LEFT JOIN breed_name gfather_bn ON gfather.breed_id = gfather_bn.id
+            LEFT JOIN register_name gfather_rn ON gfather.register_id = gfather_rn.id
+            LEFT JOIN images_father gfather_img ON gfather_img.father_id = gfather.id
+                AND gfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = gfather.id)
 
-    -- Paternal Grandmother joins
-    LEFT JOIN mother_table gmother ON father.mother_id = gmother.id
-    LEFT JOIN breed_name gmother_bn ON gmother.breed_id = gmother_bn.id
-    LEFT JOIN register_name gmother_rn ON gmother.register_id = gmother_rn.id
-    LEFT JOIN images_mother gmother_img ON gmother_img.mother_id = gmother.id
-        AND gmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = gmother.id)
+            LEFT JOIN mother_table gmother ON father.mother_id = gmother.id
+            LEFT JOIN breed_name gmother_bn ON gmother.breed_id = gmother_bn.id
+            LEFT JOIN register_name gmother_rn ON gmother.register_id = gmother_rn.id
+            LEFT JOIN images_mother gmother_img ON gmother_img.mother_id = gmother.id
+                AND gmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = gmother.id)
 
-    -- Maternal Grandfather joins
-    LEFT JOIN father_table mgfather ON mother.father_id = mgfather.id
-    LEFT JOIN breed_name mgfather_bn ON mgfather.breed_id = mgfather_bn.id
-    LEFT JOIN register_name mgfather_rn ON mgfather.register_id = mgfather_rn.id
-    LEFT JOIN images_father mgfather_img ON mgfather_img.father_id = mgfather.id
-        AND mgfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = mgfather.id)
+            LEFT JOIN father_table mgfather ON mother.father_id = mgfather.id
+            LEFT JOIN breed_name mgfather_bn ON mgfather.breed_id = mgfather_bn.id
+            LEFT JOIN register_name mgfather_rn ON mgfather.register_id = mgfather_rn.id
+            LEFT JOIN images_father mgfather_img ON mgfather_img.father_id = mgfather.id
+                AND mgfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = mgfather.id)
 
-    -- Maternal Grandmother joins
-    LEFT JOIN mother_table mgmother ON mother.mother_id = mgmother.id
-    LEFT JOIN breed_name mgmother_bn ON mgmother.breed_id = mgmother_bn.id
-    LEFT JOIN register_name mgmother_rn ON mgmother.register_id = mgmother_rn.id
-    LEFT JOIN images_mother mgmother_img ON mgmother_img.mother_id = mgmother.id
-        AND mgmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = mgmother.id)
+            LEFT JOIN mother_table mgmother ON mother.mother_id = mgmother.id
+            LEFT JOIN breed_name mgmother_bn ON mgmother.breed_id = mgmother_bn.id
+            LEFT JOIN register_name mgmother_rn ON mgmother.register_id = mgmother_rn.id
+            LEFT JOIN images_mother mgmother_img ON mgmother_img.mother_id = mgmother.id
+                AND mgmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = mgmother.id)
 
-    WHERE p.user_id = ?
-    AND p.puppy_slug = ?
-    AND p.breed_id = ?
-    AND p.puppy_is_online = 1
-    AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved', 'sold')
-    LIMIT 1
-`;
+            WHERE p.user_id = ?
+            AND p.puppy_slug = ?
+            AND p.breed_id = ?
+            AND p.puppy_is_online = 1
+            AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved', 'sold')
+            LIMIT 1
+        `;
 
         const querySiblings = `
-        SELECT 
-            p.puppy_name,
-            p.puppy_gender,
-            p.puppy_breed_type,
-            p.puppy_color,
-            p.puppy_slug,
-            p.sale_status,
-            bn.name AS breed_name,
-            bn.slug AS breed_slug,
-            img.image_path,
-            img.optimized_image_path,
-            img.balise_alt
-        FROM puppies p
-        LEFT JOIN breed_name bn ON p.breed_id = bn.id
-        LEFT JOIN puppies_images img ON img.puppies_id = p.id
-            AND img.id = (SELECT MIN(id) FROM puppies_images WHERE puppies_id = p.id)
-        WHERE p.marriage_id = ?
-        AND p.id != ?
-        AND p.puppy_is_online = 1
-        ORDER BY p.puppy_name ASC
+            SELECT 
+                p.puppy_name,
+                p.puppy_gender,
+                p.puppy_breed_type,
+                p.puppy_color,
+                p.puppy_slug,
+                p.sale_status,
+                bn.name AS breed_name,
+                bn.slug AS breed_slug,
+                img.image_path,
+                img.optimized_image_path,
+                img.balise_alt
+            FROM puppies p
+            LEFT JOIN breed_name bn ON p.breed_id = bn.id
+            LEFT JOIN puppies_images img ON img.puppies_id = p.id
+                AND img.id = (SELECT MIN(id) FROM puppies_images WHERE puppies_id = p.id)
+            WHERE p.marriage_id = ?
+            AND p.id != ?
+            AND p.puppy_is_online = 1
+            ORDER BY p.puppy_name ASC
+        `;
+
+        const queryPuppyImages = `
+            SELECT 
+                image_path,
+                optimized_image_path,
+                balise_alt
+            FROM puppies_images
+            WHERE puppies_id = ?
+            ORDER BY id DESC
         `;
 
         db.query(queryPuppy, [userId, slug, breedId], (err, puppyResult) => {
@@ -837,7 +842,6 @@ router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
             }
 
             if (!puppyResult.length) {
-                console.error('Chiot non trouvé');
                 return res.redirect('/erreur');
             }
 
@@ -845,233 +849,610 @@ router.get('/a-vendre/:breedSlug/:slug', (req, res) => {
 
             if (puppy.sale_status === 'sold') {
                 return res.redirect(301, `/chiots/produits/${breedSlug}/${slug}`);
-              }
+            }
 
-              const queryPuppyImages = `
-              SELECT 
-                  image_path,
-                  optimized_image_path,
-                  balise_alt
-              FROM puppies_images
-              WHERE puppies_id = ?
-              ORDER BY id DESC
-          `;
-
-            db.query(queryPuppyImages, [puppy.id], (err, images) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des images:', err);
-                    return res.redirect('/erreur');
-                }
-
-                db.query(querySiblings, [puppy.marriage_id, puppy.id], (err, siblings) => {
-                    if (err) {
-                        console.error('Erreur lors de la récupération des frères et sœurs:', err);
-                        return res.redirect('/erreur');
-                    }
-
-                    const birthDate = new Date(puppy.puppy_birth_date);
-                    const today = new Date();
-                    const ageInMonths = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24 * 30.44));
-
-                    const availableDate = puppy.available_date ? new Date(puppy.available_date) : null;
-                    const formattedAvailableDate = availableDate ? new Intl.DateTimeFormat('fr-FR', {
-                        weekday: 'short',
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric'
-                    }).format(availableDate) : null;
-
-                    const firstImage = images.length > 0 ? images[0] : null;
-
-                    res.render('puppy_detail', {
-                        puppy: {
-                            name: puppy.puppy_name,
-                            age: ageInMonths,
-                            price: puppy.price,
-                            gender: puppy.puppy_gender,
-                            slug: puppy.puppy_slug,
-                            availableDate: formattedAvailableDate,
-                            breed: {
-                                name: puppy.breed_name,
-                                slug: puppy.breed_slug,
-                                type: puppy.puppy_breed_type
-                            },
-                            eyeColor: puppy.puppy_eye_color,
-                            color: puppy.puppy_color,
-                            coatType: puppy.puppy_coat_type,
-                            country: puppy.country_name,
-                            likes: puppy.likes,
-                            register: {
-                                name: puppy.register_name,
-                            },
-                            description: puppy.puppy_description_animals,
-                            status: (() => {
-                                switch (puppy.sale_status) {
-                                    case 'for_sale':
-                                        return 'À vendre';
-                                    case 'available_for_reservation':
-                                        return 'Disponible à la réservation';
-                                    case 'in_reservation':
-                                        return 'En cours de réservation';
-                                    case 'reserved':
-                                        return 'Réservé';
-                                    default:
-                                        return 'Statut inconnu';
-                                }
-                            })()
-                        },
-                        father: puppy.father_name ? {
-                            name: puppy.father_name,
-                            gender: puppy.father_gender,
-                            breed: {
-                                name: puppy.father_breed_name,
-                                type: puppy.father_breed_type,
-                                slug: puppy.father_breed_slug
-                            },
-                            coatType: puppy.father_coat_type,
-                            color: puppy.father_color,
-                            eyeColor: puppy.father_eye_color,
-                            register: puppy.father_register_name,
-                            inBreeding: puppy.father_in_breeding === 1,
-                            image: {
-                                path: puppy.father_optimized_image_path ?
-                                    `/uploads/optimized/${puppy.father_optimized_image_path}` : `/uploads/${puppy.father_image_path}`,
-                                alt: puppy.father_image_alt
-                            }
-                        } : null,
-                        mother: puppy.mother_name ? {
-                            name: puppy.mother_name,
-                            gender: puppy.mother_gender,
-                            breed: {
-                                name: puppy.mother_breed_name,
-                                type: puppy.mother_breed_type,
-                                slug: puppy.mother_breed_slug
-                            },
-                            coatType: puppy.mother_coat_type,
-                            color: puppy.mother_color,
-                            eyeColor: puppy.mother_eye_color,
-                            register: puppy.mother_register_name,
-                            inBreeding: puppy.mother_in_breeding === 1,
-                            image: {
-                                path: puppy.mother_optimized_image_path ?
-                                    `/uploads/optimized/${puppy.mother_optimized_image_path}` : `/uploads/${puppy.mother_image_path}`,
-                                alt: puppy.mother_image_alt
-                            }
-                        } : null,
-                        grandparents: {
-                            grandfather: puppy.grandfather_name ? {
-                                name: puppy.grandfather_name,
-                                gender: puppy.grandfather_gender,
-                                breed: {
-                                    name: puppy.grandfather_breed_name,
-                                    type: puppy.grandfather_breed_type
-                                },
-                                coatType: puppy.grandfather_coat_type,
-                                color: puppy.grandfather_color,
-                                eyeColor: puppy.grandfather_eye_color,
-                                register: puppy.grandfather_register_name,
-                                inBreeding: puppy.grandfather_is_online === 1,
-                                image: {
-                                    path: puppy.grandfather_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.grandfather_optimized_image_path}` : `/uploads/${puppy.grandfather_image_path}`,
-                                    alt: puppy.grandfather_image_alt
-                                }
-                            } : null,
-                            grandmother: puppy.grandmother_name ? {
-                                name: puppy.grandmother_name,
-                                gender: puppy.grandmother_gender,
-                                breed: {
-                                    name: puppy.grandmother_breed_name,
-                                    type: puppy.grandmother_breed_type
-                                },
-                                coatType: puppy.grandmother_coat_type,
-                                color: puppy.grandmother_color,
-                                eyeColor: puppy.grandmother_eye_color,
-                                register: puppy.grandmother_register_name,
-                                inBreeding: puppy.grandmother_is_online === 1,
-                                image: {
-                                    path: puppy.grandmother_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.grandmother_optimized_image_path}` : `/uploads/${puppy.grandmother_image_path}`,
-                                    alt: puppy.grandmother_image_alt
-                                }
-                            } : null
-                        },
-                        maternal_grandparents: {
-                            grandfather: puppy.maternal_grandfather_name ? {
-                                name: puppy.maternal_grandfather_name,
-                                gender: puppy.maternal_grandfather_gender,
-                                breed: {
-                                    name: puppy.maternal_grandfather_breed_name,
-                                    type: puppy.maternal_grandfather_breed_type
-                                },
-                                coatType: puppy.maternal_grandfather_coat_type,
-                                color: puppy.maternal_grandfather_color,
-                                eyeColor: puppy.maternal_grandfather_eye_color,
-                                register: puppy.maternal_grandfather_register_name,
-                                inBreeding: puppy.maternal_grandfather_is_online === 1,
-                                image: {
-                                    path: puppy.maternal_grandfather_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.maternal_grandfather_optimized_image_path}` : `/uploads/${puppy.maternal_grandfather_image_path}`,
-                                    alt: puppy.maternal_grandfather_image_alt
-                                }
-                            } : null,
-                            grandmother: puppy.maternal_grandmother_name ? {
-                                name: puppy.maternal_grandmother_name,
-                                gender: puppy.maternal_grandmother_gender,
-                                breed: {
-                                    name: puppy.maternal_grandmother_breed_name,
-                                    type: puppy.maternal_grandmother_breed_type
-                                },
-                                coatType: puppy.maternal_grandmother_coat_type,
-                                color: puppy.maternal_grandmother_color,
-                                eyeColor: puppy.maternal_grandmother_eye_color,
-                                register: puppy.maternal_grandmother_register_name,
-                                inBreeding: puppy.maternal_grandmother_is_online === 1,
-                                image: {
-                                    path: puppy.maternal_grandmother_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.maternal_grandmother_optimized_image_path}` : `/uploads/${puppy.maternal_grandmother_image_path}`,
-                                    alt: puppy.maternal_grandmother_image_alt
-                                }
-                            } : null
-                        },
-                        images: images.map(img => ({
-                            path: img.optimized_image_path ?
-                                `/uploads/optimized/${img.optimized_image_path}` : `/uploads/${img.image_path}`,
-                            alt: img.balise_alt
-                        })),
-                        siblings: siblings.map(sibling => ({
-                            name: sibling.puppy_name,
-                            gender: sibling.puppy_gender,
-                            breed: {
-                                name: sibling.breed_name,
-                                slug: sibling.breed_slug,
-                                type: sibling.puppy_breed_type
-                            },
-                            color: sibling.puppy_color,
-                            slug: sibling.puppy_slug,
-                            status: sibling.sale_status,
-                            image: {
-                                path: sibling.optimized_image_path 
-                                    ? `/uploads/optimized/${sibling.optimized_image_path}`
-                                    : `/uploads/${sibling.image_path}`,
-                                alt: sibling.balise_alt
-                            }
-                         })),
-                        ogImage: firstImage ? `/uploads/optimized/${firstImage.optimized_image_path || firstImage.image_path}` : null
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    db.query(queryPuppyImages, [puppy.id], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySiblings, [puppy.marriage_id, puppy.id], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                    });
+                })
+            ])
+            .then(([images, siblings, socialLinks]) => {
+                const birthDate = new Date(puppy.puppy_birth_date);
+                const today = new Date();
+                const ageInMonths = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24 * 30.44));
+
+                const availableDate = puppy.available_date ? new Date(puppy.available_date) : null;
+                const formattedAvailableDate = availableDate ? new Intl.DateTimeFormat('fr-FR', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                }).format(availableDate) : null;
+
+                const firstImage = images.length > 0 ? images[0] : null;
+
+                res.render('puppy_detail', {
+                    puppy: {
+                        name: puppy.puppy_name,
+                        age: ageInMonths,
+                        price: puppy.price,
+                        gender: puppy.puppy_gender,
+                        slug: puppy.puppy_slug,
+                        availableDate: formattedAvailableDate,
+                        healthTests: puppy.puppy_health_tests,
+                        breed: {
+                            name: puppy.breed_name,
+                            slug: puppy.breed_slug,
+                            type: puppy.puppy_breed_type
+                        },
+                        eyeColor: puppy.puppy_eye_color,
+                        color: puppy.puppy_color,
+                        coatType: puppy.puppy_coat_type,
+                        country: puppy.country_name,
+                        register: { name: puppy.register_name },
+                        description: puppy.puppy_description_animals,
+                        status: (() => {
+                            switch (puppy.sale_status) {
+                                case 'for_sale': return 'À vendre';
+                                case 'available_for_reservation': return 'Disponible à la réservation';
+                                case 'in_reservation': return 'En cours de réservation';
+                                case 'reserved': return 'Réservé';
+                                default: return 'Statut inconnu';
+                            }
+                        })()
+                    },
+                    father: puppy.father_name ? {
+                        name: puppy.father_name,
+                        gender: puppy.father_gender,
+                        breed: {
+                            name: puppy.father_breed_name,
+                            type: puppy.father_breed_type,
+                            slug: puppy.father_breed_slug
+                        },
+                        coatType: puppy.father_coat_type,
+                        color: puppy.father_color,
+                        eyeColor: puppy.father_eye_color,
+                        register: puppy.father_register_name,
+                        inBreeding: puppy.father_in_breeding === 1,
+                        image: {
+                            path: puppy.father_optimized_image_path ?
+                                `/uploads/optimized/${puppy.father_optimized_image_path}` :
+                                `/uploads/${puppy.father_image_path}`,
+                            alt: puppy.father_image_alt
+                        }
+                    } : null,
+                    mother: puppy.mother_name ? {
+                        name: puppy.mother_name,
+                        gender: puppy.mother_gender,
+                        breed: {
+                            name: puppy.mother_breed_name,
+                            type: puppy.mother_breed_type,
+                            slug: puppy.mother_breed_slug
+                        },
+                        coatType: puppy.mother_coat_type,
+                        color: puppy.mother_color,
+                        eyeColor: puppy.mother_eye_color,
+                        register: puppy.mother_register_name,
+                        inBreeding: puppy.mother_in_breeding === 1,
+                        image: {
+                            path: puppy.mother_optimized_image_path ?
+                                `/uploads/optimized/${puppy.mother_optimized_image_path}` :
+                                `/uploads/${puppy.mother_image_path}`,
+                            alt: puppy.mother_image_alt
+                        }
+                    } : null,
+                    grandparents: {
+                        grandfather: puppy.grandfather_name ? {
+                            name: puppy.grandfather_name,
+                            breed: { name: puppy.grandfather_breed_name, type: puppy.grandfather_breed_type },
+                            image: {
+                                path: puppy.grandfather_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.grandfather_optimized_image_path}` :
+                                    `/uploads/${puppy.grandfather_image_path}`
+                            }
+                        } : null,
+                        grandmother: puppy.grandmother_name ? {
+                            name: puppy.grandmother_name,
+                            breed: { name: puppy.grandmother_breed_name, type: puppy.grandmother_breed_type },
+                            image: {
+                                path: puppy.grandmother_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.grandmother_optimized_image_path}` :
+                                    `/uploads/${puppy.grandmother_image_path}`
+                            }
+                        } : null
+                    },
+                    maternal_grandparents: {
+                        grandfather: puppy.maternal_grandfather_name ? {
+                            name: puppy.maternal_grandfather_name,
+                            breed: { name: puppy.maternal_grandfather_breed_name, type: puppy.maternal_grandfather_breed_type },
+                            image: {
+                                path: puppy.maternal_grandfather_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.maternal_grandfather_optimized_image_path}` :
+                                    `/uploads/${puppy.maternal_grandfather_image_path}`
+                            }
+                        } : null,
+                        grandmother: puppy.maternal_grandmother_name ? {
+                            name: puppy.maternal_grandmother_name,
+                            breed: { name: puppy.maternal_grandmother_breed_name, type: puppy.maternal_grandmother_breed_type },
+                            image: {
+                                path: puppy.maternal_grandmother_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.maternal_grandmother_optimized_image_path}` :
+                                    `/uploads/${puppy.maternal_grandmother_image_path}`
+                            }
+                        } : null
+                    },
+                    images: images.map(img => ({
+                        path: img.optimized_image_path ?
+                            `/uploads/optimized/${img.optimized_image_path}` : `/uploads/${img.image_path}`,
+                        alt: img.balise_alt
+                    })),
+                    siblings: siblings.map(sibling => ({
+                        name: sibling.puppy_name,
+                        gender: sibling.puppy_gender,
+                        breed: {
+                            name: sibling.breed_name,
+                            slug: sibling.breed_slug,
+                            type: sibling.puppy_breed_type
+                        },
+                        color: sibling.puppy_color,
+                        slug: sibling.puppy_slug,
+                        status: sibling.sale_status,
+                        image: {
+                            path: sibling.optimized_image_path ?
+                                `/uploads/optimized/${sibling.optimized_image_path}` :
+                                `/uploads/${sibling.image_path}`,
+                            alt: sibling.balise_alt
+                        }
+                    })),
+                    ogImage: firstImage ?
+                        `/uploads/optimized/${firstImage.optimized_image_path || firstImage.image_path}` : null,
+                    socialLinks: socialLinks
                 });
+            })
+            .catch(err => {
+                console.error('Erreur:', err);
+                res.redirect('/erreur');
             });
         });
     });
 });
 
+
 // router pour afficher la page de détail d'un chiot vendu
+// router.get('/produits/:breedSlug/:slug', (req, res) => {
+//     const userId = 10;
+//     const {
+//         breedSlug,
+//         slug
+//     } = req.params;
+
+//     const queryBreedCheck = `
+//         SELECT id FROM breed_name 
+//         WHERE slug = ? AND user_id = ? AND is_online = 1
+//         LIMIT 1
+//     `;
+
+//     db.query(queryBreedCheck, [breedSlug, userId], (err, breedResult) => {
+//         if (err || !breedResult.length) {
+//             console.error('Race non trouvée:', err);
+//             return res.redirect('/erreur');
+//         }
+
+//         const breedId = breedResult[0].id;
+
+//         const queryPuppy = `
+//     SELECT 
+//         -- Puppy information
+//         p.*, 
+//         bn.name AS breed_name,
+//         bn.slug AS breed_slug,
+//         cn.name AS country_name,
+//         rn.name AS register_name,
+
+//         -- Father information from animals
+//         father.id AS father_id,
+//         father.name AS father_name,
+//         father.gender AS father_gender,
+//         father.breed_type AS father_breed_type,
+//         father.coat_type AS father_coat_type,
+//         father.color AS father_color,
+//         father.eye_color AS father_eye_color,
+//         father.in_breeding AS father_in_breeding,
+//         father_bn.name AS father_breed_name,
+//         father_rn.name AS father_register_name,
+//         father_img.image_path AS father_image_path,
+//         father_img.optimized_image_path AS father_optimized_image_path,
+//         father_img.balise_alt AS father_image_alt,
+
+//         -- Mother information from animals
+//         mother.id AS mother_id,
+//         mother.name AS mother_name,
+//         mother.gender AS mother_gender,
+//         mother.breed_type AS mother_breed_type,
+//         mother.coat_type AS mother_coat_type,
+//         mother.color AS mother_color,
+//         mother.eye_color AS mother_eye_color,
+//         mother.in_breeding AS mother_in_breeding,
+//         mother_bn.name AS mother_breed_name,
+//         mother_rn.name AS mother_register_name,
+//         mother_img.image_path AS mother_image_path,
+//         mother_img.optimized_image_path AS mother_optimized_image_path,
+//         mother_img.balise_alt AS mother_image_alt,
+
+//         -- Father's father information from father_table
+//         gfather.father_name AS grandfather_name,
+//         gfather.father_gender AS grandfather_gender,
+//         gfather.father_breed_type AS grandfather_breed_type,
+//         gfather.father_coat_type AS grandfather_coat_type,
+//         gfather.father_color AS grandfather_color,
+//         gfather.father_eye_color AS grandfather_eye_color,
+//         gfather.father_is_online AS grandfather_is_online,
+//         gfather_bn.name AS grandfather_breed_name,
+//         gfather_rn.name AS grandfather_register_name,
+//         gfather_img.image_path AS grandfather_image_path,
+//         gfather_img.optimized_image_path AS grandfather_optimized_image_path,
+
+//         -- Father's mother information from mother_table
+//         gmother.mother_name AS grandmother_name,
+//         gmother.mother_gender AS grandmother_gender,
+//         gmother.mother_breed_type AS grandmother_breed_type,
+//         gmother.mother_coat_type AS grandmother_coat_type,
+//         gmother.mother_color AS grandmother_color,
+//         gmother.mother_eye_color AS grandmother_eye_color,
+//         gmother.mother_is_online AS grandmother_is_online,
+//         gmother_bn.name AS grandmother_breed_name,
+//         gmother_rn.name AS grandmother_register_name,
+//         gmother_img.image_path AS grandmother_image_path,
+//         gmother_img.optimized_image_path AS grandmother_optimized_image_path,
+
+//         -- Mother's father information (maternal grandfather)
+//         mgfather.father_name AS maternal_grandfather_name,
+//         mgfather.father_gender AS maternal_grandfather_gender,
+//         mgfather.father_breed_type AS maternal_grandfather_breed_type,
+//         mgfather.father_coat_type AS maternal_grandfather_coat_type,
+//         mgfather.father_color AS maternal_grandfather_color,
+//         mgfather.father_eye_color AS maternal_grandfather_eye_color,
+//         mgfather.father_is_online AS maternal_grandfather_is_online,
+//         mgfather_bn.name AS maternal_grandfather_breed_name,
+//         mgfather_rn.name AS maternal_grandfather_register_name,
+//         mgfather_img.image_path AS maternal_grandfather_image_path,
+//         mgfather_img.optimized_image_path AS maternal_grandfather_optimized_image_path,
+
+//         -- Mother's mother information (maternal grandmother)
+//         mgmother.mother_name AS maternal_grandmother_name,
+//         mgmother.mother_gender AS maternal_grandmother_gender,
+//         mgmother.mother_breed_type AS maternal_grandmother_breed_type,
+//         mgmother.mother_coat_type AS maternal_grandmother_coat_type,
+//         mgmother.mother_color AS maternal_grandmother_color,
+//         mgmother.mother_eye_color AS maternal_grandmother_eye_color,
+//         mgmother.mother_is_online AS maternal_grandmother_is_online,
+//         mgmother_bn.name AS maternal_grandmother_breed_name,
+//         mgmother_rn.name AS maternal_grandmother_register_name,
+//         mgmother_img.image_path AS maternal_grandmother_image_path,
+//         mgmother_img.optimized_image_path AS maternal_grandmother_optimized_image_path
+
+//     FROM puppies p
+//     LEFT JOIN breed_name bn ON p.breed_id = bn.id
+//     LEFT JOIN country_name cn ON p.country_id = cn.id
+//     LEFT JOIN register_name rn ON p.register_id = rn.id
+
+//     -- Father joins
+//     LEFT JOIN animals father ON p.father_id = father.id
+//     LEFT JOIN breed_name father_bn ON father.breed_id = father_bn.id
+//     LEFT JOIN register_name father_rn ON father.register_id = father_rn.id
+//     LEFT JOIN images father_img ON father_img.animal_id = father.id
+//         AND father_img.id = (SELECT MIN(id) FROM images WHERE animal_id = father.id)
+
+//     -- Mother joins
+//     LEFT JOIN animals mother ON p.mother_id = mother.id
+//     LEFT JOIN breed_name mother_bn ON mother.breed_id = mother_bn.id
+//     LEFT JOIN register_name mother_rn ON mother.register_id = mother_rn.id
+//     LEFT JOIN images mother_img ON mother_img.animal_id = mother.id
+//         AND mother_img.id = (SELECT MIN(id) FROM images WHERE animal_id = mother.id)
+
+//     -- Paternal Grandfather joins
+//     LEFT JOIN father_table gfather ON father.father_id = gfather.id
+//     LEFT JOIN breed_name gfather_bn ON gfather.breed_id = gfather_bn.id
+//     LEFT JOIN register_name gfather_rn ON gfather.register_id = gfather_rn.id
+//     LEFT JOIN images_father gfather_img ON gfather_img.father_id = gfather.id
+//         AND gfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = gfather.id)
+
+//     -- Paternal Grandmother joins
+//     LEFT JOIN mother_table gmother ON father.mother_id = gmother.id
+//     LEFT JOIN breed_name gmother_bn ON gmother.breed_id = gmother_bn.id
+//     LEFT JOIN register_name gmother_rn ON gmother.register_id = gmother_rn.id
+//     LEFT JOIN images_mother gmother_img ON gmother_img.mother_id = gmother.id
+//         AND gmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = gmother.id)
+
+//     -- Maternal Grandfather joins
+//     LEFT JOIN father_table mgfather ON mother.father_id = mgfather.id
+//     LEFT JOIN breed_name mgfather_bn ON mgfather.breed_id = mgfather_bn.id
+//     LEFT JOIN register_name mgfather_rn ON mgfather.register_id = mgfather_rn.id
+//     LEFT JOIN images_father mgfather_img ON mgfather_img.father_id = mgfather.id
+//         AND mgfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = mgfather.id)
+
+//     -- Maternal Grandmother joins
+//     LEFT JOIN mother_table mgmother ON mother.mother_id = mgmother.id
+//     LEFT JOIN breed_name mgmother_bn ON mgmother.breed_id = mgmother_bn.id
+//     LEFT JOIN register_name mgmother_rn ON mgmother.register_id = mgmother_rn.id
+//     LEFT JOIN images_mother mgmother_img ON mgmother_img.mother_id = mgmother.id
+//         AND mgmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = mgmother.id)
+
+//     WHERE p.user_id = ?
+//     AND p.puppy_slug = ?
+//     AND p.breed_id = ?
+//     AND p.puppy_is_online = 1
+//     AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved', 'sold')
+//     LIMIT 1
+// `;
+
+//         const querySiblings = `
+//         SELECT 
+//             p.puppy_name,
+//             p.puppy_gender,
+//             p.puppy_breed_type,
+//             p.puppy_color,
+//             p.puppy_slug,
+//             p.sale_status,
+//             bn.name AS breed_name,
+//             bn.slug AS breed_slug,
+//             img.image_path,
+//             img.optimized_image_path,
+//             img.balise_alt
+//         FROM puppies p
+//         LEFT JOIN breed_name bn ON p.breed_id = bn.id
+//         LEFT JOIN puppies_images img ON img.puppies_id = p.id
+//            AND img.id = (SELECT MAX(id) FROM puppies_images WHERE puppies_id = p.id)
+//         WHERE p.marriage_id = ?
+//         AND p.id != ?
+//         AND p.puppy_is_online = 1
+//         ORDER BY p.puppy_name ASC
+//         `;
+
+//         db.query(queryPuppy, [userId, slug, breedId], (err, puppyResult) => {
+//             if (err) {
+//                 console.error('Erreur lors de la récupération du chiot:', err);
+//                 return res.redirect('/erreur');
+//             }
+
+//             if (!puppyResult.length) {
+//                 console.error('Chiot non trouvé');
+//                 return res.redirect('/erreur');
+//             }
+
+//             const puppy = puppyResult[0];
+
+//             if (puppy.sale_status !== 'sold') {
+//                 return res.redirect(301, `/chiots/a-vendre/${breedSlug}/${slug}`);
+//             }
+
+//             const queryPuppyImages = `
+//                 SELECT 
+//                     image_path,
+//                     optimized_image_path,
+//                     balise_alt
+//                 FROM puppies_images
+//                 WHERE puppies_id = ?
+//                 ORDER BY id ASC
+//             `;
+
+//             db.query(queryPuppyImages, [puppy.id], (err, images) => {
+//                 if (err) {
+//                     console.error('Erreur lors de la récupération des images:', err);
+//                     return res.redirect('/erreur');
+//                 }
+
+//                 db.query(querySiblings, [puppy.marriage_id, puppy.id], (err, siblings) => {
+//                     if (err) {
+//                         console.error('Erreur lors de la récupération des frères et sœurs:', err);
+//                         return res.redirect('/erreur');
+//                     }
+
+//                     const birthDate = new Date(puppy.puppy_birth_date);
+//                     const today = new Date();
+//                     const ageInMonths = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24 * 30.44));
+
+//                     const availableDate = puppy.available_date ? new Date(puppy.available_date) : null;
+//                     const formattedAvailableDate = availableDate ? new Intl.DateTimeFormat('fr-FR', {
+//                         weekday: 'short',
+//                         day: 'numeric',
+//                         month: 'short',
+//                         year: 'numeric'
+//                     }).format(availableDate) : null;
+
+//                     const firstImage = images.length > 0 ? images[0] : null;
+
+//                     res.render('puppy_sold_detail', {
+//                         puppy: {
+//                             name: puppy.puppy_name,
+//                             age: ageInMonths,
+//                             gender: puppy.puppy_gender,
+//                             slug: puppy.puppy_slug,
+//                             availableDate: formattedAvailableDate,
+//                             breed: {
+//                                 name: puppy.breed_name,
+//                                 slug: puppy.breed_slug,
+//                                 type: puppy.puppy_breed_type
+//                             },
+//                             eyeColor: puppy.puppy_eye_color,
+//                             color: puppy.puppy_color,
+//                             coatType: puppy.puppy_coat_type,
+//                             country: puppy.country_name,
+//                             register: {
+//                                 name: puppy.register_name,
+//                             },
+//                             description: puppy.puppy_description_animals,
+//                             status: (() => {
+//                                 switch (puppy.sale_status) {
+//                                     case 'sold':
+//                                         return 'Vendu';
+//                                 }
+//                             })()
+//                         },
+//                         father: puppy.father_name ? {
+//                             name: puppy.father_name,
+//                             gender: puppy.father_gender,
+//                             breed: {
+//                                 name: puppy.father_breed_name,
+//                                 type: puppy.father_breed_type
+//                             },
+//                             coatType: puppy.father_coat_type,
+//                             color: puppy.father_color,
+//                             eyeColor: puppy.father_eye_color,
+//                             register: puppy.father_register_name,
+//                             inBreeding: puppy.father_in_breeding === 1,
+//                             image: {
+//                                 path: puppy.father_optimized_image_path ?
+//                                     `/uploads/optimized/${puppy.father_optimized_image_path}` : `/uploads/${puppy.father_image_path}`,
+//                                 alt: puppy.father_image_alt
+//                             }
+//                         } : null,
+//                         mother: puppy.mother_name ? {
+//                             name: puppy.mother_name,
+//                             gender: puppy.mother_gender,
+//                             breed: {
+//                                 name: puppy.mother_breed_name,
+//                                 type: puppy.mother_breed_type
+//                             },
+//                             coatType: puppy.mother_coat_type,
+//                             color: puppy.mother_color,
+//                             eyeColor: puppy.mother_eye_color,
+//                             register: puppy.mother_register_name,
+//                             inBreeding: puppy.mother_in_breeding === 1,
+//                             image: {
+//                                 path: puppy.mother_optimized_image_path ?
+//                                     `/uploads/optimized/${puppy.mother_optimized_image_path}` : `/uploads/${puppy.mother_image_path}`,
+//                                 alt: puppy.mother_image_alt
+//                             }
+//                         } : null,
+//                         grandparents: {
+//                             grandfather: puppy.grandfather_name ? {
+//                                 name: puppy.grandfather_name,
+//                                 gender: puppy.grandfather_gender,
+//                                 breed: {
+//                                     name: puppy.grandfather_breed_name,
+//                                     type: puppy.grandfather_breed_type
+//                                 },
+//                                 coatType: puppy.grandfather_coat_type,
+//                                 color: puppy.grandfather_color,
+//                                 eyeColor: puppy.grandfather_eye_color,
+//                                 register: puppy.grandfather_register_name,
+//                                 inBreeding: puppy.grandfather_is_online === 1,
+//                                 image: {
+//                                     path: puppy.grandfather_optimized_image_path ?
+//                                         `/uploads/optimized/${puppy.grandfather_optimized_image_path}` : `/uploads/${puppy.grandfather_image_path}`,
+//                                     alt: puppy.grandfather_image_alt
+//                                 }
+//                             } : null,
+//                             grandmother: puppy.grandmother_name ? {
+//                                 name: puppy.grandmother_name,
+//                                 gender: puppy.grandmother_gender,
+//                                 breed: {
+//                                     name: puppy.grandmother_breed_name,
+//                                     type: puppy.grandmother_breed_type
+//                                 },
+//                                 coatType: puppy.grandmother_coat_type,
+//                                 color: puppy.grandmother_color,
+//                                 eyeColor: puppy.grandmother_eye_color,
+//                                 register: puppy.grandmother_register_name,
+//                                 inBreeding: puppy.grandmother_is_online === 1,
+//                                 image: {
+//                                     path: puppy.grandmother_optimized_image_path ?
+//                                         `/uploads/optimized/${puppy.grandmother_optimized_image_path}` : `/uploads/${puppy.grandmother_image_path}`,
+//                                     alt: puppy.grandmother_image_alt
+//                                 }
+//                             } : null
+//                         },
+//                         maternal_grandparents: {
+//                             grandfather: puppy.maternal_grandfather_name ? {
+//                                 name: puppy.maternal_grandfather_name,
+//                                 gender: puppy.maternal_grandfather_gender,
+//                                 breed: {
+//                                     name: puppy.maternal_grandfather_breed_name,
+//                                     type: puppy.maternal_grandfather_breed_type
+//                                 },
+//                                 coatType: puppy.maternal_grandfather_coat_type,
+//                                 color: puppy.maternal_grandfather_color,
+//                                 eyeColor: puppy.maternal_grandfather_eye_color,
+//                                 register: puppy.maternal_grandfather_register_name,
+//                                 inBreeding: puppy.maternal_grandfather_is_online === 1,
+//                                 image: {
+//                                     path: puppy.maternal_grandfather_optimized_image_path ?
+//                                         `/uploads/optimized/${puppy.maternal_grandfather_optimized_image_path}` : `/uploads/${puppy.maternal_grandfather_image_path}`,
+//                                     alt: puppy.maternal_grandfather_image_alt
+//                                 }
+//                             } : null,
+//                             grandmother: puppy.maternal_grandmother_name ? {
+//                                 name: puppy.maternal_grandmother_name,
+//                                 gender: puppy.maternal_grandmother_gender,
+//                                 breed: {
+//                                     name: puppy.maternal_grandmother_breed_name,
+//                                     type: puppy.maternal_grandmother_breed_type
+//                                 },
+//                                 coatType: puppy.maternal_grandmother_coat_type,
+//                                 color: puppy.maternal_grandmother_color,
+//                                 eyeColor: puppy.maternal_grandmother_eye_color,
+//                                 register: puppy.maternal_grandmother_register_name,
+//                                 inBreeding: puppy.maternal_grandmother_is_online === 1,
+//                                 image: {
+//                                     path: puppy.maternal_grandmother_optimized_image_path ?
+//                                         `/uploads/optimized/${puppy.maternal_grandmother_optimized_image_path}` : `/uploads/${puppy.maternal_grandmother_image_path}`,
+//                                     alt: puppy.maternal_grandmother_image_alt
+//                                 }
+//                             } : null
+//                         },
+//                         images: images.map(img => ({
+//                             path: img.optimized_image_path ?
+//                                 `/uploads/optimized/${img.optimized_image_path}` : `/uploads/${img.image_path}`,
+//                             alt: img.balise_alt
+//                         })),
+//                         siblings: siblings.map(sibling => ({
+//                             name: sibling.puppy_name,
+//                             gender: sibling.puppy_gender,
+//                             breed: {
+//                                 name: sibling.breed_name,
+//                                 slug: sibling.breed_slug,
+//                                 type: sibling.puppy_breed_type
+//                             },
+//                             color: sibling.puppy_color,
+//                             slug: sibling.puppy_slug,
+//                             status: sibling.sale_status,
+//                             image: {
+//                                 path: sibling.optimized_image_path 
+//                                     ? `/uploads/optimized/${sibling.optimized_image_path}`
+//                                     : `/uploads/${sibling.image_path}`,
+//                                 alt: sibling.balise_alt
+//                             }
+//                          })),
+//                         ogImage: firstImage ? `/uploads/optimized/${firstImage.optimized_image_path || firstImage.image_path}` : null
+//                     });
+//                 });
+//             });
+//         });
+//     });
+// });
+
+
+
+
 router.get('/produits/:breedSlug/:slug', (req, res) => {
     const userId = 10;
-    const {
-        breedSlug,
-        slug
-    } = req.params;
+    const { breedSlug, slug } = req.params;
 
     const queryBreedCheck = `
         SELECT id FROM breed_name 
@@ -1079,161 +1460,126 @@ router.get('/produits/:breedSlug/:slug', (req, res) => {
         LIMIT 1
     `;
 
-    db.query(queryBreedCheck, [breedSlug, userId], (err, breedResult) => {
-        if (err || !breedResult.length) {
-            console.error('Race non trouvée:', err);
-            return res.redirect('/erreur');
-        }
+    const queryPuppy = `
+        SELECT 
+            p.*, 
+            bn.name AS breed_name,
+            bn.slug AS breed_slug,
+            cn.name AS country_name,
+            rn.name AS register_name,
+            father.id AS father_id,
+            father.name AS father_name,
+            father.gender AS father_gender,
+            father.breed_type AS father_breed_type,
+            father.coat_type AS father_coat_type,
+            father.color AS father_color,
+            father.eye_color AS father_eye_color,
+            father.in_breeding AS father_in_breeding,
+            father_bn.name AS father_breed_name,
+            father_rn.name AS father_register_name,
+            father_img.image_path AS father_image_path,
+            father_img.optimized_image_path AS father_optimized_image_path,
+            father_img.balise_alt AS father_image_alt,
+            mother.id AS mother_id,
+            mother.name AS mother_name,
+            mother.gender AS mother_gender,
+            mother.breed_type AS mother_breed_type,
+            mother.coat_type AS mother_coat_type,
+            mother.color AS mother_color,
+            mother.eye_color AS mother_eye_color,
+            mother.in_breeding AS mother_in_breeding,
+            mother_bn.name AS mother_breed_name,
+            mother_rn.name AS mother_register_name,
+            mother_img.image_path AS mother_image_path,
+            mother_img.optimized_image_path AS mother_optimized_image_path,
+            mother_img.balise_alt AS mother_image_alt,
+            gfather.father_name AS grandfather_name,
+            gfather.father_gender AS grandfather_gender,
+            gfather.father_breed_type AS grandfather_breed_type,
+            gfather.father_coat_type AS grandfather_coat_type,
+            gfather.father_color AS grandfather_color,
+            gfather.father_eye_color AS grandfather_eye_color,
+            gfather.father_is_online AS grandfather_is_online,
+            gfather_bn.name AS grandfather_breed_name,
+            gfather_rn.name AS grandfather_register_name,
+            gfather_img.image_path AS grandfather_image_path,
+            gfather_img.optimized_image_path AS grandfather_optimized_image_path,
+            gmother.mother_name AS grandmother_name,
+            gmother.mother_gender AS grandmother_gender,
+            gmother.mother_breed_type AS grandmother_breed_type,
+            gmother.mother_coat_type AS grandmother_coat_type,
+            gmother.mother_color AS grandmother_color,
+            gmother.mother_eye_color AS grandmother_eye_color,
+            gmother.mother_is_online AS grandmother_is_online,
+            gmother_bn.name AS grandmother_breed_name,
+            gmother_rn.name AS grandmother_register_name,
+            gmother_img.image_path AS grandmother_image_path,
+            gmother_img.optimized_image_path AS grandmother_optimized_image_path,
+            mgfather.father_name AS maternal_grandfather_name,
+            mgfather.father_gender AS maternal_grandfather_gender,
+            mgfather.father_breed_type AS maternal_grandfather_breed_type,
+            mgfather.father_coat_type AS maternal_grandfather_coat_type,
+            mgfather.father_color AS maternal_grandfather_color,
+            mgfather.father_eye_color AS maternal_grandfather_eye_color,
+            mgfather.father_is_online AS maternal_grandfather_is_online,
+            mgfather_bn.name AS maternal_grandfather_breed_name,
+            mgfather_rn.name AS maternal_grandfather_register_name,
+            mgfather_img.image_path AS maternal_grandfather_image_path,
+            mgfather_img.optimized_image_path AS maternal_grandfather_optimized_image_path,
+            mgmother.mother_name AS maternal_grandmother_name,
+            mgmother.mother_gender AS maternal_grandmother_gender,
+            mgmother.mother_breed_type AS maternal_grandmother_breed_type,
+            mgmother.mother_coat_type AS maternal_grandmother_coat_type,
+            mgmother.mother_color AS maternal_grandmother_color,
+            mgmother.mother_eye_color AS maternal_grandmother_eye_color,
+            mgmother.mother_is_online AS maternal_grandmother_is_online,
+            mgmother_bn.name AS maternal_grandmother_breed_name,
+            mgmother_rn.name AS maternal_grandmother_register_name,
+            mgmother_img.image_path AS maternal_grandmother_image_path,
+            mgmother_img.optimized_image_path AS maternal_grandmother_optimized_image_path
+        FROM puppies p
+        LEFT JOIN breed_name bn ON p.breed_id = bn.id
+        LEFT JOIN country_name cn ON p.country_id = cn.id
+        LEFT JOIN register_name rn ON p.register_id = rn.id
+        LEFT JOIN animals father ON p.father_id = father.id
+        LEFT JOIN breed_name father_bn ON father.breed_id = father_bn.id
+        LEFT JOIN register_name father_rn ON father.register_id = father_rn.id
+        LEFT JOIN images father_img ON father_img.animal_id = father.id
+            AND father_img.id = (SELECT MIN(id) FROM images WHERE animal_id = father.id)
+        LEFT JOIN animals mother ON p.mother_id = mother.id
+        LEFT JOIN breed_name mother_bn ON mother.breed_id = mother_bn.id
+        LEFT JOIN register_name mother_rn ON mother.register_id = mother_rn.id
+        LEFT JOIN images mother_img ON mother_img.animal_id = mother.id
+            AND mother_img.id = (SELECT MIN(id) FROM images WHERE animal_id = mother.id)
+        LEFT JOIN father_table gfather ON father.father_id = gfather.id
+        LEFT JOIN breed_name gfather_bn ON gfather.breed_id = gfather_bn.id
+        LEFT JOIN register_name gfather_rn ON gfather.register_id = gfather_rn.id
+        LEFT JOIN images_father gfather_img ON gfather_img.father_id = gfather.id
+            AND gfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = gfather.id)
+        LEFT JOIN mother_table gmother ON father.mother_id = gmother.id
+        LEFT JOIN breed_name gmother_bn ON gmother.breed_id = gmother_bn.id
+        LEFT JOIN register_name gmother_rn ON gmother.register_id = gmother_rn.id
+        LEFT JOIN images_mother gmother_img ON gmother_img.mother_id = gmother.id
+            AND gmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = gmother.id)
+        LEFT JOIN father_table mgfather ON mother.father_id = mgfather.id
+        LEFT JOIN breed_name mgfather_bn ON mgfather.breed_id = mgfather_bn.id
+        LEFT JOIN register_name mgfather_rn ON mgfather.register_id = mgfather_rn.id
+        LEFT JOIN images_father mgfather_img ON mgfather_img.father_id = mgfather.id
+            AND mgfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = mgfather.id)
+        LEFT JOIN mother_table mgmother ON mother.mother_id = mgmother.id
+        LEFT JOIN breed_name mgmother_bn ON mgmother.breed_id = mgmother_bn.id
+        LEFT JOIN register_name mgmother_rn ON mgmother.register_id = mgmother_rn.id
+        LEFT JOIN images_mother mgmother_img ON mgmother_img.mother_id = mgmother.id
+            AND mgmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = mgmother.id)
+        WHERE p.user_id = ?
+        AND p.puppy_slug = ?
+        AND p.breed_id = ?
+        AND p.puppy_is_online = 1
+        AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved', 'sold')
+        LIMIT 1
+    `;
 
-        const breedId = breedResult[0].id;
-
-        const queryPuppy = `
-    SELECT 
-        -- Puppy information
-        p.*, 
-        bn.name AS breed_name,
-        bn.slug AS breed_slug,
-        cn.name AS country_name,
-        rn.name AS register_name,
-
-        -- Father information from animals
-        father.id AS father_id,
-        father.name AS father_name,
-        father.gender AS father_gender,
-        father.breed_type AS father_breed_type,
-        father.coat_type AS father_coat_type,
-        father.color AS father_color,
-        father.eye_color AS father_eye_color,
-        father.in_breeding AS father_in_breeding,
-        father_bn.name AS father_breed_name,
-        father_rn.name AS father_register_name,
-        father_img.image_path AS father_image_path,
-        father_img.optimized_image_path AS father_optimized_image_path,
-        father_img.balise_alt AS father_image_alt,
-
-        -- Mother information from animals
-        mother.id AS mother_id,
-        mother.name AS mother_name,
-        mother.gender AS mother_gender,
-        mother.breed_type AS mother_breed_type,
-        mother.coat_type AS mother_coat_type,
-        mother.color AS mother_color,
-        mother.eye_color AS mother_eye_color,
-        mother.in_breeding AS mother_in_breeding,
-        mother_bn.name AS mother_breed_name,
-        mother_rn.name AS mother_register_name,
-        mother_img.image_path AS mother_image_path,
-        mother_img.optimized_image_path AS mother_optimized_image_path,
-        mother_img.balise_alt AS mother_image_alt,
-
-        -- Father's father information from father_table
-        gfather.father_name AS grandfather_name,
-        gfather.father_gender AS grandfather_gender,
-        gfather.father_breed_type AS grandfather_breed_type,
-        gfather.father_coat_type AS grandfather_coat_type,
-        gfather.father_color AS grandfather_color,
-        gfather.father_eye_color AS grandfather_eye_color,
-        gfather.father_is_online AS grandfather_is_online,
-        gfather_bn.name AS grandfather_breed_name,
-        gfather_rn.name AS grandfather_register_name,
-        gfather_img.image_path AS grandfather_image_path,
-        gfather_img.optimized_image_path AS grandfather_optimized_image_path,
-
-        -- Father's mother information from mother_table
-        gmother.mother_name AS grandmother_name,
-        gmother.mother_gender AS grandmother_gender,
-        gmother.mother_breed_type AS grandmother_breed_type,
-        gmother.mother_coat_type AS grandmother_coat_type,
-        gmother.mother_color AS grandmother_color,
-        gmother.mother_eye_color AS grandmother_eye_color,
-        gmother.mother_is_online AS grandmother_is_online,
-        gmother_bn.name AS grandmother_breed_name,
-        gmother_rn.name AS grandmother_register_name,
-        gmother_img.image_path AS grandmother_image_path,
-        gmother_img.optimized_image_path AS grandmother_optimized_image_path,
-
-        -- Mother's father information (maternal grandfather)
-        mgfather.father_name AS maternal_grandfather_name,
-        mgfather.father_gender AS maternal_grandfather_gender,
-        mgfather.father_breed_type AS maternal_grandfather_breed_type,
-        mgfather.father_coat_type AS maternal_grandfather_coat_type,
-        mgfather.father_color AS maternal_grandfather_color,
-        mgfather.father_eye_color AS maternal_grandfather_eye_color,
-        mgfather.father_is_online AS maternal_grandfather_is_online,
-        mgfather_bn.name AS maternal_grandfather_breed_name,
-        mgfather_rn.name AS maternal_grandfather_register_name,
-        mgfather_img.image_path AS maternal_grandfather_image_path,
-        mgfather_img.optimized_image_path AS maternal_grandfather_optimized_image_path,
-
-        -- Mother's mother information (maternal grandmother)
-        mgmother.mother_name AS maternal_grandmother_name,
-        mgmother.mother_gender AS maternal_grandmother_gender,
-        mgmother.mother_breed_type AS maternal_grandmother_breed_type,
-        mgmother.mother_coat_type AS maternal_grandmother_coat_type,
-        mgmother.mother_color AS maternal_grandmother_color,
-        mgmother.mother_eye_color AS maternal_grandmother_eye_color,
-        mgmother.mother_is_online AS maternal_grandmother_is_online,
-        mgmother_bn.name AS maternal_grandmother_breed_name,
-        mgmother_rn.name AS maternal_grandmother_register_name,
-        mgmother_img.image_path AS maternal_grandmother_image_path,
-        mgmother_img.optimized_image_path AS maternal_grandmother_optimized_image_path
-
-    FROM puppies p
-    LEFT JOIN breed_name bn ON p.breed_id = bn.id
-    LEFT JOIN country_name cn ON p.country_id = cn.id
-    LEFT JOIN register_name rn ON p.register_id = rn.id
-
-    -- Father joins
-    LEFT JOIN animals father ON p.father_id = father.id
-    LEFT JOIN breed_name father_bn ON father.breed_id = father_bn.id
-    LEFT JOIN register_name father_rn ON father.register_id = father_rn.id
-    LEFT JOIN images father_img ON father_img.animal_id = father.id
-        AND father_img.id = (SELECT MIN(id) FROM images WHERE animal_id = father.id)
-
-    -- Mother joins
-    LEFT JOIN animals mother ON p.mother_id = mother.id
-    LEFT JOIN breed_name mother_bn ON mother.breed_id = mother_bn.id
-    LEFT JOIN register_name mother_rn ON mother.register_id = mother_rn.id
-    LEFT JOIN images mother_img ON mother_img.animal_id = mother.id
-        AND mother_img.id = (SELECT MIN(id) FROM images WHERE animal_id = mother.id)
-
-    -- Paternal Grandfather joins
-    LEFT JOIN father_table gfather ON father.father_id = gfather.id
-    LEFT JOIN breed_name gfather_bn ON gfather.breed_id = gfather_bn.id
-    LEFT JOIN register_name gfather_rn ON gfather.register_id = gfather_rn.id
-    LEFT JOIN images_father gfather_img ON gfather_img.father_id = gfather.id
-        AND gfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = gfather.id)
-
-    -- Paternal Grandmother joins
-    LEFT JOIN mother_table gmother ON father.mother_id = gmother.id
-    LEFT JOIN breed_name gmother_bn ON gmother.breed_id = gmother_bn.id
-    LEFT JOIN register_name gmother_rn ON gmother.register_id = gmother_rn.id
-    LEFT JOIN images_mother gmother_img ON gmother_img.mother_id = gmother.id
-        AND gmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = gmother.id)
-
-    -- Maternal Grandfather joins
-    LEFT JOIN father_table mgfather ON mother.father_id = mgfather.id
-    LEFT JOIN breed_name mgfather_bn ON mgfather.breed_id = mgfather_bn.id
-    LEFT JOIN register_name mgfather_rn ON mgfather.register_id = mgfather_rn.id
-    LEFT JOIN images_father mgfather_img ON mgfather_img.father_id = mgfather.id
-        AND mgfather_img.id = (SELECT MIN(id) FROM images_father WHERE father_id = mgfather.id)
-
-    -- Maternal Grandmother joins
-    LEFT JOIN mother_table mgmother ON mother.mother_id = mgmother.id
-    LEFT JOIN breed_name mgmother_bn ON mgmother.breed_id = mgmother_bn.id
-    LEFT JOIN register_name mgmother_rn ON mgmother.register_id = mgmother_rn.id
-    LEFT JOIN images_mother mgmother_img ON mgmother_img.mother_id = mgmother.id
-        AND mgmother_img.id = (SELECT MIN(id) FROM images_mother WHERE mother_id = mgmother.id)
-
-    WHERE p.user_id = ?
-    AND p.puppy_slug = ?
-    AND p.breed_id = ?
-    AND p.puppy_is_online = 1
-    AND p.sale_status IN ('available_for_reservation', 'for_sale', 'in_reservation', 'reserved', 'sold')
-    LIMIT 1
-`;
-
-        const querySiblings = `
+    const querySiblings = `
         SELECT 
             p.puppy_name,
             p.puppy_gender,
@@ -1249,16 +1595,42 @@ router.get('/produits/:breedSlug/:slug', (req, res) => {
         FROM puppies p
         LEFT JOIN breed_name bn ON p.breed_id = bn.id
         LEFT JOIN puppies_images img ON img.puppies_id = p.id
-           AND img.id = (SELECT MAX(id) FROM puppies_images WHERE puppies_id = p.id)
+            AND img.id = (SELECT MAX(id) FROM puppies_images WHERE puppies_id = p.id)
         WHERE p.marriage_id = ?
         AND p.id != ?
         AND p.puppy_is_online = 1
         ORDER BY p.puppy_name ASC
-        `;
+    `;
+
+    const queryPuppyImages = `
+        SELECT image_path, optimized_image_path, balise_alt
+        FROM puppies_images
+        WHERE puppies_id = ?
+        ORDER BY id ASC
+    `;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    db.query(queryBreedCheck, [breedSlug, userId], (err, breedResult) => {
+        if (err || !breedResult.length) {
+            console.error('Race non trouvée:', err);
+            return res.redirect('/erreur');
+        }
+
+        const breedId = breedResult[0].id;
 
         db.query(queryPuppy, [userId, slug, breedId], (err, puppyResult) => {
             if (err) {
-                console.error('Erreur lors de la récupération du chiot:', err);
+                console.error('Erreur queryPuppy:', err);
                 return res.redirect('/erreur');
             }
 
@@ -1273,211 +1645,218 @@ router.get('/produits/:breedSlug/:slug', (req, res) => {
                 return res.redirect(301, `/chiots/a-vendre/${breedSlug}/${slug}`);
             }
 
-            const queryPuppyImages = `
-                SELECT 
-                    image_path,
-                    optimized_image_path,
-                    balise_alt
-                FROM puppies_images
-                WHERE puppies_id = ?
-                ORDER BY id ASC
-            `;
+            const birthDate = new Date(puppy.puppy_birth_date);
+            const today = new Date();
+            const ageInMonths = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24 * 30.44));
 
-            db.query(queryPuppyImages, [puppy.id], (err, images) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des images:', err);
-                    return res.redirect('/erreur');
-                }
+            const availableDate = puppy.available_date ? new Date(puppy.available_date) : null;
+            const formattedAvailableDate = availableDate ? new Intl.DateTimeFormat('fr-FR', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            }).format(availableDate) : null;
 
-                db.query(querySiblings, [puppy.marriage_id, puppy.id], (err, siblings) => {
-                    if (err) {
-                        console.error('Erreur lors de la récupération des frères et sœurs:', err);
-                        return res.redirect('/erreur');
-                    }
-
-                    const birthDate = new Date(puppy.puppy_birth_date);
-                    const today = new Date();
-                    const ageInMonths = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24 * 30.44));
-
-                    const availableDate = puppy.available_date ? new Date(puppy.available_date) : null;
-                    const formattedAvailableDate = availableDate ? new Intl.DateTimeFormat('fr-FR', {
-                        weekday: 'short',
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric'
-                    }).format(availableDate) : null;
-
-                    const firstImage = images.length > 0 ? images[0] : null;
-
-                    res.render('puppy_sold_detail', {
-                        puppy: {
-                            name: puppy.puppy_name,
-                            age: ageInMonths,
-                            gender: puppy.puppy_gender,
-                            slug: puppy.puppy_slug,
-                            availableDate: formattedAvailableDate,
-                            breed: {
-                                name: puppy.breed_name,
-                                slug: puppy.breed_slug,
-                                type: puppy.puppy_breed_type
-                            },
-                            eyeColor: puppy.puppy_eye_color,
-                            color: puppy.puppy_color,
-                            coatType: puppy.puppy_coat_type,
-                            country: puppy.country_name,
-                            register: {
-                                name: puppy.register_name,
-                            },
-                            description: puppy.puppy_description_animals,
-                            status: (() => {
-                                switch (puppy.sale_status) {
-                                    case 'sold':
-                                        return 'Vendu';
-                                }
-                            })()
-                        },
-                        father: puppy.father_name ? {
-                            name: puppy.father_name,
-                            gender: puppy.father_gender,
-                            breed: {
-                                name: puppy.father_breed_name,
-                                type: puppy.father_breed_type
-                            },
-                            coatType: puppy.father_coat_type,
-                            color: puppy.father_color,
-                            eyeColor: puppy.father_eye_color,
-                            register: puppy.father_register_name,
-                            inBreeding: puppy.father_in_breeding === 1,
-                            image: {
-                                path: puppy.father_optimized_image_path ?
-                                    `/uploads/optimized/${puppy.father_optimized_image_path}` : `/uploads/${puppy.father_image_path}`,
-                                alt: puppy.father_image_alt
-                            }
-                        } : null,
-                        mother: puppy.mother_name ? {
-                            name: puppy.mother_name,
-                            gender: puppy.mother_gender,
-                            breed: {
-                                name: puppy.mother_breed_name,
-                                type: puppy.mother_breed_type
-                            },
-                            coatType: puppy.mother_coat_type,
-                            color: puppy.mother_color,
-                            eyeColor: puppy.mother_eye_color,
-                            register: puppy.mother_register_name,
-                            inBreeding: puppy.mother_in_breeding === 1,
-                            image: {
-                                path: puppy.mother_optimized_image_path ?
-                                    `/uploads/optimized/${puppy.mother_optimized_image_path}` : `/uploads/${puppy.mother_image_path}`,
-                                alt: puppy.mother_image_alt
-                            }
-                        } : null,
-                        grandparents: {
-                            grandfather: puppy.grandfather_name ? {
-                                name: puppy.grandfather_name,
-                                gender: puppy.grandfather_gender,
-                                breed: {
-                                    name: puppy.grandfather_breed_name,
-                                    type: puppy.grandfather_breed_type
-                                },
-                                coatType: puppy.grandfather_coat_type,
-                                color: puppy.grandfather_color,
-                                eyeColor: puppy.grandfather_eye_color,
-                                register: puppy.grandfather_register_name,
-                                inBreeding: puppy.grandfather_is_online === 1,
-                                image: {
-                                    path: puppy.grandfather_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.grandfather_optimized_image_path}` : `/uploads/${puppy.grandfather_image_path}`,
-                                    alt: puppy.grandfather_image_alt
-                                }
-                            } : null,
-                            grandmother: puppy.grandmother_name ? {
-                                name: puppy.grandmother_name,
-                                gender: puppy.grandmother_gender,
-                                breed: {
-                                    name: puppy.grandmother_breed_name,
-                                    type: puppy.grandmother_breed_type
-                                },
-                                coatType: puppy.grandmother_coat_type,
-                                color: puppy.grandmother_color,
-                                eyeColor: puppy.grandmother_eye_color,
-                                register: puppy.grandmother_register_name,
-                                inBreeding: puppy.grandmother_is_online === 1,
-                                image: {
-                                    path: puppy.grandmother_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.grandmother_optimized_image_path}` : `/uploads/${puppy.grandmother_image_path}`,
-                                    alt: puppy.grandmother_image_alt
-                                }
-                            } : null
-                        },
-                        maternal_grandparents: {
-                            grandfather: puppy.maternal_grandfather_name ? {
-                                name: puppy.maternal_grandfather_name,
-                                gender: puppy.maternal_grandfather_gender,
-                                breed: {
-                                    name: puppy.maternal_grandfather_breed_name,
-                                    type: puppy.maternal_grandfather_breed_type
-                                },
-                                coatType: puppy.maternal_grandfather_coat_type,
-                                color: puppy.maternal_grandfather_color,
-                                eyeColor: puppy.maternal_grandfather_eye_color,
-                                register: puppy.maternal_grandfather_register_name,
-                                inBreeding: puppy.maternal_grandfather_is_online === 1,
-                                image: {
-                                    path: puppy.maternal_grandfather_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.maternal_grandfather_optimized_image_path}` : `/uploads/${puppy.maternal_grandfather_image_path}`,
-                                    alt: puppy.maternal_grandfather_image_alt
-                                }
-                            } : null,
-                            grandmother: puppy.maternal_grandmother_name ? {
-                                name: puppy.maternal_grandmother_name,
-                                gender: puppy.maternal_grandmother_gender,
-                                breed: {
-                                    name: puppy.maternal_grandmother_breed_name,
-                                    type: puppy.maternal_grandmother_breed_type
-                                },
-                                coatType: puppy.maternal_grandmother_coat_type,
-                                color: puppy.maternal_grandmother_color,
-                                eyeColor: puppy.maternal_grandmother_eye_color,
-                                register: puppy.maternal_grandmother_register_name,
-                                inBreeding: puppy.maternal_grandmother_is_online === 1,
-                                image: {
-                                    path: puppy.maternal_grandmother_optimized_image_path ?
-                                        `/uploads/optimized/${puppy.maternal_grandmother_optimized_image_path}` : `/uploads/${puppy.maternal_grandmother_image_path}`,
-                                    alt: puppy.maternal_grandmother_image_alt
-                                }
-                            } : null
-                        },
-                        images: images.map(img => ({
-                            path: img.optimized_image_path ?
-                                `/uploads/optimized/${img.optimized_image_path}` : `/uploads/${img.image_path}`,
-                            alt: img.balise_alt
-                        })),
-                        siblings: siblings.map(sibling => ({
-                            name: sibling.puppy_name,
-                            gender: sibling.puppy_gender,
-                            breed: {
-                                name: sibling.breed_name,
-                                slug: sibling.breed_slug,
-                                type: sibling.puppy_breed_type
-                            },
-                            color: sibling.puppy_color,
-                            slug: sibling.puppy_slug,
-                            status: sibling.sale_status,
-                            image: {
-                                path: sibling.optimized_image_path 
-                                    ? `/uploads/optimized/${sibling.optimized_image_path}`
-                                    : `/uploads/${sibling.image_path}`,
-                                alt: sibling.balise_alt
-                            }
-                         })),
-                        ogImage: firstImage ? `/uploads/optimized/${firstImage.optimized_image_path || firstImage.image_path}` : null
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    db.query(queryPuppyImages, [puppy.id], (err, result) => {
+                        if (err) reject(err); else resolve(result);
                     });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySiblings, [puppy.marriage_id, puppy.id], (err, result) => {
+                        if (err) reject(err); else resolve(result);
+                    });
+                }),
+                new Promise((resolve, reject) => {
+                    db.query(querySocialLinks, [userId], (err, result) => {
+                        if (err) reject(err); else resolve(result);
+                    });
+                })
+            ]).then(([images, siblings, socialLinks]) => {
+
+                const firstImage = images.length > 0 ? images[0] : null;
+
+                res.render('puppy_sold_detail', {
+                    puppy: {
+                        name: puppy.puppy_name,
+                        age: ageInMonths,
+                        gender: puppy.puppy_gender,
+                        slug: puppy.puppy_slug,
+                        availableDate: formattedAvailableDate,
+                        healthTests: puppy.puppy_health_tests,
+                        breed: {
+                            name: puppy.breed_name,
+                            slug: puppy.breed_slug,
+                            type: puppy.puppy_breed_type
+                        },
+                        eyeColor: puppy.puppy_eye_color,
+                        color: puppy.puppy_color,
+                        coatType: puppy.puppy_coat_type,
+                        country: puppy.country_name,
+                        register: {
+                            name: puppy.register_name
+                        },
+                        description: puppy.puppy_description_animals,
+                        status: 'Vendu'
+                    },
+                    father: puppy.father_name ? {
+                        name: puppy.father_name,
+                        gender: puppy.father_gender,
+                        breed: {
+                            name: puppy.father_breed_name,
+                            type: puppy.father_breed_type
+                        },
+                        coatType: puppy.father_coat_type,
+                        color: puppy.father_color,
+                        eyeColor: puppy.father_eye_color,
+                        register: puppy.father_register_name,
+                        inBreeding: puppy.father_in_breeding === 1,
+                        image: {
+                            path: puppy.father_optimized_image_path ?
+                                `/uploads/optimized/${puppy.father_optimized_image_path}` :
+                                `/uploads/${puppy.father_image_path}`,
+                            alt: puppy.father_image_alt
+                        }
+                    } : null,
+                    mother: puppy.mother_name ? {
+                        name: puppy.mother_name,
+                        gender: puppy.mother_gender,
+                        breed: {
+                            name: puppy.mother_breed_name,
+                            type: puppy.mother_breed_type
+                        },
+                        coatType: puppy.mother_coat_type,
+                        color: puppy.mother_color,
+                        eyeColor: puppy.mother_eye_color,
+                        register: puppy.mother_register_name,
+                        inBreeding: puppy.mother_in_breeding === 1,
+                        image: {
+                            path: puppy.mother_optimized_image_path ?
+                                `/uploads/optimized/${puppy.mother_optimized_image_path}` :
+                                `/uploads/${puppy.mother_image_path}`,
+                            alt: puppy.mother_image_alt
+                        }
+                    } : null,
+                    grandparents: {
+                        grandfather: puppy.grandfather_name ? {
+                            name: puppy.grandfather_name,
+                            gender: puppy.grandfather_gender,
+                            breed: {
+                                name: puppy.grandfather_breed_name,
+                                type: puppy.grandfather_breed_type
+                            },
+                            register: puppy.grandfather_register_name,
+                            image: {
+                                path: puppy.grandfather_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.grandfather_optimized_image_path}` :
+                                    `/uploads/${puppy.grandfather_image_path}`,
+                                alt: null
+                            }
+                        } : null,
+                        grandmother: puppy.grandmother_name ? {
+                            name: puppy.grandmother_name,
+                            gender: puppy.grandmother_gender,
+                            breed: {
+                                name: puppy.grandmother_breed_name,
+                                type: puppy.grandmother_breed_type
+                            },
+                            register: puppy.grandmother_register_name,
+                            image: {
+                                path: puppy.grandmother_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.grandmother_optimized_image_path}` :
+                                    `/uploads/${puppy.grandmother_image_path}`,
+                                alt: null
+                            }
+                        } : null
+                    },
+                    maternal_grandparents: {
+                        grandfather: puppy.maternal_grandfather_name ? {
+                            name: puppy.maternal_grandfather_name,
+                            gender: puppy.maternal_grandfather_gender,
+                            breed: {
+                                name: puppy.maternal_grandfather_breed_name,
+                                type: puppy.maternal_grandfather_breed_type
+                            },
+                            register: puppy.maternal_grandfather_register_name,
+                            image: {
+                                path: puppy.maternal_grandfather_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.maternal_grandfather_optimized_image_path}` :
+                                    `/uploads/${puppy.maternal_grandfather_image_path}`,
+                                alt: null
+                            }
+                        } : null,
+                        grandmother: puppy.maternal_grandmother_name ? {
+                            name: puppy.maternal_grandmother_name,
+                            gender: puppy.maternal_grandmother_gender,
+                            breed: {
+                                name: puppy.maternal_grandmother_breed_name,
+                                type: puppy.maternal_grandmother_breed_type
+                            },
+                            register: puppy.maternal_grandmother_register_name,
+                            image: {
+                                path: puppy.maternal_grandmother_optimized_image_path ?
+                                    `/uploads/optimized/${puppy.maternal_grandmother_optimized_image_path}` :
+                                    `/uploads/${puppy.maternal_grandmother_image_path}`,
+                                alt: null
+                            }
+                        } : null
+                    },
+                    images: images.map(img => ({
+                        path: img.optimized_image_path ?
+                            `/uploads/optimized/${img.optimized_image_path}` :
+                            `/uploads/${img.image_path}`,
+                        alt: img.balise_alt
+                    })),
+                    siblings: siblings.map(sibling => ({
+                        name: sibling.puppy_name,
+                        gender: sibling.puppy_gender,
+                        breed: {
+                            name: sibling.breed_name,
+                            slug: sibling.breed_slug,
+                            type: sibling.puppy_breed_type
+                        },
+                        color: sibling.puppy_color,
+                        slug: sibling.puppy_slug,
+                        status: sibling.sale_status,
+                        image: {
+                            path: sibling.optimized_image_path ?
+                                `/uploads/optimized/${sibling.optimized_image_path}` :
+                                `/uploads/${sibling.image_path}`,
+                            alt: sibling.balise_alt
+                        }
+                    })),
+                    ogImage: firstImage ?
+                        `/uploads/optimized/${firstImage.optimized_image_path || firstImage.image_path}` :
+                        null,
+                    socialLinks
                 });
+
+            }).catch(err => {
+                console.error('Erreur Promise.all:', err);
+                return res.redirect('/erreur');
             });
         });
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // router pour afficher la page de chiots produits par genre (fait)
 router.get('/produits/:gender(males|femelles)', (req, res) => {
