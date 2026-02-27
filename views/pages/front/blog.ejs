@@ -1,289 +1,365 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><% if (currentPage > 1) { %>Blog & Actualités - Page <%= currentPage %> | Élevage de Bel Air<% } else { %>Blog & Actualités | Élevage de Bel Air<% } %></title>
-    <meta name="description" content="Découvrez nos articles sur l'élevage d'American Bully et de Springer Anglais. Conseils pratiques, actualités, portées à venir et vie quotidienne de notre élevage familial de Bel Air près de Montpellier en Occitanie.">
-    <meta name="keywords" content="blog élevage canin, american bully conseils, springer anglais actualités, portées chiots, élevage de bel air blog, actualités chiens, conseils éleveur, blog american bully">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/blog<%= currentPage > 1 ? '?page=' + currentPage : '' %>">
-    <% if (currentPage > 1) { %>
-    <link rel="prev" href="https://elevagedebelair.com/blog<%= currentPage > 2 ? '?page=' + (currentPage - 1) : '' %>">
-    <% } %>
-    <% if (currentPage < totalPages) { %>
-    <link rel="next" href="https://elevagedebelair.com/blog?page=<%= currentPage + 1 %>">
-    <% } %>
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Blog & Actualités | Élevage de Bel Air">
-    <meta property="og:description" content="Suivez l'actualité de notre élevage familial d'American Bully et de Springer Anglais. Articles, conseils et vie quotidienne.">
-    <meta property="og:url" content="https://elevagedebelair.com/blog">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Blog - Élevage de Bel Air">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blog & Actualités | Élevage de Bel Air">
-    <meta name="twitter:description" content="Suivez l'actualité de notre élevage d'American Bully et de Springer Anglais.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Blog - Élevage de Bel Air">
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css"><link rel="stylesheet" href="/front/css/blog.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title><% if (currentPage > 1) { %>Blog & Actualités - Page <%= currentPage %> | Spirit of Freedom Kennel<% } else { %>Blog & Actualités | Spirit of Freedom Kennel<% } %></title>
+        <meta name="description" content="Découvrez nos articles sur l'élevage d'American Bully. Conseils pratiques, actualités, portées à venir et vie quotidienne du Spirit of Freedom Kennel à Codognan, dans le Gard.">
+        <meta name="keywords" content="blog élevage canin, american bully conseils, american bully actualités, portées chiots, spirit of freedom kennel blog, actualités chiens, conseils éleveur, blog american bully, élevage gard">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/blog<%= currentPage > 1 ? '?page=' + currentPage : '' %>">
+        <% if (currentPage > 1) { %>
+        <link rel="prev" href="https://spiritoffreedomkennel.com/blog<%= currentPage > 2 ? '?page=' + (currentPage - 1) : '' %>">
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+        <link rel="next" href="https://spiritoffreedomkennel.com/blog?page=<%= currentPage + 1 %>">
+        <% } %>
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Blog & Actualités | Spirit of Freedom Kennel">
+        <meta property="og:description" content="Suivez l'actualité du Spirit of Freedom Kennel à Codognan : articles, conseils pratiques sur l'American Bully et vie quotidienne de l'élevage.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/blog">
+        <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Blog & Actualités - Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Blog & Actualités | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Suivez l'actualité du Spirit of Freedom Kennel à Codognan, dans le Gard.">
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Blog & Actualités - Spirit of Freedom Kennel">
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/blog.css">
+    </head>
     <body class="h-100">
         <%- include('../front/frontEndAssets/header') %>
         <main style="padding-top: 70px;">
-            <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+            <section class="page-intro-section">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">Blog & Actualités</h1>
-                        <p class="page-hero-subtitle">
-                            Suivez l'actualité de notre élevage, découvrez nos conseils d'experts 
-                            et plongez dans l'univers passionnant de l'American Bully et du Springer Anglais. 
-                            Retrouvez ici tous nos articles, portées à venir et moments privilégiés partagés avec nos chiens.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="blog-filters-section mt-2">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                            <div class="blog-filters-wrapper" >
-                                <div class="filters-header">
-                                    <h2 class="filters-title">
-                                        <i class="fas fa-filter"></i>
-                                        Filtrer par catégorie
-                                    </h2>
-                                    <p class="filters-subtitle">
-                                        <%= totalItems %> article<%= totalItems > 1 ? 's' : '' %> disponible<%= totalItems > 1 ? 's' : '' %>
-                                    </p>
-                                </div>
-                                <button class="mobile-filters-toggle" id="mobileFiltersToggle">
-                                    <i class="fas fa-filter"></i>
-                                    <span>Sélectionner une catégorie</span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="blog-categories-list" id="blogCategoriesList">
-                                    <a href="/blog" class="category-filter-btn <%= !currentCategory ? 'active' : '' %>">
-                                        <i class="fas fa-th-large"></i>
-                                        Tous les articles
-                                        <span class="category-count"><%= totalItems %></span>
-                                    </a>
-                                    <% categories.forEach(category => { %>
-                                        <a href="/blog/categorie/<%= category.category_slug %>" 
-                                        class="category-filter-btn">
-                                            <i class="fas fa-tag"></i>
-                                            <%= category.content %>
-                                            <span class="category-count">
-                                                <%= category.count || 0 %>
-                                            </span>
-                                        </a>
-                                    <% }); %>
+                    <div class="specialty-text">
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <h4 class="specialty-title">Blog & <span class="text-gold">Actualités</span></h4>
+                                    <p>Retrouvez tous nos articles sur l'élevage d'American Bully, nos conseils pratiques, les actualités du Spirit of Freedom Kennel et la vie quotidienne de nos chiens à Codognan, dans le Gard.</p>
+                                    <p>Portées à venir, conseils d'élevage, informations sur le mond canin, restez informés de toute notre actualité.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="blog-articles-section mt-3">
+            <section class="blog-filters-section">
                 <div class="container">
-                    <% if (blogs.length > 0) { %>
-                        <div class="row g-4">
-                            <% blogs.forEach((blog, index) => { %>
-                                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
-                                    <article class="blog-card">
-                                        <div class="blog-card-image">
-                                        <% 
-                                            let blogImageSrc;
-                                            if (blog.optimized_image_path) {
-                                                blogImageSrc = '/uploads/optimized/' + blog.optimized_image_path;
-                                            } else if (blog.image_path) {
-                                                blogImageSrc = '/uploads/' + blog.image_path;
-                                            } else {
-                                                blogImageSrc = '/img/placeholder-blog.jpg';
-                                            }
-                                            
-                                            const blogFallbackSrc = blog.image_path ? 
-                                                '/uploads/' + blog.image_path : 
-                                                '/img/placeholder-blog.jpg';
-                                            %>
-                                        <a href="/blog/<%= blog.slug %>">
-                                        <img src="<%= blogImageSrc %>" 
-                                            alt="<%= blog.balise_alt || blog.titre %>" 
-                                            class="img-fluid"
-                                            onerror="this.onerror=null; this.src='<%= blogFallbackSrc %>';">
-                                        </a>
-                                            <% if (blog.category_content) { %>
-                                                <span class="blog-category-badge">
-                                                    <i class="fas fa-tag"></i>
-                                                    <%= blog.category_content %>
-                                                </span>
-                                            <% } %>
-                                        </div>
-                                        
-                                        <div class="blog-card-body">
-                                            <div class="blog-meta">
-                                                <span class="blog-date">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                    <%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { 
-                                                        year: 'numeric', 
-                                                        month: 'long', 
-                                                        day: 'numeric' 
-                                                    }) %>
-                                                </span>
-                                                <span class="blog-likes">
-                                                    <i class="fas fa-heart"></i>
-                                                    <%= blog.likes || 0 %>
-                                                </span>
-                                            </div>
-                                            <h2 class="blog-title">
-                                                <a href="/blog/<%= blog.slug %>">
-                                                    <%= blog.titre %>
-                                                </a>
-                                            </h2>
-                                            <% if (blog.preview) { %>
-                                            <p class="blog-preview">
-                                                <%= blog.preview.substring(0, 100) %><%= blog.preview.length > 100 ? '...' : '' %>
-                                            </p>
-                                            <% } %>
-                                            <% if (blog.keywords_with_count) { 
-                                                const tagsArray = blog.keywords_with_count.split(',').map(tag => {
-                                                    const parts = tag.split(':');
-                                                    return { 
-                                                        content: parts[0].trim(), 
-                                                        slug: parts[1].trim(), 
-                                                        count: parts[2] 
-                                                    };
-                                                }).slice(0, 3); // Limiter à 3 tags
-                                            %>
-                                                <% if (tagsArray.length > 0) { %>
-                                                    <div class="blog-tags">
-                                                        <% tagsArray.forEach(tag => { %>
-                                                            <a href="/blog/tag/<%= tag.slug %>" class="blog-tag-badge">
-                                                                <i class="fas fa-hashtag"></i>
-                                                                <%= tag.content.replace(/^#/, '') %>
-                                                            </a>
-                                                        <% }); %>
-                                                        <% if (blog.total_tags > 3) { %>
-                                                            <span class="blog-tag-more">+<%= blog.total_tags - 3 %></span>
-                                                        <% } %>
-                                                    </div>
-                                                <% } %>
-                                            <% } %>
-                                            <a href="/blog/<%= blog.slug %>" class="btn-read-more">
-                                                Lire la suite
-                                                <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                    </article>
-                                </div>
+                    <div class="blog-filters-wrapper">
+                        <div class="blog-filters-left">
+                            <span class="blog-filters-label">
+                            <i class="fas fa-filter"></i>Catégories
+                            </span>
+                            <div class="blog-filters-list" id="blogFiltersList">
+                                <a href="/blog" class="blog-filter-btn <%= !currentCategory ? 'active' : '' %>">
+                                <i class="fas fa-th-large"></i>
+                                Tous
+                                <span class="blog-filter-count"><%= totalItems %></span>
+                                </a>
+                                <% if (categories && categories.length > 0) { %>
+                                <% categories.forEach(category => { %>
+                                <% if (category.count > 0) { %>
+                                <a href="/blog/categorie/<%= category.category_slug %>"
+                                    class="blog-filter-btn <%= currentCategory === category.category_slug ? 'active' : '' %>">
+                                <i class="fas fa-tag"></i>
+                                <%= category.content %>
+                                <span class="blog-filter-count"><%= category.count %></span>
+                                </a>
+                                <% } %>
+                                <% }); %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="blog-filters-right">
+                            <span class="blog-article-count">
+                            <span class="blog-article-count-number"><%= totalItems %></span>
+                            article<%= totalItems > 1 ? 's' : '' %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-filters-mobile">
+                        <button class="blog-filters-toggle" id="blogFiltersToggle">
+                            <div class="blog-filters-toggle-left">
+                                <i class="fas fa-filter"></i>
+                                <span><% if (currentCategory) { %>
+                                <%= categories.find(c => c.category_slug === currentCategory)?.content || 'Catégorie' %>
+                                <% } else { %>
+                                Tous les articles
+                                <% } %></span>
+                            </div>
+                            <div class="blog-filters-toggle-right">
+                                <span class="blog-filter-count"><%= totalItems %></span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="blog-filters-menu" id="blogFiltersMenu">
+                            <a href="/blog" class="blog-filter-item <%= !currentCategory ? 'active' : '' %>">
+                            <i class="fas fa-th-large"></i>
+                            Tous les articles
+                            <span class="blog-filter-count ms-auto"><%= totalItems %></span>
+                            </a>
+                            <% if (categories && categories.length > 0) { %>
+                            <% categories.forEach(category => { %>
+                            <% if (category.count > 0) { %>
+                            <a href="/blog/categorie/<%= category.category_slug %>"
+                                class="blog-filter-item <%= currentCategory === category.category_slug ? 'active' : '' %>">
+                            <i class="fas fa-tag"></i>
+                            <%= category.content %>
+                            <span class="blog-filter-count ms-auto"><%= category.count %></span>
+                            </a>
+                            <% } %>
                             <% }); %>
+                            <% } %>
                         </div>
-                    <% } else { %>
-                        <div class="no-articles-found" data-aos="fade-up">
-                            <div class="no-articles-icon">
-                                <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </section>
+            <section class="blog-grid-section">
+                <div class="container">
+                    <% if (blogs && blogs.length > 0) { %>
+                    <%
+                        const featuredBlog = blogs[0];
+                        const restBlogs = blogs.slice(1);
+                        
+                        let featuredImageSrc;
+                        if (featuredBlog.optimized_image_path) {
+                            featuredImageSrc = '/uploads/optimized/' + featuredBlog.optimized_image_path;
+                        } else if (featuredBlog.image_path) {
+                            featuredImageSrc = '/uploads/' + featuredBlog.image_path;
+                        } else {
+                            featuredImageSrc = '/img/placeholder-blog.webp';
+                        }
+                        
+                        const featuredDate = new Date(featuredBlog.date_creation).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                        %>
+                    <article class="blog-featured" data-aos="fade-up">
+                        <div class="blog-featured-image">
+                            <a href="/blog/<%= featuredBlog.slug %>">
+                            <img src="<%= featuredImageSrc %>"
+                                alt="<%= featuredBlog.balise_alt || featuredBlog.titre %>"
+                                onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
+                            </a>
+                            <% if (featuredBlog.category_content) { %>
+                            <div class="blog-featured-category">
+                                <i class="fas fa-tag me-1"></i><%= featuredBlog.category_content %>
                             </div>
-                            <h3>Aucun article trouvé</h3>
-                            <p>Il n'y a pas encore d'articles dans cette catégorie.</p>
-                            <a href="/blog" class="btn-back-to-blog">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour à tous les articles
+                            <% } %>
+                            <div class="blog-featured-badge">
+                                <i class="fas fa-star me-1"></i>À la une
+                            </div>
+                        </div>
+                        <div class="blog-featured-content">
+                            <div class="blog-featured-meta">
+                                <span class="blog-meta-date">
+                                <i class="fas fa-calendar-alt"></i><%= featuredDate %>
+                                </span>
+                                <% if (featuredBlog.likes > 0) { %>
+                                <span class="blog-meta-likes">
+                                <i class="fas fa-heart"></i><%= featuredBlog.likes %>
+                                </span>
+                                <% } %>
+                            </div>
+                            <h2 class="blog-featured-title">
+                                <a href="/blog/<%= featuredBlog.slug %>"><%= featuredBlog.titre %></a>
+                            </h2>
+                            <% if (featuredBlog.preview) { %>
+                            <p class="blog-featured-preview"><%= featuredBlog.preview.length > 220 ? featuredBlog.preview.substring(0, 220) + '...' : featuredBlog.preview %></p>
+                            <% } %>
+                            <% if (featuredBlog.keywords && featuredBlog.keywords.length > 0) { %>
+                            <div class="blog-tags">
+                                <% featuredBlog.keywords.slice(0, 4).forEach(tag => { %>
+                                <a href="/blog/tag/<%= tag.slug %>" class="blog-tag">
+                                <%= tag.content %>
+                                </a>
+                                <% }); %>
+                            </div>
+                            <% } %>
+                            <a href="/blog/<%= featuredBlog.slug %>" class="btn-blog-read">
+                            Lire l'article <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
+                    </article>
+                    <% if (restBlogs.length > 0) { %>
+                    <div class="blog-grid">
+                        <% restBlogs.forEach((blog, index) => { %>
+                        <%
+                            let blogImageSrc;
+                            if (blog.optimized_image_path) {
+                                blogImageSrc = '/uploads/optimized/' + blog.optimized_image_path;
+                            } else if (blog.image_path) {
+                                blogImageSrc = '/uploads/' + blog.image_path;
+                            } else {
+                                blogImageSrc = '/img/placeholder-blog.webp';
+                            }
+                            
+                            const blogDate = new Date(blog.date_creation).toLocaleDateString('fr-FR', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                            });
+                            %>
+                        <article class="blog-card" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                            <div class="blog-card-image">
+                                <a href="/blog/<%= blog.slug %>">
+                                <img src="<%= blogImageSrc %>"
+                                    alt="<%= blog.balise_alt || blog.titre %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
+                                </a>
+                                <% if (blog.category_content) { %>
+                                <div class="blog-card-category">
+                                    <i class="fas fa-tag me-1"></i><%= blog.category_content %>
+                                </div>
+                                <% } %>
+                            </div>
+                            <div class="blog-card-content">
+                                <div class="blog-card-meta">
+                                    <span class="blog-meta-date">
+                                    <i class="fas fa-calendar-alt"></i><%= blogDate %>
+                                    </span>
+                                    <% if (blog.likes > 0) { %>
+                                    <span class="blog-meta-likes">
+                                    <i class="fas fa-heart"></i><%= blog.likes %>
+                                    </span>
+                                    <% } %>
+                                </div>
+                                <h3 class="blog-card-title">
+                                    <a href="/blog/<%= blog.slug %>"><%= blog.titre %></a>
+                                </h3>
+                                <% if (blog.preview) { %>
+                                <p class="blog-card-preview"><%= blog.preview.length > 155 ? blog.preview.substring(0, 155) + '...' : blog.preview %></p>
+                                <% } %>
+                                <% if (blog.keywords && blog.keywords.length > 0) { %>
+                                <div class="blog-tags">
+                                    <% blog.keywords.slice(0, 3).forEach(tag => { %>
+                                    <a href="/blog/tag/<%= tag.slug %>" class="blog-tag">
+                                    <%= tag.content %>
+                                    </a>
+                                    <% }); %>
+                                </div>
+                                <% } %>
+                                <a href="/blog/<%= blog.slug %>" class="btn-blog-read-sm">
+                                Lire <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <% }); %>
+                    </div>
+                    <% } %>
+                    <% } else { %>
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-dogs-message">
+                            <i class="fas fa-newspaper fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
+                            <h3>Aucun article disponible</h3>
+                            <p>Revenez bientôt pour découvrir nos prochains articles</p>
+                        </div>
+                    </div>
                     <% } %>
                 </div>
             </section>
             <% if (totalPages > 1) { %>
-                <section class="blog-pagination-section">
-                    <div class="container">
-                        <nav aria-label="Navigation des pages du blog">
-                            <ul class="blog-pagination">
-                                <% if (currentPage > 1) { %>
-                                    <li class="page-item">
-                                        <a href="/blog?page=<%= currentPage - 1 %>" class="page-link page-prev" aria-label="Page précédente">
-                                            <i class="fas fa-chevron-left"></i>
-                                            <span class="d-none d-md-inline">Précédent</span>
-                                        </a>
-                                    </li>
-                                <% } else { %>
-                                    <li class="page-item disabled">
-                                        <span class="page-link page-prev">
-                                            <i class="fas fa-chevron-left"></i>
-                                            <span class="d-none d-md-inline">Précédent</span>
-                                        </span>
-                                    </li>
-                                <% } %>
-                                <% 
-                                const maxVisiblePages = 5;
-                                let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-                                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-                                
-                                if (endPage - startPage < maxVisiblePages - 1) {
-                                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
-                                }
+            <section class="dog-pagination-section">
+                <div class="container">
+                    <nav aria-label="Navigation pagination" data-aos="fade-up">
+                        <ul class="dog-pagination">
+                            <% if (currentPage > 1) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Précédent</span>
+                                </a>
+                            </li>
+                            <% } %>
+                            <%
+                                let startPage = Math.max(1, currentPage - 2);
+                                let endPage = Math.min(totalPages, currentPage + 2);
+                                if (startPage > 1) {
                                 %>
-                                <% if (startPage > 1) { %>
-                                    <li class="page-item">
-                                        <a href="/blog?page=1" class="page-link">1</a>
-                                    </li>
-                                    <% if (startPage > 2) { %>
-                                        <li class="page-item disabled">
-                                            <span class="page-link page-ellipsis">...</span>
-                                        </li>
-                                    <% } %>
-                                <% } %>
-                                <% for (let i = startPage; i <= endPage; i++) { %>
-                                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-                                        <% if (i === currentPage) { %>
-                                            <span class="page-link"><%= i %></span>
-                                        <% } else { %>
-                                            <a href="/blog?page=<%= i %>" class="page-link"><%= i %></a>
-                                        <% } %>
-                                    </li>
-                                <% } %>
-                                <% if (endPage < totalPages) { %>
-                                    <% if (endPage < totalPages - 1) { %>
-                                        <li class="page-item disabled">
-                                            <span class="page-link page-ellipsis">...</span>
-                                        </li>
-                                    <% } %>
-                                    <li class="page-item">
-                                        <a href="/blog?page=<%= totalPages %>" class="page-link"><%= totalPages %></a>
-                                    </li>
-                                <% } %>
-                                <% if (hasNextPage) { %>
-                                    <li class="page-item">
-                                        <a href="/blog?page=<%= currentPage + 1 %>" class="page-link page-next" aria-label="Page suivante">
-                                            <span class="d-none d-md-inline">Suivant</span>
-                                            <i class="fas fa-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                <% } else { %>
-                                    <li class="page-item disabled">
-                                        <span class="page-link page-next">
-                                            <span class="d-none d-md-inline">Suivant</span>
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-                                    </li>
-                                <% } %>
-                            </ul>
-                        </nav>
+                            <li class="dog-pagination-item">
+                                <a href="?page=1" class="dog-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <% } %>
+                            <% for (let i = startPage; i <= endPage; i++) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= i %>"
+                                    class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                <%= i %>
+                                </a>
+                            </li>
+                            <% } %>
+                            <% if (endPage < totalPages) { %>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= totalPages %>" class="dog-pagination-link">
+                                <%= totalPages %>
+                                </a>
+                            </li>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
+                                <span>Suivant</span>
+                                <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                    <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
+                        Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
+                        (<%= totalItems %> article<%= totalItems > 1 ? 's' : '' %> au total)
                     </div>
-                </section>
+                </div>
+            </section>
             <% } %>
-            </main>
+            <section class="dog-cta-section">
+                <div class="container">
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Restez informés</span>
+                            <h2 class="dog-cta-title">Suivez l'actualité du <span class="text-gold">Spirit of Freedom Kennel</span></h2>
+                            <p class="dog-cta-text">Portées à venir, conseils d'élevage, Informations sur le monde canin, découvrez la vie quotidienne de notre élevage à Codognan, dans le Gard.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/chiots" class="btn-dog-cta-secondary">
+                            <i class="fas fa-paw me-2"></i>Voir les chiots
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
         <%- include('../front/frontEndAssets/footer') %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="/front/js/header.js"></script>
@@ -303,9 +379,9 @@
         </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const toggleBtn = document.getElementById("dogFiltersToggle");
-                const menu = document.getElementById("dogFiltersMenu");
-
+                const toggleBtn = document.getElementById("blogFiltersToggle");
+                const menu = document.getElementById("blogFiltersMenu");
+            
                 if (toggleBtn && menu) {
                     toggleBtn.addEventListener("click", function () {
                         menu.classList.toggle("active");
@@ -324,7 +400,7 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const toggleBtn = document.getElementById("mobileFiltersToggle");
                 const categoriesList = document.getElementById("blogCategoriesList");
-
+            
                 if (toggleBtn && categoriesList) {
                     toggleBtn.addEventListener("click", function () {
                         categoriesList.classList.toggle("active");

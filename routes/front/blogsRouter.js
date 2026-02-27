@@ -26,10 +26,15 @@ router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // get de la page blog
 router.get('/', (req, res) => {
-    const userId = 8;
-    const itemsPerPage = 6;
+    const userId = 10;
+    const itemsPerPage = 5;
     const currentPage = parseInt(req.query.page) || 1;
+
     if (req.query.page === '0' || req.query.page === '1') {
+        return res.redirect('/blog');
+    }
+
+    if (req.query.page && (isNaN(currentPage) || currentPage < 0)) {
         return res.redirect('/blog');
     }
 
@@ -38,21 +43,8 @@ router.get('/', (req, res) => {
         FROM blog 
         WHERE blog.user_id = ? AND blog.is_online = 1
     `;
-    db.query(countQuery, [userId], (err, countResult) => {
-        if (err) {
-            console.error('Erreur lors du comptage des blogs:', err);
-            return res.redirect('/erreur');
-        }
 
-        const totalItems = countResult[0].total;
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-        if (currentPage > totalPages) {
-            res.status(404);
-            return res.redirect(`/blog?page=${totalPages}`);
-        }
-        const offset = (currentPage - 1) * itemsPerPage;
-        const queryBlogs = `
+    const queryBlogs = `
         SELECT 
             blog.id,
             blog.titre,
@@ -80,62 +72,103 @@ router.get('/', (req, res) => {
             (SELECT optimized_image_path FROM blog_images WHERE blog_images.blog_id = blog.id LIMIT 1) AS optimized_image_path,
             (SELECT image_path FROM blog_images WHERE blog_images.blog_id = blog.id LIMIT 1) AS image_path,
             (SELECT balise_alt FROM blog_images WHERE blog_images.blog_id = blog.id LIMIT 1) AS balise_alt
-        FROM 
-            blog
-        LEFT JOIN 
-            blog_categorie ON blog.categorie_id = blog_categorie.id
-        WHERE 
-            blog.user_id = ? AND blog.is_online = 1
-        GROUP BY 
-            blog.id
-        ORDER BY 
-            blog.date_creation DESC
+        FROM blog
+        LEFT JOIN blog_categorie ON blog.categorie_id = blog_categorie.id
+        WHERE blog.user_id = ? AND blog.is_online = 1
+        GROUP BY blog.id
+        ORDER BY blog.date_creation DESC
         LIMIT ? OFFSET ?
     `;
 
-        const queryBlogCategories = `
-            SELECT 
-                bc.id, 
-                bc.content, 
-                bc.category_slug,
-                (
-                    SELECT COUNT(*) 
-                    FROM blog 
-                    WHERE blog.categorie_id = bc.id 
-                    AND blog.is_online = 1
-                    AND blog.user_id = ?
-                ) as count
-            FROM blog_categorie bc
-        `;
-        
+    const queryBlogCategories = `
+        SELECT 
+            bc.id, 
+            bc.content, 
+            bc.category_slug,
+            (
+                SELECT COUNT(*) 
+                FROM blog 
+                WHERE blog.categorie_id = bc.id 
+                AND blog.is_online = 1
+                AND blog.user_id = ?
+            ) as count
+        FROM blog_categorie bc
+    `;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    Promise.all([
+        new Promise((resolve, reject) => {
+            db.query(countQuery, [userId], (err, result) => {
+                if (err) reject(err); else resolve(result[0].total);
+            });
+        }),
+        new Promise((resolve, reject) => {
+            db.query(queryBlogCategories, [userId], (err, result) => {
+                if (err) reject(err); else resolve(result);
+            });
+        }),
+        new Promise((resolve, reject) => {
+            db.query(querySocialLinks, [userId], (err, result) => {
+                if (err) reject(err); else resolve(result);
+            });
+        })
+    ]).then(([totalItems, categories, socialLinks]) => {
+
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        if (currentPage > totalPages && totalPages > 0) {
+            return res.redirect(`/blog?page=${totalPages}`);
+        }
+
+        const offset = (currentPage - 1) * itemsPerPage;
+
         db.query(queryBlogs, [userId, itemsPerPage, offset], (err, blogs) => {
             if (err) {
                 console.error('Erreur lors de la récupération des blogs:', err);
                 return res.redirect('/erreur');
             }
 
-            db.query(queryBlogCategories, [userId], (err, categories) => {
-                if (err) {
-                    console.error('Erreur lors de la récupération des catégories de blogs:', err);
-                    return res.redirect('/erreur');
-                }
-                res.render('blog', {
-                    blogs: blogs,
-                    categories: categories,
-                    currentPage: currentPage,
-                    totalPages: totalPages,
-                    totalItems: totalItems,
-                    hasNextPage: currentPage < totalPages,
-                    currentCategory: req.query.category || null
-                });
+            res.render('blog', {
+                blogs: blogs.map(blog => ({
+                    ...blog,
+                    keywords: blog.keywords_with_count ? blog.keywords_with_count.split(',').map(k => {
+                        const parts = k.split(':');
+                        return {
+                            content: parts[0],
+                            slug: parts[1],
+                            count: parseInt(parts[2]) || 0
+                        };
+                    }) : []
+                })),
+                categories,
+                currentPage,
+                totalPages,
+                totalItems,
+                hasNextPage: currentPage < totalPages,
+                currentCategory: req.query.category || null,
+                socialLinks
             });
         });
+
+    }).catch(err => {
+        console.error('Erreur:', err);
+        res.redirect('/erreur');
     });
 });
 
 // route de la page de la liste des tags
 router.get('/tags', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const queryAllTags = `
         SELECT 
             bk.tag_slug,
@@ -552,7 +585,7 @@ router.post('/:slug/like', (req, res) => {
 // route pour afficher les détails d'un blog
 router.get('/:slug', (req, res) => {
     const slug = req.params.slug;
-    const userId = 8;
+    const userId = 10;
 
     // Ajout de la requête pour les FAQs
     const queryFaqs = `

@@ -288,6 +288,18 @@
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script> 
         <script src="/front/js/header.js"></script><script src="/front/js/aos.js"></script><script src="/front/js/fancybox.js"></script>
         <%- include('./partials/googleAnalytics') %>
+                <script>
+            AOS.init({
+                duration: 1000,
+                easing: "ease-in-out",
+                once: true,
+                offset: 120,
+                delay: 0,
+                anchorPlacement: "top-bottom",
+                mirror: false,
+                disable: "mobile",
+            });
+        </script>
         <script>
             document.querySelectorAll('.breed-accordion-header').forEach(btn => {
                 btn.addEventListener('click', () => {
