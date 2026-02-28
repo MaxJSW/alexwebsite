@@ -365,6 +365,28 @@
                     </div>
                 </div>
             </section>
+            <% if (animal.retreat == 1 || animal.retreat === true) { %>
+            <section class="dog-retreat-section pt-4">
+                <div class="container">
+                    <div class="dog-retreat-box" data-aos="fade-up">
+                        <div class="dog-retreat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="dog-retreat-content">
+                            <span class="dog-retreat-label">En retraite bien méritée</span>
+                            <p class="dog-retreat-text">
+                                <strong><%= animal.name %></strong> ne fait plus partie de l'élevage et profite désormais d'une retraite paisible. 
+                                Ce<%= animal.gender === 'Female' ? 'tte magnifique' : ' magnifique' %> <strong><%= animal.breed_name %></strong> 
+                                a contribué à notre programme d'élevage avec dévouement et nous 
+                                <%= animal.gender === 'Female' ? 'la' : 'le' %> remercions chaleureusement pour 
+                                <%= animal.gender === 'Female' ? 'sa' : 'son' %> contribution exceptionnelle.
+                                <%= animal.gender === 'Female' ? 'Elle a été une mère exemplaire et ses portées font notre fierté.' : 'Il a été un reproducteur d\'exception dont la descendance fait notre fierté.' %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <% } %>
             <% if (father || mother) { %>
             <section class="dog-detail-pedigree-section">
                 <div class="container">

@@ -1318,3 +1318,81 @@
         aspect-ratio: 4/3;
     }
 }
+
+
+
+
+/* ========================================
+   BLOC RETRAITE
+======================================== */
+
+.dog-retreat-section {
+    padding: 0 0 2rem;
+    background: #0d0d0d;
+}
+
+.dog-retreat-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.75rem 2rem;
+    background: #111111;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 4px solid #c9a84c;
+    border-radius: 12px;
+}
+
+.dog-retreat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a84c;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    animation: retreat-heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes retreat-heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.dog-retreat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.dog-retreat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.dog-retreat-text {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin: 0;
+}
+
+.dog-retreat-text strong { color: rgba(255,255,255,0.9); }
+
+/* Responsive */
+@media (max-width: 767px) {
+    .dog-retreat-box { padding: 1.5rem; gap: 1rem; }
+    .dog-retreat-icon { width: 40px; height: 40px; font-size: 1rem; }
+    .dog-retreat-text { font-size: 0.83rem; }
+}
+
+@media (max-width: 575px) {
+    .dog-retreat-box { padding: 1.25rem; flex-direction: column; gap: 0.85rem; }
+    .dog-retreat-icon { width: 36px; height: 36px; font-size: 0.9rem; }
+}

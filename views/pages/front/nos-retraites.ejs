@@ -1,90 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Nos Chiens à la Retraite | Élevage de Bel Air</title>
-    <meta name="description" content="Découvrez nos reproducteurs American Bully et Springer Anglais à la retraite. Élevage de Bel Air : après des années de service, nos chiens profitent d'une retraite bien méritée en Occitanie.">
-    <meta name="keywords" content="chiens retraités, reproducteurs retraite, american bully retraite, springer anglais retraite, anciens reproducteurs, élevage de bel air, retraite élevage">
-    <meta name="author" content="Élevage de Bel Air">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://elevagedebelair.com/nos-retraites">
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Nos Chiens à la Retraite - Élevage de Bel Air">
-    <meta property="og:description" content="Découvrez nos reproducteurs American Bully et Springer Anglais à la retraite : après des années de service, ils profitent d'une retraite bien méritée.">
-    <meta property="og:url" content="https://elevagedebelair.com/nos-retraites">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Nos Chiens à la Retraite - Élevage de Bel Air">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nos Chiens à la Retraite">
-    <meta name="twitter:description" content="Découvrez nos reproducteurs à la retraite : une retraite bien méritée.">
-    <meta name="twitter:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta name="twitter:image:alt" content="Nos Chiens à la Retraite - Élevage de Bel Air">
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/chiens.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Nos Retraités | Spirit of Freedom Kennel</title>
+        <meta name="description" content="Découvrez nos chiens retraités du Spirit of Freedom Kennel, des reproducteurs d'exception qui cherchent maintenant un foyer aimant.">
+        <meta name="keywords" content="chiens retraités élevage, reproducteurs retraite, american bully retraite, spirit of freedom kennel retraités, adoption gard, codognan">
+        <meta name="author" content="Spirit of Freedom Kennel">
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/nos-retraites<% if (currentPage > 1) { %>?page=<%= currentPage %><% } %>">
+        <meta name="language" content="fr">
+        <meta name="geo.region" content="FR-30">
+        <meta name="geo.placename" content="Codognan, Gard">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Spirit of Freedom Kennel">
+        <meta property="og:title" content="Nos Retraités | Spirit of Freedom Kennel">
+        <meta property="og:description" content="Découvrez nos chiens retraités du Spirit of Freedom Kennel qui cherchent un foyer aimant.">
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/nos-retraites">
+        <meta property="og:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Nos Retraités Spirit of Freedom Kennel">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Nos Retraités | Spirit of Freedom Kennel">
+        <meta name="twitter:description" content="Nos reproducteurs d'exception qui cherchent un foyer aimant.">
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com/img/og/og-image.webp">
+        <meta name="twitter:image:alt" content="Spirit of Freedom Kennel - Nos Retraités">
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css">
+        <link rel="stylesheet" href="/front/css/chiens.css">
+    </head>
     <body class="h-100">
         <%- include('../front/frontEndAssets/header') %>
-       <main style="padding-top: 70px;">
-            <section class="page-hero-simple">
-                <div class="page-hero-overlay"></div>
+        <main style="padding-top: 70px;">
+            <section class="page-intro-section">
                 <div class="container">
-                    <div class="page-hero-content">
-                        <h1 class="page-hero-title">Nos Retraités</h1>
-                        <p class="page-hero-subtitle">
-                            Après avoir consacré leur vie à transmettre leurs meilleures qualités, 
-                            nos reproducteurs et reproductrices méritent une retraite paisible et heureuse. 
-                            Découvrez ces compagnons exceptionnels qui ont fait la fierté de notre élevage 
-                            et qui profitent désormais d'une vie de famille bien méritée.
-                        </p>
+                    <div class="specialty-text">
+                        <div class="specialty-box-inline">
+                            <div class="specialty-top-bar"></div>
+                            <div class="specialty-grid">
+                                <div class="specialty-main">
+                                    <h1 class="specialty-title">Nos <span class="text-gold">Retraités</span></h1>
+                                    <p>Nos reproducteurs d'exception ont contribué à notre programme d'élevage avec dévouement et passion. Après des années de bons et loyaux services, ils méritent une retraite bien méritée.</p>
+                                    <p>Ces chiens sont disponibles à l'adoption dans des foyers aimants et expérimentés. N'hésitez pas à nous contacter pour en savoir plus sur chacun d'eux.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-
             <section class="dog-grid-section">
                 <div class="container">
                     <% if (animals && animals.length > 0) { %>
+                    <div class="breed-section-header" data-aos="fade-up">
+                        <div class="breed-section-header-left">
+                            <span class="label-tag">Retraités</span>
+                            <h2 class="breed-section-title">Nos <span class="text-gold">Retraités</span></h2>
+                        </div>
+                        <div class="breed-gallery-counter">
+                            <span class="counter-number"><%= totalItems %></span>
+                            <span class="counter-label">chien<%= totalItems > 1 ? 's' : '' %></span>
+                        </div>
+                    </div>
                     <div class="row g-4">
                         <% animals.forEach((animal, index) => { %>
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
                             <article class="dog-card">
                                 <div class="dog-card-image">
+                                    <%
+                                        let animalImageSrc;
+                                        if (animal.optimized_image_path) {
+                                            animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path;
+                                        } else if (animal.image_path) {
+                                            animalImageSrc = '/uploads/' + animal.image_path;
+                                        } else {
+                                            animalImageSrc = '/img/placeholder-dog.jpg';
+                                        }
+                                        %>
                                     <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                        <% let animalImageSrc; if (animal.optimized_image_path) { animalImageSrc = '/uploads/optimized/' + animal.optimized_image_path; } else if (animal.image_path) { animalImageSrc = '/uploads/' +
-                                        animal.image_path; } else { animalImageSrc = '/img/placeholder-dog.jpg'; } %>
-                                        <img src="<%= animalImageSrc %>" alt="<%= animal.balise_alt || animal.name %>" onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';" />
+                                    <img src="<%= animalImageSrc %>"
+                                        alt="<%= animal.balise_alt || animal.name %>"
+                                        onerror="this.onerror=null; this.src='/img/placeholder-dog.jpg';">
                                     </a>
-                                    <div class="dog-gender-badge <%= animal.gender === 'male' ? 'male' : 'female' %>">
-                                        <i class="fas <%= animal.gender === 'male' ? 'fa-mars' : 'fa-venus' %>"></i>
+                                    <div class="dog-gender-badge <%= animal.gender === 'Male' ? 'male' : 'female' %>">
+                                        <i class="fas <%= animal.gender === 'Male' ? 'fa-mars' : 'fa-venus' %>"></i>
+                                    </div>
+                                    <div class="ret-badge">
+                                        <i class="fas fa-heart"></i>
+                                        Retraité
                                     </div>
                                 </div>
                                 <div class="dog-card-body">
+                                    <div class="dog-card-top-bar"></div>
                                     <h3 class="dog-card-name">
-                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>">
-                                            <%= animal.name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>"><%= animal.name %></a>
                                     </h3>
                                     <div class="dog-card-race">
                                         <i class="fas fa-paw"></i>
-                                        <a href="/chiens/<%= animal.breed_slug %>">
-                                            <%= animal.breed_name %>
-                                        </a>
+                                        <a href="/chiens/<%= animal.breed_slug %>"><%= animal.breed_name %></a>
                                     </div>
-                                    
-                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="dog-card-btn">
-                                        Voir le profil
-                                        <i class="fas fa-arrow-right"></i>
+                                    <a href="/chiens/<%= animal.breed_slug %>/<%= animal.slug %>" class="btn-view-dog-card">
+                                    Voir le profil <i class="fas fa-arrow-right ms-2"></i>
                                     </a>
                                 </div>
                             </article>
@@ -92,14 +112,13 @@
                         <% }); %>
                     </div>
                     <% } else { %>
-                    <div class="text-center py-5">
-                        <div class="no-dogs-message" data-aos="fade-up">
-                            <i class="fas fa-paw fa-3x text-muted mb-4"></i>
-                            <h3>Aucun chien disponible</h3>
-                            <p class="text-muted mb-4">Aucun chien ne correspond à vos critères de recherche</p>
+                    <div class="text-center py-5" data-aos="fade-up">
+                        <div class="no-dogs-message">
+                            <i class="fas fa-heart fa-3x mb-4" style="color: rgba(201,168,76,0.3)"></i>
+                            <h3>Aucun retraité pour le moment</h3>
+                            <p>Nos reproducteurs sont encore en activité, revenez nous voir prochainement.</p>
                             <a href="/chiens" class="btn-back-dogs">
-                                <i class="fas fa-arrow-left me-2"></i>
-                                Retour à tous les chiens
+                            <i class="fas fa-arrow-left me-2"></i>Voir nos reproducteurs
                             </a>
                         </div>
                     </div>
@@ -114,52 +133,48 @@
                             <% if (currentPage > 1) { %>
                             <li class="dog-pagination-item">
                                 <a href="?page=<%= currentPage - 1 %>" class="dog-pagination-link prev">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>Précédent</span>
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Précédent</span>
                                 </a>
                             </li>
                             <% } %>
-                            <% 
-                            // Logique de pagination
-                            let startPage = Math.max(1, currentPage - 2);
-                            let endPage = Math.min(totalPages, currentPage + 2);
-                            
-                            // Première page
-                            if (startPage > 1) { %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=1" class="dog-pagination-link">1</a>
-                                </li>
-                                <% if (startPage > 2) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
+                            <%
+                                let startPage = Math.max(1, currentPage - 2);
+                                let endPage = Math.min(totalPages, currentPage + 2);
+                                if (startPage > 1) {
+                                %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=1" class="dog-pagination-link">1</a>
+                            </li>
+                            <% if (startPage > 2) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
                             <% } %>
                             <% for (let i = startPage; i <= endPage; i++) { %>
                             <li class="dog-pagination-item">
-                                <a href="?page=<%= i %>" 
-                                class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
-                                    <%= i %>
+                                <a href="?page=<%= i %>"
+                                    class="dog-pagination-link <%= i === currentPage ? 'active' : '' %>">
+                                <%= i %>
                                 </a>
                             </li>
                             <% } %>
                             <% if (endPage < totalPages) { %>
-                                <% if (endPage < totalPages - 1) { %>
-                                    <li class="dog-pagination-item">
-                                        <span class="dog-pagination-dots">...</span>
-                                    </li>
-                                <% } %>
-                                <li class="dog-pagination-item">
-                                    <a href="?page=<%= totalPages %>" class="dog-pagination-link">
-                                        <%= totalPages %>
-                                    </a>
-                                </li>
+                            <% if (endPage < totalPages - 1) { %>
+                            <li class="dog-pagination-item">
+                                <span class="dog-pagination-dots">...</span>
+                            </li>
+                            <% } %>
+                            <li class="dog-pagination-item">
+                                <a href="?page=<%= totalPages %>" class="dog-pagination-link"><%= totalPages %></a>
+                            </li>
                             <% } %>
                             <% if (currentPage < totalPages) { %>
                             <li class="dog-pagination-item">
                                 <a href="?page=<%= currentPage + 1 %>" class="dog-pagination-link next">
-                                    <span>Suivant</span>
-                                    <i class="fas fa-chevron-right"></i>
+                                <span>Suivant</span>
+                                <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
                             <% } %>
@@ -167,22 +182,25 @@
                     </nav>
                     <div class="dog-pagination-info" data-aos="fade-up" data-aos-delay="100">
                         Page <strong><%= currentPage %></strong> sur <strong><%= totalPages %></strong>
-                        (<%= totalItems %> chien(s) au total)
+                        (<%= totalItems %> chien<%= totalItems > 1 ? 's' : '' %> au total)
                     </div>
                 </div>
             </section>
             <% } %>
             <section class="dog-cta-section">
                 <div class="container">
-                    <div class="dog-cta-box" data-aos="zoom-in">
-                        <div class="dog-cta-content">
-                            <h2 class="dog-cta-title">Vous souhaitez adopter un chiot ?</h2>
-                            <p class="dog-cta-text">
-                                Contactez-nous pour plus d'informations sur nos reproducteurs, nos saillies et nos chiots disponibles
-                            </p>
-                            <a href="/contact" class="btn-dog-cta">
-                                <i class="fas fa-envelope me-2"></i>
-                                Nous Contacter
+                    <div class="dog-cta-box" data-aos="fade-up">
+                        <div class="dog-cta-left">
+                            <span class="label-tag">Intéressé ?</span>
+                            <h2 class="dog-cta-title">Offrez-leur une <span class="text-gold">retraite dorée</span></h2>
+                            <p class="dog-cta-text">Ces chiens exceptionnels ont donné le meilleur d'eux-mêmes. Ils cherchent maintenant un foyer aimant pour profiter d'une vie de famille bien méritée.</p>
+                        </div>
+                        <div class="dog-cta-right">
+                            <a href="/chiens" class="btn-dog-cta-secondary">
+                            <i class="fas fa-paw me-2"></i>Nos reproducteurs
+                            </a>
+                            <a href="/contact" class="btn-dog-cta-primary">
+                            <i class="fas fa-envelope me-2"></i>Nous contacter
                             </a>
                         </div>
                     </div>
@@ -204,25 +222,6 @@
                 anchorPlacement: "top-bottom",
                 mirror: false,
                 disable: "mobile",
-            });
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const toggleBtn = document.getElementById("dogFiltersToggle");
-                const menu = document.getElementById("dogFiltersMenu");
-
-                if (toggleBtn && menu) {
-                    toggleBtn.addEventListener("click", function () {
-                        menu.classList.toggle("active");
-                        toggleBtn.classList.toggle("active");
-                    });
-                    document.addEventListener("click", function (e) {
-                        if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
-                            menu.classList.remove("active");
-                            toggleBtn.classList.remove("active");
-                        }
-                    });
-                }
             });
         </script>
     </body>
