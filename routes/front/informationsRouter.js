@@ -28,7 +28,8 @@ router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Route pour afficher la page d'informations
 router.get('/', (req, res) => {
-    const userId = 8;
+    const userId = 10;
+
     const queryKennelInfo = `
         SELECT 
             ki.id AS kennel_info_id,
@@ -44,13 +45,31 @@ router.get('/', (req, res) => {
         LEFT JOIN kennel_images ki_img ON ki_img.kennel_infos_id = ki.id
         WHERE ki.user_id = ? AND ki.is_online = 1
     `;
- 
-    db.query(queryKennelInfo, [userId], (err, kennelInfo) => {
-        if (err) {
-            console.error('Erreur lors de la récupération des informations:', err);
-            return res.redirect('/erreur');
-        }
- 
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    Promise.all([
+        new Promise((resolve, reject) => {
+            db.query(queryKennelInfo, [userId], (err, result) => {
+                if (err) reject(err); else resolve(result);
+            });
+        }),
+        new Promise((resolve, reject) => {
+            db.query(querySocialLinks, [userId], (err, result) => {
+                if (err) reject(err); else resolve(result);
+            });
+        })
+    ]).then(([kennelInfo, socialLinks]) => {
+
         res.render('informations', {
             kennelInfo: kennelInfo.map(info => ({
                 titre: info.titre,
@@ -62,21 +81,26 @@ router.get('/', (req, res) => {
                 }),
                 slug: info.slug,
                 image: {
-                    path: info.optimized_image_path ? 
-                        `/uploads/optimized/${info.optimized_image_path}` : 
+                    path: info.optimized_image_path ?
+                        `/uploads/optimized/${info.optimized_image_path}` :
                         `/uploads/${info.image_path}`,
                     alt: info.balise_alt
                 }
-            }))
+            })),
+            socialLinks
         });
-    });
- });
 
+    }).catch(err => {
+        console.error('Erreur:', err);
+        res.redirect('/erreur');
+    });
+});
 
 // Route pour afficher la page d'informations détaillées
 router.get('/:slug', (req, res) => {
-    const userId = 8;
+    const userId = 10;
     const slug = req.params.slug;
+
     const queryKennelInfo = `
         SELECT 
             ki.id AS kennel_info_id, 
@@ -88,43 +112,61 @@ router.get('/:slug', (req, res) => {
             ki.user_id, 
             ki.is_online, 
             ki_img.image_path, 
-            ki_img.optimized_image_path,  -- Chemin de l'image optimisée
+            ki_img.optimized_image_path,
             ki_img.balise_alt
-        FROM 
-            kennel_informations ki
-        LEFT JOIN 
-            kennel_images ki_img ON ki_img.kennel_infos_id = ki.id
-        WHERE 
-            ki.user_id = ? AND ki.slug = ? AND ki.is_online = 1  -- Filtrer par l'ID de l'utilisateur, le slug et vérifier si c'est en ligne
+        FROM kennel_informations ki
+        LEFT JOIN kennel_images ki_img ON ki_img.kennel_infos_id = ki.id
+        WHERE ki.user_id = ? AND ki.slug = ? AND ki.is_online = 1
     `;
+
     const queryKennelParagraphs = `
         SELECT 
             kp.id, 
             kp.kennel_infos_id, 
             kp.title, 
             kp.content
-        FROM 
-            kennel_paragraphs kp
-        WHERE 
-            kp.kennel_infos_id = ?
+        FROM kennel_paragraphs kp
+        WHERE kp.kennel_infos_id = ?
     `;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    // Première requête pour récupérer les infos de base
     db.query(queryKennelInfo, [userId, slug], (err, kennelInfo) => {
         if (err) {
-            console.error('Erreur lors de la récupération des informations de l\'élevage:', err);
+            console.error('Erreur lors de la récupération des informations:', err);
             return res.redirect('/erreur');
         }
 
         if (kennelInfo.length === 0) {
-            return res.status(404).send('Information d\'élevage non trouvée');
+            return res.status(404).redirect('/erreur');
         }
 
         const kennelInfoId = kennelInfo[0].kennel_info_id;
 
-        db.query(queryKennelParagraphs, [kennelInfoId], (err, kennelParagraphs) => {
-            if (err) {
-                console.error('Erreur lors de la récupération des paragraphes de l\'élevage:', err);
-                return res.redirect('/erreur');
-            }
+        // Promise.all pour les requêtes suivantes
+        Promise.all([
+            new Promise((resolve, reject) => {
+                db.query(queryKennelParagraphs, [kennelInfoId], (err, result) => {
+                    if (err) reject(err); else resolve(result);
+                });
+            }),
+            new Promise((resolve, reject) => {
+                db.query(querySocialLinks, [userId], (err, result) => {
+                    if (err) reject(err); else resolve(result);
+                });
+            })
+        ]).then(([kennelParagraphs, socialLinks]) => {
+
             const imagePath = kennelInfo[0].optimized_image_path
                 ? `/uploads/optimized/${kennelInfo[0].optimized_image_path}`
                 : `/uploads/${kennelInfo[0].image_path}`;
@@ -133,10 +175,15 @@ router.get('/:slug', (req, res) => {
 
             res.render('informations_detail', {
                 kennelInfo: kennelInfo[0],
-                kennelParagraphs: kennelParagraphs,
+                kennelParagraphs,
                 ogImage: imagePath,
-                isAdoptSection
+                isAdoptSection,
+                socialLinks
             });
+
+        }).catch(err => {
+            console.error('Erreur Promise.all:', err);
+            res.redirect('/erreur');
         });
     });
 });

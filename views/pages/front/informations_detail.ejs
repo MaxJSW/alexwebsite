@@ -4,114 +4,211 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title><%= kennelInfo.titre %> | Élevage de Bel Air</title>
-        <meta name="description" content="<%= kennelInfo.description %>" />
-        <meta name="keywords" content="<%= kennelInfo.titre %>, informations élevage, guide american bully, guide springer anglais, élevage de bel air"/>
-        <meta name="author" content="Élevage de Bel Air" />
+        <title><%= kennelInfo.titre %> | Spirit of Freedom Kennel</title>
+        <meta name="description" content="<%= kennelInfo.description.substring(0, 160) %>" />
+        <meta name="keywords" content="<%= kennelInfo.titre.toLowerCase() %>, spirit of freedom kennel, american bully, élevage canin gard, codognan" />
+        <meta name="author" content="Spirit of Freedom Kennel" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
-        <link rel="canonical" href="https://elevagedebelair.com/informations/<%= kennelInfo.slug %>" />
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/informations/<%= kennelInfo.slug %>" />
         <meta name="language" content="fr" />
-        <meta name="geo.region" content="FR" />
-        <meta name="geo.placename" content="France" />
+        <meta name="geo.region" content="FR-30" />
+        <meta name="geo.placename" content="Codognan, Gard" />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Élevage de Bel Air" />
-        <meta property="og:title" content="<%= kennelInfo.titre %> | Élevage de Bel Air" />
-        <meta property="og:description" content="<%= kennelInfo.description %>" />
-        <meta property="og:url" content="https://elevagedebelair.com/informations/<%= kennelInfo.slug %>" />
-        <meta property="og:image" content="https://elevagedebelair.com<%= ogImage %>" />
+        <meta property="og:site_name" content="Spirit of Freedom Kennel" />
+        <meta property="og:title" content="<%= kennelInfo.titre %> | Spirit of Freedom Kennel" />
+        <meta property="og:description" content="<%= kennelInfo.description.substring(0, 160) %>" />
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/informations/<%= kennelInfo.slug %>" />
+        <meta property="og:image" content="https://spiritoffreedomkennel.com<%= ogImage %>" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="<%= kennelInfo.balise_alt || kennelInfo.titre %>" />
+        <meta property="og:image:alt" content="<%= kennelInfo.titre %>" />
         <meta property="og:locale" content="fr_FR" />
         <meta property="article:published_time" content="<%= new Date(kennelInfo.date_creation).toISOString() %>" />
+        <% if (kennelInfo.date_modification) { %>
         <meta property="article:modified_time" content="<%= new Date(kennelInfo.date_modification).toISOString() %>" />
+        <% } %>
+        <meta property="article:author" content="Spirit of Freedom Kennel" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="<%= kennelInfo.titre %> | Élevage de Bel Air" />
-        <meta name="twitter:description" content="<%= kennelInfo.description %>" />
-        <meta name="twitter:image" content="https://elevagedebelair.com<%= ogImage %>" />
-        <meta name="twitter:image:alt" content="<%= kennelInfo.balise_alt || kennelInfo.titre %>" />
-<%- include('../front/partials/head-meta-base.ejs') %>
-<%- include('../front/partials/head-fonts-libs.ejs') %>
-        <link rel="stylesheet" href="/front/css/navbar.css" /><link rel="stylesheet" href="/front/css/informations-detail.css" />
+        <meta name="twitter:title" content="<%= kennelInfo.titre %> | Spirit of Freedom Kennel" />
+        <meta name="twitter:description" content="<%= kennelInfo.description.substring(0, 160) %>" />
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com<%= ogImage %>" />
+        <meta name="twitter:image:alt" content="<%= kennelInfo.titre %>" />
+        <%- include('../front/partials/head-meta-base.ejs') %>
+        <%- include('../front/partials/head-fonts-libs.ejs') %>
+        <link rel="stylesheet" href="/front/css/navbar.css" />
+        <link rel="stylesheet" href="/front/css/informations-detail.css" />
     </head>
-        <body class="h-100">
-            <%- include('../front/frontEndAssets/header') %>
-            <main style="padding-top: 70px;">
-                <section class="page-hero-simple">
-                    <div class="page-hero-overlay"></div>
-                    <div class="container">
-                        <div class="page-hero-content">
-                            <h1 class="page-hero-title"><%= kennelInfo.titre %></h1>
-                            <p class="page-hero-subtitle">
-                                <%= kennelInfo.description %>
-                            </p>
-                        </div>
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
+        <main style="padding-top: 70px;">
+            <div class="info-breadcrumb-mobile">
+                <div class="container">
+                    <div class="info-breadcrumb">
+                        <a href="/"><i class="fas fa-home me-1"></i>Accueil</a>
+                        <span class="info-breadcrumb-sep">›</span>
+                        <a href="/informations"><i class="fas fa-info-circle me-1"></i>Informations</a>
+                        <span class="info-breadcrumb-sep">›</span>
+                        <span><%= kennelInfo.titre.length > 35 ? kennelInfo.titre.substring(0, 35) + '...' : kennelInfo.titre %></span>
                     </div>
-                </section>
-                <section class="info-detail-section">
-                    <div class="container">
-                        <nav aria-label="Fil d'Ariane" class="breadcrumb-nav" data-aos="fade-up">
-                            <ol class="breadcrumb-list">
-                                <li class="breadcrumb-item">
-                                    <a href="/">
-                                        <i class="fas fa-home"></i>
-                                        Accueil
-                                    </a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a class="ms-1" href="/informations">Informations</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                  <span class="ms-1"><%= kennelInfo.titre %></span>  
-                                </li>
-                            </ol>
-                        </nav>
-                        <div class="info-featured-image" data-aos="fade-up">
-                            <img src="<%= ogImage %>" 
-                                alt="<%= kennelInfo.balise_alt || kennelInfo.titre %>"
-                                class="img-fluid"
-                                onerror="this.onerror=null; this.src='/img/placeholder-info.jpg';">
-                        </div>
-                        <div class="info-meta-wrapper" data-aos="fade-up">
-                            <div class="info-meta-item">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>Publié le <%= new Date(kennelInfo.date_creation).toLocaleDateString('fr-FR', { 
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
-                                }) %></span>
-                            </div>
-                            <div class="info-meta-item">
-                                <i class="fas fa-sync-alt"></i>
-                                <span>Mis à jour le <%= new Date(kennelInfo.date_modification).toLocaleDateString('fr-FR', { 
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
-                                }) %></span>
+                </div>
+            </div>
+            <section class="infod-hero">
+                <div class="container">
+                    <div class="infod-hero-grid">
+                        <div class="infod-hero-left" data-aos="fade-right">
+                            <div class="infod-hero-image">
+                                <%
+                                    let heroImageSrc;
+                                    if (kennelInfo.optimized_image_path) {
+                                        heroImageSrc = '/uploads/optimized/' + kennelInfo.optimized_image_path;
+                                    } else if (kennelInfo.image_path) {
+                                        heroImageSrc = '/uploads/' + kennelInfo.image_path;
+                                    } else {
+                                        heroImageSrc = '/img/placeholder-blog.webp';
+                                    }
+                                    %>
+                                <img src="<%= heroImageSrc %>"
+                                    alt="<%= kennelInfo.balise_alt || kennelInfo.titre %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
                             </div>
                         </div>
-                        <div class="info-content" data-aos="fade-up">
-                            <% kennelParagraphs.forEach((paragraph, index) => { %>
-                                <div class="info-paragraph" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
-                                    <% if (paragraph.title) { %>
-                                        <h2 class="paragraph-title"><%= paragraph.title %></h2>
-                                    <% } %>
-                                    <div class="paragraph-content">
-                                        <%- paragraph.content %>
-                                    </div>
+                        <div class="infod-hero-right" data-aos="fade-left">
+                            <div class="info-breadcrumb infod-hero-breadcrumb desktop-only">
+                                <a href="/"><i class="fas fa-home me-1"></i>Accueil</a>
+                                <span class="info-breadcrumb-sep">›</span>
+                                <a href="/informations"><i class="fas fa-info-circle me-1"></i>Informations</a>
+                                <span class="info-breadcrumb-sep">›</span>
+                                <span><%= kennelInfo.titre.length > 40 ? kennelInfo.titre.substring(0, 40) + '...' : kennelInfo.titre %></span>
+                            </div>
+                            <div class="infod-hero-title-block">
+                                <div class="infod-hero-title-bar"></div>
+                                <h1 class="infod-hero-title"><%= kennelInfo.titre %></h1>
+                            </div>
+                            <div class="infod-hero-meta">
+                                <div class="infod-hero-meta-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Publié le <%= new Date(kennelInfo.date_creation).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
                                 </div>
-                            <% }); %>
-                        </div>
-                        <div class="back-to-list-wrapper" data-aos="fade-up">
-                            <a href="/informations" class="btn-back-to-list">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour aux informations
-                            </a>
+                                <% if (kennelInfo.date_modification) { %>
+                                <div class="infod-hero-meta-sep">•</div>
+                                <div class="infod-hero-meta-item">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Modifié le <%= new Date(kennelInfo.date_modification).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+                                </div>
+                                <% } %>
+                                <div class="infod-hero-meta-sep">•</div>
+                                <div class="infod-hero-meta-item">
+                                    <i class="fas fa-user"></i>
+                                    <span>Spirit of Freedom Kennel</span>
+                                </div>
+                            </div>
+                            <% if (kennelInfo.description) { %>
+                            <p class="infod-hero-description"><%= kennelInfo.description %></p>
+                            <% } %>
+                            <% if (isAdoptSection) { %>
+                            <div class="infod-hero-cta">
+                                <a href="/chiots/a-vendre" class="infod-cta-btn-primary">
+                                <i class="fas fa-paw me-2"></i>Voir les chiots disponibles
+                                </a>
+                                <a href="/contact" class="infod-cta-btn-secondary">
+                                <i class="fas fa-envelope me-2"></i>Nous contacter
+                                </a>
+                            </div>
+                            <% } %>
+                            <div class="infod-hero-share">
+                                <span class="infod-hero-share-label">Partager :</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https://spiritoffreedomkennel.com/informations/<%= kennelInfo.slug %>" 
+                                    target="_blank" rel="noopener" class="infod-share-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url=https://spiritoffreedomkennel.com/informations/<%= kennelInfo.slug %>&text=<%= encodeURIComponent(kennelInfo.titre) %>" 
+                                    target="_blank" rel="noopener" class="infod-share-btn twitter">
+                                <i class="fab fa-x-twitter"></i>
+                                </a>
+                                <a href="https://wa.me/?text=<%= encodeURIComponent(kennelInfo.titre + ' - https://spiritoffreedomkennel.com/informations/' + kennelInfo.slug) %>" 
+                                    target="_blank" rel="noopener" class="infod-share-btn whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </section>
-            </main>
+                </div>
+            </section>
+            <section class="infod-content-section">
+                <div class="container">
+                    <div class="infod-content-grid">
+                        <div class="infod-main">
+                            <% if (kennelParagraphs && kennelParagraphs.length > 0) { %>
+                            <div class="infod-paragraphs">
+                                <% kennelParagraphs.forEach((paragraph, index) => { %>
+                                <div class="infod-paragraph" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                                    <% if (paragraph.title) { %>
+                                    <h2 class="infod-paragraph-title"><%= paragraph.title %></h2>
+                                    <% } %>
+                                    <% if (paragraph.content) { %>
+                                    <div class="infod-paragraph-content"><%- paragraph.content %></div>
+                                    <% } %>
+                                </div>
+                                <% }); %>
+                            </div>
+                            <% } %>
+                        </div>
+                        <aside class="infod-sidebar">
+                            <div class="infod-sidebar-widget" data-aos="fade-left">
+                                <div class="infod-sidebar-widget-header">
+                                    <div class="infod-sidebar-bar"></div>
+                                    <h3 class="infod-sidebar-widget-title">Autres informations</h3>
+                                </div>
+                                <div class="infod-sidebar-links">
+                                    <a href="/informations" class="infod-sidebar-link">
+                                        <div class="infod-sidebar-link-left">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Toutes les informations</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                    <a href="/blog" class="infod-sidebar-link">
+                                        <div class="infod-sidebar-link-left">
+                                            <i class="fas fa-newspaper"></i>
+                                            <span>Notre blog</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                    <a href="/races" class="infod-sidebar-link">
+                                        <div class="infod-sidebar-link-left">
+                                            <i class="fas fa-dog"></i>
+                                            <span>Nos races</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                    <a href="/mariages" class="infod-sidebar-link">
+                                        <div class="infod-sidebar-link-left">
+                                            <i class="fas fa-heart"></i>
+                                            <span>Nos mariages</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="infod-sidebar-widget infod-sidebar-cta" data-aos="fade-left" data-aos-delay="100">
+                                <div class="infod-sidebar-cta-icon">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <h3 class="infod-sidebar-cta-title">Un chiot vous intéresse ?</h3>
+                                <p class="infod-sidebar-cta-text">Contactez-nous pour en savoir plus sur nos chiots disponibles et nos prochaines portées.</p>
+                                <a href="/contact" class="infod-sidebar-cta-btn">
+                                <i class="fas fa-envelope me-2"></i>Nous contacter
+                                </a>
+                                <a href="/chiots/a-vendre" class="infod-sidebar-cta-btn-secondary">
+                                <i class="fas fa-paw me-2"></i>Voir les chiots
+                                </a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </main>
         <%- include('../front/frontEndAssets/footer') %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="/front/js/header.js"></script>
@@ -130,27 +227,33 @@
             });
         </script>
         <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": "<%= kennelInfo.titre %>",
-            "description": "<%= kennelInfo.description %>",
-            "image": "https://elevagedebelair.com<%= ogImage %>",
-            "datePublished": "<%= new Date(kennelInfo.date_creation).toISOString() %>",
-            "dateModified": "<%= new Date(kennelInfo.date_modification).toISOString() %>",
-            "author": {
-                "@type": "Organization",
-                "name": "Élevage de Bel Air"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Élevage de Bel Air",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://elevagedebelair.com/images/logo.png"
+            {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "<%= kennelInfo.titre %>",
+                "description": "<%= kennelInfo.description.replace(/"/g, '\\"').replace(/\n/g, ' ') %>",
+                "image": "https://spiritoffreedomkennel.com<%= ogImage %>",
+                "datePublished": "<%= new Date(kennelInfo.date_creation).toISOString() %>",
+                "dateModified": "<%= kennelInfo.date_modification ? new Date(kennelInfo.date_modification).toISOString() : new Date(kennelInfo.date_creation).toISOString() %>",
+                "author": {
+                    "@type": "Organization",
+                    "name": "Spirit of Freedom Kennel",
+                    "url": "https://spiritoffreedomkennel.com"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Spirit of Freedom Kennel",
+                    "url": "https://spiritoffreedomkennel.com",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://spiritoffreedomkennel.com/img/logo.webp"
+                    }
+                },
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://spiritoffreedomkennel.com/informations/<%= kennelInfo.slug %>"
                 }
             }
-        }
         </script>
     </body>
 </html>
