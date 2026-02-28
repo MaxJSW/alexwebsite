@@ -6,30 +6,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title><%= blog.titre %></title>
         <meta name="description" content="<%= blog.preview %>" />
-        <meta name="keywords" content="<%= keywords %>, élevage de bel air, american bully, springer anglais, blog élevage canin"/>
-        <meta name="author" content="<%= userInfo.kennel_name %>" />
+        <meta name="keywords" content="<%= keywords %>, spirit of freedom kennel, american bully, élevage canin gard, blog élevage, codognan, chiots ABKC FBKC" />
+        <meta name="author" content="<%= userInfo.kennel_name || 'Spirit of Freedom Kennel' %>" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
-        <link rel="canonical" href="https://elevagedebelair.com/blog/<%= blog.slug %>" />
+        <link rel="canonical" href="https://spiritoffreedomkennel.com/blog/<%= blog.slug %>" />
         <meta name="language" content="fr" />
-        <meta name="geo.region" content="FR" />
-        <meta name="geo.placename" content="France" />
+        <meta name="geo.region" content="FR-30" />
+        <meta name="geo.placename" content="Codognan, Gard" />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Élevage de Bel Air" />
-        <meta property="og:title" content="<%= blog.titre %>" />
+        <meta property="og:site_name" content="Spirit of Freedom Kennel" />
+        <meta property="og:title" content="<%= blog.titre %> | Spirit of Freedom Kennel" />
         <meta property="og:description" content="<%= blog.preview %>" />
-        <meta property="og:url" content="https://elevagedebelair.com/blog/<%= blog.slug %>" />
-        <% 
+        <meta property="og:url" content="https://spiritoffreedomkennel.com/blog/<%= blog.slug %>" />
+        <%
             let socialImagePath;
             if (blogImage && blogImage.optimized_image_path) {
                 socialImagePath = '/uploads/optimized/' + blogImage.optimized_image_path;
             } else if (blogImage && blogImage.image_path) {
                 socialImagePath = '/uploads/' + blogImage.image_path;
             } else {
-                socialImagePath = '/images/og-image-blog.jpg';
+                socialImagePath = '/img/og/og-image.webp';
             }
-        %>
-        <meta property="og:image" content="https://elevagedebelair.com<%= socialImagePath %>" />
+            %>
+        <meta property="og:image" content="https://spiritoffreedomkennel.com<%= socialImagePath %>" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="<%= blogImage.balise_alt || blog.titre %>" />
@@ -38,285 +38,320 @@
         <% if (blog.date_modification) { %>
         <meta property="article:modified_time" content="<%= new Date(blog.date_modification).toISOString() %>" />
         <% } %>
-        <meta property="article:author" content="<%= userInfo.kennel_name %>" />
-        <meta property="article:section" content="<%= blog.category_content %>" />
+        <meta property="article:author" content="<%= userInfo.kennel_name || 'Spirit of Freedom Kennel' %>" />
+        <meta property="article:section" content="<%= blog.category_content || 'Blog' %>" />
         <% tags.forEach(tag => { if (tag.tag_content) { %>
         <meta property="article:tag" content="<%= tag.tag_content %>" />
         <% }}); %>
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="<%= blog.titre %>" />
+        <meta name="twitter:title" content="<%= blog.titre %> | Spirit of Freedom Kennel" />
         <meta name="twitter:description" content="<%= blog.preview %>" />
-        <meta name="twitter:image" content="https://elevagedebelair.com<%= socialImagePath %>" />
+        <meta name="twitter:image" content="https://spiritoffreedomkennel.com<%= socialImagePath %>" />
         <meta name="twitter:image:alt" content="<%= blogImage.balise_alt || blog.titre %>" />
         <%- include('../front/partials/head-meta-base.ejs') %>
         <%- include('../front/partials/head-fonts-libs.ejs') %>
-        <link rel="stylesheet" href="/front/css/navbar.css"/><link rel="stylesheet" href="/front/css/blog.css"/><link rel="stylesheet" href="/front/css/blog-details.css"/>
+        <link rel="stylesheet" href="/front/css/navbar.css" />
+        <link rel="stylesheet" href="/front/css/blog.css" />
+        <link rel="stylesheet" href="/front/css/blog-details.css" />
     </head>
-      <body class="h-100">
+    <body class="h-100">
+        <%- include('../front/frontEndAssets/header') %>
         <main style="padding-top: 70px;">
-           <%- include('../front/frontEndAssets/header') %>
+            <div class="blog-breadcrumb-mobile">
+                <div class="container">
+                    <div class="blog-breadcrumb">
+                        <a href="/blog"><i class="fas fa-newspaper me-1"></i>Blog</a>
+                        <span class="breadcrumb-sep">›</span>
+                        <% if (blog.category_content) { %>
+                        <a href="/blog/<%= blog.category_slug %>"><%= blog.category_content %></a>
+                        <span class="breadcrumb-sep">›</span>
+                        <% } %>
+                        <span><%= blog.titre.length > 35 ? blog.titre.substring(0, 35) + '...' : blog.titre %></span>
+                    </div>
+                </div>
+            </div>
             <section class="blog-detail-hero">
-                <div class="container mt-2">
-                    <nav aria-label="Fil d'Ariane" class="breadcrumb-nav mt-5" data-aos="fade-down">
-                        <ol class="breadcrumb-list">
-                            <li class="breadcrumb-item">
-                                <a href="/"><i class="fas fa-home"></i> Accueil</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a class="ms-1" href="/blog">Blog</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                            <span class="ms-1"><%= blog.titre %></span> 
-                            </li>
-                        </ol>
-                    </nav>
-
-                    <div class="row">
-                        <div class="col-lg-5" data-aos="fade-right">
-                            <div class="article-image-wrapper">
-                                <% 
-                                let articleImageSrc;
-                                if (blogImage && blogImage.optimized_image_path) {
-                                    articleImageSrc = '/uploads/optimized/' + blogImage.optimized_image_path;
-                                } else if (blogImage && blogImage.image_path) {
-                                    articleImageSrc = '/uploads/' + blogImage.image_path;
-                                } else {
-                                    articleImageSrc = '/img/placeholder-blog.jpg';
-                                }
-                                
-                                const articleFallbackSrc = blogImage && blogImage.image_path ? 
-                                    '/uploads/' + blogImage.image_path : 
-                                    '/img/placeholder-blog.jpg';
-                                %>
-                                <img src="<%= articleImageSrc %>" 
-                                    alt="<%= blogImage.balise_alt || blog.titre %>" 
-                                    class="article-main-image"
-                                    onerror="this.onerror=null; this.src='<%= articleFallbackSrc %>';">
+                <div class="container">
+                    <div class="blog-detail-hero-grid">
+                        <div class="blog-detail-hero-left" data-aos="fade-right">
+                            <div class="blog-detail-hero-image">
+                                <%
+                                    let heroImageSrc;
+                                    if (blogImage && blogImage.optimized_image_path) {
+                                        heroImageSrc = '/uploads/optimized/' + blogImage.optimized_image_path;
+                                    } else if (blogImage && blogImage.image_path) {
+                                        heroImageSrc = '/uploads/' + blogImage.image_path;
+                                    } else {
+                                        heroImageSrc = '/img/placeholder-blog.webp';
+                                    }
+                                    %>
+                                <img src="<%= heroImageSrc %>"
+                                    alt="<%= blogImage.balise_alt || blog.titre %>"
+                                    onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
+                                <% if (blog.category_content) { %>
+                                <div class="blog-detail-category-badge">
+                                    <i class="fas fa-tag me-1"></i><%= blog.category_content %>
+                                </div>
+                                <% } %>
                             </div>
                         </div>
-                        <div class="col-lg-7" data-aos="fade-left">
-                            <div class="article-header-info">
-                                <% if (blog.category_content && blog.category_slug) { %>
-                                <a href="/blog/categorie/<%= blog.category_slug %>" class="article-category-badge">
-                                    <i class="fas fa-folder"></i>
-                                    <%= blog.category_content %>
-                                </a>
+                        <div class="blog-detail-hero-right" data-aos="fade-left">
+                            <div class="blog-breadcrumb desktop-only">
+                                <a href="/blog"><i class="fas fa-newspaper me-1"></i>Blog</a>
+                                <span class="breadcrumb-sep">›</span>
+                                <% if (blog.category_content) { %>
+                                <a href="/blog/categorie/<%= blog.category_slug %>"><%= blog.category_content %></a>
+                                <span class="breadcrumb-sep">›</span>
                                 <% } %>
-                                <h1 class="article-title"><%= blog.titre %></h1>
-                                <div class="article-meta-info">
-                                    <span class="meta-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        }) %>
-                                    </span>
-                                    <% if (blog.date_modification) { %>
-                                    <span class="meta-updated">
-                                        <i class="fas fa-sync-alt"></i>
-                                        Mis à jour le <%= new Date(blog.date_modification).toLocaleDateString('fr-FR', { 
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric'
-                                        }) %>
-                                    </span>
-                                    <% } %>
-                                    <span class="meta-likes">
-                                        <i class="fas fa-heart"></i>
-                                        <span id="likesCount"><%= blog.likes || 0 %></span> J'aime
-                                    </span>
+                                <span><%= blog.titre.length > 40 ? blog.titre.substring(0, 40) + '...' : blog.titre %></span>
+                            </div>
+                            <div class="blog-detail-title-block">
+                                <div class="blog-detail-title-bar"></div>
+                                <h1 class="blog-detail-title"><%= blog.titre %></h1>
+                            </div>
+                            <div class="blog-detail-meta">
+                                <div class="blog-detail-meta-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span><%= new Date(blog.date_creation).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
                                 </div>
-                                <% if (blog.preview) { %>
-                                <p class="article-preview"><%- blog.preview %></p>
-                                <% } %>
-                                <% if (tags && tags.length > 0) { %>
-                                <div class="article-tags-list">
-                                    <% tags.forEach(tag => { if (tag.tag_content && tag.tag_slug) { %>
-                                    <a href="/blog/tag/<%= tag.tag_slug %>" class="tag-link">
-                                        <i class="fas fa-hashtag"></i><%= tag.tag_content.replace(/^#/, '') %>
-                                    </a>
-                                    <% }}); %>
+                                <% if (blog.date_modification) { %>
+                                <div class="blog-detail-meta-sep">•</div>
+                                <div class="blog-detail-meta-item">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Modifié le <%= new Date(blog.date_modification).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
                                 </div>
                                 <% } %>
-                                <!-- <button class="btn-like-article" id="likeButton" data-slug="<%= blog.slug %>">
+                                <% if (blog.likes > 0) { %>
+                                <div class="blog-detail-meta-sep">•</div>
+                                <div class="blog-detail-meta-item">
                                     <i class="fas fa-heart"></i>
-                                    J'aime cet article
-                                </button> -->
+                                    <span><%= blog.likes %> j'aime</span>
+                                </div>
+                                <% } %>
+                                <div class="blog-detail-meta-sep">•</div>
+                                <div class="blog-detail-meta-item">
+                                    <i class="fas fa-user"></i>
+                                    <span>Spirit of Freedom Kennel</span>
+                                </div>
+                            </div>
+                            <% if (blog.preview) { %>
+                            <p class="blog-detail-preview"><%= blog.preview %></p>
+                            <% } %>
+                            <% if (tags && tags.some(t => t.tag_content)) { %>
+                            <div class="blog-tags">
+                                <% tags.forEach(tag => { if (tag.tag_content) { %>
+                                <a href="/blog/tag/<%= tag.tag_slug %>" class="blog-tag">
+                                <%= tag.tag_content %>
+                                </a>
+                                <% }}); %>
+                            </div>
+                            <% } %>
+                            <div class="blog-detail-share">
+                                <span class="blog-detail-share-label">Partager :</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https://spiritoffreedomkennel.com/blog/<%= blog.slug %>" 
+                                    target="_blank" rel="noopener" class="blog-share-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url=https://spiritoffreedomkennel.com/blog/<%= blog.slug %>&text=<%= encodeURIComponent(blog.titre) %>" 
+                                    target="_blank" rel="noopener" class="blog-share-btn twitter">
+                                <i class="fab fa-x-twitter"></i>
+                                </a>
+                                <a href="https://wa.me/?text=<%= encodeURIComponent(blog.titre + ' - https://spiritoffreedomkennel.com/blog/' + blog.slug) %>" 
+                                    target="_blank" rel="noopener" class="blog-share-btn whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="article-content-section">
+            <section class="blog-detail-content-section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <article class="article-main-content" data-aos="fade-up">
-                                <% if (blogParagraphs && blogParagraphs.length > 0) { %>
-                                    <% blogParagraphs.forEach((paragraph, index) => { %>
-                                        <div class="article-paragraph" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
-                                            <% if (paragraph.title) { %>
-                                                <h2 class="paragraph-title"><%= paragraph.title %></h2>
-                                            <% } %>
-                                            <% if (paragraph.content) { %>
-                                                <div class="paragraph-content">
-                                                    <%- paragraph.content %>
-                                                </div>
-                                            <% } %>
-                                        </div>
+                    <div class="blog-detail-content-grid">
+                        <div class="blog-detail-main">
+                            <% if (blogParagraphs && blogParagraphs.length > 0) { %>
+                            <div class="blog-detail-paragraphs">
+                                <% blogParagraphs.forEach((paragraph, index) => { %>
+                                <div class="blog-detail-paragraph" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                                    <% if (paragraph.title) { %>
+                                    <h2 class="blog-paragraph-title"><%= paragraph.title %></h2>
+                                    <% } %>
+                                    <% if (paragraph.content) { %>
+                                    <div class="blog-paragraph-content"><%- paragraph.content %></div>
+                                    <% } %>
+                                </div>
+                                <% }); %>
+                            </div>
+                            <% } %>
+                            <% if (suppPhotos && suppPhotos.length > 0) { %>
+                            <div class="blog-detail-supp-photos" data-aos="fade-up">
+                                <div class="blog-supp-photos-header">
+                                    <div class="blog-supp-photos-bar"></div>
+                                    <h3 class="blog-supp-photos-title">Galerie photos</h3>
+                                </div>
+                                <div class="blog-supp-photos-grid">
+                                    <% suppPhotos.forEach((photo, index) => { %>
+                                    <%
+                                        let suppPhotoSrc;
+                                        if (photo.optimized_image_path) {
+                                            suppPhotoSrc = '/uploads/optimized/' + photo.optimized_image_path;
+                                        } else {
+                                            suppPhotoSrc = '/uploads/' + photo.image_path;
+                                        }
+                                        %>
+                                    <div class="blog-supp-photo-item">
+                                        <a href="<%= suppPhotoSrc %>" 
+                                            data-fancybox="gallery"
+                                            data-caption="<%= photo.balise_alt || '' %>">
+                                            <img src="<%= suppPhotoSrc %>"
+                                                alt="<%= photo.balise_alt || '' %>"
+                                                onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
+                                            <div class="blog-supp-photo-overlay">
+                                                <i class="fas fa-expand"></i>
+                                            </div>
+                                        </a>
+                                        <% if (photo.balise_title) { %>
+                                        <span class="blog-supp-photo-caption"><%= photo.balise_title %></span>
+                                        <% } %>
+                                    </div>
                                     <% }); %>
-                                <% } %>
-                                <% if (suppPhotos && suppPhotos.length > 0) { %>
-                                    <div class="article-gallery" data-aos="fade-up">
-                                        <h3 class="gallery-title">
-                                            <i class="fas fa-images"></i>
-                                            Photos supplémentaires
-                                        </h3>
-                                        <div class="row g-3">
-                                            <% suppPhotos.forEach((photo, index) => { %>
-                                                <div class="col-md-6" data-aos="zoom-in" data-aos-delay="<%= index * 50 %>">
-                                                    <div class="gallery-item">
-                                                        <% 
-                                                        let photoSrc = photo.optimized_image_path ? 
-                                                            '/uploads/optimized/' + photo.optimized_image_path : 
-                                                            '/uploads/' + photo.image_path;
-                                                        let photoFallback = '/uploads/' + photo.image_path;
-                                                        %>
-                                                        <img src="<%= photoSrc %>" 
-                                                            alt="<%= photo.balise_alt || 'Photo supplémentaire' %>" 
-                                                            title="<%= photo.balise_title || '' %>"
-                                                            class="gallery-image"
-                                                            onerror="this.onerror=null; this.src='<%= photoFallback %>';">
-                                                    </div>
-                                                </div>
-                                            <% }); %>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% if (faqs && faqs.length > 0) { %>
+                            <div class="blog-detail-faq" data-aos="fade-up">
+                                <div class="blog-faq-header">
+                                    <div class="blog-supp-photos-bar"></div>
+                                    <h3 class="blog-supp-photos-title">Questions fréquentes</h3>
+                                </div>
+                                <div class="blog-faq-list">
+                                    <% faqs.forEach((faq, index) => { %>
+                                    <div class="blog-faq-item">
+                                        <button class="blog-faq-question" data-faq="<%= index %>">
+                                        <span><%= faq.question %></span>
+                                        <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                        <div class="blog-faq-answer" id="faq-<%= index %>">
+                                            <div class="blog-faq-answer-inner"><%- faq.reponse %></div>
                                         </div>
                                     </div>
-                                <% } %>
-                                <% if (faqs && faqs.length > 0) { %>
-                                    <div class="article-faq" data-aos="fade-up">
-                                        <h3 class="faq-title">
-                                            <i class="fas fa-question-circle"></i>
-                                            Questions fréquentes
-                                        </h3>
-                                        <div class="accordion" id="faqAccordion">
-                                            <% faqs.forEach((faq, index) => { %>
-                                                <div class="accordion-item">
-                                                    <h4 class="accordion-header" id="faqHeading<%= index %>">
-                                                        <button class="accordion-button <%= index !== 0 ? 'collapsed' : '' %>" 
-                                                                type="button" 
-                                                                data-bs-toggle="collapse" 
-                                                                data-bs-target="#faqCollapse<%= index %>" 
-                                                                aria-expanded="<%= index === 0 ? 'true' : 'false' %>" 
-                                                                aria-controls="faqCollapse<%= index %>">
-                                                            <%= faq.question %>
-                                                        </button>
-                                                    </h4>
-                                                    <div id="faqCollapse<%= index %>" 
-                                                        class="accordion-collapse collapse <%= index === 0 ? 'show' : '' %>" 
-                                                        aria-labelledby="faqHeading<%= index %>" 
-                                                        data-bs-parent="#faqAccordion">
-                                                        <div class="accordion-body">
-                                                            <%= faq.reponse %>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <% }); %>
-                                        </div>
-                                    </div>
-                                <% } %>
-                            </article>
+                                    <% }); %>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% if (tags && tags.some(t => t.tag_content)) { %>
+                            <div class="blog-detail-tags-footer" data-aos="fade-up">
+                                <span class="blog-detail-tags-label">
+                                <i class="fas fa-tags me-2"></i>Tags :
+                                </span>
+                                <div class="blog-tags">
+                                    <% tags.forEach(tag => { if (tag.tag_content) { %>
+                                    <a href="/blog/tag/<%= tag.tag_slug %>" class="blog-tag">
+                                    <%= tag.tag_content %>
+                                    </a>
+                                    <% }}); %>
+                                </div>
+                            </div>
+                            <% } %>
                         </div>
-                        <div class="col-lg-4">
-                            <aside class="article-sidebar">
-                                <div class="sidebar-widget" data-aos="fade-left">
-                                    <h3 class="widget-title">
-                                        <i class="fas fa-clock"></i>
-                                        Articles Récents
-                                    </h3>
-                                    <% if (recentPosts && recentPosts.length > 0) { %>
-                                        <div class="recent-posts-list">
-                                            <% recentPosts.slice(0, 5).forEach((post, index) => { %>
-                                                <article class="recent-post-item">
-                                                    <div class="recent-post-image">
-                                                        <% 
-                                                        let recentImageSrc = post.optimized_image_path ? 
-                                                            '/uploads/optimized/' + post.optimized_image_path : 
-                                                            (post.image_path ? '/uploads/' + post.image_path : '/img/placeholder-blog.jpg');
-                                                        let recentFallback = post.image_path ? '/uploads/' + post.image_path : '/img/placeholder-blog.jpg';
-                                                        %>
-                                                        <a href="/blog/<%= post.slug %>">
-                                                            <img src="<%= recentImageSrc %>" 
-                                                                alt="<%= post.balise_alt || post.titre %>"
-                                                                onerror="this.onerror=null; this.src='<%= recentFallback %>';">
-                                                        </a>
-                                                    </div>
-                                                    <div class="recent-post-content">
-                                                        <h4 class="recent-post-title">
-                                                            <a href="/blog/<%= post.slug %>"><%= post.titre %></a>
-                                                        </h4>
-                                                        <span class="recent-post-date">
-                                                            <i class="far fa-calendar-alt"></i>
-                                                            <%= new Date(post.date_creation).toLocaleDateString('fr-FR', { 
-                                                                day: 'numeric',
-                                                                month: 'short',
-                                                                year: 'numeric'
-                                                            }) %>
-                                                        </span>
-                                                    </div>
-                                                </article>
-                                            <% }); %>
-                                        </div>
-                                    <% } %>
+                        <aside class="blog-detail-sidebar">
+                            <% if (recentPosts && recentPosts.length > 0) { %>
+                            <div class="blog-sidebar-widget" data-aos="fade-left">
+                                <div class="blog-sidebar-widget-header">
+                                    <div class="blog-supp-photos-bar"></div>
+                                    <h3 class="blog-sidebar-widget-title">Articles récents</h3>
                                 </div>
-                                <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="100">
-                                    <div class="widget-header">
-                                        <h3 class="widget-title">
-                                            <i class="fas fa-folder-open"></i>
-                                            Catégories
-                                        </h3>
-                                        <a href="/blog/categories" class="widget-view-all">
-                                            Voir toutes
-                                            <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                    <% if (categories && categories.length > 0) { %>
-                                        <div class="categories-badges">
-                                            <% categories.forEach(category => { %>
-                                                <a href="/blog/categorie/<%= category.category_slug %>" class="category-badge">
-                                                    <i class="fas fa-tag"></i>
-                                                    <%= category.content %>
-                                                    <span class="badge-count"><%= category.count || 0 %></span>
-                                                </a>
-                                            <% }); %>
+                                <div class="blog-sidebar-posts">
+                                    <% recentPosts.forEach(post => { %>
+                                    <%
+                                        let postImageSrc;
+                                        if (post.optimized_image_path) {
+                                            postImageSrc = '/uploads/optimized/' + post.optimized_image_path;
+                                        } else if (post.image_path) {
+                                            postImageSrc = '/uploads/' + post.image_path;
+                                        } else {
+                                            postImageSrc = '/img/placeholder-blog.webp';
+                                        }
+                                        const postDate = new Date(post.date_creation).toLocaleDateString('fr-FR', {
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric'
+                                        });
+                                        %>
+                                    <a href="/blog/<%= post.slug %>" class="blog-sidebar-post">
+                                        <div class="blog-sidebar-post-image">
+                                            <img src="<%= postImageSrc %>"
+                                                alt="<%= post.balise_alt || post.titre %>"
+                                                onerror="this.onerror=null; this.src='/img/placeholder-blog.webp';">
                                         </div>
-                                    <% } %>
-                                </div>
-                                <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="200">
-                                    <div class="widget-header">
-                                        <h3 class="widget-title">
-                                            <i class="fas fa-hashtag"></i>
-                                            Tags Populaires
-                                        </h3>
-                                        <a href="/blog/tags" class="widget-view-all">
-                                            Voir tous
-                                            <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                    <% if (randomTags && randomTags.length > 0) { %>
-                                        <div class="tags-cloud">
-                                            <% randomTags.forEach(tag => { %>
-                                                <a href="/blog/tag/<%= tag.tag_slug %>" class="tag-cloud-item">
-                                                    #<%= tag.content.replace(/^#/, '') %>
-                                                    <span class="tag-count">(<%= tag.count %>)</span>
-                                                </a>
-                                            <% }); %>
+                                        <div class="blog-sidebar-post-info">
+                                            <span class="blog-sidebar-post-date">
+                                            <i class="fas fa-calendar-alt"></i><%= postDate %>
+                                            </span>
+                                            <h4 class="blog-sidebar-post-title"><%= post.titre %></h4>
                                         </div>
-                                    <% } %>
+                                    </a>
+                                    <% }); %>
                                 </div>
-                            </aside>
-                        </div>
+                            </div>
+                            <% } %>
+                            <% if (categories && categories.length > 0) { %>
+                            <div class="blog-sidebar-widget" data-aos="fade-left" data-aos-delay="100">
+                                <div class="blog-sidebar-widget-header">
+                                    <div class="blog-supp-photos-bar"></div>
+                                    <h3 class="blog-sidebar-widget-title">Catégories</h3>
+                                </div>
+                                <div class="blog-sidebar-categories">
+                                    <% categories.forEach(category => { %>
+                                    <% if (category.count > 0) { %>
+                                    <a href="/blog/categorie/<%= category.category_slug %>" class="blog-sidebar-category">
+                                        <div class="blog-sidebar-category-left">
+                                            <i class="fas fa-folder"></i>
+                                            <span><%= category.content %></span>
+                                        </div>
+                                        <span class="blog-sidebar-category-count"><%= category.count %></span>
+                                    </a>
+                                    <% } %>
+                                    <% }); %>
+                                </div>
+                                <a href="/blog/categories" class="blog-sidebar-see-all">
+                                    <i class="fas fa-th-list me-1"></i>Voir toutes les catégories
+                                </a>
+                            </div>
+                            <% } %>
+
+                            <% if (randomTags && randomTags.length > 0) { %>
+                            <div class="blog-sidebar-widget" data-aos="fade-left" data-aos-delay="150">
+                                <div class="blog-sidebar-widget-header">
+                                    <div class="blog-supp-photos-bar"></div>
+                                    <h3 class="blog-sidebar-widget-title">Tags populaires</h3>
+                                </div>
+                                <div class="blog-tags">
+                                    <% randomTags.forEach(tag => { %>
+                                    <a href="/blog/tag/<%= tag.tag_slug %>" class="blog-tag">
+                                        <%= tag.content %>
+                                    </a>
+                                    <% }); %>
+                                </div>
+                                <a href="/blog/tags" class="blog-sidebar-see-all">
+                                    <i class="fas fa-tags me-1"></i>Voir tous les tags
+                                </a>
+                            </div>
+                            <% } %>
+                            <div class="blog-sidebar-widget blog-sidebar-cta" data-aos="fade-left" data-aos-delay="200">
+                                <div class="blog-sidebar-cta-icon">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <h3 class="blog-sidebar-cta-title">Un chiot vous intéresse ?</h3>
+                                <p class="blog-sidebar-cta-text">Contactez-nous pour en savoir plus sur nos chiots disponibles et nos prochaines portées.</p>
+                                <a href="/contact" class="btn-blog-cta">
+                                <i class="fas fa-envelope me-2"></i>Nous contacter
+                                </a>
+                                <a href="/chiots" class="btn-blog-cta-secondary">
+                                <i class="fas fa-paw me-2"></i>Voir les chiots
+                                </a>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
@@ -336,6 +371,34 @@
                 anchorPlacement: "top-bottom",
                 mirror: false,
                 disable: "mobile",
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const faqItems = document.querySelectorAll(".blog-faq-item");
+            
+                faqItems.forEach((item, index) => {
+                    const question = item.querySelector(".blog-faq-question");
+                    const answer = document.getElementById("faq-" + index);
+            
+                    if (question && answer) {
+                        question.addEventListener("click", function () {
+                            const isOpen = item.classList.contains("active");
+            
+                            faqItems.forEach(otherItem => {
+                                const otherIndex = [...faqItems].indexOf(otherItem);
+                                const otherAnswer = document.getElementById("faq-" + otherIndex);
+                                otherItem.classList.remove("active");
+                                if (otherAnswer) otherAnswer.classList.remove("open");
+                            });
+            
+                            if (!isOpen) {
+                                item.classList.add("active");
+                                answer.classList.add("open");
+                            }
+                        });
+                    }
+                });
             });
         </script>
     </body>
