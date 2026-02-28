@@ -1,103 +1,84 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page introuvable - Erreur 404 | Élevage de Bel Air</title>
-    <meta name="description" content="La page que vous recherchez est introuvable. Retournez à l'accueil de l'Élevage de Bel Air pour découvrir nos American Bully et Springer Anglais.">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex, nofollow">
-    <link rel="canonical" href="https://elevagedebelair.com/">
-    <meta name="language" content="fr">
-    <meta name="geo.region" content="FR-OCC">
-    <meta name="geo.placename" content="Occitanie, France">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Élevage de Bel Air">
-    <meta property="og:title" content="Page introuvable | Élevage de Bel Air">
-    <meta property="og:description" content="La page que vous recherchez est introuvable.">
-    <meta property="og:url" content="https://elevagedebelair.com/">
-    <meta property="og:image" content="https://elevagedebelair.com/img/og/og-image.webp">
-    <meta property="og:locale" content="fr_FR">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page introuvable | Spirit of Freedom Kennel</title>
+    <meta name="robots" content="noindex, nofollow" />
     <%- include('../front/partials/head-meta-base.ejs') %>
     <%- include('../front/partials/head-fonts-libs.ejs') %>
-    <link rel="stylesheet" href="/front/css/navbar.css">
-    <link rel="stylesheet" href="/front/css/erreur.css">
+    <link rel="stylesheet" href="/front/css/navbar.css" />
+    <link rel="stylesheet" href="/front/css/erreur.css" />
 </head>
-    <body >
-        <%- include('../front/frontEndAssets/header') %>
-        <main class="error-page">
-            <div class="error-container">
-                <div class="error-content" data-aos="fade-up">
-                    <div class="error-icon">
-                        <i class="fas fa-paw"></i>
+<body class="h-100">
+    <%- include('../front/frontEndAssets/header') %>
+    <main style="padding-top: 70px;">
+
+        <section class="erreur-section">
+            <div class="erreur-overlay"></div>
+            <div class="container">
+                <div class="erreur-content" data-aos="fade-up">
+
+                    <div class="erreur-code">
+                        <span class="erreur-4">4</span>
+                        <div class="erreur-paw">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <span class="erreur-4">4</span>
                     </div>
-                    <h1 class="error-title">404</h1>
-                    <h2 class="error-subtitle">Oups ! Page introuvable</h2>
-                    <p class="error-message">
-                        Il semblerait que cette page se soit échappée... 🐕<br>
-                        Nos chiens sont plus faciles à retrouver que cette page !
+
+                    <h1 class="erreur-title">Oups, cette page est introuvable !</h1>
+                    <p class="erreur-text">
+                        La page que vous recherchez n'existe pas ou a été déplacée. 
+                        Pas de panique, nos chiens sont toujours là pour vous guider !
                     </p>
-                    <div class="error-actions">
-                        <a href="/" class="btn-primary">
+
+                    <div class="erreur-btns">
+                        <a href="/" class="erreur-btn-primary">
                             <i class="fas fa-home"></i>
                             Retour à l'accueil
                         </a>
-                        <a href="/chiots/a-vendre" class="btn-secondary">
-                            <i class="fas fa-heart"></i>
-                            Voir nos chiots
+                        <a href="/chiots" class="erreur-btn-secondary">
+                            <i class="fas fa-paw"></i>
+                            Voir les chiots
+                        </a>
+                        <a href="/contact" class="erreur-btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Nous contacter
                         </a>
                     </div>
-                    <div class="error-links">
-                        <h3>Liens utiles :</h3>
-                        <ul>
-                            <li><a href="/"><i class="fas fa-angle-right"></i> Accueil</a></li>
-                            <li><a href="/chiots/a-vendre"><i class="fas fa-angle-right"></i> Chiots disponibles</a></li>
-                            <li><a href="/chiens"><i class="fas fa-angle-right"></i> Nos reproducteurs</a></li>
-                            <li><a href="/mariages"><i class="fas fa-angle-right"></i> Nos portées</a></li>
-                            <li><a href="/contact"><i class="fas fa-angle-right"></i> Nous contacter</a></li>
-                        </ul>
+
+                    <div class="erreur-links">
+                        <span>Liens utiles :</span>
+                        <a href="/blog">Blog</a>
+                        <span>•</span>
+                        <a href="/races">Races</a>
+                        <span>•</span>
+                        <a href="/chiens">Nos chiens</a>
+                        <span>•</span>
+                        <a href="/mariages">Mariages</a>
+                        <span>•</span>
+                        <a href="/informations">Informations</a>
                     </div>
-                </div>
-                <div class="error-illustration" data-aos="fade-left" data-aos-delay="200">
-                    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="250" cy="350" rx="150" ry="30" fill="#e0e0e0" opacity="0.3"/>
-                        <g id="dog">
-                            <ellipse cx="250" cy="280" rx="80" ry="60" fill="#8B4513"/>
-                            <circle cx="250" cy="220" r="50" fill="#8B4513"/>
-                            <ellipse cx="220" cy="200" rx="20" ry="40" fill="#654321" transform="rotate(-20 220 200)"/>
-                            <ellipse cx="280" cy="200" rx="20" ry="40" fill="#654321" transform="rotate(20 280 200)"/>
-                            <circle cx="235" cy="220" r="8" fill="#000"/>
-                            <circle cx="265" cy="220" r="8" fill="#000"/>
-                            <circle cx="237" cy="218" r="3" fill="#fff"/>
-                            <circle cx="267" cy="218" r="3" fill="#fff"/>
-                            <ellipse cx="250" cy="235" rx="15" ry="10" fill="#654321"/>
-                            <circle cx="250" cy="235" r="5" fill="#000"/>
-                            <rect x="210" y="320" width="15" height="40" rx="7" fill="#8B4513"/>
-                            <rect x="275" y="320" width="15" height="40" rx="7" fill="#8B4513"/>
-                            <path d="M 180 280 Q 150 260 140 240" stroke="#8B4513" stroke-width="12" fill="none" stroke-linecap="round"/>
-                        </g>
-                        <text x="350" y="200" font-size="80" fill="#65C178" opacity="0.3">?</text>
-                    </svg>
+
                 </div>
             </div>
-        </main>
-        <%- include('../front/frontEndAssets/footer') %>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="/front/js/header.js"></script>
-        <%- include('./partials/googleAnalytics') %>
-        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-        <script>
-            AOS.init({
-                duration: 1000,
-                easing: "ease-in-out",
-                once: true,
-                offset: 120,
-                delay: 0,
-                anchorPlacement: "top-bottom",
-                mirror: false,
-                disable: "mobile",
-            });
-        </script>
-    </body>
+        </section>
+
+    </main>
+    <%- include('../front/frontEndAssets/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/front/js/header.js"></script>
+    <%- include('./partials/googleAnalytics') %>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: "ease-in-out",
+            once: true,
+            disable: "mobile"
+        });
+    </script>
+</body>
 </html>

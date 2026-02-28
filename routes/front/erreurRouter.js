@@ -24,9 +24,29 @@ const storage = multer.diskStorage({
 
 router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// get de la page erreur.ejs
 router.get('/', (req, res) => {
-    const userId = 8;
-res.render('erreur');
+    const userId = 10;
+
+    const querySocialLinks = `
+        SELECT 
+            usl.social_media_link,
+            sn.name AS network_name
+        FROM user_social_links usl
+        LEFT JOIN social_network sn ON usl.social_network_id = sn.id
+        WHERE usl.user_id = ?
+        AND usl.social_media_link IS NOT NULL
+        AND usl.social_media_link != ''
+    `;
+
+    db.query(querySocialLinks, [userId], (err, socialLinks) => {
+        if (err) {
+            console.error('Erreur récupération social links:', err);
+            return res.render('erreur', { socialLinks: [] });
+        }
+
+        res.render('erreur', { socialLinks });
+    });
 });
 
 module.exports = router;
