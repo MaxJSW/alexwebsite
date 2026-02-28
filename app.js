@@ -173,7 +173,6 @@ const erreurRouter = require('./routes/front/erreurRouter');
 const legalRouter = require('./routes/front/legalRouter');
 const nosRetraitesRouter = require('./routes/front/nosRetraitesRouter');
 const seoRouter = require('./routes/front/seoRouter');
-const bookRouter = require('./routes/front/bookRouter');
 
 
 // Préfixe /admin pour les routes d'administration
@@ -216,7 +215,6 @@ app.use('/erreur', erreurRouter);
 app.use('/conditions-generales', legalRouter);
 app.use('/nos-retraites', nosRetraitesRouter);
 app.use('/', seoRouter);
-app.use('/livre-d-or', bookRouter);
 
 
 app.get('/admin/change-password', (req, res) => {
